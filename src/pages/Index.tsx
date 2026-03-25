@@ -279,39 +279,46 @@ function HeroSection() {
    SCROLLING TICKER — CSS marquee for seamless loop
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
-  const services = [
-    "ChatGPT", "Claude", "Midjourney", "Netflix", "Spotify",
-    "Booking", "Airbnb", "Apple", "Google", "Stripe", "Lovable",
-  ];
+  const row1 = ["ChatGPT", "Claude", "Midjourney", "Netflix", "Spotify", "Booking", "Airbnb"];
+  const row2 = ["Apple", "Google", "Stripe", "App Store", "Google Play", "Visa", "Mastercard"];
 
-  const renderRow = (key: string) => (
-    <div key={key} className="ticker-track flex shrink-0 items-center gap-16">
-      {services.map((name) => (
-        <span
-          key={`${key}-${name}`}
-          className="text-base font-semibold text-foreground/[0.35] hover:text-foreground/90 hover:drop-shadow-[0_0_8px_hsl(28_100%_50%/0.5)] transition-all duration-300 cursor-default select-none whitespace-nowrap"
-        >
-          {name}
-        </span>
-      ))}
+  const TickerRow = ({ items, reverse, speed }: { items: string[]; reverse?: boolean; speed: number }) => (
+    <div className="relative overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-40 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-40 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+      <div
+        className="flex gap-12 shrink-0"
+        style={{
+          animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite`,
+        }}
+      >
+        {[...items, ...items].map((name, i) => (
+          <span
+            key={`${name}-${i}`}
+            className="text-sm md:text-base font-semibold text-foreground/[0.35] hover:text-foreground/90 hover:drop-shadow-[0_0_12px_hsl(28_100%_50%/0.6)] transition-all duration-300 cursor-default select-none whitespace-nowrap px-4 py-2"
+          >
+            {name}
+          </span>
+        ))}
+      </div>
     </div>
   );
 
   return (
-    <section className="py-12 border-y border-border/20 bg-card/20 backdrop-blur-sm relative overflow-hidden">
-      <NoiseOverlay opacity={0.015} />
+    <section className="py-16 lg:py-20 border-y border-border/10 relative overflow-hidden">
+      <div className="absolute inset-0 bg-card/30 backdrop-blur-xl" />
+      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
+      <NoiseOverlay opacity={0.02} />
       <div className="relative z-10">
-        <p className="text-center text-xs font-semibold text-muted-foreground mb-8 tracking-[0.2em] uppercase">
+        <p className="text-center text-xs font-semibold text-muted-foreground mb-2 tracking-[0.2em] uppercase">
           Works with services where regular cards fail
         </p>
-        <div className="relative overflow-hidden">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-          <div className="absolute right-0 top-0 bottom-0 w-32 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
-          <div className="flex gap-16 ticker-wrapper">
-            {renderRow("a")}
-            {renderRow("b")}
-          </div>
+        <p className="text-center text-sm text-muted-foreground/60 mb-10">
+          AI tools, subscriptions and global services
+        </p>
+        <div className="flex flex-col gap-6">
+          <TickerRow items={row1} speed={20} />
+          <TickerRow items={row2} reverse speed={25} />
         </div>
       </div>
     </section>
