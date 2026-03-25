@@ -286,19 +286,31 @@ function ScrollingTicker() {
       <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
       <div
         className="flex shrink-0"
-        style={{
-          animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite`,
-        }}
+        style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
       >
         {[...items, ...items, ...items].map((brand, i) => (
           <div
             key={`${brand.name}-${i}`}
-            className="flex items-center gap-3 px-8 lg:px-10 py-3 mx-3 rounded-2xl border border-border/5 bg-card/30 backdrop-blur-sm hover:bg-card/60 hover:border-primary/15 hover:shadow-[0_0_30px_-8px_hsl(28_100%_50%/0.25)] transition-all duration-500 cursor-default select-none group"
+            className="group flex items-center gap-3.5 px-8 lg:px-10 py-4 mx-3 rounded-2xl border border-border/5 bg-card/30 backdrop-blur-sm transition-all duration-500 cursor-default select-none hover:bg-card/60 hover:border-white/10"
+            style={{ ["--brand-color" as string]: brand.color }}
           >
-            <brand.Logo className="w-6 h-6 lg:w-7 lg:h-7 text-foreground/30 group-hover:text-primary transition-colors duration-500" />
-            <span className="text-sm lg:text-base font-semibold text-foreground/35 group-hover:text-foreground/90 transition-colors duration-500 whitespace-nowrap tracking-tight">
+            <brand.Logo
+              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 text-foreground/25"
+              style={{
+                filter: "grayscale(100%) brightness(0.6)",
+              }}
+            />
+            <span
+              className="text-sm lg:text-base font-bold text-foreground/30 transition-all duration-500 whitespace-nowrap tracking-tight group-hover:text-foreground/90"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            >
               {brand.name}
             </span>
+            {/* Colored line accent on hover */}
+            <div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-3/4 rounded-full transition-all duration-500"
+              style={{ background: brand.color, boxShadow: `0 0 12px ${brand.color}60` }}
+            />
           </div>
         ))}
       </div>
