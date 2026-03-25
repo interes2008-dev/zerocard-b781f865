@@ -180,7 +180,7 @@ function HeroSection() {
 
             <FadeIn delay={0.3}>
               <div className="mt-8">
-                <CTAButton text="Get your card for free in 2 minutes" size="large" />
+                <CTAButton text="Get your card for free" size="large" />
                 <p className="mt-4 text-xs text-muted-foreground tracking-wide">
                   No monthly fees • Free card • Cashback
                 </p>
@@ -745,7 +745,7 @@ function ComparisonSection() {
    ═══════════════════════════════════════════════════ */
 function GuideSection() {
   const steps = [
-    { num: "01", title: "Sign up", desc: "Create your account — takes just 2 minutes", cta: true },
+    { num: "01", title: "Sign up", desc: "Create your account in a couple of minutes", cta: true },
     { num: "02", title: "Verification", desc: "Simple identity check — like any bank" },
     { num: "03", title: "Get your card", desc: "Virtual card is issued instantly" },
     { num: "04", title: "Fund balance", desc: "Top up your card with USDT" },
@@ -1159,7 +1159,7 @@ function FOMOSection() {
           <p className="text-lg text-white/30 leading-relaxed mb-16">
             While others struggle with failed payments — you already pay without limits
           </p>
-          <CTAButton text="Get your card for free in 2 minutes" size="large" />
+          <CTAButton text="Get your card for free" size="large" />
         </FadeIn>
       </div>
     </section>
@@ -1200,7 +1200,7 @@ function FinalCTA() {
               </div>
             ))}
           </div>
-          <CTAButton text="Get your card for free in 2 minutes" size="large" />
+          <CTAButton text="Get your card for free" size="large" />
           <p className="mt-8 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
