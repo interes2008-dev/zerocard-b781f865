@@ -301,8 +301,8 @@ function ScrollingTicker() {
               <brand.Logo className="w-full h-full" />
             </div>
             <span
-              className="text-sm lg:text-base font-bold text-foreground/30 transition-all duration-500 whitespace-nowrap tracking-tight group-hover:text-foreground/90"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              className="text-sm lg:text-base font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125"
+              style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}
             >
               {brand.name}
             </span>
