@@ -190,7 +190,7 @@ function HeroSection() {
                   <p className="text-xs font-semibold text-foreground/70 mb-3 tracking-wide">What happens after you click:</p>
                   <div className="space-y-2">
                     {[
-                      { icon: UserPlus, text: "2 min signup" },
+                      { icon: UserPlus, text: "5 min signup" },
                       { icon: ShieldCheck, text: "Quick identity verification" },
                       { icon: CreditCard, text: "Card access" },
                     ].map((step) => (
@@ -1171,7 +1171,7 @@ function FOMOSection() {
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
   const quickSteps = [
-    { icon: UserPlus, label: "2 min signup" },
+    { icon: UserPlus, label: "5 min signup" },
     { icon: ShieldCheck, label: "Simple verification" },
     { icon: CreditCard, label: "Free card" },
   ];
