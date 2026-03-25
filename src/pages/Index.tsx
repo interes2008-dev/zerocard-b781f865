@@ -356,36 +356,40 @@ function InfrastructureSection() {
    SCROLLING TICKER — Premium branded logos
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
-  const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => (
-    <div className="relative overflow-hidden py-1.5">
-      <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
-      <div
-        className="flex shrink-0"
-        style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
-      >
-        {[...items, ...items, ...items, ...items].map((brand, i) => (
-          <div
-            key={`${brand.name}-${i}`}
-            className="group relative flex items-center gap-2.5 px-5 lg:px-6 py-3.5 mx-1.5 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
-          >
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{ boxShadow: `0 0 30px -8px ${brand.color}50, inset 0 0 20px -10px ${brand.color}25` }} />
-            <div className="absolute inset-0 rounded-xl opacity-[0.03]"
-              style={{ boxShadow: `inset 0 0 20px -8px ${brand.color}` }} />
-            <div className="w-5 h-5 lg:w-6 lg:h-6 transition-all duration-500 group-hover:scale-110 relative z-10"
-              style={{ color: brand.color }}>
-              <brand.Logo className="w-full h-full" />
+  const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
+    const repeated = [...items, ...items, ...items, ...items, ...items, ...items];
+    return (
+      <div className="relative overflow-hidden py-1">
+        <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
+        <div
+          className="flex shrink-0"
+          style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
+        >
+          {repeated.map((brand, i) => (
+            <div
+              key={`${brand.name}-${i}`}
+              className="group relative flex items-center gap-2 px-4 lg:px-5 py-3 mx-1 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
+              style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}
+            >
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ boxShadow: `0 0 40px -6px ${brand.color}60, inset 0 0 25px -8px ${brand.color}30` }} />
+              <div className="absolute inset-0 rounded-xl opacity-[0.05]"
+                style={{ boxShadow: `inset 0 0 20px -8px ${brand.color}` }} />
+              <div className="w-5 h-5 lg:w-6 lg:h-6 transition-all duration-500 group-hover:scale-110 relative z-10"
+                style={{ color: brand.color }}>
+                <brand.Logo className="w-full h-full" />
+              </div>
+              <span className="text-xs lg:text-sm font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10"
+                style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
+                {brand.name}
+              </span>
             </div>
-            <span className="text-xs lg:text-sm font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10"
-              style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
-              {brand.name}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <section className="py-12 lg:py-16 relative overflow-hidden" style={{
