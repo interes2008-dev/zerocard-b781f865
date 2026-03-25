@@ -311,7 +311,7 @@ function InfrastructureSection() {
         <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto mb-16">
           {cards.map((c, i) => (
             <FadeIn key={c.title} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
                 <div className="relative group rounded-3xl overflow-hidden h-full">
                   <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
                     background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))",
@@ -597,7 +597,7 @@ function ProblemSection() {
             <FadeIn key={p} delay={i * 0.1}>
               <motion.div
                 whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }}
-                className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-8 transition-all cursor-default"
+                className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-8 transition-all cursor-default h-full"
                 style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}
               >
                 <div className="w-12 h-12 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
@@ -803,7 +803,7 @@ function BenefitsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-5xl mx-auto">
           {benefits.map((b, i) => (
             <FadeIn key={b.title} delay={i * 0.08}>
-              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
                 <div className="p-10 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all h-full"
                   style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.04)" }}>
                   <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center"
@@ -849,7 +849,7 @@ function SafetySection() {
         <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto">
           {safetyPoints.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
                 <div className="relative group rounded-3xl overflow-hidden h-full">
                   <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
                     background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))",
@@ -972,7 +972,7 @@ function BetterThanBanks() {
         <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {reasons.map((r, i) => (
             <FadeIn key={r.title} delay={i * 0.1}>
-              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
                 <div className="relative group rounded-3xl overflow-hidden h-full">
                   <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
                     background: "linear-gradient(135deg, hsl(28 100% 50% / 0.2), hsl(0 0% 100% / 0.06), hsl(270 70% 55% / 0.1))",
@@ -1027,7 +1027,7 @@ function StandardProcess() {
         <div className="grid md:grid-cols-3 gap-7">
           {points.map((p, i) => (
             <FadeIn key={p.title} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+              <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
                 <GlassCard className="p-10 text-center h-full">
                   <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
                     style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
