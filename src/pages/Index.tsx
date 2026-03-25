@@ -1355,7 +1355,32 @@ function DynamicMeta() {
     setMeta("name", "twitter:title", t.metaTitle);
     setMeta("name", "twitter:description", t.metaDesc);
   }, [t]);
-  return null;
+
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "ZeroCard",
+    url: "https://zerocard.pro",
+    logo: "https://zerocard.pro/zerocard-orange.png",
+    description: t.metaDesc,
+    sameAs: [],
+  };
+
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ZeroCard",
+    url: "https://zerocard.pro",
+    description: t.metaDesc,
+    inLanguage: lang === "ru" ? "ru-RU" : "en-US",
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
+    </>
+  );
 }
 
 const Index = () => (
