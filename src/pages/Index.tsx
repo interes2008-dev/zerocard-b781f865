@@ -1354,7 +1354,23 @@ function DynamicMeta() {
     setMeta("property", "og:description", t.metaDesc);
     setMeta("name", "twitter:title", t.metaTitle);
     setMeta("name", "twitter:description", t.metaDesc);
-  }, [t]);
+
+    // hreflang tags
+    const hreflangs = [
+      { rel: "alternate", hreflang: "ru", href: "https://zerocard.pro/?lang=ru" },
+      { rel: "alternate", hreflang: "en", href: "https://zerocard.pro/?lang=en" },
+      { rel: "alternate", hreflang: "x-default", href: "https://zerocard.pro/" },
+    ];
+    // Remove old hreflang links
+    document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
+    hreflangs.forEach(({ rel, hreflang, href }) => {
+      const link = document.createElement("link");
+      link.rel = rel;
+      link.hreflang = hreflang;
+      link.href = href;
+      document.head.appendChild(link);
+    });
+  }, [t, lang]);
 
   const orgSchema = {
     "@context": "https://schema.org",
