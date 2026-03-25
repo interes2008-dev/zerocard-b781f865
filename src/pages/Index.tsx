@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
+import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import {
   CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
