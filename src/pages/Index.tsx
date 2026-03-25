@@ -817,6 +817,63 @@ function BenefitsSection() {
 }
 
 /* ═══════════════════════════════════════════════════
+   WHY IT'S SAFE — Dark premium section
+   ═══════════════════════════════════════════════════ */
+function SafetySection() {
+  const safetyPoints = [
+    { icon: Shield, title: "Account protection", desc: "Multi-layer security with encryption and real-time monitoring of all transactions", gradient: "from-emerald-500 to-teal-400" },
+    { icon: Fingerprint, title: "Identity verification", desc: "Standard KYC process — same as any regulated bank or financial institution", gradient: "from-orange-500 to-amber-400" },
+    { icon: Lock, title: "Transaction control", desc: "Full control over your card: freeze, unfreeze, set limits — all from your phone", gradient: "from-violet-500 to-purple-400" },
+  ];
+  return (
+    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(200 15% 6%) 50%, hsl(220 12% 3%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(160 60% 40%)" size={700} position="top-1/4 left-1/3" blur={200} opacity={0.06} />
+      <GlowOrb color="hsl(28 100% 50%)" size={500} position="bottom-1/4 right-1/4" blur={180} opacity={0.05} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Security first</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+            Why it's <span className="gradient-text">safe</span>
+          </h2>
+          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">Your money and data are protected at every level</p>
+        </FadeIn>
+        <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto">
+          {safetyPoints.map((s, i) => (
+            <FadeIn key={s.title} delay={i * 0.12}>
+              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+                <div className="relative group rounded-3xl overflow-hidden h-full">
+                  <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
+                    background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))",
+                  }}>
+                    <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
+                  </div>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
+                  <div className="relative z-10 p-10 lg:p-12 text-center">
+                    <div className="relative mx-auto mb-7">
+                      <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                      <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`}
+                        style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                        <s.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+                    <p className="text-sm text-white/40 leading-relaxed">{s.desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    TRUST — Light premium section
    ═══════════════════════════════════════════════════ */
 function TrustSection() {
