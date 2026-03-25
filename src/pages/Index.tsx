@@ -1153,6 +1153,11 @@ function FOMOSection() {
    FINAL CTA — Light premium section
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
+  const quickSteps = [
+    { icon: UserPlus, label: "2 min signup" },
+    { icon: ShieldCheck, label: "Simple verification" },
+    { icon: CreditCard, label: "Free card" },
+  ];
   return (
     <section className="py-36 lg:py-48 relative overflow-hidden bg-background">
       <NoiseOverlay />
@@ -1161,15 +1166,25 @@ function FinalCTA() {
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-8 leading-tight">
-            Start now —{" "}
-            <span className="gradient-text">takes 5 minutes</span>
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
+            Start now
           </h2>
-          <p className="text-lg text-muted-foreground mb-16 max-w-md mx-auto">
+          <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">
             Free global payment card with no restrictions
           </p>
+          <div className="flex flex-wrap justify-center gap-6 mb-14">
+            {quickSteps.map((s) => (
+              <div key={s.label} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 20px -6px hsl(28 100% 50% / 0.2)" }}>
+                  <s.icon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="font-medium">{s.label}</span>
+              </div>
+            ))}
+          </div>
           <CTAButton text="Get your card for free" size="large" />
-          <p className="mt-12 text-sm text-muted-foreground/60">
+          <p className="mt-10 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
         </FadeIn>
