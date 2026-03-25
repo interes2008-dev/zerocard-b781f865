@@ -280,7 +280,7 @@ function InfrastructureSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.infraTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight text-center">
+          <h2 className={`${hSize} font-bold text-white mb-6 leading-tight text-center`}>
             {t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/35 mb-20 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
