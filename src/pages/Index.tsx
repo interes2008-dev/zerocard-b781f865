@@ -1039,7 +1039,7 @@ function FinalCTA() {
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">{t.finalTitle}</h2>
+          <h2 className="section-title text-foreground mb-6">{t.finalTitle}</h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">{t.finalDesc}</p>
           <div className="flex flex-wrap justify-center gap-6 mb-14">
             {quickSteps.map((s) => (
