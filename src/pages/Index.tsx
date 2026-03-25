@@ -1083,7 +1083,7 @@ function FOMOSection() {
           <p className="text-lg text-white/30 leading-relaxed mb-16">
             While others struggle with failed payments — you already pay without limits
           </p>
-          <CTAButton text="Get card for free" size="large" />
+          <CTAButton text="Get your card for free" size="large" />
         </FadeIn>
       </div>
     </section>
