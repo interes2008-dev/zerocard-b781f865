@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import {
-  CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap,
+  CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap, UserPlus, ShieldCheck,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
   BadgeCheck, CircleDollarSign, Bot, Smartphone, Lock, Layers,
   Fingerprint, Brain, Plane,
