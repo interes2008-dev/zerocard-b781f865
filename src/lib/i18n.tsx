@@ -497,6 +497,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
     localStorage.setItem("zc-lang", newLang);
+    document.documentElement.lang = newLang;
   }, []);
 
   return (

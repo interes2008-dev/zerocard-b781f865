@@ -427,7 +427,7 @@ function AIUseCases() {
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
           <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.aiTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight">
+          <h2 className="section-title text-white mb-6 leading-tight">
             {t.aiTitle1}<span className="gradient-text">{t.aiTitle2}</span>
           </h2>
           <p className="text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.aiDesc}</p>
@@ -514,7 +514,7 @@ function ProblemSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-destructive/70 mb-4 tracking-[0.2em] uppercase">{t.problemTag}</p>
-          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
+          <h2 className="text-center section-title text-white mb-8 leading-tight">
             {t.problemTitle1}<span className="gradient-text">{t.problemTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/25 mb-16 max-w-md mx-auto">{t.problemDesc}</p>
@@ -556,7 +556,7 @@ function WhyItWorks() {
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
         <FadeIn>
           <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.whyTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
+          <h2 className="section-title text-foreground mb-8 leading-tight">
             {t.whyTitle1}<span className="gradient-text">{t.whyTitle2}</span>
           </h2>
           <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-20 max-w-xl mx-auto">{t.whyDesc}</p>
@@ -610,7 +610,7 @@ function ComparisonSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.compTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-center text-white mb-8 leading-tight">
+          <h2 className="section-title text-center text-white mb-8 leading-tight">
             {t.compTitle1}<span className="gradient-text">{t.compTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-20 max-w-lg mx-auto">{t.compDesc}</p>
@@ -710,7 +710,7 @@ function BenefitsSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.benefitsTag}</p>
-          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-20 leading-tight">
+          <h2 className="text-center section-title text-white mb-20 leading-tight">
             {t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span>
           </h2>
         </FadeIn>
@@ -753,7 +753,7 @@ function SafetySection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.safetyTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-8 leading-tight text-center">
             {t.safetyTitle1}<span className="gradient-text">{t.safetyTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.safetyDesc}</p>
@@ -802,7 +802,7 @@ function TrustSection() {
             <div className="mx-auto mb-10 w-22 h-22 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ width: 88, height: 88, boxShadow: "0 0 80px -10px hsl(28 100% 50% / 0.2)" }}>
               <Shield className="w-9 h-9 text-primary" />
             </div>
-            <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
+            <h2 className="section-title text-foreground mb-8 leading-tight">
               {t.trustTitle1}
               <br />
               {t.trustTitle2}<span className="gradient-text">{t.trustTitle3}</span>
@@ -861,7 +861,7 @@ function BetterThanBanks() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.bankTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-8 leading-tight text-center">
             {t.bankTitle1}<span className="gradient-text">{t.bankTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.bankDesc}</p>
@@ -911,7 +911,7 @@ function StandardProcess() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-4xl">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.stdTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-6 leading-tight text-center">
+          <h2 className="section-title text-foreground mb-6 leading-tight text-center">
             {t.stdTitle1}<span className="gradient-text">{t.stdTitle2}</span>
           </h2>
           <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto leading-relaxed">{t.stdDesc}</p>
@@ -947,7 +947,7 @@ function FearSection() {
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center max-w-2xl relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-10 leading-tight">
+          <h2 className="section-title text-white mb-10 leading-tight">
             {t.fearTitle1}<span className="gradient-text">{t.fearTitle2}</span>
           </h2>
           <motion.div whileHover={{ scale: 1.02 }} className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-12" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.4)" }}>
@@ -1020,7 +1020,7 @@ function FOMOSection() {
           <div className="mx-auto mb-10 w-20 h-20 rounded-3xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.25)" }}>
             <Clock className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
+          <h2 className="section-title text-white mb-8 leading-tight">
             {t.fomoTitle1}<span className="gradient-text">{t.fomoTitle2}</span>
           </h2>
           <p className="text-lg text-white/30 leading-relaxed mb-16">{t.fomoDesc}</p>
