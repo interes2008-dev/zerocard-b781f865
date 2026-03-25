@@ -1342,7 +1342,7 @@ function Navbar() {
    DYNAMIC META TAGS
    ═══════════════════════════════════════════════════ */
 function DynamicMeta() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   useEffect(() => {
     document.title = t.metaTitle;
     const setMeta = (attr: string, val: string, content: string) => {
