@@ -51,8 +51,8 @@ function CTAButton({ text, size = "default" }: { text: string; size?: "default" 
       rel="noopener noreferrer"
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.97 }}
-      className={`inline-flex items-center gap-3 rounded-full gradient-bg text-white font-semibold transition-all ${
-        size === "large" ? "px-12 py-5 text-lg" : "px-8 py-3.5 text-sm"
+      className={`inline-flex items-center justify-center gap-3 rounded-full gradient-bg text-white font-semibold transition-all ${
+        size === "large" ? "w-full sm:w-auto px-12 py-5 text-lg" : "px-8 py-3.5 text-sm"
       }`}
       style={{ boxShadow: "0 16px 60px -12px hsl(28 100% 50% / 0.5), 0 8px 24px -8px hsl(340 80% 55% / 0.3)" }}
     >
@@ -193,7 +193,7 @@ function HeroSection() {
 
           {/* Right — Card */}
           <FadeIn delay={0.3} className="relative flex justify-center lg:justify-end">
-            <div className="relative w-96 lg:w-[560px]">
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[560px]">
               <div className="absolute inset-0 rounded-3xl scale-[1.4] blur-[120px] opacity-45"
                 style={{ background: "radial-gradient(circle, hsl(28 100% 50%), transparent 70%)" }} />
               <div className="absolute inset-0 rounded-3xl scale-[1.6] blur-[160px] opacity-25"
