@@ -35,13 +35,11 @@ function GlassCard({ children, className = "", hover = true }: { children: React
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className={`relative group rounded-3xl overflow-hidden ${className}`}
     >
-      {/* Gradient border */}
       <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
         background: "linear-gradient(135deg, hsl(28 100% 50% / 0.3), hsl(270 70% 55% / 0.1), hsl(0 0% 100% / 0.08))",
       }}>
         <div className="w-full h-full rounded-3xl bg-card/80 backdrop-blur-2xl" />
       </div>
-      {/* Hover glow */}
       {hover && (
         <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{ boxShadow: "0 20px 80px -20px hsl(28 100% 50% / 0.2), 0 0 60px -30px hsl(28 100% 50% / 0.15)" }} />
@@ -64,12 +62,9 @@ function CTAButton({ text, className = "", size = "default" }: { text: string; c
         size === "large" ? "px-14 py-6 text-lg" : "px-10 py-4.5 text-base"
       } ${className}`}
     >
-      {/* Button gradient bg */}
       <div className="absolute inset-0 gradient-bg" />
-      {/* Hover glow overlay */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
         style={{ boxShadow: "inset 0 0 40px hsl(0 0% 100% / 0.15), 0 0 80px -10px hsl(28 100% 50% / 0.6), 0 0 120px -20px hsl(28 100% 50% / 0.3)" }} />
-      {/* Shine sweep */}
       <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       <span className="relative z-10">{text}</span>
       <ArrowRight className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -126,7 +121,6 @@ function HeroSection() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
-      {/* BG gradient */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse 90% 70% at 50% 30%, hsl(28 40% 96%) 0%, hsl(0 0% 100%) 50%, hsl(240 10% 98%) 100%)",
@@ -135,12 +129,10 @@ function HeroSection() {
 
       <NoiseOverlay opacity={0.02} />
 
-      {/* Glow orbs */}
       <GlowOrb color="hsl(28 100% 50%)" size={1000} position="top-[10%] right-[15%]" blur={180} opacity={0.08} />
       <GlowOrb color="hsl(340 80% 55%)" size={600} position="top-[40%] right-[30%]" blur={150} opacity={0.05} />
       <GlowOrb color="hsl(270 70% 55%)" size={500} position="-bottom-20 -left-20" blur={140} opacity={0.04} />
 
-      {/* Grid */}
       <div className="absolute inset-0 opacity-[0.012]" style={{
         backgroundImage: "linear-gradient(hsl(0 0% 0%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 0%) 1px, transparent 1px)",
         backgroundSize: "80px 80px",
@@ -165,13 +157,14 @@ function HeroSection() {
                 <br />
                 working?
               </h1>
+              <p className="mt-5 text-2xl lg:text-3xl font-bold text-foreground/80">
+                Here is the solution
+              </p>
             </FadeIn>
 
             <FadeIn delay={0.2}>
               <p className="mt-8 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-md">
-                Use a card that works without restrictions.
-                <br />
-                Setup takes 5 minutes.
+                A card without restrictions — works instantly
               </p>
             </FadeIn>
 
@@ -196,20 +189,43 @@ function HeroSection() {
                 </p>
               </div>
             </FadeIn>
+
+            {/* What happens next — inline */}
+            <FadeIn delay={0.5}>
+              <div className="mt-12 border-t border-border/20 pt-8">
+                <p className="text-xs font-semibold text-muted-foreground mb-5 tracking-[0.15em] uppercase">What happens next</p>
+                <div className="flex flex-wrap gap-4">
+                  {[
+                    { icon: CreditCard, label: "Sign up (2 min)" },
+                    { icon: Fingerprint, label: "Quick verification" },
+                    { icon: Wallet, label: "Card ready" },
+                    { icon: ShoppingCart, label: "Start paying" },
+                  ].map((s, i) => (
+                    <div key={s.label} className="flex items-center gap-2 text-xs text-foreground/60">
+                      <div className="w-7 h-7 rounded-lg bg-primary/8 border border-primary/10 flex items-center justify-center">
+                        <s.icon className="w-3.5 h-3.5 text-primary" />
+                      </div>
+                      <span className="font-medium">{s.label}</span>
+                      {i < 3 && <ChevronRight className="w-3 h-3 text-muted-foreground/30 ml-1" />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
           </div>
 
-          {/* Right — Card */}
+          {/* Right — Card (25-30% larger) */}
           <FadeIn delay={0.3} className="relative flex justify-center lg:justify-end">
-            <div className="relative w-80 lg:w-[440px]">
+            <div className="relative w-96 lg:w-[560px]">
               {/* Multi-layer glow */}
-              <div className="absolute inset-0 rounded-3xl scale-[1.3] blur-[100px] opacity-40"
+              <div className="absolute inset-0 rounded-3xl scale-[1.4] blur-[120px] opacity-45"
                 style={{ background: "radial-gradient(circle, hsl(28 100% 50%), transparent 70%)" }} />
-              <div className="absolute inset-0 rounded-3xl scale-[1.5] blur-[140px] opacity-20"
+              <div className="absolute inset-0 rounded-3xl scale-[1.6] blur-[160px] opacity-25"
                 style={{ background: "radial-gradient(circle, hsl(340 80% 55%), transparent 60%)" }} />
 
               <motion.div
                 style={{ y: cardY }}
-                animate={{ y: [0, -12, 0] }}
+                animate={{ y: [0, -14, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
               >
                 <motion.div
@@ -222,10 +238,9 @@ function HeroSection() {
                     alt="Zerocard — global payment card"
                     className="w-full rounded-2xl relative z-10"
                     style={{
-                      filter: "drop-shadow(0 50px 100px rgba(0,0,0,0.35)) drop-shadow(0 20px 40px rgba(255,122,0,0.3))",
+                      filter: "drop-shadow(0 60px 120px rgba(0,0,0,0.4)) drop-shadow(0 25px 50px rgba(255,122,0,0.35))",
                     }}
                   />
-                  {/* Card reflection */}
                   <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none"
                     style={{
                       background: "linear-gradient(135deg, hsl(0 0% 100% / 0.15) 0%, transparent 40%, transparent 60%, hsl(0 0% 100% / 0.05) 100%)",
@@ -261,30 +276,41 @@ function HeroSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   MICRO-BRIDGE
+   SCROLLING TICKER
    ═══════════════════════════════════════════════════ */
-function MicroBridge() {
-  const steps = [
-    { icon: CreditCard, label: "Sign up (2 min)" },
-    { icon: Fingerprint, label: "Verify identity" },
-    { icon: Wallet, label: "Get your card" },
-    { icon: ShoppingCart, label: "Start paying" },
+function ScrollingTicker() {
+  const services = [
+    "ChatGPT", "Claude", "Midjourney", "Netflix", "Spotify",
+    "Booking", "Airbnb", "Apple", "Google", "Stripe", "Lovable",
   ];
+  // Double for seamless loop
+  const doubled = [...services, ...services];
+
   return (
-    <section className="py-12 border-y border-border/20 bg-card/30 backdrop-blur-xl relative">
+    <section className="py-10 border-y border-border/20 bg-card/20 backdrop-blur-sm relative overflow-hidden">
       <NoiseOverlay opacity={0.015} />
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <p className="text-center text-sm text-muted-foreground mb-8 font-medium tracking-wide">What happens next</p>
-        <div className="flex flex-wrap justify-center gap-6 lg:gap-14">
-          {steps.map((s, i) => (
-            <div key={s.label} className="flex items-center gap-3 text-sm text-foreground/70">
-              <div className="w-10 h-10 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center">
-                <s.icon className="w-4.5 h-4.5 text-primary" />
-              </div>
-              <span className="font-medium">{s.label}</span>
-              {i < steps.length - 1 && <ChevronRight className="w-4 h-4 text-muted-foreground/25 ml-4 hidden sm:block" />}
-            </div>
-          ))}
+      <div className="relative z-10">
+        <p className="text-center text-xs font-semibold text-muted-foreground mb-6 tracking-[0.2em] uppercase">
+          Works with services where regular cards fail
+        </p>
+        <div className="relative overflow-hidden">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+          <motion.div
+            className="flex gap-12 items-center whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          >
+            {doubled.map((name, i) => (
+              <span
+                key={`${name}-${i}`}
+                className="text-sm font-semibold text-foreground/40 hover:text-foreground/80 transition-opacity duration-300 cursor-default select-none"
+              >
+                {name}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -323,10 +349,8 @@ function StatusBar() {
 function AIUseCases() {
   const services = [
     { icon: Bot, name: "ChatGPT" },
-    { icon: Brain, name: "Midjourney" },
-    { icon: Sparkles, name: "Claude" },
-    { icon: Layers, name: "Subscriptions" },
-    { icon: Plane, name: "Travel bookings" },
+    { icon: Brain, name: "Claude" },
+    { icon: Sparkles, name: "Midjourney" },
   ];
   return (
     <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
@@ -334,18 +358,17 @@ function AIUseCases() {
       <NoiseOverlay />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <SectionHeading
-          tag="Works everywhere"
-          title={<>Pay for everything that<br /><span className="gradient-text">didn't work before</span></>}
-          subtitle="AI tools, global subscriptions, travel — all unlocked with one card."
+          tag="No restrictions"
+          title={<>Pay without <span className="gradient-text">restrictions</span></>}
         />
-        <div className="flex flex-wrap justify-center gap-5 max-w-3xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
           {services.map((s, i) => (
-            <FadeIn key={s.name} delay={i * 0.08}>
-              <GlassCard className="flex items-center gap-4 px-8 py-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/10 flex items-center justify-center">
-                  <s.icon className="w-5 h-5 text-primary" />
+            <FadeIn key={s.name} delay={i * 0.1}>
+              <GlassCard className="flex items-center gap-5 px-10 py-8">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/10 flex items-center justify-center">
+                  <s.icon className="w-6 h-6 text-primary" />
                 </div>
-                <span className="font-semibold text-foreground text-base">{s.name}</span>
+                <span className="font-bold text-foreground text-lg">{s.name}</span>
               </GlassCard>
             </FadeIn>
           ))}
@@ -533,10 +556,10 @@ function ComparisonSection() {
    ═══════════════════════════════════════════════════ */
 function GuideSection() {
   const steps = [
-    { num: "01", title: "Register", desc: "Create your account — takes 2 minutes", cta: true },
-    { num: "02", title: "Verification", desc: "Verify your identity — like any bank" },
-    { num: "03", title: "Order card", desc: "Virtual card is issued instantly" },
-    { num: "04", title: "Fund (USDT)", desc: "Top up your card balance" },
+    { num: "01", title: "Sign up", desc: "Create your account — takes just 2 minutes", cta: true },
+    { num: "02", title: "Verification", desc: "Simple identity check — like any bank" },
+    { num: "03", title: "Get your card", desc: "Virtual card is issued instantly" },
+    { num: "04", title: "Fund balance", desc: "Top up your card with USDT" },
     { num: "05", title: "Pay normally", desc: "Use it like any regular payment card" },
   ];
   return (
@@ -544,7 +567,7 @@ function GuideSection() {
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="-top-20 right-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading tag="Step-by-step guide" title="Setup takes 5 minutes" />
+        <SectionHeading tag="Step-by-step guide" title="Setup takes 5 minutes" subtitle="Follow these simple steps and start paying globally" />
         <div className="max-w-2xl mx-auto space-y-5">
           {steps.map((s, i) => (
             <FadeIn key={s.num} delay={i * 0.08}>
@@ -743,9 +766,10 @@ function FOMOSection() {
             Most people discover this{" "}
             <span className="gradient-text">too late</span>
           </h2>
-          <p className="text-lg text-white/35 leading-relaxed">
+          <p className="text-lg text-white/35 leading-relaxed mb-14">
             While others struggle with failed payments — you already pay without limits
           </p>
+          <CTAButton text="Get card for free" size="large" />
         </FadeIn>
       </div>
     </section>
@@ -800,7 +824,7 @@ function Footer() {
 const Index = () => (
   <div className="min-h-screen overflow-x-hidden">
     <HeroSection />
-    <MicroBridge />
+    <ScrollingTicker />
     <StatusBar />
     <AIUseCases />
     <StepsOverview />
