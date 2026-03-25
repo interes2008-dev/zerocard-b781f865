@@ -1126,6 +1126,7 @@ function Footer() {
 const Index = () => (
   <div className="min-h-screen overflow-x-hidden">
     <HeroSection />
+    <InfrastructureSection />
     <ScrollingTicker />
     <StatusBar />
     <AIUseCases />
@@ -1133,8 +1134,10 @@ const Index = () => (
     <ProblemSection />
     <WhyItWorks />
     <ComparisonSection />
+    <BetterThanBanks />
     <GuideSection />
     <BenefitsSection />
+    <StandardProcess />
     <TrustSection />
     <FearSection />
     <ExtraSection />
