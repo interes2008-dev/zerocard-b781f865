@@ -415,7 +415,7 @@ function StepsOverview() {
   const steps = [
     { icon: CreditCard, num: "01", title: "Sign up", desc: "Create an account on Pionex (2–3 minutes)" },
     { icon: Wallet, num: "02", title: "Get your card", desc: "Issue a virtual card for free" },
-    { icon: ArrowUpRight, num: "03", title: "Fund your balance", desc: "Transfer USDT easily" },
+    { icon: ArrowRight, num: "03", title: "Fund your balance", desc: "Transfer USDT easily" },
     { icon: ShoppingCart, num: "04", title: "Pay anywhere", desc: "Use the card for subscriptions and services" },
   ];
   return (
