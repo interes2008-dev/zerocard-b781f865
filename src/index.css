@@ -106,6 +106,14 @@ html {
 }
 
 @layer utilities {
+  .section-title {
+    @apply text-4xl lg:text-6xl font-bold leading-tight;
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+  
+  html[lang="ru"] .section-title {
+    font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+  }
   .glass {
     @apply bg-white/10 backdrop-blur-xl border border-white/20;
   }
