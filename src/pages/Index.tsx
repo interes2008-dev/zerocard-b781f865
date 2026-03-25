@@ -294,12 +294,12 @@ function ScrollingTicker() {
             className="group flex items-center gap-3.5 px-8 lg:px-10 py-4 mx-3 rounded-2xl border border-border/5 bg-card/30 backdrop-blur-sm transition-all duration-500 cursor-default select-none hover:bg-card/60 hover:border-white/10"
             style={{ ["--brand-color" as string]: brand.color }}
           >
-            <brand.Logo
-              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 text-foreground/25"
-              style={{
-                filter: "grayscale(100%) brightness(0.6)",
-              }}
-            />
+            <div
+              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100"
+              style={{ color: brand.color }}
+            >
+              <brand.Logo className="w-full h-full" />
+            </div>
             <span
               className="text-sm lg:text-base font-bold text-foreground/30 transition-all duration-500 whitespace-nowrap tracking-tight group-hover:text-foreground/90"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
