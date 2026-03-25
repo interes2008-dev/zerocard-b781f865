@@ -52,7 +52,7 @@ function CTAButton({ text, size = "default" }: { text: string; size?: "default" 
       whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.97 }}
       className={`inline-flex items-center justify-center gap-3 rounded-full gradient-bg text-white font-semibold transition-all ${
-        size === "large" ? "w-full sm:w-auto px-12 py-5 text-lg" : "px-8 py-3.5 text-sm"
+        size === "large" ? "w-full sm:w-auto px-10 py-4 text-base" : "px-8 py-3.5 text-sm"
       }`}
       style={{ boxShadow: "0 16px 60px -12px hsl(28 100% 50% / 0.5), 0 8px 24px -8px hsl(340 80% 55% / 0.3)" }}
     >
