@@ -276,29 +276,29 @@ function HeroSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SCROLLING TICKER — CSS marquee for seamless loop
+   SCROLLING TICKER — Premium branded logos
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
-  const row1 = ["ChatGPT", "Claude", "Midjourney", "Netflix", "Spotify", "Booking", "Airbnb"];
-  const row2 = ["Apple", "Google", "Stripe", "App Store", "Google Play", "Visa", "Mastercard"];
-
-  const TickerRow = ({ items, reverse, speed }: { items: string[]; reverse?: boolean; speed: number }) => (
-    <div className="relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-40 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-40 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+  const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => (
+    <div className="relative overflow-hidden py-2">
+      <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
       <div
-        className="flex gap-12 shrink-0"
+        className="flex shrink-0"
         style={{
           animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite`,
         }}
       >
-        {[...items, ...items].map((name, i) => (
-          <span
-            key={`${name}-${i}`}
-            className="text-sm md:text-base font-semibold text-foreground/[0.35] hover:text-foreground/90 hover:drop-shadow-[0_0_12px_hsl(28_100%_50%/0.6)] transition-all duration-300 cursor-default select-none whitespace-nowrap px-4 py-2"
+        {[...items, ...items, ...items].map((brand, i) => (
+          <div
+            key={`${brand.name}-${i}`}
+            className="flex items-center gap-3 px-8 lg:px-10 py-3 mx-3 rounded-2xl border border-border/5 bg-card/30 backdrop-blur-sm hover:bg-card/60 hover:border-primary/15 hover:shadow-[0_0_30px_-8px_hsl(28_100%_50%/0.25)] transition-all duration-500 cursor-default select-none group"
           >
-            {name}
-          </span>
+            <brand.Logo className="w-6 h-6 lg:w-7 lg:h-7 text-foreground/30 group-hover:text-primary transition-colors duration-500" />
+            <span className="text-sm lg:text-base font-semibold text-foreground/35 group-hover:text-foreground/90 transition-colors duration-500 whitespace-nowrap tracking-tight">
+              {brand.name}
+            </span>
+          </div>
         ))}
       </div>
     </div>
@@ -316,9 +316,9 @@ function ScrollingTicker() {
         <p className="text-center text-sm text-muted-foreground/60 mb-10">
           AI tools, subscriptions and global services
         </p>
-        <div className="flex flex-col gap-6">
-          <TickerRow items={row1} speed={20} />
-          <TickerRow items={row2} reverse speed={25} />
+        <div className="flex flex-col gap-4">
+          <TickerRow items={row1Brands} speed={25} />
+          <TickerRow items={row2Brands} reverse speed={30} />
         </div>
       </div>
     </section>
