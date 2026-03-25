@@ -1119,6 +1119,16 @@ function FAQSection() {
     { q: t.faq4Q, a: t.faq4A },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
+
   return (
     <section id="faq" className="py-20 lg:py-28 bg-background relative">
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
