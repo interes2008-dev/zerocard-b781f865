@@ -107,12 +107,21 @@ html {
 
 @layer utilities {
   .section-title {
-    @apply text-4xl lg:text-6xl font-bold leading-tight;
-    font-size: clamp(2rem, 5vw, 4rem);
+    @apply font-bold leading-tight;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+  }
+  
+  .hero-title {
+    @apply font-bold leading-[1.06] tracking-tight;
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
   }
   
   html[lang="ru"] .section-title {
-    font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+  }
+  
+  html[lang="ru"] .hero-title {
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
   }
   .glass {
     @apply bg-white/10 backdrop-blur-xl border border-white/20;
