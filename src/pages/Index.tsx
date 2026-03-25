@@ -100,7 +100,7 @@ function GlowOrb({ color, size, position, blur = 120, opacity = 0.12 }: {
    HERO
    ═══════════════════════════════════════════════════ */
 function HeroSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const cardY = useTransform(scrollYProgress, [0, 1], [0, -80]);
@@ -132,7 +132,11 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-            <h1 className="mt-10 text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight leading-[1.06] text-foreground">
+              <h1 className={`mt-10 font-bold tracking-tight leading-[1.06] text-foreground ${
+                lang === "ru"
+                  ? "text-[2.5rem] sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4rem]"
+                  : "text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem]"
+              }`}>
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
                 <br />
                 {t.heroTitle3}
