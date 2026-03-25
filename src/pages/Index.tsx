@@ -263,7 +263,8 @@ function HeroSection() {
    INFRASTRUCTURE TRUST
    ═══════════════════════════════════════════════════ */
 function InfrastructureSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const hSize = lang === "ru" ? "text-3xl lg:text-5xl xl:text-[3.5rem]" : "text-4xl lg:text-6xl xl:text-[4rem]";
   const cards = [
     { icon: Shield, title: t.infraCard1Title, desc: t.infraCard1Desc, gradient: "from-emerald-500 to-teal-400" },
     { icon: Zap, title: t.infraCard2Title, desc: t.infraCard2Desc, gradient: "from-orange-500 to-amber-400" },
