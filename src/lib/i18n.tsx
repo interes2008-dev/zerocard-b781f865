@@ -246,9 +246,9 @@ const translations = {
 
     // Hero
     heroBadge: "Платежи нового поколения",
-    heroTitle1: "Карта",
+    heroTitle1: "Виртуальная карта",
     heroTitle2: " для",
-    heroTitle3: "мировых платежей",
+    heroTitle3: "глобальных платежей",
     heroPowered: "На базе",
     heroInfra: "инфраструктуры",
     heroDesc1: "ChatGPT, Claude, Spotify, Netflix, Midjourney",
