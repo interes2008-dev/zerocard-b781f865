@@ -333,7 +333,7 @@ function InfrastructureSection() {
    SCROLLING TICKER
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
     const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
     return (
@@ -381,7 +381,7 @@ function ScrollingTicker() {
    STATUS BAR
    ═══════════════════════════════════════════════════ */
 function StatusBar() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const items = [
     { icon: Globe, label: t.statusGlobal },
     { icon: Smartphone, label: t.statusApple },
@@ -413,7 +413,7 @@ function StatusBar() {
    AI USE CASES
    ═══════════════════════════════════════════════════ */
 function AIUseCases() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const services = [
     { icon: Bot, name: "ChatGPT", desc: t.aiChatGPT },
     { icon: Brain, name: "Claude", desc: t.aiClaude },
@@ -456,7 +456,7 @@ function AIUseCases() {
    HOW IT WORKS
    ═══════════════════════════════════════════════════ */
 function StepsOverview() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const steps = [
     { icon: UserPlus, num: "01", title: t.step1Title, desc: t.step1Desc, gradient: "from-orange-500 to-amber-400" },
     { icon: ShieldCheck, num: "02", title: t.step2Title, desc: t.step2Desc, gradient: "from-amber-400 to-orange-500" },
@@ -504,7 +504,7 @@ function StepsOverview() {
    PROBLEM
    ═══════════════════════════════════════════════════ */
 function ProblemSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const problems = [t.problem1, t.problem2, t.problem3, t.problem4];
   return (
     <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)" }}>
@@ -547,7 +547,7 @@ function ProblemSection() {
    WHY THIS CARD WORKS
    ═══════════════════════════════════════════════════ */
 function WhyItWorks() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
@@ -593,7 +593,7 @@ function WhyItWorks() {
    COMPARISON TABLE
    ═══════════════════════════════════════════════════ */
 function ComparisonSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const rows = [
     { label: t.compAI, old: false, zc: true },
     { label: t.compGlobal, old: false, zc: true },
@@ -648,7 +648,7 @@ function ComparisonSection() {
    GUIDE
    ═══════════════════════════════════════════════════ */
 function GuideSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const steps = [
     { num: "01", title: t.guide1Title, desc: t.guide1Desc, cta: true },
     { num: "02", title: t.guide2Title, desc: t.guide2Desc },
@@ -693,7 +693,7 @@ function GuideSection() {
    BENEFITS
    ═══════════════════════════════════════════════════ */
 function BenefitsSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const benefits = [
     { icon: Bot, title: t.benAI, desc: t.benAIDesc },
     { icon: Globe, title: t.benGlobal, desc: t.benGlobalDesc },
@@ -738,7 +738,7 @@ function BenefitsSection() {
    WHY IT'S SAFE
    ═══════════════════════════════════════════════════ */
 function SafetySection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const safetyPoints = [
     { icon: Shield, title: t.safe1Title, desc: t.safe1Desc, gradient: "from-emerald-500 to-teal-400" },
     { icon: Fingerprint, title: t.safe2Title, desc: t.safe2Desc, gradient: "from-orange-500 to-amber-400" },
@@ -791,7 +791,7 @@ function SafetySection() {
    TRUST
    ═══════════════════════════════════════════════════ */
 function TrustSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
@@ -846,7 +846,7 @@ function TrustSection() {
    WHY BETTER THAN BANKS
    ═══════════════════════════════════════════════════ */
 function BetterThanBanks() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const reasons = [
     { icon: Globe, title: t.bank1Title, desc: t.bank1Desc },
     { icon: Zap, title: t.bank2Title, desc: t.bank2Desc },
@@ -898,7 +898,7 @@ function BetterThanBanks() {
    STANDARD PROCESS
    ═══════════════════════════════════════════════════ */
 function StandardProcess() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const points = [
     { icon: Fingerprint, title: t.std1Title, desc: t.std1Desc },
     { icon: ShieldCheck, title: t.std2Title, desc: t.std2Desc },
@@ -940,7 +940,7 @@ function StandardProcess() {
    FEAR / OBJECTION
    ═══════════════════════════════════════════════════ */
 function FearSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-32 lg:py-40 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 10% 5%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
@@ -970,7 +970,7 @@ function FearSection() {
    EXTRA
    ═══════════════════════════════════════════════════ */
 function ExtraSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
@@ -1009,7 +1009,7 @@ function ExtraSection() {
    FOMO
    ═══════════════════════════════════════════════════ */
 function FOMOSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(28 20% 5%) 50%, hsl(0 0% 2%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
@@ -1035,7 +1035,7 @@ function FOMOSection() {
    FINAL CTA
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const quickSteps = [
     { icon: UserPlus, label: t.final1 },
     { icon: ShieldCheck, label: t.final2 },
@@ -1073,7 +1073,7 @@ function FinalCTA() {
    FOOTER
    ═══════════════════════════════════════════════════ */
 function Footer() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <footer className="py-14 border-t border-border/10 bg-background">
       <div className="container mx-auto px-6 lg:px-16 flex flex-col items-center gap-3">
@@ -1128,7 +1128,7 @@ function LangSwitcher() {
    STICKY NAVBAR
    ═══════════════════════════════════════════════════ */
 function Navbar() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
