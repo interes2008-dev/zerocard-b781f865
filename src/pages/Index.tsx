@@ -623,16 +623,21 @@ function WhyItWorks() {
         </FadeIn>
         <div className="grid sm:grid-cols-3 gap-8">
           {[
-            { icon: Globe, label: "Works everywhere", desc: "No country restrictions" },
-            { icon: Layers, label: "No restrictions", desc: "Bypass banking filters" },
-            { icon: Zap, label: "Any service", desc: "AI tools, streaming, travel" },
+            { icon: Globe, label: "Works everywhere", desc: "No country restrictions", gradient: "from-orange-500 to-amber-400" },
+            { icon: Layers, label: "No restrictions", desc: "Bypass banking filters", gradient: "from-amber-400 to-orange-500" },
+            { icon: Zap, label: "Any service", desc: "AI tools, streaming, travel", gradient: "from-orange-500 to-rose-500" },
           ].map((item, i) => (
             <FadeIn key={item.label} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
-                <GlassCard className="p-10">
-                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
-                    style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
-                    <item.icon className="w-7 h-7 text-primary" />
+              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
+                <GlassCard className="p-10 h-full flex flex-col items-center justify-start" hover={false}>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ boxShadow: "inset 0 0 60px -20px hsl(28 100% 50% / 0.08), 0 0 80px -20px hsl(28 100% 50% / 0.1)" }} />
+                  <div className="relative mx-auto mb-7">
+                    <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${item.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                    <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center`}
+                      style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                      <item.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                    </div>
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{item.label}</h3>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
