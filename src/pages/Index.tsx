@@ -497,7 +497,7 @@ function StepsOverview() {
     { icon: Globe, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel", gradient: "from-orange-500 to-amber-400" },
   ];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden bg-background">
+    <section id="how-it-works" className="py-28 lg:py-36 relative overflow-hidden bg-background scroll-mt-20">
       <NoiseOverlay opacity={0.02} />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-0 right-1/4" blur={200} opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={400} position="bottom-0 left-1/4" blur={180} opacity={0.03} />
@@ -828,7 +828,7 @@ function SafetySection() {
     { icon: Layers, title: "Real infrastructure", desc: "Built on a licensed financial platform used by millions worldwide", gradient: "from-blue-500 to-cyan-400" },
   ];
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
+    <section id="safety" className="py-32 lg:py-40 relative overflow-hidden scroll-mt-20" style={{
       background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(200 15% 6%) 50%, hsl(220 12% 3%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
@@ -951,7 +951,7 @@ function BetterThanBanks() {
     { icon: Lock, title: "No censorship", desc: "Banks decide what you can pay for — Zerocard doesn't" },
   ];
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
+    <section id="why-better" className="py-32 lg:py-40 relative overflow-hidden scroll-mt-20" style={{
       background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(240 15% 6%) 50%, hsl(220 12% 3%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
