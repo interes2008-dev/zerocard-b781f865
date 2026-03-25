@@ -1199,8 +1199,18 @@ function FinalCTA() {
 function Footer() {
   return (
     <footer className="py-14 border-t border-border/10 bg-background">
-      <div className="container mx-auto px-6 lg:px-16 text-center">
-        <p className="text-lg font-bold gradient-text mb-3">Zerocard</p>
+      <div className="container mx-auto px-6 lg:px-16 flex flex-col items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-[9px] flex items-center justify-center"
+            style={{ background: "linear-gradient(135deg, hsl(28 100% 50%), hsl(340 80% 55%))" }}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="3" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="none" opacity="0.6" />
+              <rect x="4" y="5" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="white" fillOpacity="0.15" />
+              <circle cx="12" cy="9" r="1.2" fill="white" opacity="0.9" />
+            </svg>
+          </div>
+          <span className="text-lg font-bold text-foreground tracking-tight">Zero<span className="font-light">card</span></span>
+        </div>
         <p className="text-xs text-muted-foreground/50">© {new Date().getFullYear()} Zerocard. Next-generation global payments.</p>
       </div>
     </footer>
