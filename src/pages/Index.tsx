@@ -679,10 +679,11 @@ function ComparisonSection() {
       <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Side by side</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-center text-white mb-20 leading-tight">
-            Compare for <span className="gradient-text">yourself</span>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Why not a regular card</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-center text-white mb-8 leading-tight">
+            Why not a <span className="gradient-text">regular bank card</span>
           </h2>
+          <p className="text-center text-lg text-white/30 mb-20 max-w-lg mx-auto">See the difference for yourself</p>
         </FadeIn>
         <FadeIn delay={0.15}>
           <motion.div
