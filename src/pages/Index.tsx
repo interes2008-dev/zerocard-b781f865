@@ -154,8 +154,10 @@ function HeroSection() {
               <p className="mt-4 text-xl lg:text-2xl font-semibold text-foreground/70">
                 Powered by <span className="gradient-text">Pionex</span> infrastructure
               </p>
-              <p className="mt-3 text-base text-muted-foreground max-w-md leading-relaxed">
-                Pay for ChatGPT, Claude, Netflix and any global service — setup in 5 minutes
+              <p className="mt-3 text-base text-muted-foreground max-w-lg leading-relaxed">
+                Pay for ChatGPT, Claude, Spotify, Netflix, Midjourney
+                <br />
+                and any global service — setup in 5 minutes
               </p>
             </FadeIn>
 
