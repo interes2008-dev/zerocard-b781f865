@@ -151,10 +151,10 @@ function HeroSection() {
                 <br />
                 global payments
               </h1>
-              <p className="mt-4 text-xl lg:text-2xl font-semibold text-foreground/70">
-                Powered by <span className="gradient-text">Pionex</span> infrastructure
+              <p className="mt-5 text-lg lg:text-xl font-semibold text-foreground/80 tracking-tight">
+                Powered by <span className="gradient-text font-bold">Pionex</span> infrastructure
               </p>
-              <p className="mt-3 text-base text-muted-foreground max-w-lg leading-relaxed">
+              <p className="mt-4 text-base lg:text-lg text-muted-foreground/90 max-w-lg leading-relaxed font-medium">
                 Pay for ChatGPT, Claude, Spotify, Netflix, Midjourney
                 <br />
                 and any global service — setup in 5 minutes
