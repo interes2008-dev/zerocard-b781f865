@@ -257,7 +257,7 @@ const translations = {
     heroFeat2: "Без абонплаты",
     heroFeat3: "Весь мир",
     heroFeat4: "ИИ и подписки",
-    heroCTA: "Получить карту",
+    heroCTA: "Получить карту бесплатно",
     heroMicro: "Без абонплаты • Бесплатно • Кешбэк",
     heroStat1: "Стран",
     heroStat2: "Старт",
