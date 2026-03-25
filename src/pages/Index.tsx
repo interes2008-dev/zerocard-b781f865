@@ -386,19 +386,22 @@ function ScrollingTicker() {
   );
 
   return (
-    <section className="py-16 lg:py-20 relative overflow-hidden" style={{
+    <section className="py-16 lg:py-24 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)",
     }}>
-      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.05} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.07} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.04} />
       <NoiseOverlay opacity={0.03} />
       <div className="relative z-10">
-        <p className="text-center text-xs font-semibold text-primary mb-2 tracking-[0.2em] uppercase">
-          Works with services where regular cards fail
-        </p>
-        <p className="text-center text-sm text-white/25 mb-10">
-          AI tools, subscriptions and global services
-        </p>
-        <div className="flex flex-col gap-4">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-3 tracking-[0.2em] uppercase">
+            Works with services where regular cards fail
+          </p>
+          <p className="text-center text-sm text-white/30 mb-12">
+            AI tools, subscriptions and global services
+          </p>
+        </FadeIn>
+        <div className="flex flex-col gap-5">
           <TickerRow items={row1Brands} speed={25} />
           <TickerRow items={row2Brands} reverse speed={30} />
         </div>
