@@ -6,7 +6,7 @@ import {
   CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap, UserPlus, ShieldCheck,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
   BadgeCheck, CircleDollarSign, Bot, Smartphone, Lock, Layers,
-  Fingerprint, Brain, Plane,
+  Fingerprint, Brain, Plane, Menu,
 } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
@@ -1215,6 +1215,7 @@ function Footer() {
    ═══════════════════════════════════════════════════ */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -1222,42 +1223,121 @@ function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-2xl border-b border-border/15 shadow-lg shadow-black/5"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 lg:px-16 flex items-center justify-between h-16 lg:h-[72px]">
-        <a href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center"
-            style={{ boxShadow: scrolled ? "0 0 20px -4px hsl(28 100% 50% / 0.3)" : "none" }}>
-            <CreditCard className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-lg font-bold text-foreground tracking-tight">Zerocard</span>
-        </a>
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-        <motion.a
-          href={SIGNUP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          className={`inline-flex items-center gap-2 rounded-full font-semibold text-sm text-white px-5 py-2.5 transition-all duration-300 ${
-            scrolled
-              ? "bg-gradient-to-r from-primary via-primary to-destructive shadow-lg shadow-primary/25"
-              : "bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20"
-          }`}
+  const navLinks = [
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Why Zerocard", href: "#why-better" },
+    { label: "Safety", href: "#safety" },
+  ];
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled || mobileOpen
+            ? "bg-background/80 backdrop-blur-2xl border-b border-border/15 shadow-lg shadow-black/5"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-6 lg:px-16 flex items-center justify-between h-16 lg:h-[72px]">
+          <a href="/" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center"
+              style={{ boxShadow: scrolled ? "0 0 20px -4px hsl(28 100% 50% / 0.3)" : "none" }}>
+              <CreditCard className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-lg font-bold text-foreground tracking-tight">Zerocard</span>
+          </a>
+
+          {/* Desktop nav links */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop CTA */}
+          <motion.a
+            href={SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className={`hidden md:inline-flex items-center gap-2 rounded-full font-semibold text-sm text-white px-5 py-2.5 transition-all duration-300 ${
+              scrolled
+                ? "bg-gradient-to-r from-primary via-primary to-destructive shadow-lg shadow-primary/25"
+                : "bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20"
+            }`}
+          >
+            Get your card
+            <ArrowRight className="w-3.5 h-3.5" />
+          </motion.a>
+
+          {/* Mobile burger */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-foreground/80 hover:bg-foreground/5 transition-colors"
+            aria-label="Menu"
+          >
+            <motion.div animate={{ rotate: mobileOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </motion.div>
+          </button>
+        </div>
+
+        {/* Mobile dropdown */}
+        <motion.div
+          initial={false}
+          animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="md:hidden overflow-hidden"
         >
-          Get your card
-          <ArrowRight className="w-3.5 h-3.5" />
-        </motion.a>
-      </div>
-    </motion.nav>
+          <div className="px-6 pb-6 pt-2 space-y-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block py-3 px-4 rounded-xl text-base font-medium text-foreground/80 hover:text-foreground hover:bg-foreground/5 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="pt-3">
+              <a
+                href={SIGNUP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full rounded-full font-semibold text-sm text-white px-5 py-3 bg-gradient-to-r from-primary via-primary to-destructive shadow-lg shadow-primary/25"
+              >
+                Get your card
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </motion.nav>
+
+      {/* Overlay */}
+      {mobileOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+    </>
   );
 }
 
