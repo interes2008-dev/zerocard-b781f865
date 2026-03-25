@@ -1150,7 +1150,8 @@ function FAQSection() {
           </Accordion>
         </FadeIn>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 
