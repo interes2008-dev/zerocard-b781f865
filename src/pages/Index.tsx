@@ -180,12 +180,39 @@ function HeroSection() {
               </div>
             </FadeIn>
 
+            <FadeIn delay={0.25}>
+              <p className="mt-6 text-base text-muted-foreground leading-relaxed max-w-md">
+                Virtual card for global payments
+                <br />
+                <span className="text-foreground/60 font-medium">powered by financial infrastructure (Pionex)</span>
+              </p>
+            </FadeIn>
+
             <FadeIn delay={0.3}>
-              <div className="mt-10">
-                <CTAButton text="Get your card for free" size="large" />
-                <p className="mt-5 text-xs text-muted-foreground tracking-wide">
-                  Secure · Fast · No restrictions
+              <div className="mt-8">
+                <CTAButton text="Get your card for free in 2 minutes" size="large" />
+                <p className="mt-4 text-xs text-muted-foreground tracking-wide">
+                  No monthly fees • Free card • Cashback
                 </p>
+
+                {/* What happens next micro-block */}
+                <div className="mt-6 rounded-2xl border border-border/20 bg-card/40 backdrop-blur-sm p-5 max-w-sm">
+                  <p className="text-xs font-semibold text-foreground/70 mb-3 tracking-wide">What happens after you click:</p>
+                  <div className="space-y-2">
+                    {[
+                      { icon: UserPlus, text: "2 min signup" },
+                      { icon: ShieldCheck, text: "Quick identity verification" },
+                      { icon: CreditCard, text: "Card access" },
+                    ].map((step) => (
+                      <div key={step.text} className="flex items-center gap-2.5 text-xs text-muted-foreground">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <step.icon className="w-3 h-3 text-primary" />
+                        </div>
+                        {step.text}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </FadeIn>
 
@@ -278,7 +305,7 @@ function InfrastructureSection() {
     { icon: Clock, title: "24/7 Access", desc: "Manage your finances anytime, anywhere in the world", gradient: "from-violet-500 to-purple-400" },
   ];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 4%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
@@ -343,11 +370,11 @@ function InfrastructureSection() {
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
-    const repeated = [...items, ...items, ...items, ...items, ...items, ...items];
+    const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
     return (
       <div className="relative overflow-hidden py-1">
-        <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
+        <div className="absolute left-0 top-0 bottom-0 w-48 lg:w-80 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), hsl(220 15% 5% / 0.8) 30%, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-48 lg:w-80 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), hsl(220 15% 5% / 0.8) 30%, transparent)" }} />
         <div
           className="flex shrink-0"
           style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
@@ -355,7 +382,7 @@ function ScrollingTicker() {
           {repeated.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
-              className="group relative flex items-center gap-2 px-4 lg:px-5 py-3 mx-1 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
+              className="group relative flex items-center gap-2 px-3 lg:px-4 py-2.5 mx-0.5 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
               style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}
             >
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -378,7 +405,7 @@ function ScrollingTicker() {
   };
 
   return (
-    <section className="py-12 lg:py-16 relative overflow-hidden" style={{
+    <section className="py-10 lg:py-14 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)",
     }}>
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.08} />
@@ -446,7 +473,7 @@ function AIUseCases() {
     { icon: Sparkles, name: "Midjourney", desc: "AI image generation" },
   ];
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 15% 6%) 50%, hsl(0 0% 4%) 100%)",
     }}>
       <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-0 left-1/2 -translate-x-1/2" blur={180} opacity={0.06} />
@@ -497,7 +524,7 @@ function StepsOverview() {
     { icon: Globe, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel", gradient: "from-orange-500 to-amber-400" },
   ];
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden bg-background">
+    <section className="py-28 lg:py-36 relative overflow-hidden bg-background">
       <NoiseOverlay opacity={0.02} />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-0 right-1/4" blur={200} opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={400} position="bottom-0 left-1/4" blur={180} opacity={0.03} />
@@ -564,7 +591,7 @@ function ProblemSection() {
     "Regional restrictions and filters",
   ];
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)",
     }}>
       <NoiseOverlay opacity={0.05} />
@@ -578,12 +605,12 @@ function ProblemSection() {
           </h2>
           <p className="text-center text-lg text-white/25 mb-16 max-w-md mx-auto">Traditional banks apply restrictions and filters</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-16">
           {problems.map((p, i) => (
             <FadeIn key={p} delay={i * 0.1}>
               <motion.div
                 whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }}
-                className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-8 transition-all cursor-default h-full"
+                className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-7 transition-all cursor-default h-full"
                 style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}
               >
                 <div className="w-12 h-12 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
@@ -594,6 +621,16 @@ function ProblemSection() {
             </FadeIn>
           ))}
         </div>
+
+        {/* Solution callout */}
+        <FadeIn delay={0.5}>
+          <motion.div whileHover={{ scale: 1.02 }} className="max-w-md mx-auto text-center rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-2xl p-8"
+            style={{ boxShadow: "0 0 60px -15px hsl(28 100% 50% / 0.2)" }}>
+            <Check className="w-8 h-8 text-primary mx-auto mb-3" />
+            <p className="text-xl font-bold text-white mb-2">ZeroCard <span className="gradient-text">solves this</span></p>
+            <p className="text-sm text-white/40">No restrictions. No blocks. Just payments that work.</p>
+          </motion.div>
+        </FadeIn>
       </div>
     </section>
   );
@@ -813,9 +850,10 @@ function BenefitsSection() {
    ═══════════════════════════════════════════════════ */
 function SafetySection() {
   const safetyPoints = [
-    { icon: Shield, title: "Account protection", desc: "Multi-layer security with encryption and real-time monitoring of all transactions", gradient: "from-emerald-500 to-teal-400" },
-    { icon: Fingerprint, title: "Identity verification", desc: "Standard KYC process — same as any regulated bank or financial institution", gradient: "from-orange-500 to-amber-400" },
-    { icon: Lock, title: "Transaction control", desc: "Full control over your card: freeze, unfreeze, set limits — all from your phone", gradient: "from-violet-500 to-purple-400" },
+    { icon: Shield, title: "Account protection (2FA)", desc: "Multi-layer security with two-factor authentication and real-time monitoring", gradient: "from-emerald-500 to-teal-400" },
+    { icon: Fingerprint, title: "Identity verification", desc: "Standard process — same as any regulated bank or financial institution", gradient: "from-orange-500 to-amber-400" },
+    { icon: Lock, title: "Transaction control", desc: "Freeze, unfreeze, set limits — full control from your phone", gradient: "from-violet-500 to-purple-400" },
+    { icon: Layers, title: "Real infrastructure", desc: "Built on a licensed financial platform used by millions worldwide", gradient: "from-blue-500 to-cyan-400" },
   ];
   return (
     <section className="py-32 lg:py-40 relative overflow-hidden" style={{
@@ -832,7 +870,7 @@ function SafetySection() {
           </h2>
           <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">Your money and data are protected at every level</p>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {safetyPoints.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
@@ -1132,7 +1170,7 @@ function FOMOSection() {
           <p className="text-lg text-white/30 leading-relaxed mb-16">
             While others struggle with failed payments — you already pay without limits
           </p>
-          <CTAButton text="Get your card for free" size="large" />
+          <CTAButton text="Get your card for free in 2 minutes" size="large" />
         </FadeIn>
       </div>
     </section>
@@ -1173,8 +1211,8 @@ function FinalCTA() {
               </div>
             ))}
           </div>
-          <CTAButton text="Get your card for free" size="large" />
-          <p className="mt-10 text-sm text-muted-foreground/60">
+          <CTAButton text="Get your card for free in 2 minutes" size="large" />
+          <p className="mt-8 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
         </FadeIn>
