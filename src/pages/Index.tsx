@@ -156,6 +156,10 @@ function HeroSection() {
               <p className="mt-4 text-xl lg:text-2xl font-semibold text-foreground/70">
                 A card that works — setup in 5 minutes
               </p>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary/15 bg-primary/5 backdrop-blur-sm px-4 py-2">
+                <Layers className="w-4 h-4 text-primary" />
+                <span className="text-sm text-muted-foreground">Powered by <span className="font-semibold gradient-text">Pionex</span> infrastructure</span>
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.2}>
