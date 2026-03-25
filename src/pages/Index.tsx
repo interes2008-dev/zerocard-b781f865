@@ -869,6 +869,107 @@ function TrustSection() {
 }
 
 /* ═══════════════════════════════════════════════════
+   WHY BETTER THAN BANKS — Dark premium section
+   ═══════════════════════════════════════════════════ */
+function BetterThanBanks() {
+  const reasons = [
+    { icon: Globe, title: "No borders", desc: "Pay for any service in any country — no geographic blocks" },
+    { icon: Zap, title: "No delays", desc: "Instant card issuance and real-time transactions" },
+    { icon: Coins, title: "No hidden fees", desc: "0€ issuance, 0€ monthly — banks charge for everything" },
+    { icon: Lock, title: "No censorship", desc: "Banks decide what you can pay for — Zerocard doesn't" },
+  ];
+  return (
+    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(240 15% 6%) 50%, hsl(220 12% 3%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/4 right-1/4" blur={200} opacity={0.06} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 left-1/4" blur={160} opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Banks vs Zerocard</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+            Why this is <span className="gradient-text">better than banks</span>
+          </h2>
+          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">Traditional banks weren't built for the modern digital economy</p>
+        </FadeIn>
+        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {reasons.map((r, i) => (
+            <FadeIn key={r.title} delay={i * 0.1}>
+              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+                <div className="relative group rounded-3xl overflow-hidden h-full">
+                  <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
+                    background: "linear-gradient(135deg, hsl(28 100% 50% / 0.2), hsl(0 0% 100% / 0.06), hsl(270 70% 55% / 0.1))",
+                  }}>
+                    <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
+                  </div>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 40px -15px hsl(28 100% 50% / 0.05)" }} />
+                  <div className="relative z-10 p-8 lg:p-10 flex items-start gap-5">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0"
+                      style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
+                      <r.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-2">{r.title}</h3>
+                      <p className="text-sm text-white/40 leading-relaxed">{r.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   STANDARD PROCESS — Light reassurance section
+   ═══════════════════════════════════════════════════ */
+function StandardProcess() {
+  const points = [
+    { icon: Fingerprint, title: "Identity verification", desc: "Same process used by every bank and financial institution" },
+    { icon: ShieldCheck, title: "Regulated platform", desc: "Operated by a licensed financial infrastructure provider" },
+    { icon: Smartphone, title: "App-based management", desc: "Control your card from your phone, just like mobile banking" },
+  ];
+  return (
+    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
+      <NoiseOverlay />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-4xl">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Nothing unusual</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-6 leading-tight text-center">
+            This is a <span className="gradient-text">standard process</span>
+          </h2>
+          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto leading-relaxed">
+            Everything works exactly like traditional banking — just without the restrictions
+          </p>
+        </FadeIn>
+        <div className="grid md:grid-cols-3 gap-7">
+          {points.map((p, i) => (
+            <FadeIn key={p.title} delay={i * 0.12}>
+              <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+                <GlassCard className="p-10 text-center h-full">
+                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+                    style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
+                    <p.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                </GlassCard>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    OBJECTION — Dark glass section
    ═══════════════════════════════════════════════════ */
 function FearSection() {
