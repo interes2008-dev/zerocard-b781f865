@@ -295,7 +295,7 @@ function ScrollingTicker() {
             style={{ ["--brand-color" as string]: brand.color }}
           >
             <div
-              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100"
+              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 group-hover:scale-110"
               style={{ color: brand.color }}
             >
               <brand.Logo className="w-full h-full" />
