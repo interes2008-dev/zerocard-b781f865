@@ -146,20 +146,17 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <h1 className="mt-10 text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight leading-[1.06] text-foreground">
-                Payment for
+            <h1 className="mt-10 text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight leading-[1.06] text-foreground">
+                <span className="gradient-text">Virtual card</span> for
                 <br />
-                <span className="gradient-text">ChatGPT</span> not
-                <br />
-                working?
+                global payments
               </h1>
               <p className="mt-4 text-xl lg:text-2xl font-semibold text-foreground/70">
-                A card that works — setup in 5 minutes
+                Powered by <span className="gradient-text">Pionex</span> infrastructure
               </p>
-              <div className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary/15 bg-primary/5 backdrop-blur-sm px-4 py-2">
-                <Layers className="w-4 h-4 text-primary" />
-                <span className="text-sm text-muted-foreground">Powered by <span className="font-semibold gradient-text">Pionex</span> infrastructure</span>
-              </div>
+              <p className="mt-3 text-base text-muted-foreground max-w-md leading-relaxed">
+                Pay for ChatGPT, Claude, Netflix and any global service — setup in 5 minutes
+              </p>
             </FadeIn>
 
             <FadeIn delay={0.2}>
@@ -180,13 +177,6 @@ function HeroSection() {
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.25}>
-              <p className="mt-6 text-base text-muted-foreground leading-relaxed max-w-md">
-                Virtual card for global payments
-                <br />
-                <span className="text-foreground/60 font-medium">powered by financial infrastructure (Pionex)</span>
-              </p>
-            </FadeIn>
 
             <FadeIn delay={0.3}>
               <div className="mt-8">
@@ -370,11 +360,11 @@ function InfrastructureSection() {
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
-    const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
+    const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
     return (
       <div className="relative overflow-hidden py-1">
-        <div className="absolute left-0 top-0 bottom-0 w-48 lg:w-80 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), hsl(220 15% 5% / 0.8) 30%, transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-48 lg:w-80 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), hsl(220 15% 5% / 0.8) 30%, transparent)" }} />
+        <div className="absolute left-0 top-0 bottom-0 w-56 lg:w-96 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), hsl(220 15% 5% / 0.95) 20%, hsl(220 15% 5% / 0.6) 50%, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-56 lg:w-96 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), hsl(220 15% 5% / 0.95) 20%, hsl(220 15% 5% / 0.6) 50%, transparent)" }} />
         <div
           className="flex shrink-0"
           style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
@@ -382,7 +372,7 @@ function ScrollingTicker() {
           {repeated.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
-              className="group relative flex items-center gap-2 px-3 lg:px-4 py-2.5 mx-0.5 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
+              className="group relative flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3 py-2 mx-px rounded-lg border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
               style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}
             >
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -421,8 +411,8 @@ function ScrollingTicker() {
           </p>
         </FadeIn>
         <div className="flex flex-col gap-3">
-          <TickerRow items={row1Brands} speed={20} />
-          <TickerRow items={row2Brands} reverse speed={24} />
+          <TickerRow items={row1Brands} speed={35} />
+          <TickerRow items={row2Brands} reverse speed={40} />
         </div>
       </div>
     </section>
@@ -637,7 +627,7 @@ function ProblemSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   WHY IT WORKS — Glass section
+   WHY THIS CARD WORKS — Glass section
    ═══════════════════════════════════════════════════ */
 function WhyItWorks() {
   return (
@@ -647,14 +637,13 @@ function WhyItWorks() {
       <NoiseOverlay />
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
         <FadeIn>
-          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">The solution</p>
+          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">The explanation</p>
           <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
-            Why this <span className="gradient-text">works</span>
+            Why this card <span className="gradient-text">works</span>
           </h2>
           <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-20 max-w-xl mx-auto">
-            Traditional banks apply restrictions and filters.
-            Zerocard uses a different financial infrastructure,
-            allowing payments to go through without limitations.
+            Regular banks block payments to many online services.
+            Zerocard uses a separate financial infrastructure — so your payments go through without filters or restrictions.
           </p>
         </FadeIn>
         <div className="grid sm:grid-cols-3 gap-8">
