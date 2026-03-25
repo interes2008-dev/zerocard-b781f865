@@ -499,7 +499,7 @@ function AIUseCases() {
 function StepsOverview() {
   const steps = [
     { icon: UserPlus, num: "01", title: "Sign up", desc: "Create an account in a couple of minutes", gradient: "from-orange-500 to-amber-400" },
-    { icon: ShieldCheck, num: "02", title: "Verify your identity", desc: "Standard check (like in banks), takes a few minutes", gradient: "from-amber-400 to-orange-500" },
+    { icon: ShieldCheck, num: "02", title: "Verify your identity", desc: "Standard check (like in banks), takes a few minutes. This is standard process.", gradient: "from-amber-400 to-orange-500" },
     { icon: CreditCard, num: "03", title: "Get your card", desc: "Issue your virtual card for free", gradient: "from-orange-500 to-rose-500" },
     { icon: Wallet, num: "04", title: "Fund your balance", desc: "Transfer USDT easily", gradient: "from-rose-500 to-orange-500" },
     { icon: Globe, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel", gradient: "from-orange-500 to-amber-400" },
