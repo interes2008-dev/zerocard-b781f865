@@ -134,13 +134,8 @@ function HeroSection() {
       <GlowOrb color="hsl(340 80% 55%)" size={600} position="top-[40%] right-[30%]" blur={150} opacity={0.05} />
       <GlowOrb color="hsl(270 70% 55%)" size={500} position="-bottom-20 -left-20" blur={140} opacity={0.04} />
 
-      <div className="absolute inset-0 opacity-[0.012]" style={{
-        backgroundImage: "linear-gradient(hsl(0 0% 0%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 0%) 1px, transparent 1px)",
-        backgroundSize: "80px 80px",
-      }} />
-
       <div className="container mx-auto px-6 lg:px-16 py-32 lg:py-0 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
           {/* Left */}
           <div className="max-w-xl">
             <FadeIn>
@@ -151,77 +146,63 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <h1 className="mt-12 text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight leading-[1.06] text-foreground">
+              <h1 className="mt-10 text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-bold tracking-tight leading-[1.06] text-foreground">
                 Payment for
                 <br />
                 <span className="gradient-text">ChatGPT</span> not
                 <br />
                 working?
               </h1>
-              <p className="mt-5 text-2xl lg:text-3xl font-bold text-foreground/80">
-                Here is the solution
+              <p className="mt-4 text-xl lg:text-2xl font-semibold text-foreground/70">
+                A card that works — setup in 5 minutes
               </p>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <div className="mt-8 rounded-2xl border border-primary/15 bg-primary/5 backdrop-blur-sm px-6 py-4 max-w-md">
-                <p className="text-lg lg:text-xl font-semibold text-foreground leading-snug">
-                  Virtual card for global payments
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-primary" />
-                  Powered by Pionex infrastructure
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.3}>
-              <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-4 max-w-md">
-                {["0€ card issuance", "0€ monthly fees", "Works worldwide", "AI tools & subscriptions"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm text-foreground/80">
+              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 max-w-md">
+                {[
+                  { icon: CreditCard, text: "0€ card issuance" },
+                  { icon: Coins, text: "0€ monthly fees" },
+                  { icon: Globe, text: "Works worldwide" },
+                  { icon: Bot, text: "AI tools & subscriptions" },
+                ].map((item) => (
+                  <div key={item.text} className="flex items-center gap-2.5 text-sm text-foreground/80">
                     <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3.5 h-3.5 text-primary" />
+                      <item.icon className="w-3.5 h-3.5 text-primary" />
                     </div>
-                    {item}
+                    {item.text}
                   </div>
                 ))}
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.4}>
-              <div className="mt-14">
+            <FadeIn delay={0.3}>
+              <div className="mt-10">
                 <CTAButton text="Get your card for free" size="large" />
-                <p className="mt-6 text-xs text-muted-foreground tracking-wide">
-                  Secure · Fast · No restrictions · 5 minutes setup
+                <p className="mt-5 text-xs text-muted-foreground tracking-wide">
+                  Secure · Fast · No restrictions
                 </p>
               </div>
             </FadeIn>
 
-            {/* What happens next — inline */}
-            <FadeIn delay={0.5}>
-              <div className="mt-12 border-t border-border/20 pt-8">
-                <p className="text-xs font-semibold text-muted-foreground mb-5 tracking-[0.15em] uppercase">What happens next</p>
-                <div className="flex flex-wrap gap-4">
-                  {[
-                    { icon: CreditCard, label: "Sign up (2 min)" },
-                    { icon: Fingerprint, label: "Quick verification" },
-                    { icon: Wallet, label: "Card ready" },
-                    { icon: ShoppingCart, label: "Start paying" },
-                  ].map((s, i) => (
-                    <div key={s.label} className="flex items-center gap-2 text-xs text-foreground/60">
-                      <div className="w-7 h-7 rounded-lg bg-primary/8 border border-primary/10 flex items-center justify-center">
-                        <s.icon className="w-3.5 h-3.5 text-primary" />
-                      </div>
-                      <span className="font-medium">{s.label}</span>
-                      {i < 3 && <ChevronRight className="w-3 h-3 text-muted-foreground/30 ml-1" />}
-                    </div>
-                  ))}
-                </div>
+            {/* Social proof stats */}
+            <FadeIn delay={0.4}>
+              <div className="mt-10 flex items-center gap-8 pt-8 border-t border-border/15">
+                {[
+                  { value: "150+", label: "Countries" },
+                  { value: "5 min", label: "Setup" },
+                  { value: "0€", label: "Fees" },
+                ].map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-2xl font-bold gradient-text">{stat.value}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </FadeIn>
           </div>
 
-          {/* Right — Card (25-30% larger) */}
+          {/* Right — Card */}
           <FadeIn delay={0.3} className="relative flex justify-center lg:justify-end">
             <div className="relative w-96 lg:w-[560px]">
               {/* Multi-layer glow */}
@@ -255,25 +236,26 @@ function HeroSection() {
                 </motion.div>
               </motion.div>
 
-              {/* Floating accents */}
+              {/* Floating badge — cashback */}
               <motion.div
-                animate={{ y: [0, -16, 0], x: [0, 8, 0] }}
+                animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 w-14 h-14 rounded-2xl gradient-bg opacity-80 flex items-center justify-center z-20"
-                style={{ boxShadow: "0 8px 30px hsl(28 100% 50% / 0.4)" }}
+                className="absolute -top-4 -right-4 rounded-2xl gradient-bg px-4 py-2.5 z-20 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px hsl(28 100% 50% / 0.4)" }}
               >
-                <CircleDollarSign className="w-6 h-6 text-white" />
+                <TrendingUp className="w-4 h-4 text-white" />
+                <span className="text-xs font-bold text-white">Cashback 1%</span>
               </motion.div>
+
+              {/* Floating badge — global */}
               <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 -left-8 w-10 h-10 rounded-full bg-primary/20 backdrop-blur-xl z-20 border border-primary/20"
-              />
-              <motion.div
-                animate={{ y: [0, -8, 0], x: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 2 }}
-                className="absolute top-1/2 -left-12 w-6 h-6 rounded-full bg-accent/15 backdrop-blur-sm z-20"
-              />
+                animate={{ y: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-3 -left-6 rounded-2xl bg-card/90 backdrop-blur-xl border border-border/30 px-4 py-2.5 z-20 flex items-center gap-2 shadow-lg"
+              >
+                <Globe className="w-4 h-4 text-primary" />
+                <span className="text-xs font-semibold text-foreground">150+ countries</span>
+              </motion.div>
             </div>
           </FadeIn>
         </div>
