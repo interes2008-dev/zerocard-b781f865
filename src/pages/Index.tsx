@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
@@ -1210,8 +1210,60 @@ function Footer() {
 /* ═══════════════════════════════════════════════════
    PAGE
    ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   STICKY NAVBAR
+   ═══════════════════════════════════════════════════ */
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-2xl border-b border-border/15 shadow-lg shadow-black/5"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-6 lg:px-16 flex items-center justify-between h-16 lg:h-[72px]">
+        <a href="/" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center"
+            style={{ boxShadow: scrolled ? "0 0 20px -4px hsl(28 100% 50% / 0.3)" : "none" }}>
+            <CreditCard className="w-4 h-4 text-white" />
+          </div>
+          <span className="text-lg font-bold text-foreground tracking-tight">Zerocard</span>
+        </a>
+
+        <motion.a
+          href={SIGNUP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+          className={`inline-flex items-center gap-2 rounded-full font-semibold text-sm text-white px-5 py-2.5 transition-all duration-300 ${
+            scrolled
+              ? "bg-gradient-to-r from-primary via-primary to-destructive shadow-lg shadow-primary/25"
+              : "bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20"
+          }`}
+        >
+          Get your card
+          <ArrowRight className="w-3.5 h-3.5" />
+        </motion.a>
+      </div>
+    </motion.nav>
+  );
+}
+
 const Index = () => (
   <div className="min-h-screen overflow-x-hidden">
+    <Navbar />
     <HeroSection />
     <InfrastructureSection />
     <ScrollingTicker />
