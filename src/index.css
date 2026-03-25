@@ -121,7 +121,7 @@ html {
   }
   
   html[lang="ru"] .hero-title {
-    font-size: clamp(1.85rem, 4.2vw, 3rem);
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
   }
   .glass {
     @apply bg-white/10 backdrop-blur-xl border border-white/20;

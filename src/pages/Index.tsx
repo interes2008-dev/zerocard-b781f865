@@ -134,7 +134,7 @@ function HeroSection() {
             <FadeIn delay={0.1}>
               <h1 className="mt-10 hero-title text-foreground">
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
-                <br />
+                {lang === "ru" ? " " : <br />}
                 {t.heroTitle3}
               </h1>
               <p className="mt-5 text-lg lg:text-xl font-semibold text-foreground/80 tracking-tight">
