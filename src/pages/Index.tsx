@@ -414,10 +414,11 @@ function AIUseCases() {
    ═══════════════════════════════════════════════════ */
 function StepsOverview() {
   const steps = [
-    { icon: CreditCard, num: "01", title: "Sign up", desc: "Create an account on Pionex (2–3 minutes)" },
-    { icon: Wallet, num: "02", title: "Get your card", desc: "Issue a virtual card for free" },
-    { icon: ArrowRight, num: "03", title: "Fund your balance", desc: "Transfer USDT easily" },
-    { icon: ShoppingCart, num: "04", title: "Pay anywhere", desc: "Use the card for subscriptions and services" },
+    { icon: CreditCard, num: "01", title: "Sign up", desc: "Create an account in a couple of minutes" },
+    { icon: Shield, num: "02", title: "Verify your identity", desc: "Standard check (like in banks), takes a few minutes" },
+    { icon: Wallet, num: "03", title: "Get your card", desc: "Issue your virtual card for free" },
+    { icon: ArrowRight, num: "04", title: "Fund your balance", desc: "Transfer USDT easily" },
+    { icon: ShoppingCart, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel" },
   ];
   return (
     <section className="py-36 lg:py-44 relative overflow-hidden bg-background">
@@ -425,7 +426,7 @@ function StepsOverview() {
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-0 right-1/4" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeading tag="How it works" title="Start in 5 minutes" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-6 max-w-7xl mx-auto">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
