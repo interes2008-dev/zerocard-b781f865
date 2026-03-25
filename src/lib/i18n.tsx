@@ -236,6 +236,37 @@ const translations = {
 
     // Footer
     footerCopy: "Next-generation global payments.",
+
+    // SEO Meta
+    metaTitle: "Virtual card for global payments — ZeroCard",
+    metaDesc: "Pay for ChatGPT, Midjourney and global services. Free virtual card with no restrictions.",
+
+    // SEO H1
+    seoH1: "Virtual card for global payments",
+
+    // SEO Blocks
+    seoBlock1Title: "ChatGPT payment not working?",
+    seoBlock1Text: "If your payment for ChatGPT, Midjourney or other services fails, it is usually due to bank restrictions. ZeroCard allows you to pay for global services without issues.",
+    seoBlock2Title: "How to pay for international services",
+    seoBlock2Text: "With a virtual card you can pay for:",
+    seoBlock2Item1: "Subscriptions",
+    seoBlock2Item2: "AI tools",
+    seoBlock2Item3: "Travel",
+    seoBlock2Item4: "Online services",
+    seoBlock3Title: "Virtual card for international payments",
+    seoBlock3Text: "ZeroCard is a simple way to pay globally without bank restrictions.",
+
+    // FAQ
+    faqTag: "FAQ",
+    faqTitle: "Frequently asked questions",
+    faq1Q: "Why do payments fail?",
+    faq1A: "Most banks apply geographic restrictions and block payments to international online services. ZeroCard uses a separate financial infrastructure that bypasses these restrictions.",
+    faq2Q: "Is it safe?",
+    faq2A: "Yes. ZeroCard operates on a licensed financial platform with bank-level security, 2FA protection, and full transaction control from your phone.",
+    faq3Q: "How to get the card?",
+    faq3A: "Sign up, complete a simple identity verification (takes a few minutes), and get your free virtual card instantly.",
+    faq4Q: "Are there fees?",
+    faq4A: "Card issuance is free (0€). There are no monthly fees. You also earn up to 1% cashback on purchases.",
   },
   ru: {
     // Navbar
@@ -470,6 +501,37 @@ const translations = {
 
     // Footer
     footerCopy: "Платежи нового поколения.",
+
+    // SEO Meta
+    metaTitle: "Виртуальная карта для оплаты зарубежных сервисов — ZeroCard",
+    metaDesc: "Как оплатить ChatGPT, Midjourney и другие сервисы. Бесплатная виртуальная карта без ограничений.",
+
+    // SEO H1
+    seoH1: "Виртуальная карта для оплаты зарубежных сервисов",
+
+    // SEO Blocks
+    seoBlock1Title: "Не проходит оплата за ChatGPT?",
+    seoBlock1Text: "Если у вас не проходит оплата за ChatGPT, Midjourney или другие сервисы — это связано с ограничениями банков. ZeroCard позволяет оплачивать международные сервисы без отказов.",
+    seoBlock2Title: "Как оплатить зарубежные сервисы",
+    seoBlock2Text: "С помощью виртуальной карты можно оплачивать:",
+    seoBlock2Item1: "Подписки",
+    seoBlock2Item2: "AI сервисы",
+    seoBlock2Item3: "Путешествия",
+    seoBlock2Item4: "Онлайн-сервисы",
+    seoBlock3Title: "Виртуальная карта для международных платежей",
+    seoBlock3Text: "ZeroCard — это удобный способ оплаты сервисов по всему миру без ограничений банков.",
+
+    // FAQ
+    faqTag: "FAQ",
+    faqTitle: "Часто задаваемые вопросы",
+    faq1Q: "Почему не проходит оплата?",
+    faq1A: "Большинство банков применяют географические ограничения и блокируют платежи зарубежным онлайн-сервисам. ZeroCard использует отдельную финансовую инфраструктуру, которая обходит эти ограничения.",
+    faq2Q: "Это безопасно?",
+    faq2A: "Да. ZeroCard работает на лицензированной финансовой платформе с банковским уровнем безопасности, двухфакторной аутентификацией и полным контролем транзакций с телефона.",
+    faq3Q: "Как получить карту?",
+    faq3A: "Зарегистрируйтесь, пройдите простую верификацию (займёт пару минут) и получите бесплатную виртуальную карту мгновенно.",
+    faq4Q: "Сколько стоит карта?",
+    faq4A: "Выпуск карты бесплатный (0€). Абонентская плата отсутствует. Также вы получаете кешбэк до 1% с покупок.",
   },
 } as const;
 

@@ -3,11 +3,12 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import { useI18n, Lang } from "@/lib/i18n";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
   CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap, UserPlus, ShieldCheck,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
   BadgeCheck, CircleDollarSign, Bot, Smartphone, Lock, Layers,
-  Fingerprint, Brain, Plane, Menu,
+  Fingerprint, Brain, Plane, Menu, HelpCircle,
 } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
@@ -132,11 +133,12 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <h1 className="mt-10 hero-title text-foreground">
+              <h1 className="sr-only">{t.seoH1}</h1>
+              <p className="mt-10 hero-title text-foreground" aria-hidden="true">
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
                 {lang === "ru" ? " " : <br />}
                 {t.heroTitle3}
-              </h1>
+              </p>
               <p className="mt-5 text-lg lg:text-xl font-semibold text-foreground/80 tracking-tight">
                 {t.heroPowered} <span className="gradient-text font-bold">Pionex</span> {t.heroInfra}
               </p>
@@ -1060,6 +1062,87 @@ function FinalCTA() {
 }
 
 /* ═══════════════════════════════════════════════════
+   SEO CONTENT BLOCKS
+   ═══════════════════════════════════════════════════ */
+function SEOBlocks() {
+  const { t } = useI18n();
+  return (
+    <section className="py-20 lg:py-28 bg-background relative">
+      <div className="container mx-auto px-6 lg:px-16 max-w-4xl space-y-16">
+        {/* Block 1 */}
+        <FadeIn>
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">{t.seoBlock1Title}</h2>
+            <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">{t.seoBlock1Text}</p>
+          </div>
+        </FadeIn>
+
+        {/* Block 2 */}
+        <FadeIn delay={0.1}>
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">{t.seoBlock2Title}</h2>
+            <p className="text-base lg:text-lg text-muted-foreground mb-4">{t.seoBlock2Text}</p>
+            <ul className="grid grid-cols-2 gap-3">
+              {[t.seoBlock2Item1, t.seoBlock2Item2, t.seoBlock2Item3, t.seoBlock2Item4].map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-foreground/80">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-primary" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
+
+        {/* Block 3 */}
+        <FadeIn delay={0.2}>
+          <div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">{t.seoBlock3Title}</h2>
+            <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">{t.seoBlock3Text}</p>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   FAQ
+   ═══════════════════════════════════════════════════ */
+function FAQSection() {
+  const { t } = useI18n();
+  const faqs = [
+    { q: t.faq1Q, a: t.faq1A },
+    { q: t.faq2Q, a: t.faq2A },
+    { q: t.faq3Q, a: t.faq3A },
+    { q: t.faq4Q, a: t.faq4A },
+  ];
+
+  return (
+    <section id="faq" className="py-20 lg:py-28 bg-background relative">
+      <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
+        <SectionHeading tag={t.faqTag} title={t.faqTitle} />
+        <FadeIn>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="border-border/15">
+                <AccordionTrigger className="text-left text-base lg:text-lg font-semibold text-foreground hover:no-underline py-5">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════ */
 function Footer() {
@@ -1242,8 +1325,29 @@ function Navbar() {
   );
 }
 
+/* ═══════════════════════════════════════════════════
+   DYNAMIC META TAGS
+   ═══════════════════════════════════════════════════ */
+function DynamicMeta() {
+  const { t } = useI18n();
+  useEffect(() => {
+    document.title = t.metaTitle;
+    const setMeta = (attr: string, val: string, content: string) => {
+      let el = document.querySelector(`meta[${attr}="${val}"]`) as HTMLMetaElement;
+      if (el) el.content = content;
+    };
+    setMeta("name", "description", t.metaDesc);
+    setMeta("property", "og:title", t.metaTitle);
+    setMeta("property", "og:description", t.metaDesc);
+    setMeta("name", "twitter:title", t.metaTitle);
+    setMeta("name", "twitter:description", t.metaDesc);
+  }, [t]);
+  return null;
+}
+
 const Index = () => (
   <div className="min-h-screen overflow-x-hidden">
+    <DynamicMeta />
     <Navbar />
     <HeroSection />
     <InfrastructureSection />
@@ -1263,6 +1367,8 @@ const Index = () => (
     <FearSection />
     <ExtraSection />
     <FOMOSection />
+    <SEOBlocks />
+    <FAQSection />
     <FinalCTA />
     <Footer />
   </div>
