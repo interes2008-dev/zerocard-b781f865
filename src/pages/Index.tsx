@@ -365,7 +365,7 @@ function ScrollingTicker() {
         {[...items, ...items, ...items].map((brand, i) => (
           <div
             key={`${brand.name}-${i}`}
-            className="group relative flex items-center gap-3.5 px-8 lg:px-10 py-5 mx-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.12]"
+            className="group relative flex items-center gap-3.5 px-8 lg:px-10 py-5 mx-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
           >
             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{ boxShadow: `0 0 40px -10px ${brand.color}40, inset 0 0 30px -15px ${brand.color}20` }} />
