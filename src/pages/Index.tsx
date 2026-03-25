@@ -164,13 +164,15 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="mt-8 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-md">
-                Virtual card for global payments — works instantly
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground/60 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-primary/60" />
-                Powered by financial infrastructure (Pionex)
-              </p>
+              <div className="mt-8 rounded-2xl border border-primary/15 bg-primary/5 backdrop-blur-sm px-6 py-4 max-w-md">
+                <p className="text-lg lg:text-xl font-semibold text-foreground leading-snug">
+                  Virtual card for global payments
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-primary" />
+                  Powered by Pionex infrastructure
+                </p>
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.3}>
@@ -355,30 +357,30 @@ function InfrastructureSection() {
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => (
-    <div className="relative overflow-hidden py-2">
-      <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
+    <div className="relative overflow-hidden py-1.5">
+      <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
       <div
         className="flex shrink-0"
         style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
       >
-        {[...items, ...items, ...items].map((brand, i) => (
+        {[...items, ...items, ...items, ...items].map((brand, i) => (
           <div
             key={`${brand.name}-${i}`}
-            className="group relative flex items-center gap-3.5 px-8 lg:px-10 py-5 mx-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
+            className="group relative flex items-center gap-2.5 px-5 lg:px-6 py-3.5 mx-1.5 rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]"
           >
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{ boxShadow: `0 0 40px -10px ${brand.color}40, inset 0 0 30px -15px ${brand.color}20` }} />
-            <div className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 group-hover:scale-110 relative z-10"
+            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ boxShadow: `0 0 30px -8px ${brand.color}50, inset 0 0 20px -10px ${brand.color}25` }} />
+            <div className="absolute inset-0 rounded-xl opacity-[0.03]"
+              style={{ boxShadow: `inset 0 0 20px -8px ${brand.color}` }} />
+            <div className="w-5 h-5 lg:w-6 lg:h-6 transition-all duration-500 group-hover:scale-110 relative z-10"
               style={{ color: brand.color }}>
               <brand.Logo className="w-full h-full" />
             </div>
-            <span className="text-sm lg:text-base font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10"
+            <span className="text-xs lg:text-sm font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10"
               style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
               {brand.name}
             </span>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-3/4 rounded-full transition-all duration-500"
-              style={{ background: brand.color, boxShadow: `0 0 16px ${brand.color}80` }} />
           </div>
         ))}
       </div>
@@ -386,24 +388,24 @@ function ScrollingTicker() {
   );
 
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden" style={{
+    <section className="py-12 lg:py-16 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)",
     }}>
-      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.07} />
-      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.08} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
       <NoiseOverlay opacity={0.03} />
       <div className="relative z-10">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-3 tracking-[0.2em] uppercase">
+          <p className="text-center text-sm font-semibold text-primary mb-2 tracking-[0.2em] uppercase">
             Works with services where regular cards fail
           </p>
-          <p className="text-center text-sm text-white/30 mb-12">
+          <p className="text-center text-xs text-white/25 mb-8">
             AI tools, subscriptions and global services
           </p>
         </FadeIn>
-        <div className="flex flex-col gap-5">
-          <TickerRow items={row1Brands} speed={25} />
-          <TickerRow items={row2Brands} reverse speed={30} />
+        <div className="flex flex-col gap-3">
+          <TickerRow items={row1Brands} speed={20} />
+          <TickerRow items={row2Brands} reverse speed={24} />
         </div>
       </div>
     </section>
@@ -1151,6 +1153,11 @@ function FOMOSection() {
    FINAL CTA — Light premium section
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
+  const quickSteps = [
+    { icon: UserPlus, label: "2 min signup" },
+    { icon: ShieldCheck, label: "Simple verification" },
+    { icon: CreditCard, label: "Free card" },
+  ];
   return (
     <section className="py-36 lg:py-48 relative overflow-hidden bg-background">
       <NoiseOverlay />
@@ -1159,15 +1166,25 @@ function FinalCTA() {
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-8 leading-tight">
-            Start now —{" "}
-            <span className="gradient-text">takes 5 minutes</span>
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">
+            Start now
           </h2>
-          <p className="text-lg text-muted-foreground mb-16 max-w-md mx-auto">
+          <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">
             Free global payment card with no restrictions
           </p>
+          <div className="flex flex-wrap justify-center gap-6 mb-14">
+            {quickSteps.map((s) => (
+              <div key={s.label} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 20px -6px hsl(28 100% 50% / 0.2)" }}>
+                  <s.icon className="w-4 h-4 text-primary" />
+                </div>
+                <span className="font-medium">{s.label}</span>
+              </div>
+            ))}
+          </div>
           <CTAButton text="Get your card for free" size="large" />
-          <p className="mt-12 text-sm text-muted-foreground/60">
+          <p className="mt-10 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
         </FadeIn>
