@@ -1109,7 +1109,7 @@ function FinalCTA() {
           <p className="text-lg text-muted-foreground mb-16 max-w-md mx-auto">
             Free global payment card with no restrictions
           </p>
-          <CTAButton text="Get card for free" size="large" />
+          <CTAButton text="Get your card for free" size="large" />
           <p className="mt-12 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
