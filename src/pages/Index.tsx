@@ -165,7 +165,11 @@ function HeroSection() {
 
             <FadeIn delay={0.2}>
               <p className="mt-8 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-md">
-                A card without restrictions — works instantly
+                Virtual card for global payments — works instantly
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground/60 flex items-center gap-2">
+                <Layers className="w-4 h-4 text-primary/60" />
+                Powered by financial infrastructure (Pionex)
               </p>
             </FadeIn>
 
