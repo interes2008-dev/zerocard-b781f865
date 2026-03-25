@@ -31,11 +31,16 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
 
 /* ─── Section heading ─── */
 function SectionHeading({ tag, title, subtitle }: { tag: string; title: React.ReactNode; subtitle?: string }) {
+  const { lang } = useI18n();
   return (
     <FadeIn>
       <div className="text-center mb-16 lg:mb-24">
         <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{tag}</p>
-        <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-6 leading-tight">{title}</h2>
+        <h2 className={`font-bold text-foreground mb-6 leading-tight ${
+          lang === "ru"
+            ? "text-3xl lg:text-5xl xl:text-[3.5rem]"
+            : "text-4xl lg:text-6xl xl:text-[4rem]"
+        }`}>{title}</h2>
         {subtitle && <p className="text-lg text-muted-foreground max-w-lg mx-auto">{subtitle}</p>}
       </div>
     </FadeIn>
