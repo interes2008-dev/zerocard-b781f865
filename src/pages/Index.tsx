@@ -413,27 +413,28 @@ function AIUseCases() {
    ═══════════════════════════════════════════════════ */
 function StepsOverview() {
   const steps = [
-    { icon: CreditCard, title: "Create card", desc: "Free issuance in a few clicks" },
-    { icon: Wallet, title: "Fund", desc: "Top up your balance easily" },
-    { icon: ShoppingCart, title: "Pay", desc: "Anywhere in the world, no limits" },
+    { icon: CreditCard, num: "01", title: "Sign up", desc: "Create an account on Pionex (2–3 minutes)" },
+    { icon: Wallet, num: "02", title: "Get your card", desc: "Issue a virtual card for free" },
+    { icon: ArrowUpRight, num: "03", title: "Fund your balance", desc: "Transfer USDT easily" },
+    { icon: ShoppingCart, num: "04", title: "Pay anywhere", desc: "Use the card for subscriptions and services" },
   ];
   return (
     <section className="py-36 lg:py-44 relative overflow-hidden bg-background">
       <NoiseOverlay opacity={0.02} />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-0 right-1/4" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading tag="How it works" title="Three simple steps" />
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+        <SectionHeading tag="How it works" title="Start in 5 minutes" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {steps.map((s, i) => (
-            <FadeIn key={s.title} delay={i * 0.15}>
+            <FadeIn key={s.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
-                <GlassCard className="text-center p-10 lg:p-14 relative">
-                  <div className="mb-3 text-xs font-bold text-primary/40 tracking-[0.3em]">STEP 0{i + 1}</div>
-                  <div className="mx-auto mb-8 w-20 h-20 rounded-3xl gradient-bg flex items-center justify-center relative"
-                    style={{ boxShadow: "0 16px 50px -10px hsl(28 100% 50% / 0.4)" }}>
-                    <s.icon className="w-8 h-8 text-white" />
+                <GlassCard className="text-center p-8 lg:p-10 relative">
+                  <div className="mb-3 text-xs font-bold text-primary/40 tracking-[0.3em]">STEP {s.num}</div>
+                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center relative"
+                    style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                    <s.icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{s.title}</h3>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </GlassCard>
               </motion.div>
