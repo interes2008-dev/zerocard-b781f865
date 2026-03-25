@@ -164,13 +164,15 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="mt-8 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-md">
-                Virtual card for global payments — works instantly
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground/60 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-primary/60" />
-                Powered by financial infrastructure (Pionex)
-              </p>
+              <div className="mt-8 rounded-2xl border border-primary/15 bg-primary/5 backdrop-blur-sm px-6 py-4 max-w-md">
+                <p className="text-lg lg:text-xl font-semibold text-foreground leading-snug">
+                  Virtual card for global payments
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-primary" />
+                  Powered by Pionex infrastructure
+                </p>
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.3}>
