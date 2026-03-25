@@ -1248,12 +1248,24 @@ function Navbar() {
         }`}
       >
         <div className="container mx-auto px-6 lg:px-16 flex items-center justify-between h-16 lg:h-[72px]">
-          <a href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center"
-              style={{ boxShadow: scrolled ? "0 0 20px -4px hsl(28 100% 50% / 0.3)" : "none" }}>
-              <CreditCard className="w-4 h-4 text-white" />
+          <a href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-[10px] flex items-center justify-center relative overflow-hidden transition-all duration-300"
+              style={{
+                background: scrolled
+                  ? "linear-gradient(135deg, hsl(28 100% 50%), hsl(340 80% 55%))"
+                  : "linear-gradient(135deg, hsl(28 100% 50%), hsl(340 80% 55%))",
+                boxShadow: scrolled ? "0 0 24px -4px hsl(28 100% 50% / 0.35)" : "none",
+              }}>
+              {/* Abstract card shape — two thin rounded rects */}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="3" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="none" opacity="0.6" />
+                <rect x="4" y="5" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="white" fillOpacity="0.15" />
+                <circle cx="12" cy="9" r="1.2" fill="white" opacity="0.9" />
+              </svg>
             </div>
-            <span className="text-lg font-bold text-foreground tracking-tight">Zerocard</span>
+            <span className="text-lg font-bold text-foreground tracking-tight">
+              Zero<span className="font-light">card</span>
+            </span>
           </a>
 
           {/* Desktop nav links */}
