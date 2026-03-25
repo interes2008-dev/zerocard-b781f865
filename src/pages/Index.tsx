@@ -1208,6 +1208,7 @@ const Index = () => (
     <GuideSection />
     <BenefitsSection />
     <StandardProcess />
+    <SafetySection />
     <TrustSection />
     <FearSection />
     <ExtraSection />
