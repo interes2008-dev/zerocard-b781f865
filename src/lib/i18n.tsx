@@ -490,8 +490,13 @@ const I18nContext = createContext<I18nContextType>({
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
     const stored = localStorage.getItem("zc-lang");
-    if (stored === "ru" || stored === "en") return stored;
-    return navigator.language.startsWith("ru") ? "ru" : "en";
+    if (stored === "ru" || stored === "en") {
+      document.documentElement.lang = stored;
+      return stored;
+    }
+    const detected = navigator.language.startsWith("ru") ? "ru" : "en";
+    document.documentElement.lang = detected;
+    return detected;
   });
 
   const setLang = useCallback((newLang: Lang) => {

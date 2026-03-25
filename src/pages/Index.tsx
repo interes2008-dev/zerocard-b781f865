@@ -259,7 +259,6 @@ function HeroSection() {
    ═══════════════════════════════════════════════════ */
 function InfrastructureSection() {
   const { t, lang } = useI18n();
-  const hSize = lang === "ru" ? "text-3xl lg:text-5xl xl:text-[3.5rem]" : "text-4xl lg:text-6xl xl:text-[4rem]";
   const cards = [
     { icon: Shield, title: t.infraCard1Title, desc: t.infraCard1Desc, gradient: "from-emerald-500 to-teal-400" },
     { icon: Zap, title: t.infraCard2Title, desc: t.infraCard2Desc, gradient: "from-orange-500 to-amber-400" },
@@ -275,7 +274,7 @@ function InfrastructureSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.infraTag}</p>
-          <h2 className={`${hSize} font-bold text-white mb-6 leading-tight text-center`}>
+          <h2 className="section-title text-white mb-6 text-center">
             {t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/35 mb-20 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
