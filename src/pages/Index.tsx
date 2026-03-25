@@ -183,42 +183,23 @@ function HeroSection() {
             <FadeIn delay={0.3}>
               <div className="mt-8">
                 <CTAButton text="Get your card for free" size="large" />
-                <p className="mt-4 text-xs text-muted-foreground tracking-wide">
+                <p className="mt-4 text-xs text-muted-foreground/60 tracking-widest uppercase">
                   No monthly fees • Free card • Cashback
                 </p>
-
-                {/* What happens next micro-block */}
-                <div className="mt-6 rounded-2xl border border-border/20 bg-card/40 backdrop-blur-sm p-5 max-w-sm">
-                  <p className="text-xs font-semibold text-foreground/70 mb-3 tracking-wide">What happens after you click:</p>
-                  <div className="space-y-2">
-                    {[
-                      { icon: UserPlus, text: "5 min signup" },
-                      { icon: ShieldCheck, text: "Quick identity verification" },
-                      { icon: CreditCard, text: "Card access" },
-                    ].map((step) => (
-                      <div key={step.text} className="flex items-center gap-2.5 text-xs text-muted-foreground">
-                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <step.icon className="w-3 h-3 text-primary" />
-                        </div>
-                        {step.text}
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </FadeIn>
 
             {/* Social proof stats */}
             <FadeIn delay={0.4}>
-              <div className="mt-10 flex items-center gap-8 pt-8 border-t border-border/15">
+              <div className="mt-10 flex items-center gap-10 pt-8 border-t border-border/15">
                 {[
                   { value: "150+", label: "Countries" },
                   { value: "5 min", label: "Setup" },
                   { value: "0€", label: "Fees" },
                 ].map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-2xl font-bold gradient-text">{stat.value}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
+                  <div key={stat.label} className="text-center">
+                    <p className="text-3xl font-extrabold gradient-text tracking-tight">{stat.value}</p>
+                    <p className="text-xs font-semibold text-muted-foreground/70 mt-1 uppercase tracking-widest">{stat.label}</p>
                   </div>
                 ))}
               </div>
