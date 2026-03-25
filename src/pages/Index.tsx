@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import {
-  CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap,
+  CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap, UserPlus, ShieldCheck,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
   BadgeCheck, CircleDollarSign, Bot, Smartphone, Lock, Layers,
   Fingerprint, Brain, Plane,
@@ -414,28 +414,58 @@ function AIUseCases() {
    ═══════════════════════════════════════════════════ */
 function StepsOverview() {
   const steps = [
-    { icon: CreditCard, num: "01", title: "Sign up", desc: "Create an account in a couple of minutes" },
-    { icon: Shield, num: "02", title: "Verify your identity", desc: "Standard check (like in banks), takes a few minutes" },
-    { icon: Wallet, num: "03", title: "Get your card", desc: "Issue your virtual card for free" },
-    { icon: ArrowRight, num: "04", title: "Fund your balance", desc: "Transfer USDT easily" },
-    { icon: ShoppingCart, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel" },
+    { icon: UserPlus, num: "01", title: "Sign up", desc: "Create an account in a couple of minutes", gradient: "from-orange-500 to-amber-400" },
+    { icon: ShieldCheck, num: "02", title: "Verify your identity", desc: "Standard check (like in banks), takes a few minutes", gradient: "from-amber-400 to-orange-500" },
+    { icon: CreditCard, num: "03", title: "Get your card", desc: "Issue your virtual card for free", gradient: "from-orange-500 to-rose-500" },
+    { icon: Wallet, num: "04", title: "Fund your balance", desc: "Transfer USDT easily", gradient: "from-rose-500 to-orange-500" },
+    { icon: Globe, num: "05", title: "Pay anywhere", desc: "Use it for subscriptions, services and travel", gradient: "from-orange-500 to-amber-400" },
   ];
   return (
     <section className="py-36 lg:py-44 relative overflow-hidden bg-background">
       <NoiseOverlay opacity={0.02} />
-      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-0 right-1/4" blur={200} opacity={0.03} />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-0 right-1/4" blur={200} opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={400} position="bottom-0 left-1/4" blur={180} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeading tag="How it works" title="Start in 5 minutes" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-6 max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto">
           {steps.map((s, i) => (
-            <FadeIn key={s.title} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
-                <GlassCard className="text-center p-8 lg:p-10 relative">
-                  <div className="mb-3 text-xs font-bold text-primary/40 tracking-[0.3em]">STEP {s.num}</div>
-                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center relative"
-                    style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                    <s.icon className="w-7 h-7 text-white" />
+            <FadeIn key={s.title} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -8 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="h-full"
+              >
+                <GlassCard className="text-center p-8 lg:p-10 relative h-full flex flex-col items-center justify-start group" hover={false}>
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ boxShadow: "inset 0 0 60px -20px hsl(28 100% 50% / 0.08), 0 0 80px -20px hsl(28 100% 50% / 0.1)" }} />
+
+                  {/* Step label */}
+                  <div className="mb-4 text-[10px] font-bold text-primary/50 tracking-[0.35em] uppercase">Step {s.num}</div>
+
+                  {/* Icon container with layered effects */}
+                  <div className="relative mx-auto mb-7">
+                    {/* Outer ring glow */}
+                    <div className={`absolute -inset-2 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                    {/* Icon box */}
+                    <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center`}
+                      style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.4)" }}>
+                      <s.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                    </div>
+                    {/* Floating dot accent */}
+                    <motion.div
+                      className={`absolute -top-1 -right-1 w-3 h-3 rounded-full bg-gradient-to-br ${s.gradient}`}
+                      animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.3 }}
+                      style={{ boxShadow: "0 0 12px hsl(28 100% 50% / 0.5)" }}
+                    />
                   </div>
+
+                  {/* Connector line (not on last) */}
+                  {i < steps.length - 1 && (
+                    <div className="hidden xl:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/20 to-transparent" />
+                  )}
+
                   <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </GlassCard>
@@ -447,7 +477,6 @@ function StepsOverview() {
     </section>
   );
 }
-
 /* ═══════════════════════════════════════════════════
    PROBLEM — Dark dramatic section
    ═══════════════════════════════════════════════════ */
