@@ -460,17 +460,17 @@ function AIUseCases() {
           </h2>
           <p className="text-lg text-white/30 mb-16 max-w-lg mx-auto">Services that don't accept your regular card — work with Zerocard</p>
         </FadeIn>
-        <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-5 sm:gap-8 max-w-4xl mx-auto">
           {services.map((s, i) => (
             <FadeIn key={s.name} delay={i * 0.12}>
               <motion.div
                 whileHover={{ scale: 1.04, y: -4 }}
-                className="flex items-center gap-5 px-10 py-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all cursor-default"
+                className="flex items-center gap-5 px-8 sm:px-10 py-7 sm:py-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all cursor-default w-full sm:w-auto"
                 style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.05)" }}
               >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0"
                   style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
-                  <s.icon className="w-7 h-7 text-primary" />
+                  <s.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                 </div>
                 <div className="text-left">
                   <span className="font-bold text-white text-lg block">{s.name}</span>
@@ -503,7 +503,7 @@ function StepsOverview() {
       <GlowOrb color="hsl(28 100% 50%)" size={400} position="bottom-0 left-1/4" blur={180} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeading tag="How it works" title="Start in 5 minutes" />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.1}>
               <motion.div
@@ -511,7 +511,7 @@ function StepsOverview() {
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
                 className="h-full"
               >
-                <GlassCard className="text-center p-8 lg:p-10 relative h-full flex flex-col items-center justify-start group" hover={false}>
+                <GlassCard className="text-center p-8 lg:p-10 relative h-full min-h-[240px] flex flex-col items-center justify-start group" hover={false}>
                   {/* Hover glow */}
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ boxShadow: "inset 0 0 60px -20px hsl(28 100% 50% / 0.08), 0 0 80px -20px hsl(28 100% 50% / 0.1)" }} />
