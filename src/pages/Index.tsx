@@ -277,13 +277,83 @@ function HeroSection() {
 }
 
 /* ═══════════════════════════════════════════════════
+   INFRASTRUCTURE TRUST — After hero
+   ═══════════════════════════════════════════════════ */
+function InfrastructureSection() {
+  const cards = [
+    { icon: Shield, title: "Security", desc: "Enterprise-grade encryption and multi-layer fraud protection", gradient: "from-emerald-500 to-teal-400" },
+    { icon: Zap, title: "Reliability", desc: "99.9% uptime with globally distributed payment infrastructure", gradient: "from-orange-500 to-amber-400" },
+    { icon: Clock, title: "24/7 Access", desc: "Manage your finances anytime, anywhere in the world", gradient: "from-violet-500 to-purple-400" },
+  ];
+  return (
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 4%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.06} />
+      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Built for trust</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight text-center">
+            Powered by real{" "}<span className="gradient-text">financial infrastructure</span>
+          </h2>
+          <p className="text-center text-lg text-white/35 mb-20 max-w-xl mx-auto leading-relaxed">
+            Zerocard operates on the infrastructure of a global platform trusted by millions — ensuring stability, security, and instant transactions.
+          </p>
+        </FadeIn>
+        <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto mb-16">
+          {cards.map((c, i) => (
+            <FadeIn key={c.title} delay={i * 0.12}>
+              <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }}>
+                <div className="relative group rounded-3xl overflow-hidden h-full">
+                  <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
+                    background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))",
+                  }}>
+                    <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
+                  </div>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
+                  <div className="relative z-10 p-10 lg:p-12 text-center">
+                    <div className="relative mx-auto mb-7">
+                      <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                      <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
+                        style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                        <c.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{c.title}</h3>
+                    <p className="text-sm text-white/40 leading-relaxed">{c.desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn delay={0.3}>
+          <div className="text-center">
+            <p className="text-xs text-white/25 mb-4 tracking-widest uppercase">Powered by</p>
+            <motion.div whileHover={{ scale: 1.04 }}
+              className="inline-flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl px-10 py-5 cursor-default"
+              style={{ boxShadow: "0 16px 50px -12px rgba(0,0,0,0.5), 0 0 40px -15px hsl(28 100% 50% / 0.1)" }}>
+              <span className="text-xl font-bold gradient-text tracking-tight">Pionex</span>
+              <span className="text-xs text-white/25 font-medium">since 2019</span>
+            </motion.div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    SCROLLING TICKER — Premium branded logos
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => (
     <div className="relative overflow-hidden py-2">
-      <div className="absolute left-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-32 lg:w-48 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+      <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-64 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), transparent)" }} />
       <div
         className="flex shrink-0"
         style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}
@@ -291,26 +361,20 @@ function ScrollingTicker() {
         {[...items, ...items, ...items].map((brand, i) => (
           <div
             key={`${brand.name}-${i}`}
-            className="group flex items-center gap-3.5 px-8 lg:px-10 py-4 mx-3 rounded-2xl border border-border/5 bg-card/30 backdrop-blur-sm transition-all duration-500 cursor-default select-none hover:bg-card/60 hover:border-white/10"
-            style={{ ["--brand-color" as string]: brand.color }}
+            className="group relative flex items-center gap-3.5 px-8 lg:px-10 py-5 mx-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.12]"
           >
-            <div
-              className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 group-hover:scale-110"
-              style={{ color: brand.color }}
-            >
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ boxShadow: `0 0 40px -10px ${brand.color}40, inset 0 0 30px -15px ${brand.color}20` }} />
+            <div className="w-6 h-6 lg:w-7 lg:h-7 transition-all duration-500 group-hover:scale-110 relative z-10"
+              style={{ color: brand.color }}>
               <brand.Logo className="w-full h-full" />
             </div>
-            <span
-              className="text-sm lg:text-base font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125"
-              style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}
-            >
+            <span className="text-sm lg:text-base font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10"
+              style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
               {brand.name}
             </span>
-            {/* Colored line accent on hover */}
-            <div
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-3/4 rounded-full transition-all duration-500"
-              style={{ background: brand.color, boxShadow: `0 0 12px ${brand.color}60` }}
-            />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-3/4 rounded-full transition-all duration-500"
+              style={{ background: brand.color, boxShadow: `0 0 16px ${brand.color}80` }} />
           </div>
         ))}
       </div>
@@ -318,15 +382,16 @@ function ScrollingTicker() {
   );
 
   return (
-    <section className="py-16 lg:py-20 border-y border-border/10 relative overflow-hidden">
-      <div className="absolute inset-0 bg-card/30 backdrop-blur-xl" />
-      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
-      <NoiseOverlay opacity={0.02} />
+    <section className="py-16 lg:py-20 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)",
+    }}>
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.05} />
+      <NoiseOverlay opacity={0.03} />
       <div className="relative z-10">
-        <p className="text-center text-xs font-semibold text-muted-foreground mb-2 tracking-[0.2em] uppercase">
+        <p className="text-center text-xs font-semibold text-primary mb-2 tracking-[0.2em] uppercase">
           Works with services where regular cards fail
         </p>
-        <p className="text-center text-sm text-muted-foreground/60 mb-10">
+        <p className="text-center text-sm text-white/25 mb-10">
           AI tools, subscriptions and global services
         </p>
         <div className="flex flex-col gap-4">
