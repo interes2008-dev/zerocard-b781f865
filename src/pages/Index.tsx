@@ -336,124 +336,20 @@ function StatusBar() {
     { icon: Shield, label: "Bank-level security" },
   ];
   return (
-    <section className="py-8 border-b border-border/20 bg-card/20 backdrop-blur-sm">
-      <div className="container mx-auto px-6 lg:px-16">
+    <section className="py-10 border-b border-border/10 relative overflow-hidden">
+      <div className="absolute inset-0 bg-card/40 backdrop-blur-xl" />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex flex-wrap justify-center gap-10 lg:gap-20">
-          {items.map((item) => (
-            <div key={item.label} className="flex items-center gap-3 text-sm text-muted-foreground font-medium">
-              <item.icon className="w-4 h-4 text-primary/70" />
-              {item.label}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   AI USE CASES
-   ═══════════════════════════════════════════════════ */
-function AIUseCases() {
-  const services = [
-    { icon: Bot, name: "ChatGPT" },
-    { icon: Brain, name: "Claude" },
-    { icon: Sparkles, name: "Midjourney" },
-  ];
-  return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
-      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-0 left-1/2 -translate-x-1/2" blur={160} opacity={0.04} />
-      <NoiseOverlay />
-      <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
-        <SectionHeading
-          tag="No restrictions"
-          title={<>Pay without <span className="gradient-text">restrictions</span></>}
-        />
-        <div className="flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
-          {services.map((s, i) => (
-            <FadeIn key={s.name} delay={i * 0.1}>
-              <GlassCard className="flex items-center gap-5 px-10 py-8">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/10 flex items-center justify-center">
-                  <s.icon className="w-6 h-6 text-primary" />
-                </div>
-                <span className="font-bold text-foreground text-lg">{s.name}</span>
-              </GlassCard>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   HOW IT WORKS — 3 STEPS
-   ═══════════════════════════════════════════════════ */
-function StepsOverview() {
-  const steps = [
-    { icon: CreditCard, title: "Create card", desc: "Free issuance in a few clicks" },
-    { icon: Wallet, title: "Fund", desc: "Top up your balance easily" },
-    { icon: ShoppingCart, title: "Pay", desc: "Anywhere in the world, no limits" },
-  ];
-  return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(0 0% 100%) 100%)" }}>
-      <NoiseOverlay opacity={0.02} />
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading tag="How it works" title="Three simple steps" />
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-10 max-w-5xl mx-auto">
-          {steps.map((s, i) => (
-            <FadeIn key={s.title} delay={i * 0.15}>
-              <GlassCard className="text-center p-10 lg:p-12">
-                <div className="mb-3 text-xs font-bold text-primary/50 tracking-[0.25em]">0{i + 1}</div>
-                <div className="mx-auto mb-7 w-18 h-18 rounded-2xl gradient-bg flex items-center justify-center relative"
-                  style={{ width: 72, height: 72, boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                  <s.icon className="w-7 h-7 text-white" />
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                {i < 2 && <ChevronRight className="hidden md:block absolute top-1/2 -right-5 w-5 h-5 text-muted-foreground/20" />}
-              </GlassCard>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   PROBLEM
-   ═══════════════════════════════════════════════════ */
-function ProblemSection() {
-  const problems = [
-    "Payments declined without explanation",
-    "Banks block international transactions",
-    "AI service subscriptions fail",
-    "Regional restrictions and filters",
-  ];
-  return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
-      background: "linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%)",
-    }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(0 60% 40%)" size={500} position="top-1/4 left-1/4" blur={160} opacity={0.06} />
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading
-          dark
-          title={<>Why regular cards <span className="gradient-text">don't work</span></>}
-          subtitle="Traditional banks apply restrictions and filters"
-        />
-        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
-          {problems.map((p, i) => (
-            <FadeIn key={p} delay={i * 0.1}>
+          {items.map((item, i) => (
+            <FadeIn key={item.label} delay={i * 0.08}>
               <motion.div
-                whileHover={{ scale: 1.02, borderColor: "hsl(0 60% 40% / 0.2)" }}
-                className="flex items-center gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl p-7 transition-all"
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-3 text-sm text-muted-foreground font-medium cursor-default"
               >
-                <div className="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/10 flex items-center justify-center flex-shrink-0">
-                  <X className="w-5 h-5 text-red-400/80" />
+                <div className="w-9 h-9 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center">
+                  <item.icon className="w-4 h-4 text-primary/80" />
                 </div>
-                <span className="text-white/70 font-medium">{p}</span>
+                {item.label}
               </motion.div>
             </FadeIn>
           ))}
@@ -464,36 +360,46 @@ function ProblemSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   WHY IT WORKS
+   AI USE CASES — Dark gradient section
    ═══════════════════════════════════════════════════ */
-function WhyItWorks() {
+function AIUseCases() {
+  const services = [
+    { icon: Bot, name: "ChatGPT", desc: "AI assistant" },
+    { icon: Brain, name: "Claude", desc: "AI by Anthropic" },
+    { icon: Sparkles, name: "Midjourney", desc: "AI image generation" },
+  ];
   return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
-      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.04} />
-      <NoiseOverlay />
-      <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
+    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 15% 6%) 50%, hsl(0 0% 4%) 100%)",
+    }}>
+      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-0 left-1/2 -translate-x-1/2" blur={180} opacity={0.06} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 right-0" blur={160} opacity={0.04} />
+      <NoiseOverlay opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">The solution</p>
-          <h2 className="text-3xl lg:text-5xl xl:text-[3.5rem] font-bold text-foreground mb-8">Why this works</h2>
-          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-16">
-            Traditional banks apply restrictions and filters.
-            Zerocard uses a different financial infrastructure,
-            allowing payments to go through without limitations.
-          </p>
+          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">No restrictions</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight">
+            Pay without <span className="gradient-text">restrictions</span>
+          </h2>
+          <p className="text-lg text-white/30 mb-16 max-w-lg mx-auto">Services that don't accept your regular card — work with Zerocard</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-3 gap-6">
-          {[
-            { icon: Globe, label: "Works everywhere" },
-            { icon: Layers, label: "No restrictions" },
-            { icon: Zap, label: "Any service" },
-          ].map((item, i) => (
-            <FadeIn key={item.label} delay={i * 0.12}>
-              <GlassCard className="p-8">
-                <div className="mx-auto mb-5 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center">
-                  <item.icon className="w-6 h-6 text-primary" />
+        <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+          {services.map((s, i) => (
+            <FadeIn key={s.name} delay={i * 0.12}>
+              <motion.div
+                whileHover={{ scale: 1.04, y: -4 }}
+                className="flex items-center gap-5 px-10 py-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all cursor-default"
+                style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.05)" }}
+              >
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
+                  <s.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-base font-bold text-foreground">{item.label}</h3>
-              </GlassCard>
+                <div className="text-left">
+                  <span className="font-bold text-white text-lg block">{s.name}</span>
+                  <span className="text-xs text-white/30">{s.desc}</span>
+                </div>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
@@ -503,7 +409,136 @@ function WhyItWorks() {
 }
 
 /* ═══════════════════════════════════════════════════
-   COMPARISON TABLE
+   HOW IT WORKS — Light clean section
+   ═══════════════════════════════════════════════════ */
+function StepsOverview() {
+  const steps = [
+    { icon: CreditCard, title: "Create card", desc: "Free issuance in a few clicks" },
+    { icon: Wallet, title: "Fund", desc: "Top up your balance easily" },
+    { icon: ShoppingCart, title: "Pay", desc: "Anywhere in the world, no limits" },
+  ];
+  return (
+    <section className="py-36 lg:py-44 relative overflow-hidden bg-background">
+      <NoiseOverlay opacity={0.02} />
+      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-0 right-1/4" blur={200} opacity={0.03} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <SectionHeading tag="How it works" title="Three simple steps" />
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {steps.map((s, i) => (
+            <FadeIn key={s.title} delay={i * 0.15}>
+              <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+                <GlassCard className="text-center p-10 lg:p-14 relative">
+                  <div className="mb-3 text-xs font-bold text-primary/40 tracking-[0.3em]">STEP 0{i + 1}</div>
+                  <div className="mx-auto mb-8 w-20 h-20 rounded-3xl gradient-bg flex items-center justify-center relative"
+                    style={{ boxShadow: "0 16px 50px -10px hsl(28 100% 50% / 0.4)" }}>
+                    <s.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </GlassCard>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   PROBLEM — Dark dramatic section
+   ═══════════════════════════════════════════════════ */
+function ProblemSection() {
+  const problems = [
+    "Payments declined without explanation",
+    "Banks block international transactions",
+    "AI service subscriptions fail",
+    "Regional restrictions and filters",
+  ];
+  return (
+    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.05} />
+      <GlowOrb color="hsl(0 60% 35%)" size={600} position="top-1/4 left-1/3" blur={180} opacity={0.06} />
+      <GlowOrb color="hsl(0 60% 40%)" size={300} position="bottom-1/4 right-1/4" blur={140} opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-destructive/70 mb-4 tracking-[0.2em] uppercase">The problem</p>
+          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
+            Why regular cards <span className="gradient-text">don't work</span>
+          </h2>
+          <p className="text-center text-lg text-white/25 mb-16 max-w-md mx-auto">Traditional banks apply restrictions and filters</p>
+        </FadeIn>
+        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+          {problems.map((p, i) => (
+            <FadeIn key={p} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }}
+                className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-8 transition-all cursor-default"
+                style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}
+              >
+                <div className="w-12 h-12 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
+                  <X className="w-5 h-5 text-destructive/70" />
+                </div>
+                <span className="text-white/60 font-medium">{p}</span>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   WHY IT WORKS — Glass section
+   ═══════════════════════════════════════════════════ */
+function WhyItWorks() {
+  return (
+    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 right-0" blur={180} opacity={0.03} />
+      <NoiseOverlay />
+      <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
+        <FadeIn>
+          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">The solution</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
+            Why this <span className="gradient-text">works</span>
+          </h2>
+          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-20 max-w-xl mx-auto">
+            Traditional banks apply restrictions and filters.
+            Zerocard uses a different financial infrastructure,
+            allowing payments to go through without limitations.
+          </p>
+        </FadeIn>
+        <div className="grid sm:grid-cols-3 gap-8">
+          {[
+            { icon: Globe, label: "Works everywhere", desc: "No country restrictions" },
+            { icon: Layers, label: "No restrictions", desc: "Bypass banking filters" },
+            { icon: Zap, label: "Any service", desc: "AI tools, streaming, travel" },
+          ].map((item, i) => (
+            <FadeIn key={item.label} delay={i * 0.12}>
+              <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+                <GlassCard className="p-10">
+                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+                    style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
+                    <item.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.label}</h3>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </GlassCard>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   COMPARISON TABLE — Dark dramatic section
    ═══════════════════════════════════════════════════ */
 function ComparisonSection() {
   const rows = [
@@ -515,44 +550,50 @@ function ComparisonSection() {
     { label: "Yield on balance", old: false, zc: true },
   ];
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
-      background: "linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%)",
+    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(260 15% 5%) 50%, hsl(220 15% 3%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-0 left-1/2 -translate-x-1/2" blur={160} opacity={0.08} />
-      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={140} opacity={0.05} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.08} />
+      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
-          <h2 className="text-3xl lg:text-5xl xl:text-[3.5rem] font-bold text-center text-white mb-20">Compare for yourself</h2>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Side by side</p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-center text-white mb-20 leading-tight">
+            Compare for <span className="gradient-text">yourself</span>
+          </h2>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <div className="max-w-2xl mx-auto rounded-3xl overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-2xl"
-            style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.5), 0 0 60px -30px hsl(28 100% 50% / 0.1)" }}>
-            <div className="grid grid-cols-3 px-8 py-6 border-b border-white/[0.06]">
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className="max-w-2xl mx-auto rounded-[2rem] overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-2xl"
+            style={{ boxShadow: "0 40px 100px -25px rgba(0,0,0,0.6), 0 0 80px -30px hsl(28 100% 50% / 0.12)" }}
+          >
+            <div className="grid grid-cols-3 px-8 py-7 border-b border-white/[0.06]">
               <span />
-              <span className="text-sm font-semibold text-white/30 text-center">Regular card</span>
+              <span className="text-sm font-semibold text-white/25 text-center">Regular card</span>
               <span className="text-sm font-bold text-primary text-center">Zerocard</span>
             </div>
             {rows.map((r, i) => (
               <motion.div
                 key={r.label}
-                whileHover={{ backgroundColor: "rgba(255,255,255,0.02)" }}
-                className={`grid grid-cols-3 items-center px-8 py-6 transition-colors ${i < rows.length - 1 ? "border-b border-white/[0.04]" : ""}`}
+                whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
+                className={`grid grid-cols-3 items-center px-8 py-7 transition-colors ${i < rows.length - 1 ? "border-b border-white/[0.04]" : ""}`}
               >
-                <span className="text-sm text-white/50 font-medium">{r.label}</span>
+                <span className="text-sm text-white/40 font-medium">{r.label}</span>
                 <div className="flex justify-center">
-                  {r.oldText ? <span className="text-sm text-white/25">{r.oldText}</span> :
-                   r.old === false ? <X className="w-5 h-5 text-red-400/50" /> :
+                  {r.oldText ? <span className="text-sm text-white/20">{r.oldText}</span> :
+                   r.old === false ? <X className="w-5 h-5 text-destructive/50" /> :
                    <Check className="w-5 h-5 text-green-400" />}
                 </div>
                 <div className="flex justify-center">
                   {r.zcText ? <span className="text-sm font-bold text-primary">{r.zcText}</span> :
                    r.zc ? <Check className="w-5 h-5 text-green-400" /> :
-                   <X className="w-5 h-5 text-red-400/50" />}
+                   <X className="w-5 h-5 text-destructive/50" />}
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </FadeIn>
       </div>
     </section>
@@ -560,7 +601,7 @@ function ComparisonSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   GUIDE
+   GUIDE — Light premium section
    ═══════════════════════════════════════════════════ */
 function GuideSection() {
   const steps = [
@@ -571,29 +612,32 @@ function GuideSection() {
     { num: "05", title: "Pay normally", desc: "Use it like any regular payment card" },
   ];
   return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
+    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
-      <GlowOrb color="hsl(28 100% 50%)" size={500} position="-top-20 right-1/4" blur={160} opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="-top-20 right-1/4" blur={200} opacity={0.04} />
+      <GlowOrb color="hsl(340 80% 55%)" size={300} position="bottom-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading tag="Step-by-step guide" title="Setup takes 5 minutes" subtitle="Follow these simple steps and start paying globally" />
-        <div className="max-w-2xl mx-auto space-y-5">
+        <SectionHeading tag="Step-by-step guide" title={<>Setup takes <span className="gradient-text">5 minutes</span></>} subtitle="Follow these simple steps and start paying globally" />
+        <div className="max-w-2xl mx-auto space-y-6">
           {steps.map((s, i) => (
             <FadeIn key={s.num} delay={i * 0.08}>
-              <GlassCard className="flex items-center gap-6 p-7 lg:p-8">
-                <div className="text-3xl font-bold gradient-text flex-shrink-0 w-14 text-center">{s.num}</div>
-                <div className="w-px h-10 bg-border/30 flex-shrink-0" />
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{s.desc}</p>
-                </div>
-                {s.cta && (
-                  <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
-                    className="hidden sm:inline-flex items-center gap-2 rounded-xl gradient-bg px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-all"
-                    style={{ boxShadow: "0 8px 24px -6px hsl(28 100% 50% / 0.35)" }}>
-                    Start <ArrowRight className="w-4 h-4" />
-                  </a>
-                )}
-              </GlassCard>
+              <motion.div whileHover={{ scale: 1.02, x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
+                <GlassCard className="flex items-center gap-6 p-8 lg:p-9">
+                  <div className="text-3xl font-bold gradient-text flex-shrink-0 w-14 text-center">{s.num}</div>
+                  <div className="w-px h-12 bg-border/20 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{s.desc}</p>
+                  </div>
+                  {s.cta && (
+                    <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+                      className="hidden sm:inline-flex items-center gap-2 rounded-2xl gradient-bg px-7 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-all"
+                      style={{ boxShadow: "0 10px 30px -8px hsl(28 100% 50% / 0.4)" }}>
+                      Start <ArrowRight className="w-4 h-4" />
+                    </a>
+                  )}
+                </GlassCard>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
@@ -603,7 +647,7 @@ function GuideSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   BENEFITS
+   BENEFITS — Dark glass section
    ═══════════════════════════════════════════════════ */
 function BenefitsSection() {
   const benefits = [
@@ -615,20 +659,33 @@ function BenefitsSection() {
     { icon: CircleDollarSign, title: "Up to 5% annual yield", desc: "Your balance works for you" },
   ];
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(0 0% 100%) 100%)" }}>
-      <NoiseOverlay opacity={0.02} />
+    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(220 10% 4%) 0%, hsl(220 15% 6%) 50%, hsl(220 10% 3%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/4 left-1/4" blur={180} opacity={0.05} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 right-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <SectionHeading title={<>Why <span className="gradient-text">Zerocard</span></>} />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">Advantages</p>
+          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-20 leading-tight">
+            Why <span className="gradient-text">Zerocard</span>
+          </h2>
+        </FadeIn>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-5xl mx-auto">
           {benefits.map((b, i) => (
             <FadeIn key={b.title} delay={i * 0.08}>
-              <GlassCard className="p-9">
-                <div className="mb-6 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center">
-                  <b.icon className="w-6 h-6 text-primary" />
+              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+                <div className="p-10 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all h-full"
+                  style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.04)" }}>
+                  <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+                    style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.2)" }}>
+                    <b.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-3">{b.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{b.desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-foreground mb-2">{b.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-              </GlassCard>
+              </motion.div>
             </FadeIn>
           ))}
         </div>
@@ -638,55 +695,61 @@ function BenefitsSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   TRUST
+   TRUST — Light premium section
    ═══════════════════════════════════════════════════ */
 function TrustSection() {
   return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
+    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
-      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <div className="mx-auto mb-10 w-20 h-20 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center"
-              style={{ boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.15)" }}>
-              <Shield className="w-8 h-8 text-primary" />
+            <div className="mx-auto mb-10 w-22 h-22 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+              style={{ width: 88, height: 88, boxShadow: "0 0 80px -10px hsl(28 100% 50% / 0.2)" }}>
+              <Shield className="w-9 h-9 text-primary" />
             </div>
-            <h2 className="text-3xl lg:text-5xl xl:text-[3.5rem] font-bold text-foreground mb-7">
+            <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
               Financial infrastructure
               <br />
-              you can rely on
+              you can <span className="gradient-text">rely on</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-14">
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-16">
               Zerocard is powered by a global financial infrastructure used by millions of users worldwide,
               ensuring stability, security, and fast transactions.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="grid sm:grid-cols-3 gap-5 mb-14">
+            <div className="grid sm:grid-cols-3 gap-7 mb-16">
               {[
                 { icon: Lock, label: "Bank-level security" },
                 { icon: Fingerprint, label: "KYC verification" },
                 { icon: BadgeCheck, label: "Operating since 2019" },
-              ].map((item) => (
-                <GlassCard key={item.label} className="p-7 flex flex-col items-center gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <span className="text-sm font-semibold text-foreground">{item.label}</span>
-                </GlassCard>
+              ].map((item, i) => (
+                <motion.div key={item.label} whileHover={{ scale: 1.04, y: -4 }} transition={{ type: "spring", stiffness: 300 }}>
+                  <GlassCard className="p-9 flex flex-col items-center gap-5">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+                      style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.12)" }}>
+                      <item.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <span className="text-sm font-bold text-foreground">{item.label}</span>
+                  </GlassCard>
+                </motion.div>
               ))}
             </div>
           </FadeIn>
 
           <FadeIn delay={0.25}>
-            <p className="text-xs text-muted-foreground mb-4 tracking-wide">Powered by</p>
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-border/30 bg-card/50 backdrop-blur-xl px-8 py-4"
-              style={{ boxShadow: "0 8px 30px -10px rgba(0,0,0,0.08)" }}>
-              <span className="text-xl font-bold gradient-text tracking-tight">Pionex</span>
-            </div>
-            <p className="mt-4 text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mb-5 tracking-widest uppercase">Powered by</p>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="inline-flex items-center gap-3 rounded-2xl border border-border/20 bg-card/60 backdrop-blur-2xl px-10 py-5 cursor-default"
+              style={{ boxShadow: "0 12px 40px -12px rgba(0,0,0,0.1)" }}
+            >
+              <span className="text-2xl font-bold gradient-text tracking-tight">Pionex</span>
+            </motion.div>
+            <p className="mt-5 text-xs text-muted-foreground/60">
               Global financial platform with world-class infrastructure
             </p>
           </FadeIn>
@@ -697,23 +760,36 @@ function TrustSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   OBJECTION
+   OBJECTION — Dark glass section
    ═══════════════════════════════════════════════════ */
 function FearSection() {
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 98%) 0%, hsl(0 0% 100%) 100%)" }}>
-      <NoiseOverlay opacity={0.02} />
+    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 10% 5%) 100%)",
+    }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center max-w-2xl relative z-10">
         <FadeIn>
-          <h2 className="text-3xl lg:text-5xl xl:text-[3.5rem] font-bold text-foreground mb-8">Is this complicated?</h2>
-          <p className="text-xl text-muted-foreground mb-4 leading-relaxed">
-            No. Works like a normal card.
-          </p>
-          <p className="text-muted-foreground">
-            Setup takes minutes.
-            <br />
-            No financial or technical experience needed.
-          </p>
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-10 leading-tight">
+            Is this <span className="gradient-text">complicated?</span>
+          </h2>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-12"
+            style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.4)" }}
+          >
+            <p className="text-2xl text-white/80 font-semibold mb-4">
+              No.
+            </p>
+            <p className="text-lg text-white/40 leading-relaxed">
+              Works like a normal card.
+              <br />
+              Setup takes minutes.
+              <br />
+              <span className="text-white/25">No financial or technical experience needed.</span>
+            </p>
+          </motion.div>
         </FadeIn>
       </div>
     </section>
@@ -721,33 +797,38 @@ function FearSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   EXTRA — Yield + Referral
+   EXTRA — Light section with Yield + Referral
    ═══════════════════════════════════════════════════ */
 function ExtraSection() {
   return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
+    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
+      <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/3 left-1/3" blur={180} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           <FadeIn>
-            <GlassCard className="p-10 lg:p-12">
-              <div className="mb-6 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
-                style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.15)" }}>
-                <TrendingUp className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">Up to 5% annual yield</h3>
-              <p className="text-muted-foreground leading-relaxed">Earn passive income on your card balance with zero effort</p>
-            </GlassCard>
+            <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+              <GlassCard className="p-12 lg:p-14 h-full">
+                <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
+                  <TrendingUp className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">Up to 5% annual yield</h3>
+                <p className="text-muted-foreground leading-relaxed">Earn passive income on your card balance with zero effort</p>
+              </GlassCard>
+            </motion.div>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <GlassCard className="p-10 lg:p-12">
-              <div className="mb-6 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
-                style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.15)" }}>
-                <Users className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">Referral program</h3>
-              <p className="text-muted-foreground leading-relaxed">Invite friends and earn bonuses for every referral</p>
-            </GlassCard>
+            <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
+              <GlassCard className="p-12 lg:p-14 h-full">
+                <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center"
+                  style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
+                  <Users className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">Referral program</h3>
+                <p className="text-muted-foreground leading-relaxed">Invite friends and earn bonuses for every referral</p>
+              </GlassCard>
+            </motion.div>
           </FadeIn>
         </div>
       </div>
@@ -756,25 +837,27 @@ function ExtraSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   FOMO
+   FOMO — Dark dramatic section
    ═══════════════════════════════════════════════════ */
 function FOMOSection() {
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{
-      background: "linear-gradient(180deg, hsl(0 0% 4%) 0%, hsl(0 0% 2%) 100%)",
+    <section className="py-36 lg:py-44 relative overflow-hidden" style={{
+      background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(28 20% 5%) 50%, hsl(0 0% 2%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.06} />
+      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.08} />
+      <GlowOrb color="hsl(340 80% 55%)" size={400} position="bottom-0 left-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10 max-w-2xl">
         <FadeIn>
-          <div className="mx-auto mb-10 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center">
-            <Clock className="w-7 h-7 text-primary" />
+          <div className="mx-auto mb-10 w-20 h-20 rounded-3xl bg-primary/10 border border-primary/15 flex items-center justify-center"
+            style={{ boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.25)" }}>
+            <Clock className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="text-3xl lg:text-5xl xl:text-[3.5rem] font-bold text-white mb-7 leading-tight">
+          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
             Most people discover this{" "}
             <span className="gradient-text">too late</span>
           </h2>
-          <p className="text-lg text-white/35 leading-relaxed mb-14">
+          <p className="text-lg text-white/30 leading-relaxed mb-16">
             While others struggle with failed payments — you already pay without limits
           </p>
           <CTAButton text="Get card for free" size="large" />
@@ -785,25 +868,26 @@ function FOMOSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   FINAL CTA
+   FINAL CTA — Light premium section
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
   return (
-    <section className="py-32 lg:py-44 relative overflow-hidden bg-background">
+    <section className="py-36 lg:py-48 relative overflow-hidden bg-background">
       <NoiseOverlay />
-      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.06} />
-      <GlowOrb color="hsl(340 80% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.03} />
+      <GlowOrb color="hsl(28 100% 50%)" size={900} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={250} opacity={0.07} />
+      <GlowOrb color="hsl(340 80% 55%)" size={500} position="bottom-0 right-1/4" blur={180} opacity={0.04} />
+      <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-7 leading-tight">
+          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-8 leading-tight">
             Start now —{" "}
             <span className="gradient-text">takes 5 minutes</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-14 max-w-md mx-auto">
+          <p className="text-lg text-muted-foreground mb-16 max-w-md mx-auto">
             Free global payment card with no restrictions
           </p>
           <CTAButton text="Get card for free" size="large" />
-          <p className="mt-10 text-sm text-muted-foreground">
+          <p className="mt-12 text-sm text-muted-foreground/60">
             0€ issuance · 0€ monthly fees · global payments
           </p>
         </FadeIn>
@@ -817,10 +901,10 @@ function FinalCTA() {
    ═══════════════════════════════════════════════════ */
 function Footer() {
   return (
-    <footer className="py-12 border-t border-border/20 bg-background">
+    <footer className="py-14 border-t border-border/10 bg-background">
       <div className="container mx-auto px-6 lg:px-16 text-center">
-        <p className="text-base font-bold gradient-text mb-3">Zerocard</p>
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Zerocard. Next-generation global payments.</p>
+        <p className="text-lg font-bold gradient-text mb-3">Zerocard</p>
+        <p className="text-xs text-muted-foreground/50">© {new Date().getFullYear()} Zerocard. Next-generation global payments.</p>
       </div>
     </footer>
   );
