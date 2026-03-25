@@ -188,7 +188,7 @@ function HeroSection() {
 
             <FadeIn delay={0.4}>
               <div className="mt-14">
-                <CTAButton text="Get card for free" size="large" />
+                <CTAButton text="Get your card for free" size="large" />
                 <p className="mt-6 text-xs text-muted-foreground tracking-wide">
                   Secure · Fast · No restrictions · 5 minutes setup
                 </p>
