@@ -276,41 +276,42 @@ function HeroSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   SCROLLING TICKER
+   SCROLLING TICKER — CSS marquee for seamless loop
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
   const services = [
     "ChatGPT", "Claude", "Midjourney", "Netflix", "Spotify",
     "Booking", "Airbnb", "Apple", "Google", "Stripe", "Lovable",
   ];
-  // Double for seamless loop
-  const doubled = [...services, ...services];
+
+  const renderRow = (key: string) => (
+    <div key={key} className="ticker-track flex shrink-0 items-center gap-16">
+      {services.map((name) => (
+        <span
+          key={`${key}-${name}`}
+          className="text-base font-semibold text-foreground/[0.35] hover:text-foreground/90 hover:drop-shadow-[0_0_8px_hsl(28_100%_50%/0.5)] transition-all duration-300 cursor-default select-none whitespace-nowrap"
+        >
+          {name}
+        </span>
+      ))}
+    </div>
+  );
 
   return (
-    <section className="py-10 border-y border-border/20 bg-card/20 backdrop-blur-sm relative overflow-hidden">
+    <section className="py-12 border-y border-border/20 bg-card/20 backdrop-blur-sm relative overflow-hidden">
       <NoiseOverlay opacity={0.015} />
       <div className="relative z-10">
-        <p className="text-center text-xs font-semibold text-muted-foreground mb-6 tracking-[0.2em] uppercase">
+        <p className="text-center text-xs font-semibold text-muted-foreground mb-8 tracking-[0.2em] uppercase">
           Works with services where regular cards fail
         </p>
         <div className="relative overflow-hidden">
           {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
-          <motion.div
-            className="flex gap-12 items-center whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-          >
-            {doubled.map((name, i) => (
-              <span
-                key={`${name}-${i}`}
-                className="text-sm font-semibold text-foreground/40 hover:text-foreground/80 transition-opacity duration-300 cursor-default select-none"
-              >
-                {name}
-              </span>
-            ))}
-          </motion.div>
+          <div className="absolute left-0 top-0 bottom-0 w-32 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
+          <div className="absolute right-0 top-0 bottom-0 w-32 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
+          <div className="flex gap-16 ticker-wrapper">
+            {renderRow("a")}
+            {renderRow("b")}
+          </div>
         </div>
       </div>
     </section>
