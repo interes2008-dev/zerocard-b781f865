@@ -35,7 +35,7 @@ function SectionHeading({ tag, title, subtitle }: { tag: string; title: React.Re
     <FadeIn>
       <div className="text-center mb-16 lg:mb-24">
         <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{tag}</p>
-        <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-6 leading-tight">{title}</h2>
+        <h2 className="section-title text-foreground mb-6">{title}</h2>
         {subtitle && <p className="text-lg text-muted-foreground max-w-lg mx-auto">{subtitle}</p>}
       </div>
     </FadeIn>
@@ -132,11 +132,7 @@ function HeroSection() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <h1 className={`mt-10 font-bold tracking-tight leading-[1.06] text-foreground ${
-                lang === "ru"
-                  ? "text-[2.5rem] sm:text-[2.75rem] lg:text-[3.5rem] xl:text-[4rem]"
-                  : "text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-[4.5rem]"
-              }`}>
+              <h1 className="mt-10 hero-title text-foreground">
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
                 <br />
                 {t.heroTitle3}
@@ -258,7 +254,7 @@ function HeroSection() {
    INFRASTRUCTURE TRUST
    ═══════════════════════════════════════════════════ */
 function InfrastructureSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const cards = [
     { icon: Shield, title: t.infraCard1Title, desc: t.infraCard1Desc, gradient: "from-emerald-500 to-teal-400" },
     { icon: Zap, title: t.infraCard2Title, desc: t.infraCard2Desc, gradient: "from-orange-500 to-amber-400" },
@@ -274,7 +270,7 @@ function InfrastructureSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.infraTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight text-center">
+          <h2 className="section-title text-white mb-6 text-center">
             {t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/35 mb-20 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
@@ -327,7 +323,7 @@ function InfrastructureSection() {
    SCROLLING TICKER
    ═══════════════════════════════════════════════════ */
 function ScrollingTicker() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
     const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
     return (
@@ -375,7 +371,7 @@ function ScrollingTicker() {
    STATUS BAR
    ═══════════════════════════════════════════════════ */
 function StatusBar() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const items = [
     { icon: Globe, label: t.statusGlobal },
     { icon: Smartphone, label: t.statusApple },
@@ -407,7 +403,7 @@ function StatusBar() {
    AI USE CASES
    ═══════════════════════════════════════════════════ */
 function AIUseCases() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const services = [
     { icon: Bot, name: "ChatGPT", desc: t.aiChatGPT },
     { icon: Brain, name: "Claude", desc: t.aiClaude },
@@ -421,7 +417,7 @@ function AIUseCases() {
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
           <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.aiTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-6 leading-tight">
+          <h2 className="section-title text-white mb-6 leading-tight">
             {t.aiTitle1}<span className="gradient-text">{t.aiTitle2}</span>
           </h2>
           <p className="text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.aiDesc}</p>
@@ -450,7 +446,7 @@ function AIUseCases() {
    HOW IT WORKS
    ═══════════════════════════════════════════════════ */
 function StepsOverview() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const steps = [
     { icon: UserPlus, num: "01", title: t.step1Title, desc: t.step1Desc, gradient: "from-orange-500 to-amber-400" },
     { icon: ShieldCheck, num: "02", title: t.step2Title, desc: t.step2Desc, gradient: "from-amber-400 to-orange-500" },
@@ -498,7 +494,7 @@ function StepsOverview() {
    PROBLEM
    ═══════════════════════════════════════════════════ */
 function ProblemSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const problems = [t.problem1, t.problem2, t.problem3, t.problem4];
   return (
     <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)" }}>
@@ -508,7 +504,7 @@ function ProblemSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-destructive/70 mb-4 tracking-[0.2em] uppercase">{t.problemTag}</p>
-          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
+          <h2 className="text-center section-title text-white mb-8 leading-tight">
             {t.problemTitle1}<span className="gradient-text">{t.problemTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/25 mb-16 max-w-md mx-auto">{t.problemDesc}</p>
@@ -541,7 +537,7 @@ function ProblemSection() {
    WHY THIS CARD WORKS
    ═══════════════════════════════════════════════════ */
 function WhyItWorks() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
@@ -550,7 +546,7 @@ function WhyItWorks() {
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
         <FadeIn>
           <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.whyTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
+          <h2 className="section-title text-foreground mb-8 leading-tight">
             {t.whyTitle1}<span className="gradient-text">{t.whyTitle2}</span>
           </h2>
           <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-20 max-w-xl mx-auto">{t.whyDesc}</p>
@@ -587,7 +583,7 @@ function WhyItWorks() {
    COMPARISON TABLE
    ═══════════════════════════════════════════════════ */
 function ComparisonSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const rows = [
     { label: t.compAI, old: false, zc: true },
     { label: t.compGlobal, old: false, zc: true },
@@ -604,7 +600,7 @@ function ComparisonSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.compTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-center text-white mb-8 leading-tight">
+          <h2 className="section-title text-center text-white mb-8 leading-tight">
             {t.compTitle1}<span className="gradient-text">{t.compTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-20 max-w-lg mx-auto">{t.compDesc}</p>
@@ -642,7 +638,7 @@ function ComparisonSection() {
    GUIDE
    ═══════════════════════════════════════════════════ */
 function GuideSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const steps = [
     { num: "01", title: t.guide1Title, desc: t.guide1Desc, cta: true },
     { num: "02", title: t.guide2Title, desc: t.guide2Desc },
@@ -687,7 +683,7 @@ function GuideSection() {
    BENEFITS
    ═══════════════════════════════════════════════════ */
 function BenefitsSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const benefits = [
     { icon: Bot, title: t.benAI, desc: t.benAIDesc },
     { icon: Globe, title: t.benGlobal, desc: t.benGlobalDesc },
@@ -704,7 +700,7 @@ function BenefitsSection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.benefitsTag}</p>
-          <h2 className="text-center text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-20 leading-tight">
+          <h2 className="text-center section-title text-white mb-20 leading-tight">
             {t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span>
           </h2>
         </FadeIn>
@@ -732,7 +728,7 @@ function BenefitsSection() {
    WHY IT'S SAFE
    ═══════════════════════════════════════════════════ */
 function SafetySection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const safetyPoints = [
     { icon: Shield, title: t.safe1Title, desc: t.safe1Desc, gradient: "from-emerald-500 to-teal-400" },
     { icon: Fingerprint, title: t.safe2Title, desc: t.safe2Desc, gradient: "from-orange-500 to-amber-400" },
@@ -747,7 +743,7 @@ function SafetySection() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.safetyTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-8 leading-tight text-center">
             {t.safetyTitle1}<span className="gradient-text">{t.safetyTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.safetyDesc}</p>
@@ -785,7 +781,7 @@ function SafetySection() {
    TRUST
    ═══════════════════════════════════════════════════ */
 function TrustSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
@@ -796,7 +792,7 @@ function TrustSection() {
             <div className="mx-auto mb-10 w-22 h-22 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ width: 88, height: 88, boxShadow: "0 0 80px -10px hsl(28 100% 50% / 0.2)" }}>
               <Shield className="w-9 h-9 text-primary" />
             </div>
-            <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-8 leading-tight">
+            <h2 className="section-title text-foreground mb-8 leading-tight">
               {t.trustTitle1}
               <br />
               {t.trustTitle2}<span className="gradient-text">{t.trustTitle3}</span>
@@ -840,7 +836,7 @@ function TrustSection() {
    WHY BETTER THAN BANKS
    ═══════════════════════════════════════════════════ */
 function BetterThanBanks() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const reasons = [
     { icon: Globe, title: t.bank1Title, desc: t.bank1Desc },
     { icon: Zap, title: t.bank2Title, desc: t.bank2Desc },
@@ -855,7 +851,7 @@ function BetterThanBanks() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.bankTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-8 leading-tight text-center">
             {t.bankTitle1}<span className="gradient-text">{t.bankTitle2}</span>
           </h2>
           <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.bankDesc}</p>
@@ -892,7 +888,7 @@ function BetterThanBanks() {
    STANDARD PROCESS
    ═══════════════════════════════════════════════════ */
 function StandardProcess() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const points = [
     { icon: Fingerprint, title: t.std1Title, desc: t.std1Desc },
     { icon: ShieldCheck, title: t.std2Title, desc: t.std2Desc },
@@ -905,7 +901,7 @@ function StandardProcess() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-4xl">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.stdTag}</p>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-foreground mb-6 leading-tight text-center">
+          <h2 className="section-title text-foreground mb-6 leading-tight text-center">
             {t.stdTitle1}<span className="gradient-text">{t.stdTitle2}</span>
           </h2>
           <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto leading-relaxed">{t.stdDesc}</p>
@@ -934,14 +930,14 @@ function StandardProcess() {
    FEAR / OBJECTION
    ═══════════════════════════════════════════════════ */
 function FearSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-32 lg:py-40 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 10% 5%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center max-w-2xl relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-10 leading-tight">
+          <h2 className="section-title text-white mb-10 leading-tight">
             {t.fearTitle1}<span className="gradient-text">{t.fearTitle2}</span>
           </h2>
           <motion.div whileHover={{ scale: 1.02 }} className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-12" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.4)" }}>
@@ -964,7 +960,7 @@ function FearSection() {
    EXTRA
    ═══════════════════════════════════════════════════ */
 function ExtraSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
       <NoiseOverlay />
@@ -1003,7 +999,7 @@ function ExtraSection() {
    FOMO
    ═══════════════════════════════════════════════════ */
 function FOMOSection() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <section className="py-36 lg:py-44 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(28 20% 5%) 50%, hsl(0 0% 2%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
@@ -1014,7 +1010,7 @@ function FOMOSection() {
           <div className="mx-auto mb-10 w-20 h-20 rounded-3xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.25)" }}>
             <Clock className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="text-4xl lg:text-6xl xl:text-[4rem] font-bold text-white mb-8 leading-tight">
+          <h2 className="section-title text-white mb-8 leading-tight">
             {t.fomoTitle1}<span className="gradient-text">{t.fomoTitle2}</span>
           </h2>
           <p className="text-lg text-white/30 leading-relaxed mb-16">{t.fomoDesc}</p>
@@ -1029,7 +1025,7 @@ function FOMOSection() {
    FINAL CTA
    ═══════════════════════════════════════════════════ */
 function FinalCTA() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const quickSteps = [
     { icon: UserPlus, label: t.final1 },
     { icon: ShieldCheck, label: t.final2 },
@@ -1043,7 +1039,7 @@ function FinalCTA() {
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-6 leading-tight">{t.finalTitle}</h2>
+          <h2 className="section-title text-foreground mb-6">{t.finalTitle}</h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">{t.finalDesc}</p>
           <div className="flex flex-wrap justify-center gap-6 mb-14">
             {quickSteps.map((s) => (
@@ -1067,7 +1063,7 @@ function FinalCTA() {
    FOOTER
    ═══════════════════════════════════════════════════ */
 function Footer() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <footer className="py-14 border-t border-border/10 bg-background">
       <div className="container mx-auto px-6 lg:px-16 flex flex-col items-center gap-3">
@@ -1122,7 +1118,7 @@ function LangSwitcher() {
    STICKY NAVBAR
    ═══════════════════════════════════════════════════ */
 function Navbar() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 

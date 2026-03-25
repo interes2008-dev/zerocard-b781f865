@@ -239,8 +239,8 @@ const translations = {
   },
   ru: {
     // Navbar
-    navHowItWorks: "Как это работает",
-    navWhyZerocard: "Почему Zerocard",
+    navHowItWorks: "Как работает",
+    navWhyZerocard: "Почему мы",
     navSafety: "Безопасность",
     navGetCard: "Получить карту",
 
@@ -268,82 +268,82 @@ const translations = {
     // Infrastructure
     infraTag: "Надёжная основа",
     infraTitle1: "На базе реальной ",
-    infraTitle2: "финансовой инфраструктуры",
-    infraDesc: "Zerocard работает на инфраструктуре глобальной платформы, которой доверяют миллионы — стабильность, безопасность и мгновенные транзакции.",
-    infraCard1Title: "Безопасность",
-    infraCard1Desc: "Шифрование корпоративного уровня и многоуровневая защита",
+    infraTitle2: "инфраструктуры",
+    infraDesc: "Zerocard работает на платформе, которой доверяют миллионы — стабильность, защита и мгновенные транзакции.",
+    infraCard1Title: "Защита",
+    infraCard1Desc: "Шифрование и многоуровневая защита от мошенничества",
     infraCard2Title: "Надёжность",
-    infraCard2Desc: "99.9% аптайм с глобально распределённой инфраструктурой",
-    infraCard3Title: "Доступ 24/7",
-    infraCard3Desc: "Управляйте финансами в любое время из любой точки мира",
+    infraCard2Desc: "99.9% аптайм, глобальная инфраструктура",
+    infraCard3Title: "24/7",
+    infraCard3Desc: "Управление финансами из любой точки мира",
     infraPoweredBy: "На базе",
-    infraSince: "с 2019 года",
+    infraSince: "с 2019",
 
     // Ticker
-    tickerTitle: "Работает с сервисами, где обычные карты не проходят",
-    tickerSub: "ИИ-инструменты, подписки и глобальные сервисы",
+    tickerTitle: "Работает там, где обычные карты — нет",
+    tickerSub: "ИИ, подписки и глобальные сервисы",
 
     // Status bar
     statusGlobal: "Глобальные платежи",
-    statusApple: "Совместимо с Apple Pay",
-    statusInstant: "Мгновенные транзакции",
-    statusSecurity: "Банковская безопасность",
+    statusApple: "Apple Pay",
+    statusInstant: "Мгновенно",
+    statusSecurity: "Банковская защита",
 
     // AI Use Cases
     aiTag: "Без ограничений",
     aiTitle1: "Платите без ",
     aiTitle2: "ограничений",
-    aiDesc: "Сервисы, которые не принимают вашу карту — работают с Zerocard",
+    aiDesc: "Сервисы, где обычная карта не проходит — работают с Zerocard",
     aiChatGPT: "ИИ-ассистент",
     aiClaude: "ИИ от Anthropic",
     aiMidjourney: "Генерация изображений",
 
     // Steps Overview
-    stepsTag: "Как это работает",
+    stepsTag: "Как работает",
     stepsTitle: "Старт за 5 минут",
     stepsStep: "Шаг",
     step1Title: "Регистрация",
-    step1Desc: "Создайте аккаунт за пару минут",
+    step1Desc: "Аккаунт за пару минут",
     step2Title: "Верификация",
-    step2Desc: "Стандартная проверка (как в банке), занимает несколько минут",
-    step3Title: "Получите карту",
-    step3Desc: "Виртуальная карта выпускается бесплатно",
-    step4Title: "Пополните баланс",
-    step4Desc: "Переведите USDT легко и быстро",
-    step5Title: "Оплачивайте",
-    step5Desc: "Используйте для подписок, сервисов и путешествий",
+    step2Desc: "Стандартная проверка, как в банке",
+    step3Title: "Карта",
+    step3Desc: "Виртуальная карта — бесплатно",
+    step4Title: "Пополнение",
+    step4Desc: "Переведите USDT легко",
+    step5Title: "Оплата",
+    step5Desc: "Подписки, сервисы, путешествия",
 
     // Problem
     problemTag: "Проблема",
-    problemTitle1: "Почему обычные карты ",
+    problemTitle1: "Почему карты ",
     problemTitle2: "не работают",
-    problemDesc: "Традиционные банки применяют ограничения и фильтры",
-    problem1: "Платежи отклоняются без объяснений",
-    problem2: "Банки блокируют международные транзакции",
-    problem3: "Подписки на ИИ-сервисы не проходят",
-    problem4: "Региональные ограничения и фильтры",
+    problemDesc: "Банки применяют ограничения и фильтры",
+    problem1: "Платежи отклоняются без причин",
+    problem2: "Банки блокируют переводы",
+    problem3: "ИИ-подписки не проходят",
+    problem4: "Региональные фильтры",
     solutionTitle1: "ZeroCard ",
     solutionTitle2: "решает это",
-    solutionDesc: "Без ограничений. Без блокировок. Просто платежи, которые работают.",
+    solutionDesc: "Без ограничений. Без блокировок. Платежи работают.",
 
     // Why it works
     whyTag: "Объяснение",
-    whyTitle1: "Почему эта карта ",
+    whyTitle1: "Почему карта ",
     whyTitle2: "работает",
-    whyDesc: "Обычные банки блокируют платежи многим онлайн-сервисам. Zerocard использует отдельную финансовую инфраструктуру — ваши платежи проходят без фильтров и ограничений.",
-    whyCard1: "Работает везде",
-    whyCard1Desc: "Без страновых ограничений",
-    whyCard2: "Без ограничений",
-    whyCard2Desc: "Обход банковских фильтров",
+    whyDesc: "Банки блокируют платежи онлайн-сервисам. Zerocard — отдельная инфраструктура без фильтров и ограничений.",
+    whyCard1: "Везде",
+    whyCard1Desc: "Без страновых блокировок",
+    whyCard2: "Без фильтров",
+    whyCard2Desc: "Обход банковских ограничений",
     whyCard3: "Любой сервис",
     whyCard3Desc: "ИИ, стриминг, путешествия",
 
     // Comparison
-    compTag: "Почему не обычная карта",
+    compTag: "Сравнение",
     compTitle1: "Почему не ",
-    compTitle2: "обычная банковская карта",
+    compTitle2: "обычная карта",
     compDesc: "Убедитесь сами",
-    compRegular: "Обычная карта",
+    compRegular: "Обычная",
     compAI: "ИИ-платежи",
     compGlobal: "Глобальные сервисы",
     compFees: "Абонплата",
@@ -360,86 +360,86 @@ const translations = {
     bankTag: "Банки vs Zerocard",
     bankTitle1: "Почему это ",
     bankTitle2: "лучше банков",
-    bankDesc: "Традиционные банки не созданы для современной цифровой экономики",
+    bankDesc: "Банки не созданы для цифровой экономики",
     bank1Title: "Без границ",
-    bank1Desc: "Оплачивайте любой сервис в любой стране — без блокировок",
+    bank1Desc: "Любой сервис в любой стране",
     bank2Title: "Без задержек",
-    bank2Desc: "Мгновенный выпуск карты и транзакции в реальном времени",
-    bank3Title: "Без скрытых комиссий",
-    bank3Desc: "0€ выпуск, 0€ обслуживание — банки берут за всё",
+    bank2Desc: "Мгновенный выпуск и транзакции",
+    bank3Title: "Без комиссий",
+    bank3Desc: "0€ выпуск, 0€ обслуживание",
     bank4Title: "Без цензуры",
-    bank4Desc: "Банки решают, за что вам платить — Zerocard нет",
+    bank4Desc: "Банки решают за вас — мы нет",
 
     // Guide
     guideTag: "Пошаговое руководство",
     guideTitle1: "Настройка за ",
     guideTitle2: "5 минут",
-    guideSub: "Следуйте простым шагам и начните платить по всему миру",
+    guideSub: "Простые шаги — и вы платите по всему миру",
     guide1Title: "Регистрация",
-    guide1Desc: "Создайте аккаунт за пару минут",
+    guide1Desc: "Аккаунт за пару минут",
     guide2Title: "Верификация",
-    guide2Desc: "Простая проверка личности — как в любом банке",
-    guide3Title: "Получите карту",
-    guide3Desc: "Виртуальная карта выпускается мгновенно",
-    guide4Title: "Пополните баланс",
-    guide4Desc: "Пополните карту через USDT",
-    guide5Title: "Оплачивайте",
-    guide5Desc: "Используйте как обычную платёжную карту",
+    guide2Desc: "Проверка личности — как в банке",
+    guide3Title: "Карта",
+    guide3Desc: "Виртуальная — мгновенно",
+    guide4Title: "Пополнение",
+    guide4Desc: "Пополните через USDT",
+    guide5Title: "Оплата",
+    guide5Desc: "Как обычной картой",
     guideStart: "Начать",
 
     // Benefits
     benefitsTag: "Преимущества",
     benefitsTitle1: "Почему ",
     benefitsTitle2: "Zerocard",
-    benAI: "Оплата ИИ-сервисов",
+    benAI: "ИИ-сервисы",
     benAIDesc: "ChatGPT, Midjourney, Claude — без блокировок",
-    benGlobal: "Глобальные платежи",
-    benGlobalDesc: "Работает в любой стране мира",
+    benGlobal: "Весь мир",
+    benGlobalDesc: "Работает в любой стране",
     benFree: "Выпуск 0€",
-    benFreeDesc: "Полностью бесплатный выпуск карты",
-    benNoFees: "Обслуживание 0€",
-    benNoFeesDesc: "В отличие от обычных банковских карт",
+    benFreeDesc: "Бесплатный выпуск карты",
+    benNoFees: "Без абонплаты",
+    benNoFeesDesc: "В отличие от банковских карт",
     benCashback: "Кешбэк до 1%",
     benCashbackDesc: "Возврат с каждой покупки",
     benYield: "До 5% годовых",
-    benYieldDesc: "Ваш баланс работает на вас",
+    benYieldDesc: "Баланс работает на вас",
 
     // Standard Process
     stdTag: "Ничего необычного",
     stdTitle1: "Это ",
     stdTitle2: "стандартный процесс",
-    stdDesc: "Всё работает точно как в банке — только без ограничений",
-    std1Title: "Верификация личности",
-    std1Desc: "Такой же процесс, как в любом банке и финансовой организации",
-    std2Title: "Регулируемая платформа",
-    std2Desc: "Управляется лицензированным провайдером финансовой инфраструктуры",
-    std3Title: "Управление через приложение",
-    std3Desc: "Контролируйте карту с телефона, как в мобильном банке",
+    stdDesc: "Всё как в банке — только без ограничений",
+    std1Title: "Верификация",
+    std1Desc: "Как в любом банке",
+    std2Title: "Лицензия",
+    std2Desc: "Лицензированная платформа",
+    std3Title: "Приложение",
+    std3Desc: "Управление с телефона",
 
     // Safety
-    safetyTag: "Безопасность прежде всего",
+    safetyTag: "Безопасность",
     safetyTitle1: "Почему это ",
     safetyTitle2: "безопасно",
-    safetyDesc: "Ваши деньги и данные защищены на каждом уровне",
-    safe1Title: "Защита аккаунта (2FA)",
-    safe1Desc: "Многоуровневая безопасность с двухфакторной аутентификацией",
-    safe2Title: "Верификация личности",
-    safe2Desc: "Стандартный процесс — как в любом регулируемом банке",
-    safe3Title: "Контроль транзакций",
-    safe3Desc: "Заморозка, разморозка, лимиты — полный контроль с телефона",
-    safe4Title: "Реальная инфраструктура",
-    safe4Desc: "Построена на лицензированной платформе, которую используют миллионы",
+    safetyDesc: "Деньги и данные защищены на каждом уровне",
+    safe1Title: "Защита (2FA)",
+    safe1Desc: "Двухфакторная аутентификация и мониторинг",
+    safe2Title: "Верификация",
+    safe2Desc: "Стандарт — как в любом банке",
+    safe3Title: "Контроль",
+    safe3Desc: "Заморозка, лимиты — всё с телефона",
+    safe4Title: "Инфраструктура",
+    safe4Desc: "Лицензированная платформа для миллионов",
 
     // Trust
-    trustTitle1: "Финансовая инфраструктура,",
+    trustTitle1: "Инфраструктура,",
     trustTitle2: "которой можно ",
     trustTitle3: "доверять",
-    trustDesc: "Zerocard работает на глобальной финансовой инфраструктуре, которой пользуются миллионы — стабильность, безопасность и быстрые транзакции.",
-    trustSec: "Банковская безопасность",
-    trustKYC: "Верификация KYC",
-    trustSince: "Работает с 2019",
+    trustDesc: "Zerocard — на глобальной платформе для миллионов пользователей. Стабильность, защита, скорость.",
+    trustSec: "Банковская защита",
+    trustKYC: "KYC верификация",
+    trustSince: "С 2019 года",
     trustPowered: "На базе",
-    trustPlatform: "Глобальная финансовая платформа мирового класса",
+    trustPlatform: "Глобальная финансовая платформа",
 
     // Fear
     fearTitle1: "Это ",
@@ -447,26 +447,26 @@ const translations = {
     fearNo: "Нет.",
     fearDesc1: "Работает как обычная карта.",
     fearDesc2: "Настройка за минуты.",
-    fearDesc3: "Не нужен финансовый или технический опыт.",
+    fearDesc3: "Без опыта в финансах.",
 
     // Extra
     extraYield: "До 5% годовых",
-    extraYieldDesc: "Ваш баланс в USDT приносит доход — в отличие от банковских счетов",
+    extraYieldDesc: "Баланс USDT приносит доход — в отличие от банков",
     extraRef: "Реферальная программа",
-    extraRefDesc: "Приглашайте друзей и получайте бонусы за каждого",
+    extraRefDesc: "Приглашайте друзей — получайте бонусы",
 
     // FOMO
-    fomoTitle1: "Большинство узнаёт об этом ",
+    fomoTitle1: "Многие узнают об этом ",
     fomoTitle2: "слишком поздно",
     fomoDesc: "Пока другие мучаются с отклонёнными платежами — вы уже платите без ограничений",
 
     // Final CTA
     finalTitle: "Начните сейчас",
-    finalDesc: "Бесплатная глобальная платёжная карта без ограничений",
-    final1: "Регистрация за 5 мин",
+    finalDesc: "Бесплатная карта для глобальных платежей",
+    final1: "5 мин регистрация",
     final2: "Простая верификация",
     final3: "Бесплатная карта",
-    finalSub: "Выпуск 0€ · Обслуживание 0€ · Глобальные платежи",
+    finalSub: "Выпуск 0€ · Обслуживание 0€ · Весь мир",
 
     // Footer
     footerCopy: "Платежи нового поколения.",
@@ -490,13 +490,19 @@ const I18nContext = createContext<I18nContextType>({
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
     const stored = localStorage.getItem("zc-lang");
-    if (stored === "ru" || stored === "en") return stored;
-    return navigator.language.startsWith("ru") ? "ru" : "en";
+    if (stored === "ru" || stored === "en") {
+      document.documentElement.lang = stored;
+      return stored;
+    }
+    const detected = navigator.language.startsWith("ru") ? "ru" : "en";
+    document.documentElement.lang = detected;
+    return detected;
   });
 
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
     localStorage.setItem("zc-lang", newLang);
+    document.documentElement.lang = newLang;
   }, []);
 
   return (
