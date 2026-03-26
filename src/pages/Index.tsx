@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
+import pionexCardImage from "@/assets/pionex-card.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import { useI18n, Lang } from "@/lib/i18n";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -750,79 +751,103 @@ function GuideSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   PAYMENT WALLET (NEW)
+   PAYMENT WALLET — PREMIUM VISUAL
    ═══════════════════════════════════════════════════ */
 function PaymentWalletSection() {
   const { t } = useI18n();
-  const wallets = [
-    { name: "Apple Pay", icon: Smartphone, gradient: "from-gray-800 to-gray-900" },
-    { name: "Google Pay", icon: Globe, gradient: "from-blue-500 to-green-500" },
-    { name: "PayPal", icon: Wallet, gradient: "from-blue-600 to-blue-400" },
-  ];
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 3%) 100%)" }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/4 right-1/4" blur={200} opacity={0.06} />
-      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-1/4 left-1/4" blur={180} opacity={0.04} />
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{
+      background: "linear-gradient(135deg, hsl(28 100% 55%) 0%, hsl(28 90% 50%) 40%, hsl(20 85% 48%) 100%)",
+    }}>
+      {/* Subtle background glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 80% 60% at 30% 50%, hsl(28 100% 65% / 0.3), transparent 60%)",
+      }} />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 60% 80% at 70% 40%, hsl(340 80% 55% / 0.15), transparent 60%)",
+      }} />
+      <NoiseOverlay opacity={0.03} />
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
-          <h2 className="section-title text-white mb-6 text-center leading-tight">
-            {t.walletTitle1}<span className="gradient-text">{t.walletTitle2}</span>
-          </h2>
-        </FadeIn>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left — Text content */}
+          <FadeIn>
+            <div className="max-w-lg">
+              <p className="text-sm font-semibold text-white/70 mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
+              <h2 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight">
+                {t.walletTitle1}<br />
+                <span className="text-white/90">{t.walletTitle2}</span>
+              </h2>
+              <p className="text-lg lg:text-xl text-white/80 mb-8 leading-relaxed font-medium">
+                {t.walletDesc}
+              </p>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
-          {/* Left — text */}
-          <FadeIn delay={0.1}>
-            <div className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-10 lg:p-12" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.5)" }}>
-              <p className="text-lg text-white/70 leading-relaxed mb-6">{t.walletDesc}</p>
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5">
-                <p className="text-sm text-white/40 flex items-start gap-2.5">
-                  <Zap className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+              {/* Auto-conversion note */}
+              <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 mb-6">
+                <p className="text-sm text-white/70 flex items-start gap-2.5">
+                  <Zap className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
                   {t.walletNote}
                 </p>
               </div>
+
+              {/* Ready badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 px-6 py-3"
+              >
+                <Clock className="w-4 h-4 text-white" />
+                <span className="text-sm font-bold text-white">{t.walletReady}</span>
+              </motion.div>
             </div>
           </FadeIn>
 
-          {/* Right — wallet icons */}
-          <FadeIn delay={0.2}>
-            <div className="grid grid-cols-3 gap-5">
-              {wallets.map((w, i) => (
-                <motion.div
-                  key={w.name}
-                  whileHover={{ scale: 1.08, y: -6 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="flex flex-col items-center gap-4"
-                >
-                  <div className="relative group">
-                    <div className={`absolute -inset-3 rounded-3xl bg-gradient-to-br ${w.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                    <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-3xl border border-white/[0.1] bg-white/[0.06] backdrop-blur-2xl flex items-center justify-center" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), 0 0 40px -15px hsl(28 100% 50% / 0.1)" }}>
-                      <w.icon className="w-8 h-8 lg:w-10 lg:h-10 text-white/70" strokeWidth={1.5} />
-                    </div>
-                  </div>
-                  <span className="text-xs font-bold text-white/50">{w.name}</span>
-                </motion.div>
-              ))}
-            </div>
+          {/* Right — Card image with floating icons */}
+          <FadeIn delay={0.2} className="relative flex justify-center">
+            <div className="relative">
+              {/* Glow behind card */}
+              <div className="absolute inset-0 scale-[1.3] blur-[80px] opacity-40" style={{
+                background: "radial-gradient(circle, hsl(0 0% 100% / 0.3), transparent 70%)",
+              }} />
 
-            {/* Card visual */}
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="mt-8 mx-auto max-w-[280px] rounded-2xl border border-white/[0.1] bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-2xl p-6 flex items-center gap-4"
-              style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.3), 0 0 40px -15px hsl(28 100% 50% / 0.15)" }}
-            >
-              <div className="w-12 h-8 rounded-lg gradient-bg flex items-center justify-center" style={{ boxShadow: "0 6px 20px -4px hsl(28 100% 50% / 0.4)" }}>
-                <CreditCard className="w-5 h-3.5 text-white" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-white/60">ZeroCard</p>
-                <p className="text-[10px] text-white/25 font-mono">•••• •••• •••• 4242</p>
-              </div>
-            </motion.div>
+              {/* Main card image */}
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              >
+                <img
+                  src={pionexCardImage}
+                  alt="Pionex Card — pay anywhere with Apple Pay, Google Pay, PayPal"
+                  className="relative z-10 w-full max-w-[520px] rounded-3xl"
+                  style={{
+                    filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.3)) drop-shadow(0 15px 30px rgba(0,0,0,0.2))",
+                  }}
+                />
+              </motion.div>
+
+              {/* Floating accent badges */}
+              <motion.div
+                animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="absolute -top-3 -right-2 lg:right-4 z-20 rounded-2xl bg-white/95 backdrop-blur-xl px-4 py-2.5 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.15)" }}
+              >
+                <Globe className="w-4 h-4 text-primary" />
+                <span className="text-xs font-bold text-foreground">150+ {t.heroStat1?.toLowerCase()}</span>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-2 -left-2 lg:left-4 z-20 rounded-2xl bg-white/95 backdrop-blur-xl px-4 py-2.5 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.15)" }}
+              >
+                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs font-bold text-foreground">Mastercard®</span>
+              </motion.div>
+            </div>
           </FadeIn>
         </div>
       </div>
