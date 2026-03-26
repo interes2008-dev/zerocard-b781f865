@@ -1589,7 +1589,7 @@ const Index = () => (
     <PaymentWalletSection />
     <InfrastructureSection />
     <ScrollingTicker />
-    <AIUseCases />
+    
     <StepsOverview />
     <ProblemSection />
     <ComparisonSection />
