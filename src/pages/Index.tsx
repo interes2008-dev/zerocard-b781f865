@@ -1534,6 +1534,9 @@ function DynamicMeta() {
     setMeta("property", "og:description", t.metaDesc);
     setMeta("name", "twitter:title", t.metaTitle);
     setMeta("name", "twitter:description", t.metaDesc);
+    const ogImg = lang === "en" ? "https://zerocard.pro/og-image-en.jpg" : "https://zerocard.pro/og-image.jpg";
+    setMeta("property", "og:image", ogImg);
+    setMeta("name", "twitter:image", ogImg);
 
     // hreflang tags
     const hreflangs = [
