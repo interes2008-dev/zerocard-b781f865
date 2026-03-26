@@ -772,8 +772,8 @@ function PaymentWalletSection() {
             <div className="max-w-lg">
               <p className="text-sm font-semibold text-white/70 mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
               <h2 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight">
-                {t.walletTitle1}<br />
-                <span className="text-white/90">{t.walletTitle2}</span>
+                <span className="block whitespace-nowrap">{t.walletTitle1}</span>
+                <span className="block text-white/90">{t.walletTitle2}</span>
               </h2>
               <p className="text-lg lg:text-xl text-white/80 mb-8 leading-relaxed font-medium">
                 {t.walletDesc}
