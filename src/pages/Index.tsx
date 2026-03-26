@@ -319,56 +319,45 @@ function InfrastructureSection() {
     { icon: Clock, title: t.infraCard3Title, desc: t.infraCard3Desc, gradient: "from-violet-500 to-purple-400" },
   ];
   return (
-    <section className="py-20 lg:py-28 relative overflow-hidden" style={{
-      background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 4%) 100%)",
-    }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.06} />
-      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.04} />
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "hsl(30 15% 97%)" }}>
+      <NoiseOverlay opacity={0.015} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.infraTag}</p>
-          <h2 className="section-title text-white mb-6 text-center">
+          <h2 className="section-title text-foreground mb-6 text-center">
             {t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/35 mb-16 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
+          <p className="text-center text-lg text-muted-foreground mb-16 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
         </FadeIn>
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14">
           {cards.map((c, i) => (
             <FadeIn key={c.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <div className="relative group rounded-3xl overflow-hidden h-full">
-                  <div className="absolute inset-0 rounded-3xl p-[1px]" style={{
-                    background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))",
-                  }}>
-                    <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
-                  </div>
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
-                  <div className="relative z-10 p-8 lg:p-10 text-center">
-                    <div className="relative mx-auto mb-6">
-                      <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                      <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
-                        style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                        <c.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
-                      </div>
+                <GlassCard className="text-center p-8 lg:p-10 h-full group" hover={false}>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.1), inset 0 0 60px -20px hsl(28 100% 50% / 0.04)" }} />
+                  <div className="relative mx-auto mb-6">
+                    <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-15 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
+                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
+                      style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.25)" }}>
+                      <c.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{c.title}</h3>
-                    <p className="text-sm text-white/40 leading-relaxed">{c.desc}</p>
                   </div>
-                </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{c.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                </GlassCard>
               </motion.div>
             </FadeIn>
           ))}
         </div>
         <FadeIn delay={0.3}>
           <div className="text-center">
-            <p className="text-xs text-white/25 mb-4 tracking-widest uppercase">{t.infraPoweredBy}</p>
+            <p className="text-xs text-muted-foreground/50 mb-4 tracking-widest uppercase">{t.infraPoweredBy}</p>
             <motion.div whileHover={{ scale: 1.04 }}
-              className="inline-flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl px-10 py-5 cursor-default"
-              style={{ boxShadow: "0 16px 50px -12px rgba(0,0,0,0.5), 0 0 40px -15px hsl(28 100% 50% / 0.1)" }}>
+              className="inline-flex items-center gap-3 rounded-2xl border border-border/20 bg-card/60 backdrop-blur-2xl px-10 py-5 cursor-default"
+              style={{ boxShadow: "0 12px 40px -12px rgba(0,0,0,0.08)" }}>
               <span className="text-xl font-bold gradient-text tracking-tight">Pionex</span>
-              <span className="text-xs text-white/25 font-medium">{t.infraSince}</span>
+              <span className="text-xs text-muted-foreground/50 font-medium">{t.infraSince}</span>
             </motion.div>
           </div>
         </FadeIn>
@@ -377,53 +366,7 @@ function InfrastructureSection() {
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   SCROLLING TICKER
-   ═══════════════════════════════════════════════════ */
-function ScrollingTicker() {
-  const { t, lang } = useI18n();
-  const TickerRow = ({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) => {
-    const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
-    return (
-      <div className="relative overflow-hidden py-1">
-        <div className="absolute left-0 top-0 bottom-0 w-56 lg:w-96 z-10" style={{ background: "linear-gradient(to right, hsl(220 15% 5%), hsl(220 15% 5% / 0.95) 20%, hsl(220 15% 5% / 0.6) 50%, transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-56 lg:w-96 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), hsl(220 15% 5% / 0.95) 20%, hsl(220 15% 5% / 0.6) 50%, transparent)" }} />
-        <div className="flex shrink-0" style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}>
-          {repeated.map((brand, i) => (
-            <div key={`${brand.name}-${i}`} className="group relative flex items-center gap-1.5 lg:gap-2 px-2 lg:px-2.5 py-2 mx-px rounded-lg border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]" style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}>
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: `0 0 40px -6px ${brand.color}60, inset 0 0 25px -8px ${brand.color}30` }} />
-              <div className="absolute inset-0 rounded-xl opacity-[0.05]" style={{ boxShadow: `inset 0 0 20px -8px ${brand.color}` }} />
-              <div className="w-5 h-5 lg:w-6 lg:h-6 transition-all duration-500 group-hover:scale-110 relative z-10" style={{ color: brand.color }}>
-                <brand.Logo className="w-full h-full" />
-              </div>
-              <span className="text-xs lg:text-sm font-bold transition-all duration-500 whitespace-nowrap tracking-tight group-hover:brightness-125 relative z-10" style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
-                {brand.name}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <section className="py-8 lg:py-12 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)" }}>
-      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.08} />
-      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
-      <NoiseOverlay opacity={0.03} />
-      <div className="relative z-10">
-        <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-2 tracking-[0.2em] uppercase">{t.tickerTitle}</p>
-          <p className="text-center text-xs text-white/25 mb-6">{t.tickerSub}</p>
-        </FadeIn>
-        <div className="flex flex-col gap-2.5">
-          <TickerRow items={row1Brands} speed={35} />
-          <TickerRow items={row2Brands} reverse speed={40} />
-        </div>
-      </div>
-    </section>
-  );
-}
+/* ScrollingTicker removed — ticker is now embedded in HeroSection */
 
 /* ═══════════════════════════════════════════════════
    STATUS BAR
@@ -602,35 +545,34 @@ function ProblemSection() {
   const { t, lang } = useI18n();
   const problems = [t.problem1, t.problem2, t.problem3, t.problem4];
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)" }}>
-      <NoiseOverlay opacity={0.05} />
-      <GlowOrb color="hsl(0 60% 35%)" size={600} position="top-1/4 left-1/3" blur={180} opacity={0.06} />
-      <GlowOrb color="hsl(0 60% 40%)" size={300} position="bottom-1/4 right-1/4" blur={140} opacity={0.04} />
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "hsl(30 15% 97%)" }}>
+      <NoiseOverlay opacity={0.015} />
+      <GlowOrb color="hsl(0 60% 50%)" size={600} position="top-1/4 left-1/3" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-destructive/70 mb-4 tracking-[0.2em] uppercase">{t.problemTag}</p>
-          <h2 className="text-center section-title text-white mb-6 leading-tight">
+          <p className="text-center text-sm font-semibold text-destructive mb-4 tracking-[0.2em] uppercase">{t.problemTag}</p>
+          <h2 className="text-center section-title text-foreground mb-6 leading-tight">
             {t.problemTitle1}<span className="gradient-text">{t.problemTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/25 mb-14 max-w-md mx-auto">{t.problemDesc}</p>
+          <p className="text-center text-lg text-muted-foreground mb-14 max-w-md mx-auto">{t.problemDesc}</p>
         </FadeIn>
         <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-14">
           {problems.map((p, i) => (
             <FadeIn key={p} delay={i * 0.1}>
-              <motion.div whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }} className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-6 transition-all cursor-default h-full" style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}>
-                <div className="w-11 h-11 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
+              <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-4 rounded-3xl border border-border/15 bg-card/50 backdrop-blur-xl p-6 transition-all cursor-default h-full" style={{ boxShadow: "0 8px 30px -12px rgba(0,0,0,0.06)" }}>
+                <div className="w-11 h-11 rounded-2xl bg-destructive/8 border border-destructive/10 flex items-center justify-center flex-shrink-0">
                   <X className="w-5 h-5 text-destructive/70" />
                 </div>
-                <span className="text-white/60 font-medium text-sm">{p}</span>
+                <span className="text-foreground/60 font-medium text-sm">{p}</span>
               </motion.div>
             </FadeIn>
           ))}
         </div>
         <FadeIn delay={0.5}>
-          <motion.div whileHover={{ scale: 1.02 }} className="max-w-md mx-auto text-center rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-2xl p-7" style={{ boxShadow: "0 0 60px -15px hsl(28 100% 50% / 0.2)" }}>
+          <motion.div whileHover={{ scale: 1.02 }} className="max-w-md mx-auto text-center rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-2xl p-7" style={{ boxShadow: "0 0 60px -15px hsl(28 100% 50% / 0.15)" }}>
             <Check className="w-8 h-8 text-primary mx-auto mb-3" />
-            <p className="text-xl font-bold text-white mb-2">{t.solutionTitle1}<span className="gradient-text">{t.solutionTitle2}</span></p>
-            <p className="text-sm text-white/40">{t.solutionDesc}</p>
+            <p className="text-xl font-bold text-foreground mb-2">{t.solutionTitle1}<span className="gradient-text">{t.solutionTitle2}</span></p>
+            <p className="text-sm text-muted-foreground">{t.solutionDesc}</p>
           </motion.div>
         </FadeIn>
       </div>
@@ -698,36 +640,35 @@ function ComparisonSection() {
     { label: t.compYield, old: false, zc: true },
   ];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(260 15% 5%) 50%, hsl(220 15% 3%) 100%)" }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.08} />
-      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
+    <section className="py-24 lg:py-32 relative overflow-hidden bg-background">
+      <NoiseOverlay opacity={0.015} />
+      <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.compTag}</p>
-          <h2 className="section-title text-center text-white mb-6 leading-tight">
+          <h2 className="section-title text-center text-foreground mb-6 leading-tight">
             {t.compTitle1}<span className="gradient-text">{t.compTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.compDesc}</p>
+          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto">{t.compDesc}</p>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <motion.div whileHover={{ scale: 1.01 }} className="max-w-2xl mx-auto rounded-[2rem] overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-2xl" style={{ boxShadow: "0 40px 100px -25px rgba(0,0,0,0.6), 0 0 80px -30px hsl(28 100% 50% / 0.12)" }}>
-            <div className="grid grid-cols-3 px-8 py-6 border-b border-white/[0.06]">
+          <motion.div whileHover={{ scale: 1.01 }} className="max-w-2xl mx-auto rounded-[2rem] overflow-hidden border border-border/15 bg-card/50 backdrop-blur-xl" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.08)" }}>
+            <div className="grid grid-cols-3 px-8 py-6 border-b border-border/10">
               <span />
-              <span className="text-sm font-semibold text-white/25 text-center">{t.compRegular}</span>
+              <span className="text-sm font-semibold text-muted-foreground/50 text-center">{t.compRegular}</span>
               <span className="text-sm font-bold text-primary text-center">Zerocard</span>
             </div>
             {rows.map((r, i) => (
-              <motion.div key={r.label} whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }} className={`grid grid-cols-3 items-center px-8 py-6 transition-colors ${i < rows.length - 1 ? "border-b border-white/[0.04]" : ""}`}>
-                <span className="text-sm text-white/40 font-medium">{r.label}</span>
+              <motion.div key={r.label} whileHover={{ backgroundColor: "hsl(28 100% 50% / 0.02)" }} className={`grid grid-cols-3 items-center px-8 py-6 transition-colors ${i < rows.length - 1 ? "border-b border-border/8" : ""}`}>
+                <span className="text-sm text-foreground/60 font-medium">{r.label}</span>
                 <div className="flex justify-center">
-                  {r.oldText ? <span className="text-sm text-white/20">{r.oldText}</span> :
+                  {r.oldText ? <span className="text-sm text-muted-foreground/50">{r.oldText}</span> :
                    r.old === false ? <X className="w-5 h-5 text-destructive/50" /> :
-                   <Check className="w-5 h-5 text-green-400" />}
+                   <Check className="w-5 h-5 text-emerald-500" />}
                 </div>
                 <div className="flex justify-center">
                   {r.zcText ? <span className="text-sm font-bold text-primary">{r.zcText}</span> :
-                   r.zc ? <Check className="w-5 h-5 text-green-400" /> :
+                   r.zc ? <Check className="w-5 h-5 text-emerald-500" /> :
                    <X className="w-5 h-5 text-destructive/50" />}
                 </div>
               </motion.div>
@@ -903,14 +844,13 @@ function BenefitsSection() {
     { icon: CircleDollarSign, title: t.benYield, desc: t.benYieldDesc },
   ];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 10% 4%) 0%, hsl(220 15% 6%) 50%, hsl(220 10% 3%) 100%)" }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/4 left-1/4" blur={180} opacity={0.05} />
-      <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 right-1/4" blur={160} opacity={0.04} />
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "hsl(30 15% 97%)" }}>
+      <NoiseOverlay opacity={0.015} />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/4 left-1/4" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.benefitsTag}</p>
-          <h2 className="text-center section-title text-white mb-16 leading-tight">
+          <h2 className="text-center section-title text-foreground mb-16 leading-tight">
             {t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span>
           </h2>
         </FadeIn>
@@ -918,13 +858,13 @@ function BenefitsSection() {
           {benefits.map((b, i) => (
             <FadeIn key={b.title} delay={i * 0.08}>
               <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
-                <div className="p-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all h-full" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.04)" }}>
-                  <div className="mb-5 w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.2)" }}>
+                <GlassCard className="p-8 h-full">
+                  <div className="mb-5 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 30px -10px hsl(28 100% 50% / 0.15)" }}>
                     <b.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-base font-bold text-white mb-2">{b.title}</h3>
-                  <p className="text-sm text-white/40 leading-relaxed">{b.desc}</p>
-                </div>
+                  <h3 className="text-base font-bold text-foreground mb-2">{b.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                </GlassCard>
               </motion.div>
             </FadeIn>
           ))}
@@ -946,38 +886,32 @@ function SafetySection() {
     { icon: Layers, title: t.safe4Title, desc: t.safe4Desc, gradient: "from-blue-500 to-cyan-400" },
   ];
   return (
-    <section id="safety" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(200 15% 6%) 50%, hsl(220 12% 3%) 100%)" }}>
-      <NoiseOverlay opacity={0.04} />
-      <GlowOrb color="hsl(160 60% 40%)" size={700} position="top-1/4 left-1/3" blur={200} opacity={0.06} />
-      <GlowOrb color="hsl(28 100% 50%)" size={500} position="bottom-1/4 right-1/4" blur={180} opacity={0.05} />
+    <section id="safety" className="py-24 lg:py-32 relative overflow-hidden scroll-mt-20 bg-background">
+      <NoiseOverlay opacity={0.015} />
+      <GlowOrb color="hsl(160 60% 40%)" size={700} position="top-1/4 left-1/3" blur={200} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.safetyTag}</p>
-          <h2 className="section-title text-white mb-6 leading-tight text-center">
+          <h2 className="section-title text-foreground mb-6 leading-tight text-center">
             {t.safetyTitle1}<span className="gradient-text">{t.safetyTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/30 mb-14 max-w-lg mx-auto">{t.safetyDesc}</p>
+          <p className="text-center text-lg text-muted-foreground mb-14 max-w-lg mx-auto">{t.safetyDesc}</p>
         </FadeIn>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {safetyPoints.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <div className="relative group rounded-3xl overflow-hidden h-full">
-                  <div className="absolute inset-0 rounded-3xl p-[1px]" style={{ background: "linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(28 100% 50% / 0.15), hsl(0 0% 100% / 0.05))" }}>
-                    <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
-                  </div>
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
-                  <div className="relative z-10 p-8 lg:p-10 text-center">
-                    <div className="relative mx-auto mb-5">
-                      <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                      <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                        <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
-                      </div>
+                <GlassCard className="text-center p-8 lg:p-10 h-full group" hover={false}>
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.1), inset 0 0 60px -20px hsl(28 100% 50% / 0.04)" }} />
+                  <div className="relative mx-auto mb-5">
+                    <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-15 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
+                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.25)" }}>
+                      <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
-                    <p className="text-sm text-white/40 leading-relaxed">{s.desc}</p>
                   </div>
-                </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                </GlassCard>
               </motion.div>
             </FadeIn>
           ))}
