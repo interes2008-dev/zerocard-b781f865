@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import cardImage from "@/assets/zerocard-orange.png";
+import pionexCardImage from "@/assets/pionex-card.png";
 import { row1Brands, row2Brands } from "@/components/BrandLogos";
 import { useI18n, Lang } from "@/lib/i18n";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";

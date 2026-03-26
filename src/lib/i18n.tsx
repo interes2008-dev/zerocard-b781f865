@@ -172,11 +172,12 @@ const translations = {
     guideStart: "Start",
 
     // Payment Wallet
-    walletTag: "Digital wallets",
-    walletTitle1: "Works like a ",
-    walletTitle2: "real bank card",
-    walletDesc: "Add your card to Apple Pay, Google Pay or PayPal and pay worldwide — online and offline",
+    walletTag: "Universal payments",
+    walletTitle1: "Pay anywhere ",
+    walletTitle2: "like a regular card",
+    walletDesc: "Works with Apple Pay, Google Pay, PayPal and more",
     walletNote: "No manual crypto conversion — payments happen automatically",
+    walletReady: "Ready to use in about 5 minutes",
 
     // Benefits
     benefitsTag: "Advantages",
@@ -463,11 +464,12 @@ const translations = {
     guideStart: "Начать",
 
     // Payment Wallet
-    walletTag: "Цифровые кошельки",
-    walletTitle1: "Работает как ",
-    walletTitle2: "настоящая банковская карта",
-    walletDesc: "Добавьте карту в Apple Pay, Google Pay или PayPal и платите по всему миру — онлайн и офлайн",
+    walletTag: "Универсальные платежи",
+    walletTitle1: "Платите где угодно ",
+    walletTitle2: "как обычной картой",
+    walletDesc: "Работает с Apple Pay, Google Pay, PayPal и другими",
     walletNote: "Без ручной конвертации крипто — платежи проходят автоматически",
+    walletReady: "Готова к использованию за ~5 минут",
 
     // Benefits
     benefitsTag: "Преимущества",
