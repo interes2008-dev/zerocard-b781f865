@@ -175,7 +175,7 @@ function HeroSection() {
 
           {/* ── RIGHT: Card visual ── */}
           <FadeIn delay={0.15} className="relative flex justify-center lg:justify-end">
-            <motion.div style={{ y: cardY }} className="relative w-full max-w-[380px] lg:max-w-[480px]">
+            <motion.div style={{ y: cardY }} className="relative w-full max-w-[300px] lg:max-w-[370px]">
               <div className="absolute inset-0 scale-[1.4] blur-[120px] opacity-30"
                 style={{ background: "radial-gradient(circle, hsl(28 100% 55%), transparent 65%)" }} />
 
