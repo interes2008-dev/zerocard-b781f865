@@ -80,27 +80,7 @@ function GlassCard({ children, className = "", hover = true }: { children: React
 }
 
 /* ─── Hero Ticker Row ─── */
-function HeroTickerRow({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) {
-  const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
-  return (
-    <div className="relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to right, hsl(var(--background)), hsl(var(--background) / 0.8) 30%, transparent)" }} />
-      <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to left, hsl(var(--background)), hsl(var(--background) / 0.8) 30%, transparent)" }} />
-      <div className="flex shrink-0" style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}>
-        {repeated.map((brand, i) => (
-          <div key={`${brand.name}-${i}`} className="group flex items-center gap-1.5 px-2.5 py-1.5 mx-0.5 rounded-md transition-all duration-400 cursor-default select-none opacity-40 hover:opacity-100">
-            <div className="w-4 h-4 lg:w-5 lg:h-5 transition-transform duration-400 group-hover:scale-110" style={{ color: brand.color }}>
-              <brand.Logo className="w-full h-full" />
-            </div>
-            <span className="text-[11px] lg:text-xs font-semibold whitespace-nowrap tracking-tight transition-all duration-400" style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
-              {brand.name}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+
 
 /* ═══════════════════════════════════════════════════
    HERO
@@ -230,17 +210,8 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* ── Trusted brands ticker ── */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="relative py-5 border-t border-border/20">
-          <FadeIn delay={0.4}>
-            <p className="text-center text-[10px] font-semibold text-muted-foreground/50 mb-3 tracking-[0.25em] uppercase">{t.tickerTitle}</p>
-          </FadeIn>
-          <HeroTickerRow items={row1Brands} speed={40} />
-          <div className="h-2" />
-          <HeroTickerRow items={row2Brands} reverse speed={45} />
-        </div>
-      </div>
+
+
     </section>
   );
 }
