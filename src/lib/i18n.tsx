@@ -18,7 +18,7 @@ const translations = {
     heroPowered: "Powered by",
     heroInfra: "infrastructure",
     heroDesc1: "Pay for ChatGPT, Claude, Spotify, Netflix, Midjourney",
-    heroDesc2: "and any global service — setup in 5 minutes",
+    heroDesc2: "and any global service — setup in about 5 minutes",
     heroFeat1: "0€ card issuance",
     heroFeat2: "0€ monthly fees",
     heroFeat3: "Works worldwide",
@@ -30,6 +30,15 @@ const translations = {
     heroStat3: "Fees",
     heroCashback: "Cashback 1%",
     heroCountries: "150+ countries",
+
+    // After click
+    afterClickTitle: "What happens after you click:",
+    afterClick1: "2–3 minute signup on Pionex",
+    afterClick2: "Quick identity verification",
+    afterClick3: "Instant access to your card",
+
+    // Redirect transparency
+    redirectNote: "After clicking, you will be redirected to the official Pionex platform to complete registration and get your card",
 
     // Infrastructure
     infraTag: "Built for trust",
@@ -64,19 +73,28 @@ const translations = {
     aiClaude: "AI by Anthropic",
     aiMidjourney: "AI image generation",
 
+    // Real Process
+    realTag: "Transparent process",
+    realTitle1: "How it works ",
+    realTitle2: "in reality",
+    realDesc: "Simple, clear steps — no surprises",
+    real1: "Create account in Pionex",
+    real2: "Verify identity (standard process like banks)",
+    real3: "Get access to your card",
+
     // Steps Overview
     stepsTag: "How it works",
-    stepsTitle: "Start in 5 minutes",
+    stepsTitle: "Start in about 5 minutes",
     stepsStep: "Step",
-    step1Title: "Sign up",
-    step1Desc: "Create an account in a couple of minutes",
+    step1Title: "Create account",
+    step1Desc: "Quick registration in Pionex (2–3 minutes)",
     step2Title: "Verify your identity",
-    step2Desc: "Standard check (like in banks), takes a few minutes. This is standard process.",
+    step2Desc: "Standard process (like banks), takes a few minutes",
     step3Title: "Get your card",
-    step3Desc: "Issue your virtual card for free",
+    step3Desc: "Free issuance — your virtual card is ready instantly",
     step4Title: "Fund your balance",
     step4Desc: "Transfer USDT easily",
-    step5Title: "Pay anywhere",
+    step5Title: "Pay worldwide",
     step5Desc: "Use it for subscriptions, services and travel",
 
     // Problem
@@ -138,11 +156,11 @@ const translations = {
 
     // Guide
     guideTag: "Step-by-step guide",
-    guideTitle1: "Setup takes ",
+    guideTitle1: "Setup takes about ",
     guideTitle2: "5 minutes",
     guideSub: "Follow these simple steps and start paying globally",
     guide1Title: "Sign up",
-    guide1Desc: "Create your account in a couple of minutes",
+    guide1Desc: "Create your account in Pionex (2–3 minutes)",
     guide2Title: "Verification",
     guide2Desc: "Simple identity check — like any bank",
     guide3Title: "Get your card",
@@ -152,6 +170,13 @@ const translations = {
     guide5Title: "Pay normally",
     guide5Desc: "Use it like any regular payment card",
     guideStart: "Start",
+
+    // Payment Wallet
+    walletTag: "Digital wallets",
+    walletTitle1: "Works like a ",
+    walletTitle2: "real bank card",
+    walletDesc: "Add your card to Apple Pay, Google Pay or PayPal and pay worldwide — online and offline",
+    walletNote: "No manual crypto conversion — payments happen automatically",
 
     // Benefits
     benefitsTag: "Advantages",
@@ -212,7 +237,7 @@ const translations = {
     fearTitle2: "complicated?",
     fearNo: "No.",
     fearDesc1: "Works like a normal card.",
-    fearDesc2: "Setup takes minutes.",
+    fearDesc2: "Setup takes about 5 minutes.",
     fearDesc3: "No financial or technical experience needed.",
 
     // Extra
@@ -229,9 +254,10 @@ const translations = {
     // Final CTA
     finalTitle: "Start now",
     finalDesc: "Free global payment card with no restrictions",
-    final1: "5 min signup",
+    final1: "About 5 min signup",
     final2: "Simple verification",
     final3: "Free card",
+    finalCTA: "Get your card in about 5 minutes",
     finalSub: "0€ issuance · 0€ monthly fees · global payments",
 
     // Footer
@@ -264,7 +290,7 @@ const translations = {
     faq2Q: "Is it safe?",
     faq2A: "Yes. ZeroCard operates on a licensed financial platform with bank-level security, 2FA protection, and full transaction control from your phone.",
     faq3Q: "How to get the card?",
-    faq3A: "Sign up, complete a simple identity verification (takes a few minutes), and get your free virtual card instantly.",
+    faq3A: "Sign up on Pionex, complete a simple identity verification (takes a few minutes), and get your free virtual card instantly.",
     faq4Q: "Are there fees?",
     faq4A: "Card issuance is free (0€). There are no monthly fees. You also earn up to 1% cashback on purchases.",
   },
@@ -283,7 +309,7 @@ const translations = {
     heroPowered: "На базе",
     heroInfra: "инфраструктуры",
     heroDesc1: "ChatGPT, Claude, Spotify, Netflix, Midjourney",
-    heroDesc2: "и любые сервисы — старт за 5 минут",
+    heroDesc2: "и любые сервисы — старт примерно за 5 минут",
     heroFeat1: "Выпуск 0€",
     heroFeat2: "Без абонплаты",
     heroFeat3: "Весь мир",
@@ -295,6 +321,15 @@ const translations = {
     heroStat3: "Комиссии",
     heroCashback: "Кешбэк 1%",
     heroCountries: "150+ стран",
+
+    // After click
+    afterClickTitle: "Что произойдёт после нажатия:",
+    afterClick1: "Регистрация 2–3 минуты в Pionex",
+    afterClick2: "Быстрая верификация личности",
+    afterClick3: "Доступ к вашей карте",
+
+    // Redirect transparency
+    redirectNote: "После нажатия вы перейдёте на официальную платформу Pionex для регистрации и получения карты",
 
     // Infrastructure
     infraTag: "Надёжная основа",
@@ -329,16 +364,25 @@ const translations = {
     aiClaude: "ИИ от Anthropic",
     aiMidjourney: "Генерация изображений",
 
+    // Real Process
+    realTag: "Прозрачный процесс",
+    realTitle1: "Как это работает ",
+    realTitle2: "на самом деле",
+    realDesc: "Простые, понятные шаги — без сюрпризов",
+    real1: "Создайте аккаунт в Pionex",
+    real2: "Пройдите верификацию (как в банке)",
+    real3: "Получите доступ к карте",
+
     // Steps Overview
     stepsTag: "Как работает",
-    stepsTitle: "Старт за 5 минут",
+    stepsTitle: "Старт примерно за 5 минут",
     stepsStep: "Шаг",
-    step1Title: "Регистрация",
-    step1Desc: "Аккаунт за пару минут",
+    step1Title: "Создайте аккаунт",
+    step1Desc: "Быстрая регистрация в Pionex (2–3 минуты)",
     step2Title: "Верификация",
-    step2Desc: "Стандартная проверка, как в банке",
+    step2Desc: "Стандартная проверка, как в банке — занимает несколько минут",
     step3Title: "Карта",
-    step3Desc: "Виртуальная карта — бесплатно",
+    step3Desc: "Бесплатный выпуск — карта готова мгновенно",
     step4Title: "Пополнение",
     step4Desc: "Переведите USDT легко",
     step5Title: "Оплата",
@@ -403,11 +447,11 @@ const translations = {
 
     // Guide
     guideTag: "Пошаговое руководство",
-    guideTitle1: "Настройка за ",
+    guideTitle1: "Настройка примерно за ",
     guideTitle2: "5 минут",
     guideSub: "Простые шаги — и вы платите по всему миру",
     guide1Title: "Регистрация",
-    guide1Desc: "Аккаунт за пару минут",
+    guide1Desc: "Аккаунт в Pionex за 2–3 минуты",
     guide2Title: "Верификация",
     guide2Desc: "Проверка личности — как в банке",
     guide3Title: "Карта",
@@ -417,6 +461,13 @@ const translations = {
     guide5Title: "Оплата",
     guide5Desc: "Как обычной картой",
     guideStart: "Начать",
+
+    // Payment Wallet
+    walletTag: "Цифровые кошельки",
+    walletTitle1: "Работает как ",
+    walletTitle2: "настоящая банковская карта",
+    walletDesc: "Добавьте карту в Apple Pay, Google Pay или PayPal и платите по всему миру — онлайн и офлайн",
+    walletNote: "Без ручной конвертации крипто — платежи проходят автоматически",
 
     // Benefits
     benefitsTag: "Преимущества",
@@ -477,7 +528,7 @@ const translations = {
     fearTitle2: "сложно?",
     fearNo: "Нет.",
     fearDesc1: "Работает как обычная карта.",
-    fearDesc2: "Настройка за минуты.",
+    fearDesc2: "Настройка примерно за 5 минут.",
     fearDesc3: "Без опыта в финансах.",
 
     // Extra
@@ -494,9 +545,10 @@ const translations = {
     // Final CTA
     finalTitle: "Начните сейчас",
     finalDesc: "Бесплатная карта для глобальных платежей",
-    final1: "5 мин регистрация",
+    final1: "~5 мин регистрация",
     final2: "Простая верификация",
     final3: "Бесплатная карта",
+    finalCTA: "Получить карту примерно за 5 минут",
     finalSub: "Выпуск 0€ · Обслуживание 0€ · Весь мир",
 
     // Footer
@@ -529,7 +581,7 @@ const translations = {
     faq2Q: "Это безопасно?",
     faq2A: "Да. ZeroCard работает на лицензированной финансовой платформе с банковским уровнем безопасности, двухфакторной аутентификацией и полным контролем транзакций с телефона.",
     faq3Q: "Как получить карту?",
-    faq3A: "Зарегистрируйтесь, пройдите простую верификацию (займёт пару минут) и получите бесплатную виртуальную карту мгновенно.",
+    faq3A: "Зарегистрируйтесь в Pionex, пройдите простую верификацию (займёт пару минут) и получите бесплатную виртуальную карту мгновенно.",
     faq4Q: "Сколько стоит карта?",
     faq4A: "Выпуск карты бесплатный (0€). Абонентская плата отсутствует. Также вы получаете кешбэк до 1% с покупок.",
   },
