@@ -8,7 +8,7 @@ import {
   CreditCard, Wallet, ShoppingCart, Globe, Shield, TrendingUp, Zap, UserPlus, ShieldCheck,
   ArrowRight, Check, X, Coins, Users, Clock, ChevronRight, Sparkles,
   BadgeCheck, CircleDollarSign, Bot, Smartphone, Lock, Layers,
-  Fingerprint, Brain, Plane, Menu, HelpCircle,
+  Fingerprint, Brain, Plane, Menu, HelpCircle, ExternalLink,
 } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
@@ -34,7 +34,7 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
 function SectionHeading({ tag, title, subtitle }: { tag: string; title: React.ReactNode; subtitle?: string }) {
   return (
     <FadeIn>
-      <div className="text-center mb-16 lg:mb-24">
+      <div className="text-center mb-12 lg:mb-20">
         <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{tag}</p>
         <h2 className="section-title text-foreground mb-6">{title}</h2>
         {subtitle && <p className="text-lg text-muted-foreground max-w-lg mx-auto">{subtitle}</p>}
@@ -55,7 +55,7 @@ function CTAButton({ text, size = "default" }: { text: string; size?: "default" 
       className={`inline-flex items-center justify-center gap-3 rounded-full gradient-bg text-white font-semibold transition-all ${
         size === "large" ? "w-full sm:w-auto px-10 py-4 text-base" : "px-8 py-3.5 text-sm"
       }`}
-      style={{ boxShadow: "0 16px 60px -12px hsl(28 100% 50% / 0.5), 0 8px 24px -8px hsl(340 80% 55% / 0.3)" }}
+      style={{ boxShadow: "0 16px 60px -12px hsl(28 100% 50% / 0.5), 0 8px 24px -8px hsl(340 80% 55% / 0.3), 0 0 40px -10px hsl(28 100% 50% / 0.25)" }}
     >
       {text}
       <ArrowRight className={size === "large" ? "w-5 h-5" : "w-4 h-4"} />
@@ -170,15 +170,36 @@ function HeroSection() {
             <FadeIn delay={0.3}>
               <div className="mt-8">
                 <CTAButton text={t.heroCTA} size="large" />
-                <p className="mt-4 text-xs text-muted-foreground/60 tracking-widest uppercase">
+                <p className="mt-3 text-xs text-muted-foreground/60 tracking-widest uppercase">
                   {t.heroMicro}
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* What happens after click */}
+            <FadeIn delay={0.35}>
+              <div className="mt-6 rounded-2xl border border-border/15 bg-card/30 backdrop-blur-xl p-5">
+                <p className="text-xs font-bold text-foreground/70 mb-3 uppercase tracking-wider">{t.afterClickTitle}</p>
+                <div className="space-y-2">
+                  {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-primary" />
+                      </div>
+                      {step}
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-[11px] text-muted-foreground/50 flex items-center gap-1.5">
+                  <ExternalLink className="w-3 h-3" />
+                  {t.redirectNote}
                 </p>
               </div>
             </FadeIn>
 
             {/* Social proof stats */}
             <FadeIn delay={0.4}>
-              <div className="mt-10 flex items-center gap-10 pt-8 border-t border-border/15">
+              <div className="mt-8 flex items-center gap-10 pt-8 border-t border-border/15">
                 {[
                   { value: "150+", label: t.heroStat1 },
                   { value: "5 min", label: t.heroStat2 },
@@ -263,7 +284,7 @@ function InfrastructureSection() {
     { icon: Clock, title: t.infraCard3Title, desc: t.infraCard3Desc, gradient: "from-violet-500 to-purple-400" },
   ];
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden" style={{
+    <section className="py-20 lg:py-28 relative overflow-hidden" style={{
       background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 4%) 100%)",
     }}>
       <NoiseOverlay opacity={0.04} />
@@ -275,9 +296,9 @@ function InfrastructureSection() {
           <h2 className="section-title text-white mb-6 text-center">
             {t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/35 mb-20 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
+          <p className="text-center text-lg text-white/35 mb-16 max-w-xl mx-auto leading-relaxed">{t.infraDesc}</p>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-7 max-w-5xl mx-auto mb-16">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14">
           {cards.map((c, i) => (
             <FadeIn key={c.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
@@ -289,15 +310,15 @@ function InfrastructureSection() {
                   </div>
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
-                  <div className="relative z-10 p-10 lg:p-12 text-center">
-                    <div className="relative mx-auto mb-7">
+                  <div className="relative z-10 p-8 lg:p-10 text-center">
+                    <div className="relative mx-auto mb-6">
                       <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                      <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
+                      <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
                         style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                        <c.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                        <c.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3">{c.title}</h3>
+                    <h3 className="text-lg font-bold text-white mb-2">{c.title}</h3>
                     <p className="text-sm text-white/40 leading-relaxed">{c.desc}</p>
                   </div>
                 </div>
@@ -334,7 +355,7 @@ function ScrollingTicker() {
         <div className="absolute right-0 top-0 bottom-0 w-56 lg:w-96 z-10" style={{ background: "linear-gradient(to left, hsl(220 15% 5%), hsl(220 15% 5% / 0.95) 20%, hsl(220 15% 5% / 0.6) 50%, transparent)" }} />
         <div className="flex shrink-0" style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}>
           {repeated.map((brand, i) => (
-            <div key={`${brand.name}-${i}`} className="group relative flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-3 py-2 mx-px rounded-lg border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]" style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}>
+            <div key={`${brand.name}-${i}`} className="group relative flex items-center gap-1.5 lg:gap-2 px-2 lg:px-2.5 py-2 mx-px rounded-lg border border-white/[0.06] bg-white/[0.03] backdrop-blur-xl transition-all duration-500 cursor-default select-none hover:bg-white/[0.08] hover:border-white/[0.15]" style={{ boxShadow: `0 0 20px -10px ${brand.color}30` }}>
               <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: `0 0 40px -6px ${brand.color}60, inset 0 0 25px -8px ${brand.color}30` }} />
               <div className="absolute inset-0 rounded-xl opacity-[0.05]" style={{ boxShadow: `inset 0 0 20px -8px ${brand.color}` }} />
               <div className="w-5 h-5 lg:w-6 lg:h-6 transition-all duration-500 group-hover:scale-110 relative z-10" style={{ color: brand.color }}>
@@ -351,16 +372,16 @@ function ScrollingTicker() {
   };
 
   return (
-    <section className="py-10 lg:py-14 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)" }}>
+    <section className="py-8 lg:py-12 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(230 12% 5%) 100%)" }}>
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.08} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
       <NoiseOverlay opacity={0.03} />
       <div className="relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-2 tracking-[0.2em] uppercase">{t.tickerTitle}</p>
-          <p className="text-center text-xs text-white/25 mb-8">{t.tickerSub}</p>
+          <p className="text-center text-xs text-white/25 mb-6">{t.tickerSub}</p>
         </FadeIn>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2.5">
           <TickerRow items={row1Brands} speed={35} />
           <TickerRow items={row2Brands} reverse speed={40} />
         </div>
@@ -381,14 +402,14 @@ function StatusBar() {
     { icon: Shield, label: t.statusSecurity },
   ];
   return (
-    <section className="py-10 border-b border-border/10 relative overflow-hidden">
+    <section className="py-8 border-b border-border/10 relative overflow-hidden">
       <div className="absolute inset-0 bg-card/40 backdrop-blur-xl" />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <div className="flex flex-wrap justify-center gap-10 lg:gap-20">
+        <div className="flex flex-wrap justify-center gap-8 lg:gap-16">
           {items.map((item, i) => (
             <FadeIn key={item.label} delay={i * 0.08}>
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-3 text-sm text-muted-foreground font-medium cursor-default">
-                <div className="w-9 h-9 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 20px -6px hsl(28 100% 50% / 0.15)" }}>
                   <item.icon className="w-4 h-4 text-primary/80" />
                 </div>
                 {item.label}
@@ -412,7 +433,7 @@ function AIUseCases() {
     { icon: Sparkles, name: "Midjourney", desc: t.aiMidjourney },
   ];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 15% 6%) 50%, hsl(0 0% 4%) 100%)" }}>
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 15% 6%) 50%, hsl(0 0% 4%) 100%)" }}>
       <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-0 left-1/2 -translate-x-1/2" blur={180} opacity={0.06} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 right-0" blur={160} opacity={0.04} />
       <NoiseOverlay opacity={0.04} />
@@ -422,13 +443,13 @@ function AIUseCases() {
           <h2 className="section-title text-white mb-6 leading-tight">
             {t.aiTitle1}<span className="gradient-text">{t.aiTitle2}</span>
           </h2>
-          <p className="text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.aiDesc}</p>
+          <p className="text-lg text-white/30 mb-14 max-w-lg mx-auto">{t.aiDesc}</p>
         </FadeIn>
-        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-5 sm:gap-8 max-w-4xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-5 sm:gap-7 max-w-4xl mx-auto">
           {services.map((s, i) => (
             <FadeIn key={s.name} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.04, y: -4 }} className="flex items-center gap-5 px-8 sm:px-10 py-7 sm:py-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all cursor-default w-full sm:w-auto" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.05)" }}>
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
+              <motion.div whileHover={{ scale: 1.04, y: -4 }} className="flex items-center gap-5 px-8 sm:px-9 py-6 sm:py-7 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all cursor-default w-full sm:w-auto" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.05)" }}>
+                <div className="w-14 h-14 sm:w-15 sm:h-15 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
                   <s.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                 </div>
                 <div className="text-left">
@@ -439,6 +460,53 @@ function AIUseCases() {
             </FadeIn>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   REAL PROCESS (NEW)
+   ═══════════════════════════════════════════════════ */
+function RealProcessSection() {
+  const { t } = useI18n();
+  const steps = [
+    { icon: UserPlus, text: t.real1 },
+    { icon: Fingerprint, text: t.real2 },
+    { icon: CreditCard, text: t.real3 },
+  ];
+  return (
+    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+      <NoiseOverlay />
+      <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.04} />
+      <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-3xl">
+        <SectionHeading
+          tag={t.realTag}
+          title={<>{t.realTitle1}<span className="gradient-text">{t.realTitle2}</span></>}
+          subtitle={t.realDesc}
+        />
+        <div className="flex flex-col gap-5 max-w-xl mx-auto">
+          {steps.map((s, i) => (
+            <FadeIn key={i} delay={i * 0.1}>
+              <motion.div whileHover={{ scale: 1.02, x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
+                <GlassCard className="flex items-center gap-5 p-7">
+                  <div className="text-2xl font-bold gradient-text flex-shrink-0 w-10 text-center">{String(i + 1).padStart(2, '0')}</div>
+                  <div className="w-px h-10 bg-border/20 flex-shrink-0" />
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 25px -8px hsl(28 100% 50% / 0.2)" }}>
+                    <s.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <p className="text-base font-semibold text-foreground">{s.text}</p>
+                </GlassCard>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn delay={0.4}>
+          <p className="text-center mt-8 text-xs text-muted-foreground/50 flex items-center justify-center gap-1.5">
+            <ExternalLink className="w-3 h-3" />
+            {t.redirectNote}
+          </p>
+        </FadeIn>
       </div>
     </section>
   );
@@ -457,30 +525,30 @@ function StepsOverview() {
     { icon: Globe, num: "05", title: t.step5Title, desc: t.step5Desc, gradient: "from-orange-500 to-amber-400" },
   ];
   return (
-    <section id="how-it-works" className="py-28 lg:py-36 relative overflow-hidden bg-background scroll-mt-20">
+    <section id="how-it-works" className="py-24 lg:py-32 relative overflow-hidden bg-background scroll-mt-20">
       <NoiseOverlay opacity={0.02} />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-0 right-1/4" blur={200} opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={400} position="bottom-0 left-1/4" blur={180} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeading tag={t.stepsTag} title={t.stepsTitle} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-5 max-w-7xl mx-auto">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.1}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 260, damping: 20 }} className="h-full">
-                <GlassCard className="text-center p-8 lg:p-10 relative h-full min-h-[240px] flex flex-col items-center justify-start group" hover={false}>
+                <GlassCard className="text-center p-7 lg:p-8 relative h-full min-h-[220px] flex flex-col items-center justify-start group" hover={false}>
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "inset 0 0 60px -20px hsl(28 100% 50% / 0.08), 0 0 80px -20px hsl(28 100% 50% / 0.1)" }} />
-                  <div className="mb-4 text-[10px] font-bold text-primary/50 tracking-[0.35em] uppercase">{t.stepsStep} {s.num}</div>
-                  <div className="relative mx-auto mb-7">
+                  <div className="mb-3 text-[10px] font-bold text-primary/50 tracking-[0.35em] uppercase">{t.stepsStep} {s.num}</div>
+                  <div className="relative mx-auto mb-5">
                     <div className={`absolute -inset-2 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                    <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.4)" }}>
-                      <s.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.4)" }}>
+                      <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                     </div>
                     <motion.div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full bg-gradient-to-br ${s.gradient}`} animate={{ scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] }} transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.3 }} style={{ boxShadow: "0 0 12px hsl(28 100% 50% / 0.5)" }} />
                   </div>
                   {i < steps.length - 1 && (
                     <div className="hidden xl:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/20 to-transparent" />
                   )}
-                  <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
+                  <h3 className="text-base font-bold text-foreground mb-1.5">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </GlassCard>
               </motion.div>
@@ -499,32 +567,32 @@ function ProblemSection() {
   const { t, lang } = useI18n();
   const problems = [t.problem1, t.problem2, t.problem3, t.problem4];
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)" }}>
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(350 20% 5%) 50%, hsl(0 0% 3%) 100%)" }}>
       <NoiseOverlay opacity={0.05} />
       <GlowOrb color="hsl(0 60% 35%)" size={600} position="top-1/4 left-1/3" blur={180} opacity={0.06} />
       <GlowOrb color="hsl(0 60% 40%)" size={300} position="bottom-1/4 right-1/4" blur={140} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-destructive/70 mb-4 tracking-[0.2em] uppercase">{t.problemTag}</p>
-          <h2 className="text-center section-title text-white mb-8 leading-tight">
+          <h2 className="text-center section-title text-white mb-6 leading-tight">
             {t.problemTitle1}<span className="gradient-text">{t.problemTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/25 mb-16 max-w-md mx-auto">{t.problemDesc}</p>
+          <p className="text-center text-lg text-white/25 mb-14 max-w-md mx-auto">{t.problemDesc}</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-16">
+        <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-14">
           {problems.map((p, i) => (
             <FadeIn key={p} delay={i * 0.1}>
-              <motion.div whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }} className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-7 transition-all cursor-default h-full" style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}>
-                <div className="w-12 h-12 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
+              <motion.div whileHover={{ scale: 1.03, borderColor: "rgba(255,100,100,0.15)" }} className="flex items-center gap-4 rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl p-6 transition-all cursor-default h-full" style={{ boxShadow: "0 20px 50px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.03)" }}>
+                <div className="w-11 h-11 rounded-2xl bg-destructive/10 border border-destructive/10 flex items-center justify-center flex-shrink-0">
                   <X className="w-5 h-5 text-destructive/70" />
                 </div>
-                <span className="text-white/60 font-medium">{p}</span>
+                <span className="text-white/60 font-medium text-sm">{p}</span>
               </motion.div>
             </FadeIn>
           ))}
         </div>
         <FadeIn delay={0.5}>
-          <motion.div whileHover={{ scale: 1.02 }} className="max-w-md mx-auto text-center rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-2xl p-8" style={{ boxShadow: "0 0 60px -15px hsl(28 100% 50% / 0.2)" }}>
+          <motion.div whileHover={{ scale: 1.02 }} className="max-w-md mx-auto text-center rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-2xl p-7" style={{ boxShadow: "0 0 60px -15px hsl(28 100% 50% / 0.2)" }}>
             <Check className="w-8 h-8 text-primary mx-auto mb-3" />
             <p className="text-xl font-bold text-white mb-2">{t.solutionTitle1}<span className="gradient-text">{t.solutionTitle2}</span></p>
             <p className="text-sm text-white/40">{t.solutionDesc}</p>
@@ -541,19 +609,19 @@ function ProblemSection() {
 function WhyItWorks() {
   const { t, lang } = useI18n();
   return (
-    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-background relative overflow-hidden">
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 right-0" blur={180} opacity={0.03} />
       <NoiseOverlay />
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl text-center relative z-10">
         <FadeIn>
           <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.whyTag}</p>
-          <h2 className="section-title text-foreground mb-8 leading-tight">
+          <h2 className="section-title text-foreground mb-6 leading-tight">
             {t.whyTitle1}<span className="gradient-text">{t.whyTitle2}</span>
           </h2>
-          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-20 max-w-xl mx-auto">{t.whyDesc}</p>
+          <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed mb-16 max-w-xl mx-auto">{t.whyDesc}</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-3 gap-6">
           {[
             { icon: Globe, label: t.whyCard1, desc: t.whyCard1Desc, gradient: "from-orange-500 to-amber-400" },
             { icon: Layers, label: t.whyCard2, desc: t.whyCard2Desc, gradient: "from-amber-400 to-orange-500" },
@@ -561,12 +629,12 @@ function WhyItWorks() {
           ].map((item, i) => (
             <FadeIn key={item.label} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <GlassCard className="p-10 h-full flex flex-col items-center justify-start" hover={false}>
+                <GlassCard className="p-8 h-full flex flex-col items-center justify-start" hover={false}>
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ boxShadow: "inset 0 0 60px -20px hsl(28 100% 50% / 0.08), 0 0 80px -20px hsl(28 100% 50% / 0.1)" }} />
-                  <div className="relative mx-auto mb-7">
+                  <div className="relative mx-auto mb-5">
                     <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${item.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                    <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                      <item.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                      <item.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{item.label}</h3>
@@ -595,27 +663,27 @@ function ComparisonSection() {
     { label: t.compYield, old: false, zc: true },
   ];
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(260 15% 5%) 50%, hsl(220 15% 3%) 100%)" }}>
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(260 15% 5%) 50%, hsl(220 15% 3%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={800} position="top-0 left-1/2 -translate-x-1/2" blur={200} opacity={0.08} />
       <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-0 right-1/4" blur={160} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.compTag}</p>
-          <h2 className="section-title text-center text-white mb-8 leading-tight">
+          <h2 className="section-title text-center text-white mb-6 leading-tight">
             {t.compTitle1}<span className="gradient-text">{t.compTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/30 mb-20 max-w-lg mx-auto">{t.compDesc}</p>
+          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.compDesc}</p>
         </FadeIn>
         <FadeIn delay={0.15}>
           <motion.div whileHover={{ scale: 1.01 }} className="max-w-2xl mx-auto rounded-[2rem] overflow-hidden border border-white/[0.08] bg-white/[0.03] backdrop-blur-2xl" style={{ boxShadow: "0 40px 100px -25px rgba(0,0,0,0.6), 0 0 80px -30px hsl(28 100% 50% / 0.12)" }}>
-            <div className="grid grid-cols-3 px-8 py-7 border-b border-white/[0.06]">
+            <div className="grid grid-cols-3 px-8 py-6 border-b border-white/[0.06]">
               <span />
               <span className="text-sm font-semibold text-white/25 text-center">{t.compRegular}</span>
               <span className="text-sm font-bold text-primary text-center">Zerocard</span>
             </div>
             {rows.map((r, i) => (
-              <motion.div key={r.label} whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }} className={`grid grid-cols-3 items-center px-8 py-7 transition-colors ${i < rows.length - 1 ? "border-b border-white/[0.04]" : ""}`}>
+              <motion.div key={r.label} whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }} className={`grid grid-cols-3 items-center px-8 py-6 transition-colors ${i < rows.length - 1 ? "border-b border-white/[0.04]" : ""}`}>
                 <span className="text-sm text-white/40 font-medium">{r.label}</span>
                 <div className="flex justify-center">
                   {r.oldText ? <span className="text-sm text-white/20">{r.oldText}</span> :
@@ -649,25 +717,25 @@ function GuideSection() {
     { num: "05", title: t.guide5Title, desc: t.guide5Desc },
   ];
   return (
-    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-background relative overflow-hidden">
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="-top-20 right-1/4" blur={200} opacity={0.04} />
       <GlowOrb color="hsl(340 80% 55%)" size={300} position="bottom-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <SectionHeading tag={t.guideTag} title={<>{t.guideTitle1}<span className="gradient-text">{t.guideTitle2}</span></>} subtitle={t.guideSub} />
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-5">
           {steps.map((s, i) => (
             <FadeIn key={s.num} delay={i * 0.08}>
               <motion.div whileHover={{ scale: 1.02, x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
-                <GlassCard className="flex items-center gap-6 p-8 lg:p-9">
+                <GlassCard className="flex items-center gap-5 p-7 lg:p-8">
                   <div className="text-3xl font-bold gradient-text flex-shrink-0 w-14 text-center">{s.num}</div>
                   <div className="w-px h-12 bg-border/20 flex-shrink-0" />
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground">{s.title}</h3>
+                    <h3 className="text-base font-bold text-foreground">{s.title}</h3>
                     <p className="text-sm text-muted-foreground mt-1">{s.desc}</p>
                   </div>
                   {s.cta && (
-                    <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-2 rounded-2xl gradient-bg px-7 py-3.5 text-sm font-semibold text-white hover:opacity-90 transition-all" style={{ boxShadow: "0 10px 30px -8px hsl(28 100% 50% / 0.4)" }}>
+                    <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-2 rounded-2xl gradient-bg px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-all" style={{ boxShadow: "0 10px 30px -8px hsl(28 100% 50% / 0.4), 0 0 20px -6px hsl(28 100% 50% / 0.2)" }}>
                       {t.guideStart} <ArrowRight className="w-4 h-4" />
                     </a>
                   )}
@@ -675,6 +743,87 @@ function GuideSection() {
               </motion.div>
             </FadeIn>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   PAYMENT WALLET (NEW)
+   ═══════════════════════════════════════════════════ */
+function PaymentWalletSection() {
+  const { t } = useI18n();
+  const wallets = [
+    { name: "Apple Pay", icon: Smartphone, gradient: "from-gray-800 to-gray-900" },
+    { name: "Google Pay", icon: Globe, gradient: "from-blue-500 to-green-500" },
+    { name: "PayPal", icon: Wallet, gradient: "from-blue-600 to-blue-400" },
+  ];
+
+  return (
+    <section className="py-24 lg:py-32 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 15% 4%) 0%, hsl(240 12% 6%) 50%, hsl(220 15% 3%) 100%)" }}>
+      <NoiseOverlay opacity={0.04} />
+      <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/4 right-1/4" blur={200} opacity={0.06} />
+      <GlowOrb color="hsl(270 70% 55%)" size={500} position="bottom-1/4 left-1/4" blur={180} opacity={0.04} />
+
+      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+        <FadeIn>
+          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
+          <h2 className="section-title text-white mb-6 text-center leading-tight">
+            {t.walletTitle1}<span className="gradient-text">{t.walletTitle2}</span>
+          </h2>
+        </FadeIn>
+
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-center">
+          {/* Left — text */}
+          <FadeIn delay={0.1}>
+            <div className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-10 lg:p-12" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.5)" }}>
+              <p className="text-lg text-white/70 leading-relaxed mb-6">{t.walletDesc}</p>
+              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5">
+                <p className="text-sm text-white/40 flex items-start gap-2.5">
+                  <Zap className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                  {t.walletNote}
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Right — wallet icons */}
+          <FadeIn delay={0.2}>
+            <div className="grid grid-cols-3 gap-5">
+              {wallets.map((w, i) => (
+                <motion.div
+                  key={w.name}
+                  whileHover={{ scale: 1.08, y: -6 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="flex flex-col items-center gap-4"
+                >
+                  <div className="relative group">
+                    <div className={`absolute -inset-3 rounded-3xl bg-gradient-to-br ${w.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                    <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-3xl border border-white/[0.1] bg-white/[0.06] backdrop-blur-2xl flex items-center justify-center" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), 0 0 40px -15px hsl(28 100% 50% / 0.1)" }}>
+                      <w.icon className="w-8 h-8 lg:w-10 lg:h-10 text-white/70" strokeWidth={1.5} />
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-white/50">{w.name}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Card visual */}
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              className="mt-8 mx-auto max-w-[280px] rounded-2xl border border-white/[0.1] bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-2xl p-6 flex items-center gap-4"
+              style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.3), 0 0 40px -15px hsl(28 100% 50% / 0.15)" }}
+            >
+              <div className="w-12 h-8 rounded-lg gradient-bg flex items-center justify-center" style={{ boxShadow: "0 6px 20px -4px hsl(28 100% 50% / 0.4)" }}>
+                <CreditCard className="w-5 h-3.5 text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-white/60">ZeroCard</p>
+                <p className="text-[10px] text-white/25 font-mono">•••• •••• •••• 4242</p>
+              </div>
+            </motion.div>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -695,26 +844,26 @@ function BenefitsSection() {
     { icon: CircleDollarSign, title: t.benYield, desc: t.benYieldDesc },
   ];
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 10% 4%) 0%, hsl(220 15% 6%) 50%, hsl(220 10% 3%) 100%)" }}>
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(220 10% 4%) 0%, hsl(220 15% 6%) 50%, hsl(220 10% 3%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/4 left-1/4" blur={180} opacity={0.05} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 right-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.benefitsTag}</p>
-          <h2 className="text-center section-title text-white mb-20 leading-tight">
+          <h2 className="text-center section-title text-white mb-16 leading-tight">
             {t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span>
           </h2>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {benefits.map((b, i) => (
             <FadeIn key={b.title} delay={i * 0.08}>
               <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
-                <div className="p-10 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all h-full" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.04)" }}>
-                  <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.2)" }}>
-                    <b.icon className="w-7 h-7 text-primary" />
+                <div className="p-8 rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl transition-all h-full" style={{ boxShadow: "0 20px 60px -15px rgba(0,0,0,0.4), inset 0 1px 0 0 rgba(255,255,255,0.04)" }}>
+                  <div className="mb-5 w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.2)" }}>
+                    <b.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-3">{b.title}</h3>
+                  <h3 className="text-base font-bold text-white mb-2">{b.title}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{b.desc}</p>
                 </div>
               </motion.div>
@@ -738,19 +887,19 @@ function SafetySection() {
     { icon: Layers, title: t.safe4Title, desc: t.safe4Desc, gradient: "from-blue-500 to-cyan-400" },
   ];
   return (
-    <section id="safety" className="py-32 lg:py-40 relative overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(200 15% 6%) 50%, hsl(220 12% 3%) 100%)" }}>
+    <section id="safety" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(200 15% 6%) 50%, hsl(220 12% 3%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(160 60% 40%)" size={700} position="top-1/4 left-1/3" blur={200} opacity={0.06} />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="bottom-1/4 right-1/4" blur={180} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.safetyTag}</p>
-          <h2 className="section-title text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-6 leading-tight text-center">
             {t.safetyTitle1}<span className="gradient-text">{t.safetyTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.safetyDesc}</p>
+          <p className="text-center text-lg text-white/30 mb-14 max-w-lg mx-auto">{t.safetyDesc}</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {safetyPoints.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -8 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
@@ -759,14 +908,14 @@ function SafetySection() {
                     <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
                   </div>
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 60px -20px hsl(28 100% 50% / 0.06)" }} />
-                  <div className="relative z-10 p-10 lg:p-12 text-center">
-                    <div className="relative mx-auto mb-7">
+                  <div className="relative z-10 p-8 lg:p-10 text-center">
+                    <div className="relative mx-auto mb-5">
                       <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
-                      <div className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
-                        <s.icon className="w-7 h-7 text-white" strokeWidth={1.8} />
+                      <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`} style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.35)" }}>
+                        <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+                    <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
                     <p className="text-sm text-white/40 leading-relaxed">{s.desc}</p>
                   </div>
                 </div>
@@ -785,34 +934,34 @@ function SafetySection() {
 function TrustSection() {
   const { t, lang } = useI18n();
   return (
-    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-background relative overflow-hidden">
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={220} opacity={0.05} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <div className="mx-auto mb-10 w-22 h-22 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ width: 88, height: 88, boxShadow: "0 0 80px -10px hsl(28 100% 50% / 0.2)" }}>
-              <Shield className="w-9 h-9 text-primary" />
+            <div className="mx-auto mb-8 w-20 h-20 rounded-3xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 80px -10px hsl(28 100% 50% / 0.2)" }}>
+              <Shield className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="section-title text-foreground mb-8 leading-tight">
+            <h2 className="section-title text-foreground mb-6 leading-tight">
               {t.trustTitle1}
               <br />
               {t.trustTitle2}<span className="gradient-text">{t.trustTitle3}</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-16">{t.trustDesc}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto mb-14">{t.trustDesc}</p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="grid sm:grid-cols-3 gap-7 mb-16">
+            <div className="grid sm:grid-cols-3 gap-6 mb-14">
               {[
                 { icon: Lock, label: t.trustSec },
                 { icon: Fingerprint, label: t.trustKYC },
                 { icon: BadgeCheck, label: t.trustSince },
               ].map((item) => (
                 <motion.div key={item.label} whileHover={{ scale: 1.04, y: -4 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <GlassCard className="p-9 flex flex-col items-center gap-5">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.12)" }}>
-                      <item.icon className="w-6 h-6 text-primary" />
+                  <GlassCard className="p-8 flex flex-col items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.12)" }}>
+                      <item.icon className="w-5 h-5 text-primary" />
                     </div>
                     <span className="text-sm font-bold text-foreground">{item.label}</span>
                   </GlassCard>
@@ -822,11 +971,11 @@ function TrustSection() {
           </FadeIn>
 
           <FadeIn delay={0.25}>
-            <p className="text-xs text-muted-foreground mb-5 tracking-widest uppercase">{t.trustPowered}</p>
+            <p className="text-xs text-muted-foreground mb-4 tracking-widest uppercase">{t.trustPowered}</p>
             <motion.div whileHover={{ scale: 1.03 }} className="inline-flex items-center gap-3 rounded-2xl border border-border/20 bg-card/60 backdrop-blur-2xl px-10 py-5 cursor-default" style={{ boxShadow: "0 12px 40px -12px rgba(0,0,0,0.1)" }}>
               <span className="text-2xl font-bold gradient-text tracking-tight">Pionex</span>
             </motion.div>
-            <p className="mt-5 text-xs text-muted-foreground/60">{t.trustPlatform}</p>
+            <p className="mt-4 text-xs text-muted-foreground/60">{t.trustPlatform}</p>
           </FadeIn>
         </div>
       </div>
@@ -846,19 +995,19 @@ function BetterThanBanks() {
     { icon: Lock, title: t.bank4Title, desc: t.bank4Desc },
   ];
   return (
-    <section id="why-better" className="py-32 lg:py-40 relative overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(240 15% 6%) 50%, hsl(220 12% 3%) 100%)" }}>
+    <section id="why-better" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, hsl(220 12% 4%) 0%, hsl(240 15% 6%) 50%, hsl(220 12% 3%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/4 right-1/4" blur={200} opacity={0.06} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="bottom-1/4 left-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <FadeIn>
           <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.bankTag}</p>
-          <h2 className="section-title text-white mb-8 leading-tight text-center">
+          <h2 className="section-title text-white mb-6 leading-tight text-center">
             {t.bankTitle1}<span className="gradient-text">{t.bankTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-white/30 mb-16 max-w-lg mx-auto">{t.bankDesc}</p>
+          <p className="text-center text-lg text-white/30 mb-14 max-w-lg mx-auto">{t.bankDesc}</p>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
           {reasons.map((r, i) => (
             <FadeIn key={r.title} delay={i * 0.1}>
               <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
@@ -867,12 +1016,12 @@ function BetterThanBanks() {
                     <div className="w-full h-full rounded-3xl bg-white/[0.04] backdrop-blur-2xl" />
                   </div>
                   <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ boxShadow: "0 25px 80px -20px hsl(28 100% 50% / 0.15), inset 0 0 40px -15px hsl(28 100% 50% / 0.05)" }} />
-                  <div className="relative z-10 p-8 lg:p-10 flex items-start gap-5">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
-                      <r.icon className="w-6 h-6 text-primary" />
+                  <div className="relative z-10 p-7 lg:p-9 flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center flex-shrink-0" style={{ boxShadow: "0 0 30px -8px hsl(28 100% 50% / 0.2)" }}>
+                      <r.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white mb-2">{r.title}</h3>
+                      <h3 className="text-base font-bold text-white mb-1.5">{r.title}</h3>
                       <p className="text-sm text-white/40 leading-relaxed">{r.desc}</p>
                     </div>
                   </div>
@@ -897,7 +1046,7 @@ function StandardProcess() {
     { icon: Smartphone, title: t.std3Title, desc: t.std3Desc },
   ];
   return (
-    <section className="py-32 lg:py-40 bg-background relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-background relative overflow-hidden">
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={600} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10 max-w-4xl">
@@ -906,17 +1055,17 @@ function StandardProcess() {
           <h2 className="section-title text-foreground mb-6 leading-tight text-center">
             {t.stdTitle1}<span className="gradient-text">{t.stdTitle2}</span>
           </h2>
-          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto leading-relaxed">{t.stdDesc}</p>
+          <p className="text-center text-lg text-muted-foreground mb-14 max-w-lg mx-auto leading-relaxed">{t.stdDesc}</p>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-7">
+        <div className="grid md:grid-cols-3 gap-6">
           {points.map((p, i) => (
             <FadeIn key={p.title} delay={i * 0.12}>
               <motion.div whileHover={{ scale: 1.05, y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
-                <GlassCard className="p-10 text-center h-full">
-                  <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
-                    <p.icon className="w-7 h-7 text-primary" />
+                <GlassCard className="p-8 text-center h-full">
+                  <div className="mx-auto mb-5 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.15)" }}>
+                    <p.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{p.title}</h3>
+                  <h3 className="text-base font-bold text-foreground mb-2">{p.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                 </GlassCard>
               </motion.div>
@@ -934,15 +1083,15 @@ function StandardProcess() {
 function FearSection() {
   const { t, lang } = useI18n();
   return (
-    <section className="py-32 lg:py-40 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 10% 5%) 100%)" }}>
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(220 10% 5%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={180} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center max-w-2xl relative z-10">
         <FadeIn>
-          <h2 className="section-title text-white mb-10 leading-tight">
+          <h2 className="section-title text-white mb-8 leading-tight">
             {t.fearTitle1}<span className="gradient-text">{t.fearTitle2}</span>
           </h2>
-          <motion.div whileHover={{ scale: 1.02 }} className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-12" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.4)" }}>
+          <motion.div whileHover={{ scale: 1.02 }} className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-2xl p-10" style={{ boxShadow: "0 30px 80px -20px rgba(0,0,0,0.4)" }}>
             <p className="text-2xl text-white/80 font-semibold mb-4">{t.fearNo}</p>
             <p className="text-lg text-white/40 leading-relaxed">
               {t.fearDesc1}
@@ -964,29 +1113,29 @@ function FearSection() {
 function ExtraSection() {
   const { t, lang } = useI18n();
   return (
-    <section className="py-36 lg:py-44 bg-background relative overflow-hidden">
+    <section className="py-28 lg:py-36 bg-background relative overflow-hidden">
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={500} position="top-1/3 left-1/3" blur={180} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-7 max-w-3xl mx-auto">
           <FadeIn>
             <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
-              <GlassCard className="p-12 lg:p-14 h-full">
-                <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
-                  <TrendingUp className="w-7 h-7 text-primary" />
+              <GlassCard className="p-10 lg:p-12 h-full">
+                <div className="mb-5 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
+                  <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">{t.extraYield}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3">{t.extraYield}</h3>
                 <p className="text-muted-foreground leading-relaxed">{t.extraYieldDesc}</p>
               </GlassCard>
             </motion.div>
           </FadeIn>
           <FadeIn delay={0.12}>
             <motion.div whileHover={{ scale: 1.03, y: -6 }} transition={{ type: "spring", stiffness: 300 }}>
-              <GlassCard className="p-12 lg:p-14 h-full">
-                <div className="mb-7 w-16 h-16 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
-                  <Users className="w-7 h-7 text-primary" />
+              <GlassCard className="p-10 lg:p-12 h-full">
+                <div className="mb-5 w-14 h-14 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center" style={{ boxShadow: "0 0 40px -10px hsl(28 100% 50% / 0.18)" }}>
+                  <Users className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">{t.extraRef}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3">{t.extraRef}</h3>
                 <p className="text-muted-foreground leading-relaxed">{t.extraRefDesc}</p>
               </GlassCard>
             </motion.div>
@@ -1003,20 +1152,24 @@ function ExtraSection() {
 function FOMOSection() {
   const { t, lang } = useI18n();
   return (
-    <section className="py-36 lg:py-44 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(28 20% 5%) 50%, hsl(0 0% 2%) 100%)" }}>
+    <section className="py-28 lg:py-36 relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(28 20% 5%) 50%, hsl(0 0% 2%) 100%)" }}>
       <NoiseOverlay opacity={0.04} />
       <GlowOrb color="hsl(28 100% 50%)" size={700} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={200} opacity={0.08} />
       <GlowOrb color="hsl(340 80% 55%)" size={400} position="bottom-0 left-1/4" blur={160} opacity={0.04} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10 max-w-2xl">
         <FadeIn>
-          <div className="mx-auto mb-10 w-20 h-20 rounded-3xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.25)" }}>
-            <Clock className="w-8 h-8 text-primary" />
+          <div className="mx-auto mb-8 w-18 h-18 rounded-3xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ width: 72, height: 72, boxShadow: "0 0 60px -10px hsl(28 100% 50% / 0.25)" }}>
+            <Clock className="w-7 h-7 text-primary" />
           </div>
-          <h2 className="section-title text-white mb-8 leading-tight">
+          <h2 className="section-title text-white mb-6 leading-tight">
             {t.fomoTitle1}<span className="gradient-text">{t.fomoTitle2}</span>
           </h2>
-          <p className="text-lg text-white/30 leading-relaxed mb-16">{t.fomoDesc}</p>
+          <p className="text-lg text-white/30 leading-relaxed mb-12">{t.fomoDesc}</p>
           <CTAButton text={t.heroCTA} size="large" />
+          <p className="mt-4 text-[11px] text-white/20 flex items-center justify-center gap-1.5">
+            <ExternalLink className="w-3 h-3" />
+            {t.redirectNote}
+          </p>
         </FadeIn>
       </div>
     </section>
@@ -1034,27 +1187,31 @@ function FinalCTA() {
     { icon: CreditCard, label: t.final3 },
   ];
   return (
-    <section className="py-36 lg:py-48 relative overflow-hidden bg-background">
+    <section className="py-28 lg:py-40 relative overflow-hidden bg-background">
       <NoiseOverlay />
       <GlowOrb color="hsl(28 100% 50%)" size={900} position="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" blur={250} opacity={0.07} />
       <GlowOrb color="hsl(340 80% 55%)" size={500} position="bottom-0 right-1/4" blur={180} opacity={0.04} />
       <GlowOrb color="hsl(270 70% 55%)" size={400} position="top-0 left-1/4" blur={160} opacity={0.03} />
       <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
         <FadeIn>
-          <h2 className="section-title text-foreground mb-6">{t.finalTitle}</h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-md mx-auto">{t.finalDesc}</p>
-          <div className="flex flex-wrap justify-center gap-6 mb-14">
+          <h2 className="section-title text-foreground mb-5">{t.finalTitle}</h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">{t.finalDesc}</p>
+          <div className="flex flex-wrap justify-center gap-5 mb-12">
             {quickSteps.map((s) => (
               <div key={s.label} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 20px -6px hsl(28 100% 50% / 0.2)" }}>
+                <div className="w-8 h-8 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center" style={{ boxShadow: "0 0 20px -6px hsl(28 100% 50% / 0.2)" }}>
                   <s.icon className="w-4 h-4 text-primary" />
                 </div>
                 <span className="font-medium">{s.label}</span>
               </div>
             ))}
           </div>
-          <CTAButton text={t.heroCTA} size="large" />
-          <p className="mt-8 text-sm text-muted-foreground/60">{t.finalSub}</p>
+          <CTAButton text={t.finalCTA} size="large" />
+          <p className="mt-6 text-sm text-muted-foreground/60">{t.finalSub}</p>
+          <p className="mt-3 text-[11px] text-muted-foreground/40 flex items-center justify-center gap-1.5">
+            <ExternalLink className="w-3 h-3" />
+            {t.redirectNote}
+          </p>
         </FadeIn>
       </div>
     </section>
@@ -1067,8 +1224,8 @@ function FinalCTA() {
 function SEOBlocks() {
   const { t } = useI18n();
   return (
-    <section className="py-20 lg:py-28 bg-background relative">
-      <div className="container mx-auto px-6 lg:px-16 max-w-4xl space-y-16">
+    <section className="py-16 lg:py-24 bg-background relative">
+      <div className="container mx-auto px-6 lg:px-16 max-w-4xl space-y-14">
         {/* Block 1 */}
         <FadeIn>
           <div>
@@ -1132,7 +1289,7 @@ function FAQSection() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section id="faq" className="py-20 lg:py-28 bg-background relative">
+      <section id="faq" className="py-16 lg:py-24 bg-background relative">
       <div className="container mx-auto px-6 lg:px-16 max-w-3xl">
         <SectionHeading tag={t.faqTag} title={t.faqTitle} />
         <FadeIn>
@@ -1161,7 +1318,7 @@ function FAQSection() {
 function Footer() {
   const { t, lang } = useI18n();
   return (
-    <footer className="py-14 border-t border-border/10 bg-background">
+    <footer className="py-12 border-t border-border/10 bg-background">
       <div className="container mx-auto px-6 lg:px-16 flex flex-col items-center gap-3">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-[9px] flex items-center justify-center" style={{ background: "linear-gradient(135deg, hsl(28 100% 50%), hsl(340 80% 55%))" }}>
@@ -1287,6 +1444,7 @@ function Navbar() {
                   ? "bg-gradient-to-r from-primary via-primary to-destructive shadow-lg shadow-primary/25"
                   : "bg-foreground/10 backdrop-blur-sm hover:bg-foreground/20"
               }`}
+              style={scrolled ? { boxShadow: "0 8px 30px -8px hsl(28 100% 50% / 0.4)" } : {}}
             >
               {t.navGetCard}
               <ArrowRight className="w-3.5 h-3.5" />
@@ -1361,7 +1519,6 @@ function DynamicMeta() {
       { rel: "alternate", hreflang: "en", href: "https://zerocard.pro/?lang=en" },
       { rel: "alternate", hreflang: "x-default", href: "https://zerocard.pro/" },
     ];
-    // Remove old hreflang links
     document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
     hreflangs.forEach(({ rel, hreflang, href }) => {
       const link = document.createElement("link");
@@ -1408,10 +1565,12 @@ const Index = () => (
     <ScrollingTicker />
     <StatusBar />
     <AIUseCases />
+    <RealProcessSection />
     <StepsOverview />
     <ProblemSection />
     <WhyItWorks />
     <ComparisonSection />
+    <PaymentWalletSection />
     <BetterThanBanks />
     <GuideSection />
     <BenefitsSection />
