@@ -251,32 +251,27 @@ function HeroSection() {
 function PaymentWalletSection() {
   const { t } = useI18n();
   return (
-    <section className={`${SECTION_PADDING} relative overflow-hidden`} style={{
-      background: "linear-gradient(135deg, hsl(28 100% 55%) 0%, hsl(28 90% 50%) 40%, hsl(20 85% 48%) 100%)",
-    }}>
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 80% 60% at 30% 50%, hsl(28 100% 65% / 0.3), transparent 60%)",
-      }} />
+    <section className={`${SECTION_PADDING} ${SECTION_GRAY} relative overflow-hidden`}>
       <div className={`${INNER} relative z-10`}>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <FadeIn>
             <div className="max-w-lg">
-              <p className="text-sm font-semibold text-white/70 mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
-              <h2 className="text-4xl lg:text-5xl xl:text-[3.5rem] font-extrabold text-white mb-6 leading-[1.1] tracking-tight">
+              <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
+              <h2 className="text-4xl lg:text-5xl xl:text-[3.5rem] font-extrabold text-foreground mb-6 leading-[1.1] tracking-tight">
                 <span className="block whitespace-nowrap">{t.walletTitle1}</span>
-                <span className="block text-white/90">{t.walletTitle2}</span>
+                <span className="block text-foreground/80">{t.walletTitle2}</span>
               </h2>
-              <p className="text-lg text-white/80 mb-8 leading-relaxed font-medium">{t.walletDesc}</p>
-              <div className="rounded-2xl bg-white/10 backdrop-blur-xl border border-white/15 p-5 mb-6">
-                <p className="text-sm text-white/70 flex items-start gap-2.5">
-                  <Zap className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed font-medium">{t.walletDesc}</p>
+              <div className="rounded-2xl bg-primary/5 border border-primary/10 p-5 mb-6">
+                <p className="text-sm text-muted-foreground flex items-start gap-2.5">
+                  <Zap className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                   {t.walletNote}
                 </p>
               </div>
               <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="inline-flex items-center gap-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 px-6 py-3">
-                <Clock className="w-4 h-4 text-white" />
-                <span className="text-sm font-bold text-white">{t.walletReady}</span>
+                className="inline-flex items-center gap-2.5 rounded-full bg-primary/8 border border-primary/15 px-6 py-3">
+                <Clock className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-foreground">{t.walletReady}</span>
               </motion.div>
             </div>
           </FadeIn>
