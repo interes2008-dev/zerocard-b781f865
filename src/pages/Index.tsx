@@ -282,9 +282,9 @@ function PaymentWalletSection() {
 function InfrastructureSection() {
   const { t } = useI18n();
   const cards = [
-    { icon: Shield, title: t.infraCard1Title, desc: t.infraCard1Desc, gradient: "from-emerald-500 to-teal-400" },
-    { icon: Zap, title: t.infraCard2Title, desc: t.infraCard2Desc, gradient: "from-orange-500 to-amber-400" },
-    { icon: Clock, title: t.infraCard3Title, desc: t.infraCard3Desc, gradient: "from-violet-500 to-purple-400" },
+    { icon: Shield, title: t.infraCard1Title, desc: t.infraCard1Desc },
+    { icon: Zap, title: t.infraCard2Title, desc: t.infraCard2Desc },
+    { icon: Clock, title: t.infraCard3Title, desc: t.infraCard3Desc },
   ];
   return (
     <section className={`${SECTION_PADDING} ${SECTION_GRAY} relative overflow-hidden`}>
@@ -294,19 +294,15 @@ function InfrastructureSection() {
           title={<>{t.infraTitle1}<span className="gradient-text">{t.infraTitle2}</span></>}
           subtitle={t.infraDesc}
         />
-        <div className="grid md:grid-cols-3 gap-6 mb-14">
+        <div className="grid md:grid-cols-3 gap-5 mb-14">
           {cards.map((c, i) => (
-            <FadeIn key={c.title} delay={i * 0.12}>
-              <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <GlassCard className="text-center p-8 lg:p-10 h-full group" hover={false}>
-                  <div className="relative mx-auto mb-6">
-                    <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${c.gradient} opacity-15 blur-xl group-hover:opacity-25 transition-opacity duration-500`} />
-                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${c.gradient} flex items-center justify-center mx-auto`}
-                      style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.2)" }}>
-                      <c.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
-                    </div>
+            <FadeIn key={c.title} delay={i * 0.1}>
+              <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="h-full">
+                <GlassCard className="text-center p-7 h-full">
+                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <c.icon className="w-5.5 h-5.5 text-primary" strokeWidth={1.8} />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{c.title}</h3>
+                  <h3 className="text-[15px] font-bold text-foreground mb-1.5">{c.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
                 </GlassCard>
               </motion.div>
@@ -334,11 +330,11 @@ function InfrastructureSection() {
 function StepsOverview() {
   const { t } = useI18n();
   const steps = [
-    { icon: UserPlus, num: "01", title: t.step1Title, desc: t.step1Desc, gradient: "from-orange-500 to-amber-400" },
-    { icon: ShieldCheck, num: "02", title: t.step2Title, desc: t.step2Desc, gradient: "from-amber-400 to-orange-500" },
-    { icon: CreditCard, num: "03", title: t.step3Title, desc: t.step3Desc, gradient: "from-orange-500 to-rose-500" },
-    { icon: Wallet, num: "04", title: t.step4Title, desc: t.step4Desc, gradient: "from-rose-500 to-orange-500" },
-    { icon: Globe, num: "05", title: t.step5Title, desc: t.step5Desc, gradient: "from-orange-500 to-amber-400" },
+    { icon: UserPlus, num: "01", title: t.step1Title, desc: t.step1Desc },
+    { icon: ShieldCheck, num: "02", title: t.step2Title, desc: t.step2Desc },
+    { icon: CreditCard, num: "03", title: t.step3Title, desc: t.step3Desc },
+    { icon: Wallet, num: "04", title: t.step4Title, desc: t.step4Desc },
+    { icon: Globe, num: "05", title: t.step5Title, desc: t.step5Desc },
   ];
   return (
     <section id="how-it-works" className={`${SECTION_PADDING} ${SECTION_WHITE} relative overflow-hidden scroll-mt-20`}>
@@ -347,20 +343,16 @@ function StepsOverview() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
           {steps.map((s, i) => (
             <FadeIn key={s.title} delay={i * 0.1}>
-              <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 260, damping: 20 }} className="h-full">
-                <GlassCard className="text-center p-7 lg:p-8 relative h-full min-h-[220px] flex flex-col items-center justify-start group" hover={false}>
+              <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="h-full">
+                <GlassCard className="text-center p-7 relative h-full flex flex-col items-center justify-start">
                   <div className="mb-3 text-[10px] font-bold text-primary/50 tracking-[0.35em] uppercase">{t.stepsStep} {s.num}</div>
-                  <div className="relative mx-auto mb-5">
-                    <div className={`absolute -inset-2 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-15 blur-xl group-hover:opacity-30 transition-opacity duration-500`} />
-                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center`}
-                      style={{ boxShadow: "0 12px 40px -8px hsl(28 100% 50% / 0.3)" }}>
-                      <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
-                    </div>
+                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
+                    <s.icon className="w-5.5 h-5.5 text-primary" strokeWidth={1.8} />
                   </div>
                   {i < steps.length - 1 && (
                     <div className="hidden xl:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/20 to-transparent" />
                   )}
-                  <h3 className="text-base font-bold text-foreground mb-1.5">{s.title}</h3>
+                  <h3 className="text-[15px] font-bold text-foreground mb-1.5">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </GlassCard>
               </motion.div>
@@ -388,15 +380,15 @@ function ProblemSection() {
             <p className="text-lg text-muted-foreground max-w-md mx-auto">{t.problemDesc}</p>
           </div>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-14">
+        <div className="grid sm:grid-cols-2 gap-5 max-w-2xl mx-auto mb-14">
           {problems.map((p, i) => (
             <FadeIn key={p} delay={i * 0.1}>
-              <motion.div whileHover={{ scale: 1.02 }}>
-                <GlassCard className="flex items-center gap-4 p-6 h-full">
-                  <div className="w-11 h-11 rounded-xl bg-destructive/8 border border-destructive/10 flex items-center justify-center flex-shrink-0">
+              <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 24 }}>
+                <GlassCard className="text-center p-7 h-full">
+                  <div className="w-12 h-12 rounded-xl bg-destructive/5 border border-destructive/10 flex items-center justify-center mx-auto mb-5">
                     <X className="w-5 h-5 text-destructive/70" />
                   </div>
-                  <span className="text-foreground/70 font-medium text-sm">{p}</span>
+                  <p className="text-sm text-foreground/70 font-medium leading-relaxed">{p}</p>
                 </GlassCard>
               </motion.div>
             </FadeIn>
@@ -484,15 +476,15 @@ function BenefitsSection() {
           tag={t.benefitsTag}
           title={<>{t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span></>}
         />
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {benefits.map((b, i) => (
             <FadeIn key={b.title} delay={i * 0.08}>
-              <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 300 }} className="h-full">
-                <GlassCard className="p-8 h-full">
-                  <div className="mb-5 w-14 h-14 rounded-xl bg-primary/8 border border-primary/10 flex items-center justify-center">
-                    <b.icon className="w-6 h-6 text-primary" />
+              <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="h-full">
+                <GlassCard className="text-center p-7 h-full">
+                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <b.icon className="w-5.5 h-5.5 text-primary" strokeWidth={1.8} />
                   </div>
-                  <h3 className="text-base font-bold text-foreground mb-2">{b.title}</h3>
+                  <h3 className="text-[15px] font-bold text-foreground mb-1.5">{b.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
                 </GlassCard>
               </motion.div>
@@ -510,10 +502,10 @@ function BenefitsSection() {
 function SafetySection() {
   const { t } = useI18n();
   const safetyPoints = [
-    { icon: Shield, title: t.safe1Title, desc: t.safe1Desc, gradient: "from-emerald-500 to-teal-400" },
-    { icon: Fingerprint, title: t.safe2Title, desc: t.safe2Desc, gradient: "from-orange-500 to-amber-400" },
-    { icon: Lock, title: t.safe3Title, desc: t.safe3Desc, gradient: "from-violet-500 to-purple-400" },
-    { icon: Layers, title: t.safe4Title, desc: t.safe4Desc, gradient: "from-blue-500 to-cyan-400" },
+    { icon: Shield, title: t.safe1Title, desc: t.safe1Desc },
+    { icon: Fingerprint, title: t.safe2Title, desc: t.safe2Desc },
+    { icon: Lock, title: t.safe3Title, desc: t.safe3Desc },
+    { icon: Layers, title: t.safe4Title, desc: t.safe4Desc },
   ];
   return (
     <section id="safety" className={`${SECTION_PADDING} ${SECTION_WHITE} relative overflow-hidden scroll-mt-20`}>
@@ -525,16 +517,13 @@ function SafetySection() {
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {safetyPoints.map((s, i) => (
-            <FadeIn key={s.title} delay={i * 0.12}>
-              <motion.div whileHover={{ y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <GlassCard className="text-center p-8 h-full group" hover={false}>
-                  <div className="relative mx-auto mb-5">
-                    <div className={`absolute -inset-3 rounded-2xl bg-gradient-to-br ${s.gradient} opacity-15 blur-xl group-hover:opacity-25 transition-opacity duration-500`} />
-                    <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mx-auto`}>
-                      <s.icon className="w-6 h-6 text-white" strokeWidth={1.8} />
-                    </div>
+            <FadeIn key={s.title} delay={i * 0.1}>
+              <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 300, damping: 24 }} className="h-full">
+                <GlassCard className="text-center p-7 h-full">
+                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <s.icon className="w-5.5 h-5.5 text-primary" strokeWidth={1.8} />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{s.title}</h3>
+                  <h3 className="text-[15px] font-bold text-foreground mb-1.5">{s.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                 </GlassCard>
               </motion.div>
