@@ -304,8 +304,8 @@ const translations = {
 
     // Hero
     heroBadge: "Платежи нового поколения",
-    heroTitle1: "Карта для",
-    heroTitle2: " оплаты",
+    heroTitle1: "Карта",
+    heroTitle2: " для оплаты",
     heroTitle3: "по всему миру",
     heroPowered: "На базе",
     heroInfra: "инфраструктуры",
