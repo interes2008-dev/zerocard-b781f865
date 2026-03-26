@@ -1588,23 +1588,13 @@ const Index = () => (
     <HeroSection />
     <InfrastructureSection />
     <ScrollingTicker />
-    <StatusBar />
     <AIUseCases />
-    
+    <PaymentWalletSection />
     <StepsOverview />
     <ProblemSection />
-    <WhyItWorks />
     <ComparisonSection />
-    <PaymentWalletSection />
-    <BetterThanBanks />
-    <GuideSection />
     <BenefitsSection />
-    <StandardProcess />
     <SafetySection />
-    <TrustSection />
-    <FearSection />
-    <ExtraSection />
-    <FOMOSection />
     <SEOBlocks />
     <FAQSection />
     <FinalCTA />
