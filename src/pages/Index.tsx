@@ -98,6 +98,29 @@ function GlowOrb({ color, size, position, blur = 120, opacity = 0.12 }: {
   );
 }
 
+/* ─── Hero Ticker Row (light theme) ─── */
+function HeroTickerRow({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) {
+  const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
+  return (
+    <div className="relative overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to right, hsl(0 0% 100%), hsl(0 0% 100% / 0.8) 30%, transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to left, hsl(0 0% 100%), hsl(0 0% 100% / 0.8) 30%, transparent)" }} />
+      <div className="flex shrink-0" style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}>
+        {repeated.map((brand, i) => (
+          <div key={`${brand.name}-${i}`} className="group flex items-center gap-1.5 px-2.5 py-1.5 mx-0.5 rounded-md transition-all duration-400 cursor-default select-none opacity-50 hover:opacity-100">
+            <div className="w-4 h-4 lg:w-5 lg:h-5 transition-transform duration-400 group-hover:scale-110" style={{ color: brand.color }}>
+              <brand.Logo className="w-full h-full" />
+            </div>
+            <span className="text-[11px] lg:text-xs font-semibold whitespace-nowrap tracking-tight transition-all duration-400" style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
+              {brand.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════ */
@@ -268,22 +291,18 @@ function HeroSection() {
           </FadeIn>
         </div>
 
-        {/* After-click micro-steps */}
-        <FadeIn delay={0.38}>
-          <div className="mt-14 lg:mt-20 flex flex-wrap items-center justify-center gap-1">
-            {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/20 border border-border/20">
-                  <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-primary">{i + 1}</span>
-                  </span>
-                  <span className="text-[12px] text-muted-foreground/60 font-medium">{step}</span>
-                </div>
-                {i < 2 && <ArrowRight className="w-3 h-3 text-muted-foreground/20 mx-1" />}
-              </div>
-            ))}
-          </div>
-        </FadeIn>
+      </div>
+
+      {/* ── Trusted brands ticker at hero bottom ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="relative py-5 border-t border-border/10 bg-gradient-to-t from-muted/30 to-transparent backdrop-blur-sm">
+          <FadeIn delay={0.4}>
+            <p className="text-center text-[10px] font-semibold text-muted-foreground/40 mb-3 tracking-[0.25em] uppercase">{t.tickerTitle}</p>
+          </FadeIn>
+          <HeroTickerRow items={row1Brands} speed={40} />
+          <div className="h-2" />
+          <HeroTickerRow items={row2Brands} reverse speed={45} />
+        </div>
       </div>
     </section>
   );
@@ -1606,7 +1625,7 @@ const Index = () => (
     <HeroSection />
     <PaymentWalletSection />
     <InfrastructureSection />
-    <ScrollingTicker />
+    
     
     <StepsOverview />
     <ProblemSection />
