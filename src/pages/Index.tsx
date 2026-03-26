@@ -1583,10 +1583,10 @@ const Index = () => (
     <DynamicMeta />
     <Navbar />
     <HeroSection />
+    <PaymentWalletSection />
     <InfrastructureSection />
     <ScrollingTicker />
     <AIUseCases />
-    <PaymentWalletSection />
     <StepsOverview />
     <ProblemSection />
     <ComparisonSection />
