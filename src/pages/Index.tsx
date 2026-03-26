@@ -105,132 +105,105 @@ function HeroSection() {
   const { t, lang } = useI18n();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 30]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
-        <div className="absolute inset-0" style={{
-          background: "radial-gradient(ellipse 90% 70% at 50% 30%, hsl(28 40% 96%) 0%, hsl(0 0% 100%) 50%, hsl(240 10% 98%) 100%)",
-        }} />
-      </motion.div>
+    <section ref={ref} className="relative min-h-[100dvh] flex items-center overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0" style={{
+        background: "radial-gradient(ellipse 120% 80% at 50% 20%, hsl(28 60% 97%) 0%, hsl(0 0% 100%) 40%, hsl(240 10% 99%) 100%)",
+      }} />
 
-      <NoiseOverlay opacity={0.02} />
+      <NoiseOverlay opacity={0.015} />
 
-      <GlowOrb color="hsl(28 100% 50%)" size={1000} position="top-[10%] right-[15%]" blur={180} opacity={0.08} />
-      <GlowOrb color="hsl(340 80% 55%)" size={600} position="top-[40%] right-[30%]" blur={150} opacity={0.05} />
-      <GlowOrb color="hsl(270 70% 55%)" size={500} position="-bottom-20 -left-20" blur={140} opacity={0.04} />
+      {/* Ambient light — concentrated behind card */}
+      <div className="absolute top-[15%] right-[10%] w-[800px] h-[800px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(28 100% 50% / 0.1), transparent 60%)", filter: "blur(100px)" }} />
+      <div className="absolute top-[30%] right-[25%] w-[500px] h-[500px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(340 80% 55% / 0.06), transparent 60%)", filter: "blur(80px)" }} />
 
-      <div className="container mx-auto px-6 lg:px-16 py-32 lg:py-0 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
-          {/* Left */}
-          <div className="max-w-xl">
+      <div className="container mx-auto px-6 lg:px-16 py-28 lg:py-0 relative z-10">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-8 items-center">
+
+          {/* ── LEFT: Copy ── */}
+          <motion.div style={{ y: textY }} className="max-w-lg">
+            {/* Badge */}
             <FadeIn>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-border/40 bg-card/50 backdrop-blur-xl px-6 py-3 text-sm font-medium text-muted-foreground shadow-sm">
-                <Sparkles className="w-4 h-4 text-primary" />
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-5 py-2 text-xs font-bold text-primary uppercase tracking-[0.15em]"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 {t.heroBadge}
-              </div>
+              </motion.div>
             </FadeIn>
 
-            <FadeIn delay={0.1}>
+            {/* Headline */}
+            <FadeIn delay={0.08}>
               <h1 className="sr-only">{t.seoH1}</h1>
-              <p className="mt-10 hero-title text-foreground" aria-hidden="true">
+              <p className="mt-8 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.03em]" aria-hidden="true">
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
                 {lang === "ru" ? " " : <br />}
                 {t.heroTitle3}
               </p>
-              <p className="mt-5 text-lg lg:text-xl font-semibold text-foreground/80 tracking-tight">
+            </FadeIn>
+
+            {/* Subline */}
+            <FadeIn delay={0.14}>
+              <p className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-md">
+                {t.heroDesc1}
+              </p>
+              <p className="mt-2 text-sm font-medium text-foreground/60">
                 {t.heroPowered} <span className="gradient-text font-bold">Pionex</span> {t.heroInfra}
               </p>
-              <p className="mt-4 text-base lg:text-lg text-muted-foreground/90 max-w-lg leading-relaxed font-medium">
-                {t.heroDesc1}
-                <br />
-                {t.heroDesc2}
-              </p>
             </FadeIn>
 
+            {/* CTA */}
             <FadeIn delay={0.2}>
-              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 max-w-md">
-                {[
-                  { icon: CreditCard, text: t.heroFeat1 },
-                  { icon: Coins, text: t.heroFeat2 },
-                  { icon: Globe, text: t.heroFeat3 },
-                  { icon: Bot, text: t.heroFeat4 },
-                ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-2.5 text-sm text-foreground/80">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-3.5 h-3.5 text-primary" />
-                    </div>
-                    {item.text}
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.3}>
-              <div className="mt-8">
+              <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <CTAButton text={t.heroCTA} size="large" />
-                <p className="mt-3 text-xs text-muted-foreground/60 tracking-widest uppercase">
-                  {t.heroMicro}
-                </p>
-              </div>
-            </FadeIn>
-
-            {/* What happens after click */}
-            <FadeIn delay={0.35}>
-              <div className="mt-6 rounded-2xl border border-border/15 bg-card/30 backdrop-blur-xl p-5">
-                <p className="text-xs font-bold text-foreground/70 mb-3 uppercase tracking-wider">{t.afterClickTitle}</p>
-                <div className="space-y-2">
-                  {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
-                    <div key={i} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-primary" />
-                      </div>
-                      {step}
-                    </div>
-                  ))}
+                <div className="flex items-center gap-5 text-xs text-muted-foreground/50 font-semibold uppercase tracking-wider">
+                  <span>0€</span>
+                  <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
+                  <span>5 min</span>
+                  <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
+                  <span>150+ {t.heroStat1?.toLowerCase()}</span>
                 </div>
-                <p className="mt-3 text-[11px] text-muted-foreground/50 flex items-center gap-1.5">
-                  <ExternalLink className="w-3 h-3" />
-                  {t.redirectNote}
-                </p>
               </div>
             </FadeIn>
 
-            {/* Social proof stats */}
-            <FadeIn delay={0.4}>
-              <div className="mt-8 flex items-center gap-10 pt-8 border-t border-border/15">
-                {[
-                  { value: "150+", label: t.heroStat1 },
-                  { value: "5 min", label: t.heroStat2 },
-                  { value: "0€", label: t.heroStat3 },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <p className="text-3xl font-extrabold gradient-text tracking-tight">{stat.value}</p>
-                    <p className="text-xs font-semibold text-muted-foreground/70 mt-1 uppercase tracking-widest">{stat.label}</p>
-                  </div>
+            {/* Social proof row */}
+            <FadeIn delay={0.28}>
+              <div className="mt-10 flex items-center gap-3">
+                {[t.heroFeat1, t.heroFeat2, t.heroFeat3].map((feat, i) => (
+                  <span key={feat} className="flex items-center gap-1.5 text-xs text-muted-foreground/70 font-medium">
+                    <Check className="w-3.5 h-3.5 text-primary/70" />
+                    {feat}
+                    {i < 2 && <span className="ml-3 w-px h-3 bg-border/30" />}
+                  </span>
                 ))}
               </div>
             </FadeIn>
-          </div>
+          </motion.div>
 
-          {/* Right — Card */}
-          <FadeIn delay={0.3} className="relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[560px]">
-              <div className="absolute inset-0 rounded-3xl scale-[1.4] blur-[120px] opacity-45"
-                style={{ background: "radial-gradient(circle, hsl(28 100% 50%), transparent 70%)" }} />
-              <div className="absolute inset-0 rounded-3xl scale-[1.6] blur-[160px] opacity-25"
-                style={{ background: "radial-gradient(circle, hsl(340 80% 55%), transparent 60%)" }} />
+          {/* ── RIGHT: Card visual ── */}
+          <FadeIn delay={0.15} className="relative flex justify-center lg:justify-end">
+            <motion.div style={{ y: cardY }} className="relative w-full max-w-[380px] lg:max-w-[520px]">
+              {/* Deep glow */}
+              <div className="absolute inset-0 scale-[1.5] blur-[140px] opacity-50"
+                style={{ background: "radial-gradient(circle, hsl(28 100% 55%), transparent 65%)" }} />
+              <div className="absolute inset-0 scale-[1.8] blur-[180px] opacity-20"
+                style={{ background: "radial-gradient(circle, hsl(340 80% 55%), transparent 55%)" }} />
 
+              {/* Card */}
               <motion.div
-                style={{ y: cardY }}
-                animate={{ y: [0, -14, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                animate={{ y: [0, -16, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
               >
                 <motion.div
-                  whileHover={{ rotateY: 10, rotateX: -5, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 180, damping: 20 }}
+                  whileHover={{ rotateY: 8, rotateX: -4, scale: 1.04 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 24 }}
                   style={{ transformStyle: "preserve-3d", perspective: 1200 }}
                 >
                   <img
@@ -238,21 +211,23 @@ function HeroSection() {
                     alt="Zerocard — global payment card"
                     className="w-full rounded-2xl relative z-10"
                     style={{
-                      filter: "drop-shadow(0 60px 120px rgba(0,0,0,0.4)) drop-shadow(0 25px 50px rgba(255,122,0,0.35))",
+                      filter: "drop-shadow(0 50px 100px rgba(0,0,0,0.35)) drop-shadow(0 20px 40px rgba(255,122,0,0.3))",
                     }}
                   />
+                  {/* Shine overlay */}
                   <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none"
                     style={{
-                      background: "linear-gradient(135deg, hsl(0 0% 100% / 0.15) 0%, transparent 40%, transparent 60%, hsl(0 0% 100% / 0.05) 100%)",
+                      background: "linear-gradient(125deg, hsl(0 0% 100% / 0.2) 0%, transparent 35%, transparent 65%, hsl(0 0% 100% / 0.05) 100%)",
                     }} />
                 </motion.div>
               </motion.div>
 
+              {/* Floating badges */}
               <motion.div
-                animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
+                animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 rounded-2xl gradient-bg px-4 py-2.5 z-20 flex items-center gap-2"
-                style={{ boxShadow: "0 12px 40px hsl(28 100% 50% / 0.4)" }}
+                className="absolute -top-3 -right-3 lg:-right-6 rounded-2xl gradient-bg px-4 py-2.5 z-30 flex items-center gap-2"
+                style={{ boxShadow: "0 16px 50px hsl(28 100% 50% / 0.5)" }}
               >
                 <TrendingUp className="w-4 h-4 text-white" />
                 <span className="text-xs font-bold text-white">{t.heroCashback}</span>
@@ -261,14 +236,36 @@ function HeroSection() {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
-                className="absolute -bottom-3 -left-6 rounded-2xl bg-card/90 backdrop-blur-xl border border-border/30 px-4 py-2.5 z-20 flex items-center gap-2 shadow-lg"
+                className="absolute -bottom-2 -left-4 lg:-left-8 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/25 px-4 py-2.5 z-30 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.1)" }}
               >
                 <Globe className="w-4 h-4 text-primary" />
                 <span className="text-xs font-semibold text-foreground">{t.heroCountries}</span>
               </motion.div>
-            </div>
+
+              {/* Subtle pulse ring */}
+              <motion.div
+                animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0, 0.15] }}
+                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                className="absolute inset-0 rounded-2xl border-2 border-primary/20 z-5"
+              />
+            </motion.div>
           </FadeIn>
         </div>
+
+        {/* After-click hint — minimal, at bottom */}
+        <FadeIn delay={0.35}>
+          <div className="mt-12 lg:mt-16 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground/50">
+            {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
+              <span key={i} className="flex items-center gap-1.5">
+                <span className="w-5 h-5 rounded-full bg-primary/8 flex items-center justify-center">
+                  <span className="text-[10px] font-bold text-primary">{i + 1}</span>
+                </span>
+                {step}
+              </span>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
