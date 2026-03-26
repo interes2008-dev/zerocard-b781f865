@@ -143,9 +143,8 @@ function HeroSection() {
             <FadeIn delay={0.08}>
               <h1 className="sr-only">{t.seoH1}</h1>
               <p className="mt-8 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.03em]" aria-hidden="true">
-                <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
-                <br />
-                {t.heroTitle3}
+                <span className="block whitespace-nowrap"><span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}</span>
+                <span className="block">{t.heroTitle3}</span>
               </p>
             </FadeIn>
 
