@@ -110,29 +110,35 @@ function HeroSection() {
 
   return (
     <section ref={ref} className="relative min-h-[100dvh] flex items-center overflow-hidden">
-      {/* Background */}
+      {/* Background — refined mesh */}
       <div className="absolute inset-0" style={{
-        background: "radial-gradient(ellipse 120% 80% at 50% 20%, hsl(28 60% 97%) 0%, hsl(0 0% 100%) 40%, hsl(240 10% 99%) 100%)",
+        background: "radial-gradient(ellipse 130% 70% at 60% 10%, hsl(28 40% 97%) 0%, hsl(0 0% 100%) 35%, hsl(240 8% 99%) 70%, hsl(0 0% 100%) 100%)",
       }} />
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025]" style={{
+        backgroundImage: "linear-gradient(hsl(0 0% 0% / 0.08) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 0% / 0.08) 1px, transparent 1px)",
+        backgroundSize: "60px 60px",
+      }} />
+      <NoiseOverlay opacity={0.012} />
 
-      <NoiseOverlay opacity={0.015} />
-
-      {/* Ambient light — concentrated behind card */}
-      <div className="absolute top-[15%] right-[10%] w-[800px] h-[800px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(28 100% 50% / 0.1), transparent 60%)", filter: "blur(100px)" }} />
-      <div className="absolute top-[30%] right-[25%] w-[500px] h-[500px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(340 80% 55% / 0.06), transparent 60%)", filter: "blur(80px)" }} />
+      {/* Ambient light */}
+      <div className="absolute top-[10%] right-[8%] w-[900px] h-[900px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(28 100% 50% / 0.08), transparent 55%)", filter: "blur(120px)" }} />
+      <div className="absolute top-[35%] right-[30%] w-[400px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(340 80% 55% / 0.04), transparent 55%)", filter: "blur(80px)" }} />
+      <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(220 60% 60% / 0.03), transparent 60%)", filter: "blur(100px)" }} />
 
       <div className="container mx-auto px-6 lg:px-16 py-28 lg:py-0 relative z-10">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-8 items-center">
 
           {/* ── LEFT: Copy ── */}
-          <motion.div style={{ y: textY }} className="max-w-lg">
+          <motion.div style={{ y: textY }} className="max-w-xl">
             {/* Badge */}
             <FadeIn>
               <motion.div
-                whileHover={{ scale: 1.03 }}
-                className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-5 py-2 text-xs font-bold text-primary uppercase tracking-[0.15em]"
+                whileHover={{ scale: 1.02 }}
+                className="inline-flex items-center gap-2.5 rounded-lg border border-primary/10 bg-primary/[0.04] px-4 py-1.5 text-[11px] font-semibold text-primary uppercase tracking-[0.18em]"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 {t.heroBadge}
@@ -142,7 +148,7 @@ function HeroSection() {
             {/* Headline */}
             <FadeIn delay={0.08}>
               <h1 className="sr-only">{t.seoH1}</h1>
-              <p className="mt-8 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.03em]" aria-hidden="true">
+              <p className="mt-7 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.035em]" aria-hidden="true">
                 <span className="block whitespace-nowrap"><span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}</span>
                 <span className="block">{t.heroTitle3}</span>
               </p>
@@ -150,36 +156,46 @@ function HeroSection() {
 
             {/* Subline */}
             <FadeIn delay={0.14}>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed max-w-md">
+              <p className="mt-5 text-[17px] text-muted-foreground leading-relaxed max-w-md">
                 {t.heroDesc1}
               </p>
-              <p className="mt-2 text-sm font-medium text-foreground/60">
+              <p className="mt-2.5 text-[13px] font-medium text-foreground/50">
                 {t.heroPowered} <span className="gradient-text font-bold">Pionex</span> {t.heroInfra}
               </p>
             </FadeIn>
 
-            {/* CTA */}
+            {/* CTA Row */}
             <FadeIn delay={0.2}>
-              <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <CTAButton text={t.heroCTA} size="large" />
-                <div className="flex items-center gap-5 text-xs text-muted-foreground/50 font-semibold uppercase tracking-wider">
-                  <span>0€</span>
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
-                  <span>5 min</span>
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />
-                  <span>150+ {t.heroStat1?.toLowerCase()}</span>
-                </div>
               </div>
             </FadeIn>
 
-            {/* Social proof row */}
-            <FadeIn delay={0.28}>
-              <div className="mt-10 flex items-center gap-3">
+            {/* Stats pills */}
+            <FadeIn delay={0.26}>
+              <div className="mt-8 flex items-center gap-3">
+                {[
+                  { value: "0€", label: lang === "ru" ? "выпуск" : "fees" },
+                  { value: "5 min", label: lang === "ru" ? "старт" : "setup" },
+                  { value: "150+", label: lang === "ru" ? "стран" : "countries" },
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-border/40 bg-muted/30 px-3.5 py-2">
+                    <span className="text-sm font-bold text-foreground">{stat.value}</span>
+                    <span className="text-[11px] text-muted-foreground/60 uppercase tracking-wider font-medium">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+
+            {/* Trust row */}
+            <FadeIn delay={0.32}>
+              <div className="mt-6 flex items-center gap-4">
                 {[t.heroFeat1, t.heroFeat2, t.heroFeat3].map((feat, i) => (
-                  <span key={feat} className="flex items-center gap-1.5 text-xs text-muted-foreground/70 font-medium">
-                    <Check className="w-3.5 h-3.5 text-primary/70" />
+                  <span key={feat} className="flex items-center gap-1.5 text-[12px] text-muted-foreground/60 font-medium">
+                    <div className="w-4 h-4 rounded-full bg-primary/8 flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-primary" />
+                    </div>
                     {feat}
-                    {i < 2 && <span className="ml-3 w-px h-3 bg-border/30" />}
                   </span>
                 ))}
               </div>
@@ -190,9 +206,9 @@ function HeroSection() {
           <FadeIn delay={0.15} className="relative flex justify-center lg:justify-end">
             <motion.div style={{ y: cardY }} className="relative w-full max-w-[380px] lg:max-w-[520px]">
               {/* Deep glow */}
-              <div className="absolute inset-0 scale-[1.5] blur-[140px] opacity-50"
+              <div className="absolute inset-0 scale-[1.5] blur-[140px] opacity-45"
                 style={{ background: "radial-gradient(circle, hsl(28 100% 55%), transparent 65%)" }} />
-              <div className="absolute inset-0 scale-[1.8] blur-[180px] opacity-20"
+              <div className="absolute inset-0 scale-[1.8] blur-[180px] opacity-15"
                 style={{ background: "radial-gradient(circle, hsl(340 80% 55%), transparent 55%)" }} />
 
               {/* Card */}
@@ -210,13 +226,13 @@ function HeroSection() {
                     alt="Zerocard — global payment card"
                     className="w-full rounded-2xl relative z-10"
                     style={{
-                      filter: "drop-shadow(0 50px 100px rgba(0,0,0,0.35)) drop-shadow(0 20px 40px rgba(255,122,0,0.3))",
+                      filter: "drop-shadow(0 50px 100px rgba(0,0,0,0.3)) drop-shadow(0 20px 40px rgba(255,122,0,0.25))",
                     }}
                   />
                   {/* Shine overlay */}
                   <div className="absolute inset-0 rounded-2xl z-20 pointer-events-none"
                     style={{
-                      background: "linear-gradient(125deg, hsl(0 0% 100% / 0.2) 0%, transparent 35%, transparent 65%, hsl(0 0% 100% / 0.05) 100%)",
+                      background: "linear-gradient(125deg, hsl(0 0% 100% / 0.18) 0%, transparent 30%, transparent 70%, hsl(0 0% 100% / 0.04) 100%)",
                     }} />
                 </motion.div>
               </motion.div>
@@ -225,43 +241,46 @@ function HeroSection() {
               <motion.div
                 animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute -top-3 -right-3 lg:-right-6 rounded-2xl gradient-bg px-4 py-2.5 z-30 flex items-center gap-2"
-                style={{ boxShadow: "0 16px 50px hsl(28 100% 50% / 0.5)" }}
+                className="absolute -top-3 -right-3 lg:-right-6 rounded-xl bg-foreground/90 backdrop-blur-xl px-4 py-2.5 z-30 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.2)" }}
               >
-                <TrendingUp className="w-4 h-4 text-white" />
+                <TrendingUp className="w-3.5 h-3.5 text-primary" />
                 <span className="text-xs font-bold text-white">{t.heroCashback}</span>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 }}
-                className="absolute -bottom-2 -left-4 lg:-left-8 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/25 px-4 py-2.5 z-30 flex items-center gap-2"
-                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.1)" }}
+                className="absolute -bottom-2 -left-4 lg:-left-8 rounded-xl bg-white/95 backdrop-blur-xl border border-border/15 px-4 py-2.5 z-30 flex items-center gap-2"
+                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}
               >
-                <Globe className="w-4 h-4 text-primary" />
+                <Globe className="w-3.5 h-3.5 text-primary" />
                 <span className="text-xs font-semibold text-foreground">{t.heroCountries}</span>
               </motion.div>
 
               {/* Subtle pulse ring */}
               <motion.div
-                animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0, 0.15] }}
+                animate={{ scale: [1, 1.12, 1], opacity: [0.12, 0, 0.12] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                className="absolute inset-0 rounded-2xl border-2 border-primary/20 z-5"
+                className="absolute inset-0 rounded-2xl border border-primary/15 z-5"
               />
             </motion.div>
           </FadeIn>
         </div>
 
-        {/* After-click hint — minimal, at bottom */}
-        <FadeIn delay={0.35}>
-          <div className="mt-12 lg:mt-16 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground/50">
+        {/* After-click micro-steps */}
+        <FadeIn delay={0.38}>
+          <div className="mt-14 lg:mt-20 flex flex-wrap items-center justify-center gap-1">
             {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
-              <span key={i} className="flex items-center gap-1.5">
-                <span className="w-5 h-5 rounded-full bg-primary/8 flex items-center justify-center">
-                  <span className="text-[10px] font-bold text-primary">{i + 1}</span>
-                </span>
-                {step}
-              </span>
+              <div key={i} className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/20 border border-border/20">
+                  <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center">
+                    <span className="text-[10px] font-bold text-primary">{i + 1}</span>
+                  </span>
+                  <span className="text-[12px] text-muted-foreground/60 font-medium">{step}</span>
+                </div>
+                {i < 2 && <ArrowRight className="w-3 h-3 text-muted-foreground/20 mx-1" />}
+              </div>
             ))}
           </div>
         </FadeIn>
