@@ -144,7 +144,7 @@ function HeroSection() {
               <h1 className="sr-only">{t.seoH1}</h1>
               <p className="mt-8 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.03em]" aria-hidden="true">
                 <span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}
-                {lang === "ru" ? " " : <br />}
+                <br />
                 {t.heroTitle3}
               </p>
             </FadeIn>
