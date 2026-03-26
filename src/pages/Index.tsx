@@ -123,7 +123,7 @@ function HeroSection() {
 
             <FadeIn delay={0.08}>
               <h1 className="sr-only">{t.seoH1}</h1>
-              <p className="mt-7 text-[2.75rem] sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-extrabold text-foreground leading-[1.05] tracking-[-0.035em]" aria-hidden="true">
+              <p className="mt-7 text-[2.25rem] sm:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] font-extrabold text-foreground leading-[1.08] tracking-[-0.03em]" aria-hidden="true">
                 <span className="block whitespace-nowrap"><span className="gradient-text">{t.heroTitle1}</span>{t.heroTitle2}</span>
                 <span className="block">{t.heroTitle3}</span>
               </p>
@@ -228,7 +228,7 @@ function PaymentWalletSection() {
           <FadeIn>
             <div className="max-w-lg">
               <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.walletTag}</p>
-              <h2 className="text-4xl lg:text-5xl xl:text-[3.5rem] font-extrabold text-foreground mb-6 leading-[1.1] tracking-tight">
+              <h2 className="text-3xl lg:text-4xl xl:text-[2.75rem] font-extrabold text-foreground mb-6 leading-[1.1] tracking-tight">
                 <span className="block whitespace-nowrap">{t.walletTitle1}</span>
                 <span className="block text-foreground/80">{t.walletTitle2}</span>
               </h2>
