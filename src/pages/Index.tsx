@@ -1566,7 +1566,6 @@ const Index = () => (
     <ComparisonSection />
     <BenefitsSection />
     <SafetySection />
-    <SEOBlocks />
     <FAQSection />
     <FinalCTA />
     <Footer />
