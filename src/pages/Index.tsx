@@ -268,22 +268,18 @@ function HeroSection() {
           </FadeIn>
         </div>
 
-        {/* After-click micro-steps */}
-        <FadeIn delay={0.38}>
-          <div className="mt-14 lg:mt-20 flex flex-wrap items-center justify-center gap-1">
-            {[t.afterClick1, t.afterClick2, t.afterClick3].map((step, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/20 border border-border/20">
-                  <span className="w-5 h-5 rounded-md bg-primary/10 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-primary">{i + 1}</span>
-                  </span>
-                  <span className="text-[12px] text-muted-foreground/60 font-medium">{step}</span>
-                </div>
-                {i < 2 && <ArrowRight className="w-3 h-3 text-muted-foreground/20 mx-1" />}
-              </div>
-            ))}
-          </div>
-        </FadeIn>
+      </div>
+
+      {/* ── Trusted brands ticker at hero bottom ── */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="relative py-5 border-t border-border/10 bg-gradient-to-t from-muted/30 to-transparent backdrop-blur-sm">
+          <FadeIn delay={0.4}>
+            <p className="text-center text-[10px] font-semibold text-muted-foreground/40 mb-3 tracking-[0.25em] uppercase">{t.tickerTitle}</p>
+          </FadeIn>
+          <HeroTickerRow items={row1Brands} speed={40} />
+          <div className="h-2" />
+          <HeroTickerRow items={row2Brands} reverse speed={45} />
+        </div>
       </div>
     </section>
   );
@@ -1606,7 +1602,7 @@ const Index = () => (
     <HeroSection />
     <PaymentWalletSection />
     <InfrastructureSection />
-    <ScrollingTicker />
+    
     
     <StepsOverview />
     <ProblemSection />
