@@ -1590,7 +1590,7 @@ const Index = () => (
     <ScrollingTicker />
     <StatusBar />
     <AIUseCases />
-    <RealProcessSection />
+    
     <StepsOverview />
     <ProblemSection />
     <WhyItWorks />
