@@ -98,6 +98,29 @@ function GlowOrb({ color, size, position, blur = 120, opacity = 0.12 }: {
   );
 }
 
+/* ─── Hero Ticker Row (light theme) ─── */
+function HeroTickerRow({ items, reverse, speed }: { items: typeof row1Brands; reverse?: boolean; speed: number }) {
+  const repeated = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
+  return (
+    <div className="relative overflow-hidden">
+      <div className="absolute left-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to right, hsl(0 0% 100%), hsl(0 0% 100% / 0.8) 30%, transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-40 lg:w-72 z-10" style={{ background: "linear-gradient(to left, hsl(0 0% 100%), hsl(0 0% 100% / 0.8) 30%, transparent)" }} />
+      <div className="flex shrink-0" style={{ animation: `${reverse ? "ticker-scroll-reverse" : "ticker-scroll"} ${speed}s linear infinite` }}>
+        {repeated.map((brand, i) => (
+          <div key={`${brand.name}-${i}`} className="group flex items-center gap-1.5 px-2.5 py-1.5 mx-0.5 rounded-md transition-all duration-400 cursor-default select-none opacity-50 hover:opacity-100">
+            <div className="w-4 h-4 lg:w-5 lg:h-5 transition-transform duration-400 group-hover:scale-110" style={{ color: brand.color }}>
+              <brand.Logo className="w-full h-full" />
+            </div>
+            <span className="text-[11px] lg:text-xs font-semibold whitespace-nowrap tracking-tight transition-all duration-400" style={{ color: brand.color, fontFamily: "'Space Grotesk', sans-serif" }}>
+              {brand.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════ */
