@@ -1,16 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import cardImage from "@/assets/zerocard-orange.png";
+import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import {
-  CreditCard, Globe, Shield, Zap, UserPlus, ShieldCheck,
-  ArrowRight, Check, Coins, Clock, Sparkles,
-  BadgeCheck, CircleDollarSign, Smartphone, Lock, Layers,
-  Fingerprint, Menu, ExternalLink, X, Wallet, Apple,
-} from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
+const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
 
 /* ─── Animated wrapper ─── */
 function FadeIn({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -19,9 +13,9 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -30,124 +24,178 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
 }
 
 /* ═══════════════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════════════ */
+function Navbar() {
+  const { t, lang, setLang } = useI18n();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const navLinks = [
+    { label: t.navBenefits, href: "#benefits" },
+    { label: t.navHow, href: "#how" },
+    { label: t.navCompare, href: "#compare" },
+    { label: t.navFAQ, href: "#faq" },
+  ];
+
+  return (
+    <nav className="sticky top-0 z-[100] backdrop-blur-[20px] border-b"
+      style={{ background: "rgba(11,14,26,0.85)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="max-w-[1160px] mx-auto px-5 md:px-10 flex items-center justify-between h-16">
+        <a href="#" className="flex items-center gap-2.5 no-underline" style={{ color: "hsl(var(--foreground))" }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center gradient-bg text-base">💳</div>
+          <span className="text-lg font-bold">Zero<span style={{ color: "var(--accent-color)" }}>Card</span></span>
+        </a>
+
+        <div className="hidden md:flex gap-1 items-center">
+          {navLinks.map(l => (
+            <a key={l.href} href={l.href}
+              className="px-3.5 py-1.5 rounded-lg text-sm font-medium no-underline transition-all hover:bg-[var(--bg3)]"
+              style={{ color: "var(--text2)" }}>
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="hidden md:flex items-center gap-2.5">
+          {/* Lang toggle */}
+          <div className="flex rounded-lg overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+            {(["en", "ru"] as Lang[]).map(l => (
+              <button key={l} onClick={() => setLang(l)}
+                className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all"
+                style={{
+                  background: lang === l ? "var(--accent-color)" : "var(--bg3)",
+                  color: lang === l ? "#000" : "var(--text2)",
+                }}>
+                {l}
+              </button>
+            ))}
+          </div>
+          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "8px 20px", fontSize: "14px", borderRadius: "10px" }}>
+            {t.navGetCard}
+          </a>
+        </div>
+
+        <div className="md:hidden flex items-center gap-2">
+          <div className="flex rounded-lg overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+            {(["en", "ru"] as Lang[]).map(l => (
+              <button key={l} onClick={() => setLang(l)}
+                className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider transition-all"
+                style={{
+                  background: lang === l ? "var(--accent-color)" : "var(--bg3)",
+                  color: lang === l ? "#000" : "var(--text2)",
+                }}>
+                {l}
+              </button>
+            ))}
+          </div>
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="w-9 h-9 flex items-center justify-center" style={{ color: "var(--text2)" }}>
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div className="md:hidden px-5 pb-5 space-y-1">
+          {navLinks.map(l => (
+            <a key={l.href} href={l.href} onClick={() => setMobileOpen(false)}
+              className="block py-3 px-4 rounded-lg text-base font-medium no-underline"
+              style={{ color: "var(--text2)" }}>
+              {l.label}
+            </a>
+          ))}
+          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+            className="btn-primary block text-center mt-3" style={{ padding: "12px 20px" }}>
+            {t.navGetCard}
+          </a>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════ */
 function HeroSection() {
   const { t } = useI18n();
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  const pills = [
+    { icon: "🌍", label: t.pill1 },
+    { icon: "🍎", label: t.pill2 },
+    { icon: "📱", label: t.pill3 },
+    { icon: "🆓", label: t.pill4 },
+    { icon: "⚡", label: t.pill5 },
+  ];
+
+  const tickerItems = [
+    { icon: "🍎", label: t.tickerApple },
+    { icon: "📱", label: t.tickerGoogle },
+    { icon: "🅿️", label: t.tickerPaypal },
+    { icon: "💳", label: t.tickerVisa },
+    { icon: "🔴", label: t.tickerMastercard },
+    { icon: "✈️", label: t.tickerTrip },
+    { icon: "📲", label: t.tickerLine },
+    { icon: "💹", label: t.tickerWechat },
+    { icon: "🛍️", label: t.tickerAlipay },
+    { icon: "📲", label: t.tickerSamsung },
+  ];
 
   return (
-    <section ref={ref} className="relative min-h-[100dvh] flex items-center overflow-hidden bg-background">
-      {/* Soft warm gradient */}
-      <div className="absolute top-0 right-0 w-[900px] h-[900px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(14 88% 50% / 0.06), transparent 55%)", filter: "blur(140px)" }} />
-      <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(30 90% 55% / 0.04), transparent 60%)", filter: "blur(120px)" }} />
-
-      <div className="container mx-auto px-6 lg:px-16 pt-28 pb-20 lg:py-0 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* LEFT: Copy */}
-          <div className="max-w-xl">
-            <FadeIn>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-4 py-1.5 text-xs font-semibold text-primary uppercase tracking-[0.15em] mb-8">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                {t.heroBadge}
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.08}>
-              <h1 className="hero-title text-foreground mb-6">
-                {t.heroTitle1}
-                <span className="gradient-text">{t.heroTitle2}</span>
-              </h1>
-            </FadeIn>
-
-            <FadeIn delay={0.14}>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-md">
-                {t.heroDesc}
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.2}>
-              <div className="flex flex-col sm:flex-row items-start gap-4 mb-10">
-                <motion.a
-                  href={SIGNUP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 rounded-full gradient-bg text-white font-semibold px-8 py-4 text-base"
-                  style={{ boxShadow: "0 16px 60px -12px hsl(14 88% 50% / 0.35)" }}
-                >
-                  {t.heroCTA}
-                  <ArrowRight className="w-4 h-4" />
-                </motion.a>
-                <a href="#how-it-works" className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors">
-                  {t.heroSecondary}
-                </a>
-              </div>
-            </FadeIn>
-
-            {/* Stats */}
-            <FadeIn delay={0.28}>
-              <div className="flex items-center gap-6 lg:gap-8">
-                {[
-                  { val: t.heroStat1Val, label: t.heroStat1Label },
-                  { val: t.heroStat2Val, label: t.heroStat2Label },
-                  { val: t.heroStat3Val, label: t.heroStat3Label },
-                ].map((s) => (
-                  <div key={s.label} className="flex items-center gap-3">
-                    <span className="text-2xl lg:text-3xl font-bold gradient-text">{s.val}</span>
-                    <span className="text-xs text-muted-foreground max-w-[80px] leading-tight">{s.label}</span>
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
-          </div>
-
-          {/* RIGHT: Card visual */}
-          <FadeIn delay={0.15} className="relative flex justify-center lg:justify-end">
-            <motion.div style={{ y: cardY }} className="relative w-full max-w-[380px] lg:max-w-[440px]">
-              <div className="absolute inset-0 scale-[1.3] blur-[80px] opacity-25"
-                style={{ background: "radial-gradient(circle, hsl(14 88% 55%), transparent 65%)" }} />
-              <motion.div
-                animate={{ y: [0, -14, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              >
-                <motion.div
-                  whileHover={{ rotateY: 6, rotateX: -3, scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 24 }}
-                  style={{ transformStyle: "preserve-3d", perspective: 1200 }}
-                >
-                  <img
-                    src={cardImage}
-                    alt="ZeroCard — global payment card"
-                    className="w-full rounded-2xl relative z-10"
-                    style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.12)) drop-shadow(0 10px 20px rgba(233,83,25,0.15))" }}
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </FadeIn>
+    <section className="text-center relative" style={{ maxWidth: 1160, margin: "0 auto", padding: "96px 40px 80px" }}>
+      <FadeIn>
+        <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-semibold mb-7"
+          style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)", color: "var(--accent-color)" }}>
+          <span className="w-[7px] h-[7px] rounded-full" style={{ background: "var(--accent-color)", animation: "blink 2s infinite" }} />
+          {t.heroBadge}
         </div>
-      </div>
+      </FadeIn>
 
-      {/* Wallets bar */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-border/50">
-        <div className="container mx-auto px-6 lg:px-16 py-6">
-          <FadeIn delay={0.4}>
-            <p className="text-center text-xs font-semibold text-muted-foreground/60 mb-4 tracking-[0.2em] uppercase">{t.walletsTitle}</p>
-            <div className="flex justify-center items-center gap-6 lg:gap-10 flex-wrap">
-              {[t.walletApple, t.walletGoogle, t.walletPaypal, t.walletVisa, t.walletMastercard].map((w) => (
-                <span key={w} className="text-sm font-semibold text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors cursor-default tracking-wide">
-                  {w}
-                </span>
-              ))}
+      <FadeIn delay={0.05}>
+        <h1 className="hero-title mb-6">
+          {t.heroTitle1}<br />
+          <em className="not-italic" style={{ color: "var(--accent-color)" }}>{t.heroTitle2}</em>
+        </h1>
+      </FadeIn>
+
+      <FadeIn delay={0.1}>
+        <p className="text-lg leading-[1.7] font-normal mb-10 mx-auto" style={{ color: "var(--text2)", maxWidth: 600 }}>
+          {t.heroDesc}
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={0.15}>
+        <div className="flex justify-center gap-3 flex-wrap mb-14">
+          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.heroCTA}</a>
+          <a href="#how" className="btn-secondary-custom">{t.heroSecondary}</a>
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={0.2}>
+        <div className="flex justify-center items-center gap-2 flex-wrap text-[13px] font-medium" style={{ color: "var(--text2)" }}>
+          {pills.map(p => (
+            <div key={p.label} className="pill">
+              <span className="text-[15px]">{p.icon}</span>{p.label}
             </div>
-          </FadeIn>
+          ))}
+        </div>
+      </FadeIn>
+
+      {/* Wallet ticker */}
+      <div className="mt-14 overflow-hidden relative py-1">
+        <div className="absolute top-0 bottom-0 left-0 w-[120px] z-[2]" style={{ background: `linear-gradient(90deg, var(--bg), transparent)` }} />
+        <div className="absolute top-0 bottom-0 right-0 w-[120px] z-[2]" style={{ background: `linear-gradient(-90deg, var(--bg), transparent)` }} />
+        <div className="flex gap-3 w-max" style={{ animation: "ticker-scroll 22s linear infinite" }}>
+          {[...tickerItems, ...tickerItems].map((item, i) => (
+            <div key={i} className="wallet-chip">
+              <span className="text-[17px]">{item.icon}</span>{item.label}
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -155,46 +203,129 @@ function HeroSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   BENEFITS (Main Focus — 6 large cards)
+   STATS BAR
+   ═══════════════════════════════════════════════════ */
+function StatsBar() {
+  const { t } = useI18n();
+  const stats = [
+    { val: t.stat1Val, label: t.stat1Label },
+    { val: t.stat2Val, label: t.stat2Label },
+    { val: t.stat3Val, label: t.stat3Label },
+    { val: t.stat4Val, label: t.stat4Label },
+  ];
+
+  return (
+    <div className="border-t border-b py-8 px-5 md:px-10" style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="max-w-[1160px] mx-auto grid grid-cols-2 lg:grid-cols-4">
+        {stats.map((s, i) => (
+          <FadeIn key={s.label} delay={i * 0.05}>
+            <div className="text-center px-6" style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
+              <div className="text-4xl font-extrabold tracking-tight" style={{ color: "var(--accent-color)", letterSpacing: "-1.5px" }}>{s.val}</div>
+              <div className="text-[13px] font-medium mt-1" style={{ color: "var(--text2)" }}>{s.label}</div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   PAIN vs SOLUTION
+   ═══════════════════════════════════════════════════ */
+function PainSection() {
+  const { t } = useI18n();
+  const bads = [t.painBad1, t.painBad2, t.painBad3, t.painBad4, t.painBad5];
+  const goods = [t.painGood1, t.painGood2, t.painGood3, t.painGood4, t.painGood5];
+  const badIcons = ["🔒", "💸", "⏳", "📉", "🌍"];
+  const goodIcons = ["⚡", "🔄", "✅", "📈", "🌐"];
+
+  return (
+    <section className="py-24 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
+        <FadeIn>
+          <div className="section-badge">{t.painBadge}</div>
+          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.painTitle}</h2>
+          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.painDesc}</p>
+        </FadeIn>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-14">
+          <div>
+            <FadeIn>
+              <div className="text-[13px] font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: "var(--red)" }}>
+                {t.painBadLabel}
+              </div>
+            </FadeIn>
+            <div className="flex flex-col gap-2.5">
+              {bads.map((text, i) => (
+                <FadeIn key={i} delay={i * 0.04}>
+                  <div className="pain-row bad">
+                    <span className="text-xl flex-shrink-0 mt-0.5">{badIcons[i]}</span>
+                    <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+          <div>
+            <FadeIn>
+              <div className="text-[13px] font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: "var(--green)" }}>
+                {t.painGoodLabel}
+              </div>
+            </FadeIn>
+            <div className="flex flex-col gap-2.5">
+              {goods.map((text, i) => (
+                <FadeIn key={i} delay={i * 0.04}>
+                  <div className="pain-row good">
+                    <span className="text-xl flex-shrink-0 mt-0.5">{goodIcons[i]}</span>
+                    <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   BENEFITS
    ═══════════════════════════════════════════════════ */
 function BenefitsSection() {
   const { t } = useI18n();
   const benefits = [
-    { icon: Coins, title: t.ben1Title, desc: t.ben1Desc },
-    { icon: Zap, title: t.ben2Title, desc: t.ben2Desc },
-    { icon: Globe, title: t.ben3Title, desc: t.ben3Desc },
-    { icon: Sparkles, title: t.ben4Title, desc: t.ben4Desc },
-    { icon: CircleDollarSign, title: t.ben5Title, desc: t.ben5Desc },
-    { icon: Shield, title: t.ben6Title, desc: t.ben6Desc },
+    { icon: t.ben1Icon, big: t.ben1Big, title: t.ben1Title, desc: t.ben1Desc, wide: true, featured: true },
+    { icon: t.ben2Icon, big: t.ben2Big, title: t.ben2Title, desc: t.ben2Desc },
+    { icon: t.ben3Icon, title: t.ben3Title, desc: t.ben3Desc },
+    { icon: t.ben4Icon, big: t.ben4Big, title: t.ben4Title, desc: t.ben4Desc },
+    { icon: t.ben5Icon, title: t.ben5Title, desc: t.ben5Desc },
+    { icon: t.ben6Icon, title: t.ben6Title, desc: t.ben6Desc },
+    { icon: t.ben7Icon, title: t.ben7Title, desc: t.ben7Desc },
   ];
 
   return (
-    <section id="benefits" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20 bg-secondary">
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+    <section id="benefits" className="py-24 px-5 md:px-10 border-t border-b" style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.benefitsTag}</p>
-          <h2 className="section-title text-foreground text-center mb-4">
-            {t.benefitsTitle1}<span className="gradient-text">{t.benefitsTitle2}</span>
-          </h2>
-          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto">{t.benefitsDesc}</p>
+          <div className="section-badge">{t.benefitsBadge}</div>
+          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.benefitsTitle}</h2>
+          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.benefitsDesc}</p>
         </FadeIn>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-5 mt-14">
           {benefits.map((b, i) => (
-            <FadeIn key={b.title} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ scale: 1.03, y: -6 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="h-full"
-              >
-                <div className="glass-card glass-card-hover p-8 lg:p-9 h-full group transition-all duration-500">
-                  <div className="mb-6 w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center">
-                    <b.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{b.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-                </div>
-              </motion.div>
+            <FadeIn key={i} delay={i * 0.05}>
+              <div className={`glass-card glass-card-hover p-7 ${b.wide ? "md:col-span-2" : ""} ${b.featured ? "benefit-featured" : ""}`}
+                style={b.wide ? { gridColumn: "span 2" } : {}}>
+                <span className="text-[28px] mb-4 block">{b.icon}</span>
+                {b.big && (
+                  <div className="text-[42px] font-extrabold leading-none mb-2" style={{ color: "var(--accent-color)", letterSpacing: "-2px" }}>{b.big}</div>
+                )}
+                <div className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</div>
+                <div className="text-[13px] leading-[1.7]" style={{ color: "var(--text2)" }}>{b.desc}</div>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -204,100 +335,210 @@ function BenefitsSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   HOW IT WORKS — 5 steps
+   HOW IT WORKS (with tabs)
    ═══════════════════════════════════════════════════ */
 function HowItWorks() {
   const { t } = useI18n();
+  const [activeTab, setActiveTab] = useState("apply");
+
+  const tabs = [
+    { id: "apply", label: t.howTab1 },
+    { id: "apple", label: t.howTab2 },
+    { id: "google", label: t.howTab3 },
+    { id: "paypal", label: t.howTab4 },
+  ];
+
   const steps = [
-    { num: t.step1Num, tag: t.step1Tag, title: t.step1Title, desc: t.step1Desc },
-    { num: t.step2Num, tag: t.step2Tag, title: t.step2Title, desc: t.step2Desc },
-    { num: t.step3Num, tag: t.step3Tag, title: t.step3Title, desc: t.step3Desc },
-    { num: t.step4Num, tag: t.step4Tag, title: t.step4Title, desc: t.step4Desc },
-    { num: t.step5Num, tag: t.step5Tag, title: t.step5Title, desc: t.step5Desc },
+    { num: "01", title: t.step1Title, desc: t.step1Desc },
+    { num: "02", title: t.step2Title, desc: t.step2Desc },
+    { num: "03", title: t.step3Title, desc: t.step3Desc },
+    { num: "04", title: t.step4Title, desc: t.step4Desc },
+    { num: "05", title: t.step5Title, desc: t.step5Desc },
   ];
 
   return (
-    <section id="how-it-works" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20 bg-background">
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+    <section id="how" className="py-24 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.stepsTag}</p>
-          <h2 className="section-title text-foreground text-center mb-4">
-            {t.stepsTitle1}<span className="gradient-text">{t.stepsTitle2}</span>
-          </h2>
-          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto">{t.stepsDesc}</p>
+          <div className="section-badge">{t.howBadge}</div>
+          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.howTitle}</h2>
+          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.howDesc}</p>
         </FadeIn>
 
-        <div className="max-w-3xl mx-auto space-y-6">
-          {steps.map((s, i) => (
-            <FadeIn key={s.num} delay={i * 0.1}>
-              <motion.div
-                whileHover={{ scale: 1.01, x: 4 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="glass-card glass-card-hover p-7 lg:p-8 flex items-start gap-6 transition-all duration-500">
-                  <div className="flex-shrink-0">
-                    <div className="text-3xl font-bold gradient-text w-12 text-center">{s.num}</div>
+        <FadeIn delay={0.1}>
+          <div className="flex gap-2 flex-wrap mt-12 mb-8">
+            {tabs.map(tab => (
+              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                className={`how-tab ${activeTab === tab.id ? "active" : ""}`}>
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </FadeIn>
+
+        {/* APPLY PANEL */}
+        {activeTab === "apply" && (
+          <FadeIn>
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 relative">
+              <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+              {steps.map((s, i) => (
+                <div key={i} className="text-center px-3">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 relative z-[1] text-xl font-extrabold transition-all hover:shadow-[0_0_0_4px_var(--accent-bg)]"
+                    style={{ background: "var(--bg2)", border: "2px solid rgba(255,255,255,0.07)", color: "var(--accent-color)", fontFamily: "'Inter', sans-serif" }}>
+                    {s.num}
                   </div>
-                  <div className="w-px h-14 bg-border flex-shrink-0 self-center" />
-                  <div className="flex-1">
-                    <span className="text-[10px] font-bold text-primary/60 tracking-[0.3em] uppercase mb-1 block">{s.tag}</span>
-                    <h3 className="text-base lg:text-lg font-bold text-foreground mb-1.5">{s.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                  </div>
+                  <div className="text-sm font-bold mb-2">{s.title}</div>
+                  <div className="text-[13px] leading-[1.6]" style={{ color: "var(--text2)" }}>{s.desc}</div>
                 </div>
-              </motion.div>
-            </FadeIn>
-          ))}
-        </div>
+              ))}
+            </div>
+          </FadeIn>
+        )}
+
+        {/* APPLE PAY PANEL */}
+        {activeTab === "apple" && (
+          <FadeIn>
+            <div className="grid md:grid-cols-3 gap-4">
+              <WalletCard icon="🍎" name={t.appleVisa} type={t.appleVisaType} badge={t.appleVisaRecommended} badgeColor="green"
+                steps={[t.appleStep1, t.appleStep2, t.appleStep3, t.appleStep4, t.appleStep5]} />
+              <WalletCard icon="🍎" name={t.appleMC} type={t.appleMCType} badge={t.appleMCAlt} badgeColor="blue"
+                steps={[t.appleMCStep1, t.appleMCStep2, t.appleMCStep3, t.appleMCStep4, t.appleMCStep5]} />
+              <WalletCard icon="ℹ️" name={t.appleDevices} type={t.appleDevicesType} featured
+                steps={[t.appleReq1, t.appleReq2, t.appleReq3, t.appleReq4, t.appleReq5]} checkmarks />
+            </div>
+          </FadeIn>
+        )}
+
+        {/* GOOGLE PAY PANEL */}
+        {activeTab === "google" && (
+          <FadeIn>
+            <div className="grid md:grid-cols-3 gap-4">
+              <WalletCard icon="📱" name={t.gpTitle} type={t.gpType} badge={t.gpSupported} badgeColor="green"
+                steps={[t.gpStep1, t.gpStep2, t.gpStep3, t.gpStep4, t.gpStep5]} />
+              <WalletCard icon="📋" name={t.gpReqTitle} type={t.gpReqType} featured
+                steps={[t.gpReq1, t.gpReq2, t.gpReq3, t.gpReq4]} checkmarks />
+              <WalletCard icon="💡" name={t.gpHowTitle} type={t.gpHowType}
+                steps={[t.gpHow1, t.gpHow2, t.gpHow3, t.gpHow4]} />
+            </div>
+          </FadeIn>
+        )}
+
+        {/* PAYPAL PANEL */}
+        {activeTab === "paypal" && (
+          <FadeIn>
+            <div className="grid md:grid-cols-3 gap-4">
+              <WalletCard icon="🅿️" name={t.ppTitle} type={t.ppType} badge={t.ppSupported} badgeColor="green"
+                steps={[t.ppStep1, t.ppStep2, t.ppStep3, t.ppStep4, t.ppStep5]} />
+              <WalletCard icon="🌐" name={t.ppUsesTitle} type={t.ppUsesType} featured
+                steps={[t.ppUse1, t.ppUse2, t.ppUse3, t.ppUse4, t.ppUse5]} checkmarks />
+              <WalletCard icon="📲" name={t.ppOtherTitle} type={t.ppOtherType}
+                steps={[t.ppOther1, t.ppOther2, t.ppOther3, t.ppOther4, t.ppOther5]} />
+            </div>
+          </FadeIn>
+        )}
+
+        <FadeIn delay={0.2}>
+          <div className="text-center mt-14">
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.howCTA}</a>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
 }
 
+/* Wallet Card component */
+function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, checkmarks }: {
+  icon: string; name: string; type: string; steps: string[];
+  badge?: string; badgeColor?: string; featured?: boolean; checkmarks?: boolean;
+}) {
+  return (
+    <div className="glass-card glass-card-hover p-6"
+      style={featured ? { background: "var(--accent-bg)", borderColor: "var(--accent-border)" } : {}}>
+      <div className="flex justify-between items-center mb-5">
+        <span className="text-[30px]">{icon}</span>
+        {badge && (
+          <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full"
+            style={{
+              background: badgeColor === "blue" ? "var(--blue-bg)" : "var(--green-bg)",
+              color: badgeColor === "blue" ? "var(--blue)" : "var(--green)",
+            }}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <div className="text-[17px] font-bold mb-1" style={featured ? { color: "var(--accent-color)" } : {}}>{name}</div>
+      <div className="text-xs mb-4" style={{ color: "var(--text3)" }}>{type}</div>
+      <div className="flex flex-col gap-1.5">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-start gap-2.5 text-[13px] leading-[1.5]" style={{ color: "var(--text2)" }}>
+            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-bold"
+              style={{ background: "var(--accent-bg)", color: "var(--accent-color)" }}>
+              {checkmarks ? "✓" : i + 1}
+            </div>
+            {step}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
-   PAYMENT COMPATIBILITY
+   COMPARE TABLE
    ═══════════════════════════════════════════════════ */
-function PaymentSection() {
+function CompareSection() {
   const { t } = useI18n();
-  const wallets = [
-    { name: t.payApple, os: t.payAppleOS, emoji: "🍎" },
-    { name: t.payGoogle, os: t.payGoogleOS, emoji: "🔵" },
-    { name: t.payPaypal, os: t.payPaypalOS, emoji: "🅿" },
+  const rows = [
+    [t.comp1P, t.comp1Z, t.comp1B, t.comp1O],
+    [t.comp2P, t.comp2Z, t.comp2B, t.comp2O],
+    [t.comp3P, t.comp3Z, t.comp3B, t.comp3O],
+    [t.comp4P, t.comp4Z, t.comp4B, t.comp4O],
+    [t.comp5P, t.comp5Z, t.comp5B, t.comp5O],
+    [t.comp6P, t.comp6Z, t.comp6B, t.comp6O],
+    [t.comp7P, t.comp7Z, t.comp7B, t.comp7O],
+    [t.comp8P, t.comp8Z, t.comp8B, t.comp8O],
+    [t.comp9P, t.comp9Z, t.comp9B, t.comp9O],
   ];
 
+  const cellStyle = (val: string) => {
+    if (val.startsWith("✓")) return { color: "var(--green)" };
+    if (val.startsWith("✕")) return { color: "var(--red)", opacity: 0.7 };
+    if (val.startsWith("~")) return { color: "var(--accent-color)" };
+    return {};
+  };
+
   return (
-    <section className="py-28 lg:py-36 relative overflow-hidden bg-secondary">
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+    <section id="compare" className="py-24 px-5 md:px-10 border-t border-b" style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.payTag}</p>
-          <h2 className="section-title text-foreground text-center mb-4">
-            {t.payTitle1}<span className="gradient-text">{t.payTitle2}</span>
-          </h2>
-          <p className="text-center text-lg text-muted-foreground mb-16 max-w-lg mx-auto">{t.payDesc}</p>
+          <div className="section-badge">{t.compareBadge}</div>
+          <h2 className="section-title mb-4">{t.compareTitle}</h2>
+          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.compareDesc}</p>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto mb-10">
-          {wallets.map((w, i) => (
-            <FadeIn key={w.name} delay={i * 0.12}>
-              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <div className="glass-card glass-card-hover p-8 text-center h-full transition-all duration-500">
-                  <div className="text-4xl mb-4">{w.emoji}</div>
-                  <h3 className="text-lg font-bold text-foreground mb-1">{w.name}</h3>
-                  <span className="text-xs text-muted-foreground/60">{w.os}</span>
-                  <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/15 px-3 py-1">
-                    <Check className="w-3 h-3 text-primary" />
-                    <span className="text-xs font-semibold text-primary">{t.paySupported}</span>
-                  </div>
-                </div>
-              </motion.div>
-            </FadeIn>
-          ))}
-        </div>
-
-        <FadeIn delay={0.4}>
-          <div className="max-w-2xl mx-auto glass-card p-6 flex items-start gap-4">
-            <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-muted-foreground leading-relaxed">{t.payContactless}</p>
+        <FadeIn delay={0.1}>
+          <div className="mt-14 overflow-x-auto rounded-2xl border" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+            <table className="compare-table">
+              <thead>
+                <tr>
+                  <th>{t.compParam}</th>
+                  <th className="col-zero">{t.compZero}</th>
+                  <th>{t.compBank}</th>
+                  <th>{t.compOther}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, i) => (
+                  <tr key={i}>
+                    <td>{row[0]}</td>
+                    <td className="col-zero"><strong>{row[1]}</strong></td>
+                    <td style={cellStyle(row[2])}>{row[2]}</td>
+                    <td style={cellStyle(row[3])}>{row[3]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </FadeIn>
       </div>
@@ -306,54 +547,47 @@ function PaymentSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   TRUST BLOCK
+   REVIEWS
    ═══════════════════════════════════════════════════ */
-function TrustSection() {
+function ReviewsSection() {
   const { t } = useI18n();
-  const points = [
-    { icon: BadgeCheck, title: t.trust1Title, desc: t.trust1Desc },
-    { icon: Fingerprint, title: t.trust2Title, desc: t.trust2Desc },
-    { icon: Lock, title: t.trust3Title, desc: t.trust3Desc },
-    { icon: Layers, title: t.trust4Title, desc: t.trust4Desc },
+  const reviews = [
+    { text: t.rev1Text, name: t.rev1Name, role: t.rev1Role, ava: t.rev1Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev2Text, name: t.rev2Name, role: t.rev2Role, ava: t.rev2Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev3Text, name: t.rev3Name, role: t.rev3Role, ava: t.rev3Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev4Text, name: t.rev4Name, role: t.rev4Role, ava: t.rev4Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev5Text, name: t.rev5Name, role: t.rev5Role, ava: t.rev5Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev6Text, name: t.rev6Name, role: t.rev6Role, ava: t.rev6Name.split(" ").map(w => w[0]).join("") },
   ];
 
   return (
-    <section id="security" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20 bg-background">
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
+    <section className="py-24 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.trustTag}</p>
-          <h2 className="section-title text-foreground text-center mb-4">
-            {t.trustTitle1}<span className="gradient-text">{t.trustTitle2}</span>
-          </h2>
-          <p className="text-center text-lg text-muted-foreground mb-16 max-w-xl mx-auto">{t.trustDesc}</p>
+          <div className="section-badge">{t.reviewsBadge}</div>
+          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.reviewsTitle}</h2>
+          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.reviewsDesc}</p>
         </FadeIn>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto mb-14">
-          {points.map((p, i) => (
-            <FadeIn key={p.title} delay={i * 0.1}>
-              <motion.div whileHover={{ scale: 1.04, y: -6 }} transition={{ type: "spring", stiffness: 280, damping: 22 }} className="h-full">
-                <div className="glass-card glass-card-hover p-7 text-center h-full transition-all duration-500">
-                  <div className="mx-auto mb-5 w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center">
-                    <p.icon className="w-6 h-6 text-primary" />
+        <div className="grid md:grid-cols-3 gap-5 mt-14">
+          {reviews.map((r, i) => (
+            <FadeIn key={i} delay={i * 0.05}>
+              <div className="review-card">
+                <div className="text-[13px] tracking-[2px] mb-3.5" style={{ color: "var(--accent-color)" }}>★★★★★</div>
+                <div className="text-sm leading-[1.7] mb-5 italic" style={{ color: "var(--text2)" }}>{r.text}</div>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[13px] font-bold flex-shrink-0 gradient-bg" style={{ color: "#000" }}>
+                    {r.ava}
                   </div>
-                  <h3 className="text-base font-bold text-foreground mb-2">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                  <div>
+                    <div className="text-[13px] font-bold">{r.name}</div>
+                    <div className="text-xs mt-0.5" style={{ color: "var(--text3)" }}>{r.role}</div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </FadeIn>
           ))}
         </div>
-
-        <FadeIn delay={0.4}>
-          <div className="text-center">
-            <p className="text-xs text-muted-foreground/50 mb-4 tracking-widest uppercase">{t.trustPowered}</p>
-            <motion.div whileHover={{ scale: 1.03 }}
-              className="inline-flex items-center gap-3 glass-card px-10 py-5 cursor-default">
-              <span className="text-2xl font-bold gradient-text tracking-tight">Pionex</span>
-            </motion.div>
-            <p className="mt-4 text-xs text-muted-foreground/50">{t.trustPlatform}</p>
-          </div>
-        </FadeIn>
       </div>
     </section>
   );
@@ -364,6 +598,8 @@ function TrustSection() {
    ═══════════════════════════════════════════════════ */
 function FAQSection() {
   const { t } = useI18n();
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
   const faqs = [
     { q: t.faq1Q, a: t.faq1A },
     { q: t.faq2Q, a: t.faq2A },
@@ -371,12 +607,14 @@ function FAQSection() {
     { q: t.faq4Q, a: t.faq4A },
     { q: t.faq5Q, a: t.faq5A },
     { q: t.faq6Q, a: t.faq6A },
+    { q: t.faq7Q, a: t.faq7A },
+    { q: t.faq8Q, a: t.faq8A },
   ];
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqs.map(faq => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -386,26 +624,39 @@ function FAQSection() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section id="faq" className="py-28 lg:py-36 relative overflow-hidden scroll-mt-20 bg-secondary">
-        <div className="container mx-auto px-6 lg:px-16 max-w-3xl relative z-10">
+      <section id="faq" className="py-24 px-5 md:px-10 border-t border-b" style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+        <div className="max-w-[800px] mx-auto">
           <FadeIn>
-            <p className="text-center text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.faqTag}</p>
-            <h2 className="section-title text-foreground text-center mb-16">{t.faqTitle}</h2>
+            <div className="section-badge">{t.faqBadge}</div>
+            <h2 className="section-title mb-12" style={{ whiteSpace: "pre-line" }}>{t.faqTitle}</h2>
           </FadeIn>
-          <FadeIn delay={0.1}>
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border-border/50">
-                  <AccordionTrigger className="text-left text-base lg:text-lg font-semibold text-foreground hover:no-underline py-6">
+
+          <div className="flex flex-col gap-2">
+            {faqs.map((faq, i) => (
+              <FadeIn key={i} delay={i * 0.03}>
+                <div className={`faq-item ${openIdx === i ? "open" : ""}`}>
+                  <button className="w-full px-6 py-[18px] flex justify-between items-center gap-4 text-left font-semibold text-[15px] transition-colors"
+                    style={{ color: openIdx === i ? "var(--accent-color)" : "hsl(var(--foreground))" }}
+                    onClick={() => setOpenIdx(openIdx === i ? null : i)}>
                     {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-6">
-                    {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </FadeIn>
+                    <span className="w-6 h-6 rounded-full flex items-center justify-center text-sm flex-shrink-0 transition-all"
+                      style={{
+                        background: openIdx === i ? "var(--accent-bg)" : "var(--bg3)",
+                        border: `1px solid ${openIdx === i ? "var(--accent-border)" : "rgba(255,255,255,0.07)"}`,
+                        color: openIdx === i ? "var(--accent-color)" : "var(--text3)",
+                        transform: openIdx === i ? "rotate(45deg)" : "rotate(0deg)",
+                      }}>
+                      +
+                    </span>
+                  </button>
+                  <div className="overflow-hidden transition-all duration-300"
+                    style={{ maxHeight: openIdx === i ? 300 : 0, padding: openIdx === i ? "0 24px 20px" : "0 24px" }}>
+                    <div className="text-sm leading-[1.7]" style={{ color: "var(--text2)" }}>{faq.a}</div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
     </>
@@ -413,42 +664,26 @@ function FAQSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   FINAL CTA
+   CTA
    ═══════════════════════════════════════════════════ */
-function FinalCTA() {
+function CTASection() {
   const { t } = useI18n();
   return (
-    <section className="py-28 lg:py-40 relative overflow-hidden bg-background">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(14 88% 50% / 0.06), transparent 60%)", filter: "blur(120px)" }} />
-
-      <div className="container mx-auto px-6 lg:px-16 text-center relative z-10 max-w-2xl">
+    <section className="py-24 px-5 md:px-10 text-center border-t" style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="max-w-[700px] mx-auto">
         <FadeIn>
-          <p className="text-sm font-semibold text-primary mb-4 tracking-[0.2em] uppercase">{t.finalTag}</p>
-          <h2 className="section-title text-foreground mb-6">
-            {t.finalTitle1}<span className="gradient-text">{t.finalTitle2}</span>
-          </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-md mx-auto leading-relaxed">{t.finalDesc}</p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <motion.a
-              href={SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 rounded-full gradient-bg text-white font-semibold px-10 py-4 text-base"
-              style={{ boxShadow: "0 16px 60px -12px hsl(14 88% 50% / 0.35)" }}
-            >
-              {t.finalCTA}
-              <ArrowRight className="w-5 h-5" />
-            </motion.a>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-semibold mb-6"
+            style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)", color: "var(--accent-color)" }}>
+            <span className="w-[7px] h-[7px] rounded-full" style={{ background: "var(--accent-color)", animation: "blink 2s infinite" }} />
+            {t.ctaBadge}
           </div>
-
-          <p className="text-[11px] text-muted-foreground/40 flex items-center justify-center gap-1.5">
-            <ExternalLink className="w-3 h-3" />
-            {t.redirectNote}
-          </p>
+          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.ctaTitle}</h2>
+          <p className="text-[17px] leading-[1.7] mb-9" style={{ color: "var(--text2)" }}>{t.ctaDesc}</p>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.ctaCTA}</a>
+            <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary-custom">{t.ctaDocs}</a>
+          </div>
+          <p className="mt-5 text-xs" style={{ color: "var(--text3)" }}>{t.ctaDisclaimer}</p>
         </FadeIn>
       </div>
     </section>
@@ -461,168 +696,16 @@ function FinalCTA() {
 function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="py-12 border-t border-border bg-background">
-      <div className="container mx-auto px-6 lg:px-16 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-[9px] flex items-center justify-center gradient-bg">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="3" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="none" opacity="0.6" />
-              <rect x="4" y="5" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="white" fillOpacity="0.15" />
-              <circle cx="12" cy="9" r="1.2" fill="white" opacity="0.9" />
-            </svg>
-          </div>
-          <span className="text-lg font-bold text-foreground tracking-tight">Zero<span className="font-light">card</span></span>
-        </div>
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Zerocard. {t.footerCopy}</p>
+    <footer className="py-8 px-5 md:px-10 border-t flex flex-col md:flex-row justify-between items-center gap-4 flex-wrap"
+      style={{ background: "var(--bg2)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <div className="flex items-center gap-2 text-base font-bold">
+        <div className="w-[26px] h-[26px] rounded-md flex items-center justify-center text-[13px] gradient-bg">💳</div>
+        Zero<span style={{ color: "var(--accent-color)" }}>Card</span>
+      </div>
+      <div className="text-xs leading-[1.6] max-w-[480px] text-center md:text-right" style={{ color: "var(--text3)" }}>
+        {t.footerNote}
       </div>
     </footer>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   LANGUAGE SWITCHER
-   ═══════════════════════════════════════════════════ */
-function LangSwitcher() {
-  const { lang, setLang } = useI18n();
-  return (
-    <div className="flex items-center rounded-full border border-border bg-muted p-0.5">
-      {(["en", "ru"] as Lang[]).map((l) => (
-        <button
-          key={l}
-          onClick={() => setLang(l)}
-          className={`relative px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-            lang === l ? "text-white" : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          {lang === l && (
-            <motion.div
-              layoutId="lang-pill"
-              className="absolute inset-0 rounded-full gradient-bg"
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
-          )}
-          <span className="relative z-10">{l}</span>
-        </button>
-      ))}
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   NAVBAR
-   ═══════════════════════════════════════════════════ */
-function Navbar() {
-  const { t } = useI18n();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  const navLinks = [
-    { label: t.navBenefits, href: "#benefits" },
-    { label: t.navHowItWorks, href: "#how-it-works" },
-    { label: t.navSecurity, href: "#security" },
-  ];
-
-  return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || mobileOpen
-            ? "bg-background/90 backdrop-blur-2xl border-b border-border shadow-sm"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="container mx-auto px-6 lg:px-16 flex items-center justify-between h-16 lg:h-[72px]">
-          <a href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[10px] flex items-center justify-center gradient-bg"
-              style={{ boxShadow: scrolled ? "0 0 20px -4px hsl(14 88% 50% / 0.3)" : "none" }}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="3" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="none" opacity="0.6" />
-                <rect x="4" y="5" width="11" height="8" rx="2" stroke="white" strokeWidth="1.3" fill="white" fillOpacity="0.15" />
-                <circle cx="12" cy="9" r="1.2" fill="white" opacity="0.9" />
-              </svg>
-            </div>
-            <span className="text-lg font-bold text-foreground tracking-tight">Zero<span className="font-light">card</span></span>
-          </a>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center gap-4">
-            <LangSwitcher />
-            <motion.a
-              href={SIGNUP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 rounded-full font-semibold text-sm text-white px-5 py-2.5 gradient-bg transition-all"
-              style={{ boxShadow: "0 8px 30px -8px hsl(14 88% 50% / 0.3)" }}
-            >
-              {t.navGetCard}
-              <ArrowRight className="w-3.5 h-3.5" />
-            </motion.a>
-          </div>
-
-          <div className="md:hidden flex items-center gap-2">
-            <LangSwitcher />
-            <button onClick={() => setMobileOpen(!mobileOpen)}
-              className="w-10 h-10 flex items-center justify-center rounded-xl text-foreground/80 hover:bg-muted transition-colors" aria-label="Menu">
-              <motion.div animate={{ rotate: mobileOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
-                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </motion.div>
-            </button>
-          </div>
-        </div>
-
-        <motion.div
-          initial={false}
-          animate={{ height: mobileOpen ? "auto" : 0, opacity: mobileOpen ? 1 : 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="md:hidden overflow-hidden"
-        >
-          <div className="px-6 pb-6 pt-2 space-y-1">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)}
-                className="block py-3 px-4 rounded-xl text-base font-medium text-foreground/80 hover:text-foreground hover:bg-muted transition-colors">
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-3">
-              <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full rounded-full font-semibold text-sm text-white px-5 py-3 gradient-bg"
-                style={{ boxShadow: "0 8px 30px -8px hsl(14 88% 50% / 0.3)" }}>
-                {t.navGetCard}
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </motion.div>
-      </motion.nav>
-
-      {mobileOpen && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 bg-foreground/10 backdrop-blur-sm md:hidden" onClick={() => setMobileOpen(false)} />
-      )}
-    </>
   );
 }
 
@@ -634,14 +717,12 @@ function DynamicMeta() {
   useEffect(() => {
     document.title = t.metaTitle;
     const setMeta = (attr: string, val: string, content: string) => {
-      let el = document.querySelector(`meta[${attr}="${val}"]`) as HTMLMetaElement;
+      const el = document.querySelector(`meta[${attr}="${val}"]`) as HTMLMetaElement;
       if (el) el.content = content;
     };
     setMeta("name", "description", t.metaDesc);
     setMeta("property", "og:title", t.metaTitle);
     setMeta("property", "og:description", t.metaDesc);
-    setMeta("name", "twitter:title", t.metaTitle);
-    setMeta("name", "twitter:description", t.metaDesc);
   }, [t, lang]);
 
   const orgSchema = {
@@ -663,12 +744,14 @@ const Index = () => (
     <DynamicMeta />
     <Navbar />
     <HeroSection />
+    <StatsBar />
+    <PainSection />
     <BenefitsSection />
     <HowItWorks />
-    <PaymentSection />
-    <TrustSection />
+    <CompareSection />
+    <ReviewsSection />
     <FAQSection />
-    <FinalCTA />
+    <CTASection />
     <Footer />
   </div>
 );
