@@ -15,7 +15,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Spend crypto like",
-    heroDesc: "ZeroCard turns USDT into an everyday payment tool — 1% cashback on everything, 5% APR on balance and zero fees for maintenance.",
+    heroDesc: "ZeroCard turns USDT into an everyday payment tool — 1% cashback on everything, 5% APR on balance and zero fees for maintenance. Works with Apple Pay, Google Pay and PayPal in 200+ countries.",
     heroCTA: "Get card for free →",
     heroSecondary: "How it works",
     pill1: "200+ countries",
@@ -24,10 +24,12 @@ const translations = {
     pill4: "$0 annual fee",
     pill5: "Instant top-up",
 
-    // Typewriter phrases
+    // Typewriter phrases (13)
     tw1: "real money", tw2: "coffee & taxi", tw3: "Netflix & Spotify",
-    tw4: "food & shopping", tw5: "ChatGPT & Claude", tw6: "hotels & flights",
-    tw7: "subscriptions", tw8: "anything you want", tw9: "real life",
+    tw4: "Steam & Xbox", tw5: "Adobe & Figma", tw6: "food & shopping",
+    tw7: "ChatGPT & Claude", tw8: "hotels & flights", tw9: "subscriptions",
+    tw10: "Meta ads", tw11: "supplier orders", tw12: "anything you want",
+    tw13: "real life",
 
     // Ticker wallets
     tickerApple: "Apple Pay", tickerGoogle: "Google Pay", tickerPaypal: "PayPal",
@@ -116,7 +118,7 @@ const translations = {
     comp1P: "Cashback", comp1Z: "1% on everything, no limit", comp1B: "0–1% (with conditions)", comp1O: "0–2% (limited)",
     comp2P: "Interest on balance", comp2Z: "5% APR (hourly)", comp2B: "✕ 0–0.5%", comp2O: "✕ No",
     comp3P: "Annual fee", comp3Z: "✓ $0", comp3B: "✕ $50–500/year", comp3O: "~ Usually $0",
-    comp4P: "Issuance fee", comp4Z: "✓ $0", comp4B: "✕ $0–100", comp4O: "~ $0–10",
+    comp4P: "Issuance fee", comp4Z: "✓ $0", comp4B: "✕ Often paid", comp4O: "~ Sometimes",
     comp5P: "FX fee (Visa)", comp5Z: "✓ 0%", comp5B: "✕ 1.5–3%", comp5O: "~ 0–2%",
     comp6P: "Apple Pay / Google Pay", comp6Z: "✓", comp6B: "✓", comp6O: "~ Sometimes",
     comp7P: "Instant crypto top-up", comp7Z: "✓", comp7B: "✕", comp7O: "~ Sometimes",
@@ -132,6 +134,9 @@ const translations = {
     audTab1: "🪙 Crypto holders", audTab2: "📈 Traders", audTab3: "🤖 Pionex users",
     audTab4: "✨ AI users", audTab5: "🔒 Blocked cards", audTab6: "🌍 Digital Nomads",
     audTab7: "💼 Freelancers", audTab8: "💰 Investors",
+    audTab9: "🎬 Bloggers & Creatives", audTab10: "🎮 Gamers",
+    audTab11: "🛍️ E-commerce", audTab12: "🛂 Expats",
+    audTab13: "👨‍👩‍👧 Parents abroad", audTab14: "⚡ Arbitrageurs",
 
     // Audience: Crypto
     aud1Icon: "🪙", aud1Tag: "⚡ Primary audience", aud1Title: "Crypto holders",
@@ -168,11 +173,11 @@ const translations = {
 
     // Audience: AI
     aud4Icon: "✨", aud4Tag: "🚀 Fast-growing segment", aud4Title: "AI platform users",
-    aud4Desc: "ChatGPT Plus, Claude Pro, Midjourney, Runway, ElevenLabs, Suno, Perplexity Pro — all cost $10–$200/month and only accept international cards. If you're in Russia, CIS or any 'restricted' country — ZeroCard solves this forever.",
+    aud4Desc: "ChatGPT Plus, Claude Pro, Midjourney, Runway, ElevenLabs, Suno, Perplexity Pro — all cost $10–$200/month and only accept international cards.",
     aud4S1V: "$20", aud4S1L: "ChatGPT Plus/mo", aud4S2V: "$30", aud4S2L: "Claude Pro/mo", aud4S3V: "+1%", aud4S3L: "cashback back",
     aud4P1Icon: "🚫", aud4P1Title: "'Your card is not accepted'", aud4P1Body: "Trying to pay for ChatGPT Plus, Claude Pro or Midjourney — but your local card doesn't go through. You need the service, but can't pay.",
     aud4P1Sol: "✦ ZeroCard: international Visa — accepted everywhere foreign subscriptions work",
-    aud4P2Icon: "🔄", aud4P2Title: "Multiple subscriptions — constant headache", aud4P2Body: "ChatGPT + Claude + Midjourney + Runway = $80–150/month by different methods. Every time you search for a payment method, wasting time and nerves.",
+    aud4P2Icon: "🔄", aud4P2Title: "Multiple subscriptions — constant headache", aud4P2Body: "ChatGPT + Claude + Midjourney + Runway = $80–150/month by different methods. Every time you search for a payment method.",
     aud4P2Sol: "✦ ZeroCard: one card for all subscriptions — and 1% cashback returns every month",
     aud4P3Icon: "💳", aud4P3Title: "Virtual cards expire and get blocked", aud4P3Body: "Using disposable virtual cards for subscriptions? They regularly stop working, need re-linking — endless routine.",
     aud4P3Sol: "✦ ZeroCard: stable Visa/Mastercard with permanent details — subscriptions work without interruptions",
@@ -181,7 +186,7 @@ const translations = {
     aud5Icon: "🔒", aud5Tag: "🆘 Critically important", aud5Title: "Blocked cards",
     aud5Desc: "Sanctions, relocation, country change, bank problems — for various reasons people are left without a working card. ZeroCard doesn't depend on any specific country's banking system.",
     aud5S1V: "200+", aud5S1L: "working countries", aud5S2V: "Visa", aud5S2L: "& Mastercard", aud5S3V: "0%", aud5S3L: "FX Visa",
-    aud5P1Icon: "🌐", aud5P1Title: "Card blocked after relocation", aud5P1Body: "Moved to another country — local bank froze your card or it's simply not accepted in stores. Opening a new bank account is long, expensive and not always possible.",
+    aud5P1Icon: "🌐", aud5P1Title: "Card blocked after relocation", aud5P1Body: "Moved to another country — local bank froze your card or it's simply not accepted in stores.",
     aud5P1Sol: "✦ ZeroCard: works in 200+ countries without being tied to any specific bank or country",
     aud5P2Icon: "🏦", aud5P2Title: "Bank froze account without warning", aud5P2Body: "Banks block accounts for opaque reasons — suspicious operations, technical issues, sanction lists. Unblocking takes weeks.",
     aud5P2Sol: "✦ ZeroCard: bank-independent infrastructure based on Pionex — works when the bank fails you",
@@ -190,36 +195,102 @@ const translations = {
 
     // Audience: Nomads
     aud6Icon: "🌍", aud6Tag: "✈️ Digital Nomads", aud6Title: "Travelers & nomads",
-    aud6Desc: "You live between countries. Every time you solve the same problem: how to pay here and now without conversion losses and without blocked cards. ZeroCard — one card for the whole world.",
+    aud6Desc: "You live between countries. Every time you solve the same problem: how to pay here and now without conversion losses. ZeroCard — one card for the whole world.",
     aud6S1V: "0%", aud6S1L: "FX Visa", aud6S2V: "5%", aud6S2L: "Trip.com cashback", aud6S3V: "NFC", aud6S3L: "everywhere",
     aud6P1Icon: "💱", aud6P1Title: "Conversion eats money every day", aud6P1Body: "In Thailand — baht, Vietnam — dong, Turkey — lira. Every time 2–3% conversion, and the bank charges FX too. In a month you lose $50–100.",
     aud6P1Sol: "✦ ZeroCard Visa: 0% FX fee — pay real exchange rate without bank markups",
     aud6P2Icon: "🏨", aud6P2Title: "Expensive flights and hotels", aud6P2Body: "Traveling constantly, you spend $5000–15000/year on flights and accommodation. Every percent discount is real money.",
     aud6P2Sol: "✦ ZeroCard: 5% cashback on Trip.com — on $5000 flights you get $250 back in USDT",
-    aud6P3Icon: "📵", aud6P3Title: "Home card stopped working", aud6P3Body: "Bank sees transactions from 5 different countries in a month — blocks card as suspicious. You're in Bali, money frozen, support doesn't answer.",
+    aud6P3Icon: "📵", aud6P3Title: "Home card stopped working", aud6P3Body: "Bank sees transactions from 5 different countries in a month — blocks card as suspicious.",
     aud6P3Sol: "✦ ZeroCard: crypto infrastructure doesn't block for 'suspicious geography' — works everywhere",
 
     // Audience: Freelance
     aud7Icon: "💼", aud7Tag: "🖥️ Freelancers & remote workers", aud7Title: "Freelancers & remote employees",
-    aud7Desc: "Getting paid in crypto or stablecoins? ZeroCard is the shortest path from incoming payment to real spending. No banks, no delays, no extra fees.",
+    aud7Desc: "Getting paid in crypto or stablecoins? ZeroCard is the shortest path from incoming payment to real spending.",
     aud7S1V: "⚡", aud7S1L: "instant", aud7S2V: "1%", aud7S2L: "cashback", aud7S3V: "5%", aud7S3L: "APR",
     aud7P1Icon: "⏳", aud7P1Title: "Client paid in USDT — money unavailable", aud7P1Body: "International client transferred payment in USDT. To pay rent or groceries, you need withdrawal to bank — 2–5 business days and fees.",
     aud7P1Sol: "✦ ZeroCard: USDT received → on card in seconds → pay in store immediately",
-    aud7P2Icon: "🛠️", aud7P2Title: "Work tools cost in dollars", aud7P2Body: "Figma, Notion, GitHub Pro, Adobe CC, AWS — all $10–50/month requiring an international card. Totals $100–300/month.",
+    aud7P2Icon: "🛠️", aud7P2Title: "Work tools cost in dollars", aud7P2Body: "Figma, Notion, GitHub Pro, Adobe CC, AWS — all $10–50/month requiring an international card.",
     aud7P2Sol: "✦ ZeroCard: pay all subscriptions with one card and get 1% back on every payment",
     aud7P3Icon: "📊", aud7P3Title: "Savings sit in USDT without income", aud7P3Body: "Holding a USDT reserve for a rainy day. Smart, but money works idle — no interest, no growth.",
     aud7P3Sol: "✦ ZeroCard: 5% APR — $1000 on the card earns ~$50/year just sitting there",
 
     // Audience: Investors
     aud8Icon: "💰", aud8Tag: "📊 Passive income", aud8Title: "Investors & savers",
-    aud8Desc: "Holding capital in stablecoins as a defensive asset or waiting for market entry? ZeroCard turns waiting into income — 5% APR every hour while you hold your position.",
+    aud8Desc: "Holding capital in stablecoins as a defensive asset or waiting for market entry? ZeroCard turns waiting into income — 5% APR every hour.",
     aud8S1V: "5%", aud8S1L: "APR/year", aud8S2V: "24/7", aud8S2L: "accrual", aud8S3V: "USDT", aud8S3L: "stablecoin",
     aud8P1Icon: "😴", aud8P1Title: "Capital 'in waiting' earns nothing", aud8P1Body: "Exited position to USDT and waiting for correction to re-enter. Capital sits dead — a week, a month, three months.",
     aud8P1Sol: "✦ ZeroCard: 5% APR on balance — $10,000 waiting earns ~$42/month",
     aud8P2Icon: "🏦", aud8P2Title: "Bank deposit yields less than inflation", aud8P2Body: "Traditional bank offers 1–3% on USD deposit — less than inflation. And you need to lock money for 6–12 months.",
     aud8P2Sol: "✦ ZeroCard: 5% APR without lockup — money stays accessible, spend anytime",
-    aud8P3Icon: "💸", aud8P3Title: "Dividends and profit unavailable for spending", aud8P3Body: "Investment income arrives in crypto or converts to USDT — but to actually use profit, you need a long path through the bank.",
+    aud8P3Icon: "💸", aud8P3Title: "Dividends and profit unavailable", aud8P3Body: "Investment income arrives in crypto — but to actually use profit, you need a long path through the bank.",
     aud8P3Sol: "✦ ZeroCard: investment income → card → spend immediately without banks and delays",
+
+    // Audience: Youtubers/Creatives
+    aud9Icon: "🎬", aud9Tag: "🔥 Content makers", aud9Title: "Bloggers, streamers, Creatives",
+    aud9Desc: "YouTube, Twitch, TikTok, Patreon, Substack — platforms pay in USD, but withdrawing to a card without losses is impossible. ZeroCard does it in seconds.",
+    aud9S1V: "0%", aud9S1L: "FX conversion", aud9S2V: "1%", aud9S2L: "cashback back", aud9S3V: "⚡", aud9S3L: "instant",
+    aud9P1Icon: "💳", aud9P1Title: "Platforms don't accept local card", aud9P1Body: "Want to promote via YouTube Ads, Canva Pro or Adobe? Local card declined. Need workarounds, wasting time and money.",
+    aud9P1Sol: "✦ ZeroCard: international Visa — accepted in all ad dashboards and creative tools",
+    aud9P2Icon: "🎨", aud9P2Title: "Work tools cost in dollars", aud9P2Body: "Adobe CC, Figma, Final Cut, DaVinci Resolve — creator stack costs $100–300/month and requires an international card.",
+    aud9P2Sol: "✦ ZeroCard: all subscriptions from one card + 1% cashback = ~$3 back on every $300 spent",
+    aud9P3Icon: "📊", aud9P3Title: "Monetization comes in crypto — can't spend", aud9P3Body: "Some platforms pay in USDT or BTC. The money is real, but converting to everyday spending without losses is a whole story.",
+    aud9P3Sol: "✦ ZeroCard: USDT from platform → card in seconds → pay production costs today",
+
+    // Audience: Gamers
+    aud10Icon: "🎮", aud10Tag: "👾 Gamers & Play-to-Earn", aud10Title: "Gamers and Play-to-Earn players",
+    aud10Desc: "Steam, Epic, PlayStation, Xbox Game Pass — all require an international card. If you also earn from Play-to-Earn games, ZeroCard is the shortest path from gaming token to real purchases.",
+    aud10S1V: "100M+", aud10S1L: "Visa merchants", aud10S2V: "$0", aud10S2L: "for card", aud10S3V: "1%", aud10S3L: "cashback",
+    aud10P1Icon: "🕹️", aud10P1Title: "Steam, Epic and Xbox don't accept local card", aud10P1Body: "Want to buy a game, DLC or in-game currency — card declined. Forced to buy keys from resellers with 20–30% markup.",
+    aud10P1Sol: "✦ ZeroCard: pay directly on Steam/Epic at real price, plus get cashback",
+    aud10P2Icon: "🪙", aud10P2Title: "Play-to-Earn tokens can't be spent IRL", aud10P2Body: "Earned USDT in Axie, Gods Unchained or other P2E game — real money, but spending it at a café or store is impossible without complex withdrawal.",
+    aud10P2Sol: "✦ ZeroCard: gaming earnings → card in seconds → spend in any store worldwide",
+    aud10P3Icon: "💸", aud10P3Title: "Gaming subscriptions eat money", aud10P3Body: "Xbox Game Pass Ultimate, PlayStation Plus, EA Play — $50–150/year on subscriptions, each requiring a foreign card. Total 3–5% lost on conversion.",
+    aud10P3Sol: "✦ ZeroCard: all gaming subscriptions from one card + 1% back — real savings long term",
+
+    // Audience: E-commerce
+    aud11Icon: "🛍️", aud11Tag: "📦 E-commerce & Dropshipping", aud11Title: "Online sellers & dropshippers",
+    aud11Desc: "AliExpress, Amazon, Shopify, suppliers — everything requires an international card for purchases. If you accept crypto payments, ZeroCard closes the loop.",
+    aud11S1V: "0%", aud11S1L: "FX Visa", aud11S2V: "1%", aud11S2L: "cashback", aud11S3V: "5%", aud11S3L: "APR",
+    aud11P1Icon: "📦", aud11P1Title: "Supplier purchases require foreign card", aud11P1Body: "AliExpress, Amazon FBA, Alibaba — you buy product, but local card is declined or charges 2–3% FX. On $5000 purchases that's $100–150 extra every time.",
+    aud11P1Sol: "✦ ZeroCard Visa: 0% FX — buy from any international supplier without overpaying",
+    aud11P2Icon: "🔁", aud11P2Title: "Clients pay in crypto — money stuck", aud11P2Body: "Accepting USDT payments — convenient for client, but to reinvest in inventory or ads, you need a long path through exchange and bank.",
+    aud11P2Sol: "✦ ZeroCard: USDT payment → straight to card → buy product or run ads the same day",
+    aud11P3Icon: "📣", aud11P3Title: "Meta/Google ads require foreign card", aud11P3Body: "Facebook Ads, Google Ads, TikTok Ads — ad dashboards block local cards. Without a working card the business stops.",
+    aud11P3Sol: "✦ ZeroCard: link to ad dashboards and get 1% cashback on every ad dollar spent",
+
+    // Audience: Expats
+    aud12Icon: "🛂", aud12Tag: "✈️ Expats & Relocated", aud12Title: "Expats and recently relocated",
+    aud12Desc: "Moved to a new country? First months are a nightmare: local bank account hard to open, home cards blocked, cash running out. ZeroCard works from day one in any country.",
+    aud12S1V: "200+", aud12S1L: "countries", aud12S2V: "5 min", aud12S2L: "get card", aud12S3V: "$0", aud12S3L: "fee",
+    aud12P1Icon: "🏦", aud12P1Title: "Local bank won't open account right away", aud12P1Body: "In Germany, Portugal, UAE opening a bank account for new residents takes 2–6 weeks. Need to pay for housing, food, transport — but no card.",
+    aud12P1Sol: "✦ ZeroCard: KYC in 10 minutes — card works the same day while you wait for the bank",
+    aud12P2Icon: "🔄", aud12P2Title: "Transfers from family come in crypto", aud12P2Body: "Parents send money in USDT — cheaper and faster than SWIFT. But how to get it in a form you can pay with at a store?",
+    aud12P2Sol: "✦ ZeroCard: USDT from family → card instantly → pay at any supermarket in the new city",
+    aud12P3Icon: "💱", aud12P3Title: "Two accounts in two countries — constant headache", aud12P3Body: "Money in the old country's account, expenses in the new one. Every transfer — fees, exchange rate, time.",
+    aud12P3Sol: "✦ ZeroCard: one USDT account works everywhere without being tied to any country or bank",
+
+    // Audience: Parents
+    aud13Icon: "👨‍👩‍👧", aud13Tag: "❤️ Families apart", aud13Title: "Parents supporting kids abroad",
+    aud13Desc: "Child studying or working abroad. Sending money through bank — fees, exchange rate, 3–5 days. Crypto is faster, but the child needs a working card. ZeroCard solves this once and for all.",
+    aud13S1V: "⚡", aud13S1L: "instant", aud13S2V: "$0", aud13S2L: "issuance", aud13S3V: "5%", aud13S3L: "APR on balance",
+    aud13P1Icon: "🏫", aud13P1Title: "Transfer to student takes days and costs a lot", aud13P1Body: "SWIFT transfer to son in Germany or daughter in USA: $25–50 fee + conversion + 3–5 business days. Expensive, slow and stressful for both sides.",
+    aud13P1Sol: "✦ ZeroCard: send USDT → child tops up card → money available in a minute, not days",
+    aud13P2Icon: "😟", aud13P2Title: "Child stuck without money in emergency", aud13P2Body: "Phone broke, wallet stolen, bank blocked account — need money right now, not in three days after SWIFT.",
+    aud13P2Sol: "✦ ZeroCard: emergency USDT transfer → card in minutes → problem solved anywhere in the world",
+    aud13P3Icon: "📈", aud13P3Title: "Saved money for child doesn't grow", aud13P3Body: "Holding a USDT reserve 'just in case' for child abroad. Money just sits — no income on the wait.",
+    aud13P3Sol: "✦ ZeroCard: 5% APR accrues on card balance every hour — money grows while waiting for need",
+
+    // Audience: Arbitrage
+    aud14Icon: "⚡", aud14Tag: "🔁 P2P & Crypto arbitrage", aud14Title: "Arbitrageurs and P2P traders",
+    aud14Desc: "Making money on price differences between exchanges or working P2P? Speed of money movement is your profit. ZeroCard gives instant USDT access without delays and bank restrictions.",
+    aud14S1V: "⚡", aud14S1L: "instant", aud14S2V: "5%", aud14S2L: "APR on pause", aud14S3V: "1%", aud14S3L: "cashback everywhere",
+    aud14P1Icon: "⏱️", aud14P1Title: "Every second of delay — lost profit", aud14P1Body: "Arbitrage window lives minutes. While money goes through bank transfer 1–3 days, the window closes. Speed of USDT movement decides everything.",
+    aud14P1Sol: "✦ ZeroCard: card top-up from Pionex in seconds — money where it's needed, when it's needed",
+    aud14P2Icon: "🏦", aud14P2Title: "Banks block frequent P2P operations", aud14P2Body: "Regular transfers between accounts raise bank suspicion. Account blocked, transactions delayed — business stops.",
+    aud14P2Sol: "✦ ZeroCard: USDT movement within Pionex doesn't go through bank — no blocks, no questions",
+    aud14P3Icon: "💤", aud14P3Title: "USDT 'on pause' between deals doesn't work", aud14P3Body: "Between arbitrage windows you hold USDT in reserve. Necessary for speed, but money just sits without income — sometimes hours, sometimes days.",
+    aud14P3Sol: "✦ ZeroCard: 5% APR accrues every hour — reserves earn even while waiting for next deal",
 
     // Reviews
     reviewsBadge: "⭐ Reviews",
@@ -270,8 +341,8 @@ const translations = {
     footerNote: "Independent partner site. Not an official Pionex resource. All links contain partner referral code. Terms and fees may change — check current info at pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard — Spend Crypto Everywhere | Pionex Card",
-    metaDesc: "ZeroCard turns USDT into an everyday payment tool — 1% cashback, 5% APR on balance and zero maintenance fees.",
+    metaTitle: "ZeroCard — Crypto Card Pionex | 1% Cashback, 5% APR, Apple Pay | Spend USDT Everywhere",
+    metaDesc: "ZeroCard by Pionex — virtual Visa/Mastercard for USDT. 1% cashback on every purchase, 5% APR on balance, Apple Pay and Google Pay, 0 annual fees. Works in 200+ countries.",
   },
   ru: {
     // Nav
@@ -285,7 +356,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Трать крипту как",
-    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент — 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий за обслуживание.",
+    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент — 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий за обслуживание. Работает с Apple Pay, Google Pay и PayPal в 200+ странах.",
     heroCTA: "Получить карту бесплатно →",
     heroSecondary: "Как это работает",
     pill1: "200+ стран",
@@ -294,10 +365,12 @@ const translations = {
     pill4: "$0 годовой сбор",
     pill5: "Мгновенное пополнение",
 
-    // Typewriter phrases
+    // Typewriter phrases (13)
     tw1: "обычные деньги", tw2: "кофе и такси", tw3: "Netflix и Spotify",
-    tw4: "еду и покупки", tw5: "ChatGPT и Claude", tw6: "отели и билеты",
-    tw7: "подписки и сервисы", tw8: "всё что угодно", tw9: "реальную жизнь",
+    tw4: "Steam и Xbox", tw5: "Adobe и Figma", tw6: "еду и покупки",
+    tw7: "ChatGPT и Claude", tw8: "отели и билеты", tw9: "подписки и сервисы",
+    tw10: "рекламу в Meta", tw11: "закупки у поставщиков", tw12: "всё что угодно",
+    tw13: "реальную жизнь",
 
     // Ticker
     tickerApple: "Apple Pay", tickerGoogle: "Google Pay", tickerPaypal: "PayPal",
@@ -399,9 +472,12 @@ const translations = {
     audDesc: "Неважно чем ты занимаешься — карта работает для тебя. Выбери свою категорию.",
     audCTA: "Получить ZeroCard бесплатно →",
 
-    audTab1: "🪙 Криптаны", audTab2: "📈 Трейдеры", audTab3: "🤖 Пользователи Pionex",
+    audTab1: "🪙 Криптаны", audTab2: "📈 Трейдеры", audTab3: "🤖 Pionex боты",
     audTab4: "✨ ИИ-пользователи", audTab5: "🔒 Заблокированные карты", audTab6: "🌍 Digital Nomads",
     audTab7: "💼 Фрилансеры", audTab8: "💰 Инвесторы",
+    audTab9: "🎬 Блогеры & Creatives", audTab10: "🎮 Геймеры",
+    audTab11: "🛍️ Интернет-торговля", audTab12: "🛂 Эмигранты",
+    audTab13: "👨‍👩‍👧 Родители за рубежом", audTab14: "⚡ Арбитражники",
 
     // Audience: Crypto
     aud1Icon: "🪙", aud1Tag: "⚡ Основная аудитория", aud1Title: "Держатели крипты",
@@ -491,6 +567,72 @@ const translations = {
     aud8P3Icon: "💸", aud8P3Title: "Дивиденды и прибыль недоступны для трат", aud8P3Body: "Инвестиционный доход приходит в крипте или конвертируется в USDT — но чтобы реально воспользоваться прибылью, нужен долгий путь через банк.",
     aud8P3Sol: "✦ ZeroCard: инвестиционный доход → карта → трать сразу без банков и задержек",
 
+    // Audience: Youtubers/Creatives
+    aud9Icon: "🎬", aud9Tag: "🔥 Контент-мейкеры", aud9Title: "Блогеры, стримеры, Creatives",
+    aud9Desc: "YouTube, Twitch, TikTok, Patreon, Substack, OnlyFans — платформы платят в USD, но вывести деньги в удобную карту без потерь невозможно. ZeroCard делает это за секунды.",
+    aud9S1V: "0%", aud9S1L: "FX конвертация", aud9S2V: "1%", aud9S2L: "кэшбэк назад", aud9S3V: "⚡", aud9S3L: "мгновенно",
+    aud9P1Icon: "💳", aud9P1Title: "Платформы не принимают местную карту", aud9P1Body: "Хочешь продвигать видео через YouTube Ads, Canva Pro или Adobe? Местная карта отклонена. Приходится искать обходные пути, тратить время и деньги.",
+    aud9P1Sol: "✦ ZeroCard: международная Visa — принимается во всех рекламных кабинетах и творческих инструментах",
+    aud9P2Icon: "🎨", aud9P2Title: "Рабочие инструменты стоят в долларах", aud9P2Body: "Adobe CC, Figma, Final Cut, DaVinci Resolve — профессиональный стек контент-мейкера стоит $100–300/мес и требует зарубежную карту каждый месяц.",
+    aud9P2Sol: "✦ ZeroCard: все подписки с одной карты + 1% кэшбэк = ~$3 возврата на каждые $300 расходов",
+    aud9P3Icon: "📊", aud9P3Title: "Монетизация приходит в крипте — не потратить", aud9P3Body: "Некоторые платформы платят в USDT или BTC. Деньги есть, но конвертировать их в живые расходы без потерь — целая история.",
+    aud9P3Sol: "✦ ZeroCard: USDT от платформы → карта за секунды → оплачивай продакшн-расходы прямо сегодня",
+
+    // Audience: Gamers
+    aud10Icon: "🎮", aud10Tag: "👾 Геймеры & Play-to-Earn", aud10Title: "Геймеры и Play-to-Earn игроки",
+    aud10Desc: "Steam, Epic, PlayStation, Xbox Game Pass — всё это требует зарубежную карту. А если ты ещё и зарабатываешь в Play-to-Earn играх, ZeroCard — самый короткий путь от игрового токена до реальных покупок.",
+    aud10S1V: "100M+", aud10S1L: "магазинов Visa", aud10S2V: "$0", aud10S2L: "за карту", aud10S3V: "1%", aud10S3L: "кэшбэк",
+    aud10P1Icon: "🕹️", aud10P1Title: "Steam, Epic и Xbox не принимают местную карту", aud10P1Body: "Хочешь купить игру, DLC или внутриигровую валюту — карта отклонена. Остаётся покупать ключи у перекупов с наценкой 20–30%.",
+    aud10P1Sol: "✦ ZeroCard: платишь напрямую в Steam/Epic по курсу без наценок, ещё и кэшбэк получаешь",
+    aud10P2Icon: "🪙", aud10P2Title: "Play-to-Earn токены нельзя потратить в реальности", aud10P2Body: "Заработал USDT в Axie, Gods Unchained или другой P2E игре — деньги реальные, но потратить их в кафе или магазине невозможно без сложного вывода.",
+    aud10P2Sol: "✦ ZeroCard: игровой заработок → карта за секунды → трать в любом магазине мира",
+    aud10P3Icon: "💸", aud10P3Title: "Подписки на гейминг-сервисы съедают деньги", aud10P3Body: "Xbox Game Pass Ultimate, PlayStation Plus, EA Play — $50–150/год на подписки, каждая из которых требует валютную карту. Суммарно теряешь 3–5% на конвертации.",
+    aud10P3Sol: "✦ ZeroCard: все гейминг-подписки с одной карты + 1% возвращается — реальная экономия на длинной дистанции",
+
+    // Audience: E-commerce
+    aud11Icon: "🛍️", aud11Tag: "📦 E-commerce & Дропшиппинг", aud11Title: "Онлайн-продавцы и дропшипперы",
+    aud11Desc: "AliExpress, Amazon, Shopify, поставщики — всё требует международную карту для закупок. Если принимаешь оплату в крипте, ZeroCard замыкает цикл: получил USDT → купил товар → отправил клиенту.",
+    aud11S1V: "0%", aud11S1L: "FX Visa", aud11S2V: "1%", aud11S2L: "кэшбэк", aud11S3V: "5%", aud11S3L: "APR",
+    aud11P1Icon: "📦", aud11P1Title: "Закупка у поставщиков требует валютную карту", aud11P1Body: "AliExpress, Amazon FBA, Alibaba — закупаешь товар, но местная карта отклонена или берёт 2–3% FX. На $5000 закупок это $100–150 лишних расходов каждый раз.",
+    aud11P1Sol: "✦ ZeroCard Visa: 0% FX — закупай у любых международных поставщиков без переплат",
+    aud11P2Icon: "🔁", aud11P2Title: "Клиенты платят в крипте — деньги застряли", aud11P2Body: "Принимаешь оплату в USDT — удобно для клиента, но чтобы реинвестировать в закупки или рекламу, нужен долгий путь через биржу и банк.",
+    aud11P2Sol: "✦ ZeroCard: оплата в USDT → сразу на карту → закупай товар или крути рекламу в тот же день",
+    aud11P3Icon: "📣", aud11P3Title: "Реклама в Meta/Google требует зарубежную карту", aud11P3Body: "Facebook Ads, Google Ads, TikTok Ads — рекламные кабинеты блокируют местные карты. Без работающей карты бизнес стоит.",
+    aud11P3Sol: "✦ ZeroCard: привязывай к рекламным кабинетам и получай 1% кэшбэк от каждого потраченного рекламного бюджета",
+
+    // Audience: Expats
+    aud12Icon: "🛂", aud12Tag: "✈️ Эмигранты & Переехавшие", aud12Title: "Эмигранты и недавно переехавшие",
+    aud12Desc: "Переехал в новую страну? Первые месяцы — nightmare: местный банковский счёт открыть сложно, домашние карты заблокированы, наличные на исходе. ZeroCard работает с первого дня в любой стране.",
+    aud12S1V: "200+", aud12S1L: "стран", aud12S2V: "5 мин", aud12S2L: "получить карту", aud12S3V: "0₽", aud12S3L: "сбор",
+    aud12P1Icon: "🏦", aud12P1Title: "Местный банк не открывает счёт сразу", aud12P1Body: "В Германии, Португалии, ОАЭ открытие банковского счёта для новых резидентов занимает 2–6 недель. Нужно платить за жильё, еду, транспорт — а карты нет.",
+    aud12P1Sol: "✦ ZeroCard: KYC за 10 минут — карта работает в тот же день, пока ждёшь банк",
+    aud12P2Icon: "🔄", aud12P2Title: "Переводы от родных приходят в крипте", aud12P2Body: "Родители переводят деньги в USDT — так дешевле и быстрее, чем SWIFT. Но как получить их в виде, которым можно платить в магазине?",
+    aud12P2Sol: "✦ ZeroCard: USDT от родных → карта моментально → плати в любом супермаркете нового города",
+    aud12P3Icon: "💱", aud12P3Title: "Два счёта в двух странах — постоянная головная боль", aud12P3Body: "Деньги на счёте в старой стране, расходы в новой. Каждый перевод — комиссия, курс, время. Разрываешься между двумя банками.",
+    aud12P3Sol: "✦ ZeroCard: один USDT-счёт работает везде без привязки к конкретной стране или банку",
+
+    // Audience: Parents
+    aud13Icon: "👨‍👩‍👧", aud13Tag: "❤️ Семьи на расстоянии", aud13Title: "Родители, поддерживающие детей за рубежом",
+    aud13Desc: "Ребёнок учится или работает за границей. Переводить деньги через банк — комиссии, курс, 3–5 дней. Крипта быстрее, но ребёнку нужна работающая карта. ZeroCard решает это раз и навсегда.",
+    aud13S1V: "⚡", aud13S1L: "мгновенно", aud13S2V: "$0", aud13S2L: "за выпуск", aud13S3V: "5%", aud13S3L: "APR на остаток",
+    aud13P1Icon: "🏫", aud13P1Title: "Перевод студенту занимает дни и стоит дорого", aud13P1Body: "SWIFT-перевод сыну в Германию или дочери в США: комиссия $25–50 + конвертация + 3–5 рабочих дней. Это дорого, медленно и нервно для обеих сторон.",
+    aud13P1Sol: "✦ ZeroCard: отправь USDT → ребёнок пополняет карту → деньги доступны через минуту, а не дни",
+    aud13P2Icon: "😟", aud13P2Title: "Ребёнок застрял без денег в экстренной ситуации", aud13P2Body: "Телефон сломался, кошелёк украли, банк заблокировал счёт — нужны деньги прямо сейчас, а не через три дня после SWIFT-перевода.",
+    aud13P2Sol: "✦ ZeroCard: экстренный перевод USDT → карта за минуты → проблема решена в любой точке мира",
+    aud13P3Icon: "📈", aud13P3Title: "Отложенные деньги для ребёнка не растут", aud13P3Body: "Держишь запас USDT «на всякий случай» для ребёнка за рубежом. Деньги просто лежат — никакого дохода на ожидании.",
+    aud13P3Sol: "✦ ZeroCard: 5% APR начисляется на карточный остаток каждый час — деньги растут, пока ждут нужды",
+
+    // Audience: Arbitrage
+    aud14Icon: "⚡", aud14Tag: "🔁 P2P & Крипто-арбитраж", aud14Title: "Арбитражники и P2P-трейдеры",
+    aud14Desc: "Зарабатываешь на разнице курсов между биржами или работаешь в P2P? Скорость движения денег — это твоя прибыль. ZeroCard даёт мгновенный доступ к USDT без задержек и банковских ограничений.",
+    aud14S1V: "⚡", aud14S1L: "мгновенно", aud14S2V: "5%", aud14S2L: "APR на паузе", aud14S3V: "1%", aud14S3L: "кэшбэк везде",
+    aud14P1Icon: "⏱️", aud14P1Title: "Каждая секунда промедления — потерянная прибыль", aud14P1Body: "Арбитражное окно живёт минуты. Пока деньги идут через банковский перевод 1–3 дня, окно закрывается. Скорость движения USDT решает всё.",
+    aud14P1Sol: "✦ ZeroCard: пополнение карты из Pionex за секунды — деньги там, где нужны, когда нужны",
+    aud14P2Icon: "🏦", aud14P2Title: "Банки блокируют частые P2P-операции", aud14P2Body: "Регулярные переводы между счетами вызывают подозрение у банков. Счёт блокируют, транзакции задерживают — бизнес встаёт.",
+    aud14P2Sol: "✦ ZeroCard: движение USDT внутри Pionex не проходит через банк — никаких блокировок, никаких вопросов",
+    aud14P3Icon: "💤", aud14P3Title: "USDT «на паузе» между сделками не работает", aud14P3Body: "Между арбитражными окнами держишь USDT в резерве. Это необходимо для скорости, но деньги просто лежат без дохода — иногда часами, иногда днями.",
+    aud14P3Sol: "✦ ZeroCard: 5% APR начисляется каждый час — резерв зарабатывает даже в ожидании следующей сделки",
+
     // Reviews
     reviewsBadge: "⭐ Отзывы",
     reviewsTitle: "Они уже\nтратят умнее",
@@ -540,8 +682,8 @@ const translations = {
     footerNote: "Независимый партнёрский сайт. Не является официальным ресурсом Pionex. Все ссылки содержат реферальный код партнёра. Условия и сборы могут изменяться — проверяй актуальную информацию на pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard — Трать крипту везде | Карта Pionex",
-    metaDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент — 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий за обслуживание.",
+    metaTitle: "ZeroCard — Криптокарта Pionex | 1% кэшбэк, 5% APR, Apple Pay | Трать USDT везде",
+    metaDesc: "ZeroCard на базе Pionex — виртуальная Visa/Mastercard для USDT. 1% кэшбэк на каждую покупку, 5% годовых на остаток, Apple Pay и Google Pay, 0 годовых сборов. Работает в 200+ странах.",
   },
 } as const;
 
@@ -554,31 +696,32 @@ interface I18nContextType {
 }
 
 const I18nContext = createContext<I18nContextType>({
-  lang: "en",
+  lang: "ru",
   setLang: () => {},
-  t: translations.en,
+  t: translations.ru as unknown as Translations,
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
-    const stored = localStorage.getItem("zc-lang");
-    if (stored === "ru" || stored === "en") {
-      document.documentElement.lang = stored;
-      return stored;
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("zerocard-lang") as Lang;
+      if (saved && (saved === "en" || saved === "ru")) return saved;
+      const browserLang = navigator.language.startsWith("ru") ? "ru" : "en";
+      return browserLang as Lang;
     }
-    const detected = navigator.language.startsWith("ru") ? "ru" : "en";
-    document.documentElement.lang = detected;
-    return detected;
+    return "ru";
   });
 
-  const setLang = useCallback((newLang: Lang) => {
-    setLangState(newLang);
-    localStorage.setItem("zc-lang", newLang);
-    document.documentElement.lang = newLang;
+  const setLang = useCallback((l: Lang) => {
+    setLangState(l);
+    localStorage.setItem("zerocard-lang", l);
+    document.documentElement.lang = l;
   }, []);
 
+  const t = translations[lang] as unknown as Translations;
+
   return (
-    <I18nContext.Provider value={{ lang, setLang, t: translations[lang] }}>
+    <I18nContext.Provider value={{ lang, setLang, t }}>
       {children}
     </I18nContext.Provider>
   );
