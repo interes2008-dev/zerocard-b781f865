@@ -149,7 +149,7 @@ function Navbar() {
    ═══════════════════════════════════════════════════ */
 function HeroSection() {
   const { t } = useI18n();
-  const phrases = [t.tw1, t.tw2, t.tw3, t.tw4, t.tw5, t.tw6, t.tw7, t.tw8, t.tw9];
+  const phrases = [t.tw1, t.tw2, t.tw3, t.tw4, t.tw5, t.tw6, t.tw7, t.tw8, t.tw9, t.tw10, t.tw11, t.tw12, t.tw13];
   const [wordIdx, setWordIdx] = useState(0);
   const [animClass, setAnimClass] = useState("");
 
@@ -605,6 +605,9 @@ function AudienceSection() {
     { id: "3", label: t.audTab3 }, { id: "4", label: t.audTab4 },
     { id: "5", label: t.audTab5 }, { id: "6", label: t.audTab6 },
     { id: "7", label: t.audTab7 }, { id: "8", label: t.audTab8 },
+    { id: "9", label: t.audTab9 }, { id: "10", label: t.audTab10 },
+    { id: "11", label: t.audTab11 }, { id: "12", label: t.audTab12 },
+    { id: "13", label: t.audTab13 }, { id: "14", label: t.audTab14 },
   ];
 
   const panels: Record<string, {
@@ -684,6 +687,60 @@ function AudienceSection() {
         { icon: t.aud8P3Icon, title: t.aud8P3Title, body: t.aud8P3Body, sol: t.aud8P3Sol },
       ],
     },
+    "9": {
+      icon: t.aud9Icon, tag: t.aud9Tag, title: t.aud9Title, desc: t.aud9Desc,
+      stats: [{ val: t.aud9S1V, label: t.aud9S1L }, { val: t.aud9S2V, label: t.aud9S2L }, { val: t.aud9S3V, label: t.aud9S3L }],
+      pains: [
+        { icon: t.aud9P1Icon, title: t.aud9P1Title, body: t.aud9P1Body, sol: t.aud9P1Sol },
+        { icon: t.aud9P2Icon, title: t.aud9P2Title, body: t.aud9P2Body, sol: t.aud9P2Sol },
+        { icon: t.aud9P3Icon, title: t.aud9P3Title, body: t.aud9P3Body, sol: t.aud9P3Sol },
+      ],
+    },
+    "10": {
+      icon: t.aud10Icon, tag: t.aud10Tag, title: t.aud10Title, desc: t.aud10Desc,
+      stats: [{ val: t.aud10S1V, label: t.aud10S1L }, { val: t.aud10S2V, label: t.aud10S2L }, { val: t.aud10S3V, label: t.aud10S3L }],
+      pains: [
+        { icon: t.aud10P1Icon, title: t.aud10P1Title, body: t.aud10P1Body, sol: t.aud10P1Sol },
+        { icon: t.aud10P2Icon, title: t.aud10P2Title, body: t.aud10P2Body, sol: t.aud10P2Sol },
+        { icon: t.aud10P3Icon, title: t.aud10P3Title, body: t.aud10P3Body, sol: t.aud10P3Sol },
+      ],
+    },
+    "11": {
+      icon: t.aud11Icon, tag: t.aud11Tag, title: t.aud11Title, desc: t.aud11Desc,
+      stats: [{ val: t.aud11S1V, label: t.aud11S1L }, { val: t.aud11S2V, label: t.aud11S2L }, { val: t.aud11S3V, label: t.aud11S3L }],
+      pains: [
+        { icon: t.aud11P1Icon, title: t.aud11P1Title, body: t.aud11P1Body, sol: t.aud11P1Sol },
+        { icon: t.aud11P2Icon, title: t.aud11P2Title, body: t.aud11P2Body, sol: t.aud11P2Sol },
+        { icon: t.aud11P3Icon, title: t.aud11P3Title, body: t.aud11P3Body, sol: t.aud11P3Sol },
+      ],
+    },
+    "12": {
+      icon: t.aud12Icon, tag: t.aud12Tag, title: t.aud12Title, desc: t.aud12Desc,
+      stats: [{ val: t.aud12S1V, label: t.aud12S1L }, { val: t.aud12S2V, label: t.aud12S2L }, { val: t.aud12S3V, label: t.aud12S3L }],
+      pains: [
+        { icon: t.aud12P1Icon, title: t.aud12P1Title, body: t.aud12P1Body, sol: t.aud12P1Sol },
+        { icon: t.aud12P2Icon, title: t.aud12P2Title, body: t.aud12P2Body, sol: t.aud12P2Sol },
+        { icon: t.aud12P3Icon, title: t.aud12P3Title, body: t.aud12P3Body, sol: t.aud12P3Sol },
+      ],
+    },
+    "13": {
+      icon: t.aud13Icon, tag: t.aud13Tag, title: t.aud13Title, desc: t.aud13Desc,
+      stats: [{ val: t.aud13S1V, label: t.aud13S1L }, { val: t.aud13S2V, label: t.aud13S2L }, { val: t.aud13S3V, label: t.aud13S3L }],
+      pains: [
+        { icon: t.aud13P1Icon, title: t.aud13P1Title, body: t.aud13P1Body, sol: t.aud13P1Sol },
+        { icon: t.aud13P2Icon, title: t.aud13P2Title, body: t.aud13P2Body, sol: t.aud13P2Sol },
+        { icon: t.aud13P3Icon, title: t.aud13P3Title, body: t.aud13P3Body, sol: t.aud13P3Sol },
+      ],
+    },
+    "14": {
+      icon: t.aud14Icon, tag: t.aud14Tag, title: t.aud14Title, desc: t.aud14Desc,
+      stats: [{ val: t.aud14S1V, label: t.aud14S1L }, { val: t.aud14S2V, label: t.aud14S2L }, { val: t.aud14S3V, label: t.aud14S3L }],
+      pains: [
+        { icon: t.aud14P1Icon, title: t.aud14P1Title, body: t.aud14P1Body, sol: t.aud14P1Sol },
+        { icon: t.aud14P2Icon, title: t.aud14P2Title, body: t.aud14P2Body, sol: t.aud14P2Sol },
+        { icon: t.aud14P3Icon, title: t.aud14P3Title, body: t.aud14P3Body, sol: t.aud14P3Sol },
+      ],
+    },
   };
 
   const p = panels[activeAud];
@@ -698,7 +755,7 @@ function AudienceSection() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="flex gap-2 flex-wrap mt-12 mb-10">
+          <div className="audience-tabs-grid mt-12 mb-10">
             {tabs.map(tab => (
               <button key={tab.id} onClick={() => setActiveAud(tab.id)}
                 className={`aud-tab ${activeAud === tab.id ? "active" : ""}`}>
@@ -944,15 +1001,63 @@ function DynamicMeta() {
     setMeta("property", "og:description", t.metaDesc);
   }, [t, lang]);
 
-  const orgSchema = {
+  const schema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "ZeroCard",
-    url: "https://zerocard.pro",
-    description: t.metaDesc,
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://zerocard.pro/#webpage",
+        url: "https://zerocard.pro/",
+        name: t.metaTitle,
+        description: t.metaDesc,
+        inLanguage: lang,
+        isPartOf: { "@id": "https://zerocard.pro/#website" },
+        breadcrumb: {
+          "@type": "BreadcrumbList",
+          itemListElement: [{ "@type": "ListItem", position: 1, name: "ZeroCard", item: "https://zerocard.pro/" }]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://zerocard.pro/#website",
+        url: "https://zerocard.pro/",
+        name: "ZeroCard",
+        description: lang === "ru" ? "Криптокарта Pionex — трать USDT везде" : "Pionex crypto card — spend USDT everywhere",
+        inLanguage: lang,
+        publisher: { "@id": "https://zerocard.pro/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://zerocard.pro/#organization",
+        name: "ZeroCard",
+        url: "https://zerocard.pro/",
+        description: lang === "ru" ? "Партнёрский проект Pionex Card — криптовалютная дебетовая карта Visa/Mastercard" : "Pionex Card partner — crypto debit card Visa/Mastercard",
+        sameAs: ["https://www.pionex.com/ru/signUp?r=0uHzysLVYQh"]
+      },
+      {
+        "@type": "FinancialProduct",
+        name: "ZeroCard by Pionex",
+        description: lang === "ru"
+          ? "Виртуальная дебетовая карта Visa/Mastercard для трат в USDT. 1% кэшбэк, 5% APR на остаток, Apple Pay, Google Pay, 0 годовых сборов."
+          : "Virtual Visa/Mastercard debit card for USDT spending. 1% cashback, 5% APR on balance, Apple Pay, Google Pay, 0 annual fees.",
+        url: "https://zerocard.pro/",
+        provider: {
+          "@type": "FinancialService",
+          name: "Pionex",
+          url: "https://www.pionex.com"
+        },
+        feesAndCommissionsSpecification: "0 annual fee, 0 issuance fee, 1% transaction fee offset by 1% cashback",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          description: lang === "ru" ? "Бесплатный выпуск и обслуживание" : "Free issuance and maintenance"
+        }
+      }
+    ]
   };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />;
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
 /* ═══════════════════════════════════════════════════
