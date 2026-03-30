@@ -15,7 +15,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Spend crypto like",
-    heroDesc: "ZeroCard turns USDT into an everyday payment tool — 1% cashback on everything, 5% APR on balance and zero fees for maintenance. Works with Apple Pay, Google Pay and PayPal in 200+ countries.",
+    heroDesc: "ZeroCard turns USDT into an everyday payment tool — 1% cashback on everything, 5% APR on balance and zero maintenance fees. Works with Apple Pay, Google Pay and PayPal in 200+ countries.",
     heroCTA: "Get card for free →",
     heroSecondary: "How it works",
     pill1: "200+ countries",

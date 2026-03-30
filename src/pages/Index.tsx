@@ -208,7 +208,7 @@ function HeroSection() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <p className="text-lg leading-[1.7] font-normal mb-10 mx-auto" style={{ color: "var(--text2)", maxWidth: 600 }}>
+          <p className="text-lg leading-[1.7] font-normal mb-10 mx-auto" style={{ color: "var(--text2)", maxWidth: 660 }}>
             {t.heroDesc}
           </p>
         </FadeIn>
