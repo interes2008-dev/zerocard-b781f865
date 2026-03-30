@@ -151,21 +151,30 @@ function HeroSection() {
   const { t } = useI18n();
   const phrases = [t.tw1, t.tw2, t.tw3, t.tw4, t.tw5, t.tw6, t.tw7, t.tw8, t.tw9, t.tw10, t.tw11, t.tw12, t.tw13];
   const [wordIdx, setWordIdx] = useState(0);
-  const [animClass, setAnimClass] = useState("");
+  const [displayed, setDisplayed] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const interval = setInterval(() => {
-        setAnimClass("out");
-        setTimeout(() => {
-          setWordIdx(prev => (prev + 1) % phrases.length);
-          setAnimClass("");
-        }, 320);
-      }, 3000);
-      return () => clearInterval(interval);
-    }, 2500);
-    return () => clearTimeout(timeout);
-  }, [phrases.length]);
+    const current = phrases[wordIdx];
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayed.length < current.length) {
+      // Typing
+      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 70 + Math.random() * 40);
+    } else if (!isDeleting && displayed.length === current.length) {
+      // Pause then start deleting
+      timer = setTimeout(() => setIsDeleting(true), 2200);
+    } else if (isDeleting && displayed.length > 0) {
+      // Deleting
+      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 35);
+    } else if (isDeleting && displayed.length === 0) {
+      // Move to next word
+      setIsDeleting(false);
+      setWordIdx(prev => (prev + 1) % phrases.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayed, isDeleting, wordIdx, phrases]);
 
   const pills = [
     { icon: "🌍", label: t.pill1 }, { icon: "🍎", label: t.pill2 },
@@ -202,7 +211,8 @@ function HeroSection() {
           <h1 className="hero-title mb-6">
             {t.heroTitle1}<br />
             <span className="typewriter-wrap">
-              <span key={wordIdx} className={`typewriter-word ${animClass}`}>{phrases[wordIdx]}</span>
+              <span className="typewriter-word">{displayed}</span>
+              <span className="typewriter-cursor" />
             </span>
           </h1>
         </FadeIn>
