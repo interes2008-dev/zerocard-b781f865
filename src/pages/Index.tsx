@@ -1064,7 +1064,7 @@ function DynamicMeta() {
    PAGE COMPOSITION
    ═══════════════════════════════════════════════════ */
 const Index = () => (
-  <div className="min-h-screen overflow-x-hidden">
+  <div className="min-h-screen" style={{ overflowX: "clip" }}>
     <DynamicMeta />
     <Navbar />
     <HeroSection />
