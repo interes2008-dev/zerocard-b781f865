@@ -207,10 +207,10 @@ section, [class*="py-24"], [class*="py-8"] {
     background-clip: text;
     position: relative;
     white-space: nowrap;
-    overflow: hidden;
-    max-width: 0;
-    animation: typeIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
     vertical-align: bottom;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeSlideIn 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
   }
   .typewriter-word::after {
     content: '';
@@ -221,19 +221,19 @@ section, [class*="py-24"], [class*="py-8"] {
     border-radius: 2px;
     margin-left: 4px;
     vertical-align: baseline;
-    animation: cursorBlink 0.85s step-end infinite;
+    animation: cursorBlink 0.9s ease-in-out infinite;
     -webkit-text-fill-color: initial;
   }
-  @keyframes typeIn {
-    from { max-width: 0; opacity: 0.4; }
-    to   { max-width: 700px; opacity: 1; }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  @keyframes typeOut {
-    from { max-width: 700px; opacity: 1; }
-    to   { max-width: 0; opacity: 0; }
+  @keyframes fadeSlideOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
   }
   .typewriter-word.out {
-    animation: typeOut 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+    animation: fadeSlideOut 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
   }
   @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
