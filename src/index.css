@@ -214,11 +214,13 @@ section, [class*="py-24"], [class*="py-8"] {
   }
   .typewriter-word::after {
     content: '';
-    position: absolute;
-    bottom: 8px; right: -4px;
-    width: 3px; height: 75%;
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
     background: var(--accent-color);
     border-radius: 2px;
+    margin-left: 4px;
+    vertical-align: baseline;
     animation: cursorBlink 0.85s step-end infinite;
     -webkit-text-fill-color: initial;
   }
