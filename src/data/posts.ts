@@ -1,4 +1,4 @@
-import type { Language } from "@/lib/i18n";
+import type { Lang } from "@/lib/i18n";
 
 export interface Post {
   slug: string;
