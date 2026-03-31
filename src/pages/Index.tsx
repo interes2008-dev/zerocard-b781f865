@@ -58,6 +58,7 @@ function Navbar() {
     { label: t.navHow, href: "#how" },
     { label: t.navCompare, href: "#compare" },
     { label: t.navFAQ, href: "#faq" },
+    { label: lang === "ru" ? "Блог" : "Blog", href: "/blog" },
   ];
 
   return (
