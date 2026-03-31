@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
-import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
+import { ArrowRight, Menu, X, Sun, Moon, Globe } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
@@ -83,12 +83,13 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2.5">
-          <div className="flex rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
+          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
+            <Globe className="w-4 h-4 ml-2.5" style={{ color: "var(--text2)" }} />
             {(["en", "ru"] as Lang[]).map(l => (
               <button key={l} onClick={() => setLang(l)}
                 className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all"
                 style={{
-                  background: lang === l ? "var(--accent-color)" : "var(--bg3)",
+                  background: lang === l ? "var(--accent-color)" : "transparent",
                   color: lang === l ? "#fff" : "var(--text2)",
                 }}>
                 {l}
@@ -105,12 +106,13 @@ function Navbar() {
         </div>
 
         <div className="md:hidden flex items-center gap-2">
-          <div className="flex rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
+          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
+            <Globe className="w-3.5 h-3.5 ml-2" style={{ color: "var(--text2)" }} />
             {(["en", "ru"] as Lang[]).map(l => (
               <button key={l} onClick={() => setLang(l)}
                 className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider transition-all"
                 style={{
-                  background: lang === l ? "var(--accent-color)" : "var(--bg3)",
+                  background: lang === l ? "var(--accent-color)" : "transparent",
                   color: lang === l ? "#fff" : "var(--text2)",
                 }}>
                 {l}
