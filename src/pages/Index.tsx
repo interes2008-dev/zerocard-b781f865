@@ -83,12 +83,13 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2.5">
-          <div className="flex items-center gap-1.5 rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
+          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
             <Globe className="w-4 h-4 ml-2.5" style={{ color: "var(--text2)" }} />
+            {(["en", "ru"] as Lang[]).map(l => (
               <button key={l} onClick={() => setLang(l)}
                 className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all"
                 style={{
-                  background: lang === l ? "var(--accent-color)" : "var(--bg3)",
+                  background: lang === l ? "var(--accent-color)" : "transparent",
                   color: lang === l ? "#fff" : "var(--text2)",
                 }}>
                 {l}
