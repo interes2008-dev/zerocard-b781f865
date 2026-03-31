@@ -285,10 +285,10 @@ Get your card for free: zerocard.pro`,
   ],
 };
 
-export function getPostBySlug(slug: string, lang: Language): Post | undefined {
+export function getPostBySlug(slug: string, lang: Lang): Post | undefined {
   return posts[lang].find((p) => p.slug === slug);
 }
 
-export function getAllPosts(lang: Language): Post[] {
+export function getAllPosts(lang: Lang): Post[] {
   return posts[lang];
 }

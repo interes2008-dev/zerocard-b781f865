@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { getPostBySlug } from "@/data/posts";
+import { useI18n } from "@/lib/i18n";
+import { BlogHeader } from "./Blog";
 import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
@@ -45,10 +47,8 @@ function RenderContent({ content }: { content: string }) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    // Table row
     if (line.startsWith("|")) {
       const cells = line.split("|").filter(Boolean).map(c => c.trim());
-      // Skip separator rows like |---|---|
       if (cells.every(c => /^[-:]+$/.test(c))) continue;
       tableRows.push(cells);
       inTable = true;
@@ -57,7 +57,6 @@ function RenderContent({ content }: { content: string }) {
 
     if (inTable) flushTable();
 
-    // Heading
     if (line.startsWith("## ")) {
       elements.push(
         <h2 key={i} className="text-xl md:text-2xl font-bold mt-10 mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -67,7 +66,6 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    // List item
     if (line.startsWith("- ")) {
       elements.push(
         <li key={i} className="ml-5 mb-1.5" style={{ color: "var(--text2)", lineHeight: 1.7 }}>
@@ -77,7 +75,6 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    // Numbered list
     const numMatch = line.match(/^(\d+)\.\s(.+)/);
     if (numMatch) {
       elements.push(
@@ -89,12 +86,8 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    // Empty line
-    if (line.trim() === "") {
-      continue;
-    }
+    if (line.trim() === "") continue;
 
-    // Paragraph
     elements.push(
       <p key={i} className="mb-4" style={{ color: "var(--text2)", lineHeight: 1.8 }}>
         {renderInline(line)}
@@ -103,12 +96,10 @@ function RenderContent({ content }: { content: string }) {
   }
 
   if (inTable) flushTable();
-
   return <>{elements}</>;
 }
 
 function renderInline(text: string): React.ReactNode {
-  // Bold
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
@@ -120,14 +111,14 @@ function renderInline(text: string): React.ReactNode {
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const { lang } = useI18n();
+  const post = slug ? getPostBySlug(slug, lang) : undefined;
 
   useEffect(() => {
     if (!post) return;
     document.title = `${post.title} | ZeroCard`;
     window.scrollTo(0, 0);
 
-    // Set meta tags
     const setMeta = (attr: string, key: string, value: string) => {
       let el = document.querySelector(`meta[${attr}="${key}"]`);
       if (!el) {
@@ -148,26 +139,12 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)", color: "var(--text)" }}>
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-[20px] border-b" style={{ background: "rgba(2,13,31,0.92)", borderColor: "var(--border-custom)" }}>
-        <div className="max-w-[1160px] mx-auto px-5 md:px-10 flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2.5 no-underline" style={{ color: "var(--text)" }}>
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base" style={{ background: "var(--accent-color)" }}>💳</div>
-            <span className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Zero<span style={{ color: "var(--accent-color)" }}>Card</span></span>
-          </Link>
-          <Link to="/blog" className="text-sm font-medium no-underline transition-colors" style={{ color: "var(--text2)" }}
-            onMouseEnter={e => { e.currentTarget.style.color = "var(--text)"; }}
-            onMouseLeave={e => { e.currentTarget.style.color = "var(--text2)"; }}>
-            ← Назад к блогу
-          </Link>
-        </div>
-      </header>
+      <BlogHeader />
 
-      {/* Article */}
       <article className="max-w-[720px] mx-auto px-5 md:px-10 py-12 md:py-20">
         <div className="flex items-center gap-2 mb-6 text-sm" style={{ color: "var(--text3)" }}>
           <Calendar className="w-4 h-4" />
-          {new Date(post.date).toLocaleDateString("ru-RU", { year: "numeric", month: "long", day: "numeric" })}
+          {new Date(post.date).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", { year: "numeric", month: "long", day: "numeric" })}
         </div>
 
         <h1 className="text-3xl md:text-[42px] font-bold leading-tight mb-8" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
@@ -181,10 +158,10 @@ export default function BlogPost() {
         {/* CTA block */}
         <div className="mt-16 rounded-2xl border p-8 md:p-10 text-center" style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
           <h3 className="text-2xl md:text-3xl font-bold mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Получить карту бесплатно
+            {lang === "ru" ? "Получить карту бесплатно" : "Get Your Card for Free"}
           </h3>
           <p className="mb-6" style={{ color: "var(--text2)" }}>
-            Криптокарта с 1% кэшбэком и 5% годовых на остаток
+            {lang === "ru" ? "Криптокарта с 1% кэшбэком и 5% годовых на остаток" : "Crypto card with 1% cashback and 5% APR on balance"}
           </p>
           <a
             href={SIGNUP_URL}
@@ -193,7 +170,7 @@ export default function BlogPost() {
             className="btn-primary inline-flex items-center gap-2"
             style={{ padding: "14px 32px", fontSize: "16px", borderRadius: "12px" }}
           >
-            Оформить ZeroCard <ArrowRight className="w-5 h-5" />
+            {lang === "ru" ? "Оформить ZeroCard" : "Get ZeroCard"} <ArrowRight className="w-5 h-5" />
           </a>
         </div>
 
@@ -202,7 +179,7 @@ export default function BlogPost() {
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-medium no-underline transition-colors" style={{ color: "var(--text2)" }}
             onMouseEnter={e => { e.currentTarget.style.color = "var(--accent-color)"; }}
             onMouseLeave={e => { e.currentTarget.style.color = "var(--text2)"; }}>
-            <ArrowLeft className="w-4 h-4" /> Все статьи
+            <ArrowLeft className="w-4 h-4" /> {lang === "ru" ? "Все статьи" : "All articles"}
           </Link>
         </div>
       </article>
