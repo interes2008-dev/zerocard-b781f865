@@ -162,8 +162,9 @@ function HeroSection() {
       // Typing
       timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 70 + Math.random() * 40);
     } else if (!isDeleting && displayed.length === current.length) {
-      // Pause then start deleting
-      timer = setTimeout(() => setIsDeleting(true), 2200);
+      // Pause then start deleting — first word gets a longer accent pause
+      const pause = wordIdx === 0 ? 4500 : 2200;
+      timer = setTimeout(() => setIsDeleting(true), pause);
     } else if (isDeleting && displayed.length > 0) {
       // Deleting
       timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 35);
