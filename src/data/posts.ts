@@ -8,7 +8,7 @@ export interface Post {
   content: string;
 }
 
-export const posts: Record<Language, Post[]> = {
+export const posts: Record<Lang, Post[]> = {
   ru: [
     {
       slug: "kak-potratit-usdt",
