@@ -350,12 +350,6 @@ Reply with ONLY JSON without markdown wrapping.`;
       counter++;
     }
 
-    // Generate image URL using picsum with a seed based on slug
-    const seed = Math.abs(
-      finalSlug.split("").reduce((a, c) => a + c.charCodeAt(0), 0)
-    );
-    const imageUrl = `https://picsum.photos/seed/${seed}/800/400`;
-
     // Insert into database
     const { data: post, error } = await supabase
       .from("blog_posts")
@@ -366,7 +360,7 @@ Reply with ONLY JSON without markdown wrapping.`;
         content: article.content,
         lang,
         category: category.id,
-        image_url: imageUrl,
+        image_url: null,
         published_at: new Date().toISOString(),
       })
       .select()
