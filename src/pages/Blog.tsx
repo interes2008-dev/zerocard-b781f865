@@ -179,17 +179,8 @@ export default function Blog() {
                 }}
               >
                 <div className="p-6 md:p-8">
-                  {/* Badges */}
+                  {/* Category badge */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span
-                      className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold"
-                      style={{
-                        background: post.lang === "ru" ? "rgba(239,68,68,0.15)" : "rgba(59,130,246,0.15)",
-                        color: post.lang === "ru" ? "#ef4444" : "#3b82f6",
-                      }}
-                    >
-                      {post.lang === "ru" ? "🇷🇺 RU" : "🇬🇧 EN"}
-                    </span>
                     <span
                       className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground"
                     >
