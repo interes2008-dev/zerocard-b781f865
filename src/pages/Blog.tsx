@@ -76,13 +76,10 @@ function BlogHeader() {
 
 export { BlogHeader };
 
-type LangFilter = "all" | "ru" | "en";
-
 export default function Blog() {
   const { lang } = useI18n();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [langFilter, setLangFilter] = useState<LangFilter>("all");
   const [autoGenerating, setAutoGenerating] = useState(false);
 
   // Fetch posts
