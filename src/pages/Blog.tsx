@@ -145,29 +145,6 @@ export default function Blog() {
             : "Articles about crypto cards, USDT, and finance"}
         </p>
 
-        {/* Language filter */}
-        <div className="flex gap-2 mb-8">
-          {(["all", "ru", "en"] as LangFilter[]).map((f) => (
-            <button
-              key={f}
-              onClick={() => setLangFilter(f)}
-              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all border"
-              style={{
-                background: langFilter === f ? "hsl(var(--primary))" : "transparent",
-                color: langFilter === f ? "#fff" : "hsl(var(--muted-foreground))",
-                borderColor: langFilter === f ? "hsl(var(--primary))" : "hsl(var(--border))",
-              }}
-            >
-              {f === "all"
-                ? lang === "ru"
-                  ? "Все"
-                  : "All"
-                : f === "ru"
-                ? "🇷🇺 RU"
-                : "🇬🇧 EN"}
-            </button>
-          ))}
-        </div>
 
         {autoGenerating && (
           <div className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5">
