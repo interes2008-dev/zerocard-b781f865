@@ -76,13 +76,10 @@ function BlogHeader() {
 
 export { BlogHeader };
 
-type LangFilter = "all" | "ru" | "en";
-
 export default function Blog() {
   const { lang } = useI18n();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [langFilter, setLangFilter] = useState<LangFilter>("all");
   const [autoGenerating, setAutoGenerating] = useState(false);
 
   // Fetch posts
@@ -129,7 +126,7 @@ export default function Blog() {
     window.scrollTo(0, 0);
   }, [lang]);
 
-  const filtered = langFilter === "all" ? posts : posts.filter((p) => p.lang === langFilter);
+  const filtered = posts.filter((p) => p.lang === lang);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -148,29 +145,6 @@ export default function Blog() {
             : "Articles about crypto cards, USDT, and finance"}
         </p>
 
-        {/* Language filter */}
-        <div className="flex gap-2 mb-8">
-          {(["all", "ru", "en"] as LangFilter[]).map((f) => (
-            <button
-              key={f}
-              onClick={() => setLangFilter(f)}
-              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all border"
-              style={{
-                background: langFilter === f ? "hsl(var(--primary))" : "transparent",
-                color: langFilter === f ? "#fff" : "hsl(var(--muted-foreground))",
-                borderColor: langFilter === f ? "hsl(var(--primary))" : "hsl(var(--border))",
-              }}
-            >
-              {f === "all"
-                ? lang === "ru"
-                  ? "Все"
-                  : "All"
-                : f === "ru"
-                ? "🇷🇺 RU"
-                : "🇬🇧 EN"}
-            </button>
-          ))}
-        </div>
 
         {autoGenerating && (
           <div className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5">
@@ -205,17 +179,8 @@ export default function Blog() {
                 }}
               >
                 <div className="p-6 md:p-8">
-                  {/* Badges */}
+                  {/* Category badge */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span
-                      className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold"
-                      style={{
-                        background: post.lang === "ru" ? "rgba(239,68,68,0.15)" : "rgba(59,130,246,0.15)",
-                        color: post.lang === "ru" ? "#ef4444" : "#3b82f6",
-                      }}
-                    >
-                      {post.lang === "ru" ? "🇷🇺 RU" : "🇬🇧 EN"}
-                    </span>
                     <span
                       className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground"
                     >
