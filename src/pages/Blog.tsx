@@ -126,7 +126,7 @@ export default function Blog() {
     window.scrollTo(0, 0);
   }, [lang]);
 
-  const filtered = langFilter === "all" ? posts : posts.filter((p) => p.lang === langFilter);
+  const filtered = posts.filter((p) => p.lang === lang);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
