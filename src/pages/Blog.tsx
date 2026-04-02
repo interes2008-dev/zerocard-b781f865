@@ -204,17 +204,6 @@ export default function Blog() {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                {/* Image */}
-                {post.image_url && (
-                  <div className="w-full h-48 md:h-56 overflow-hidden">
-                    <img
-                      src={post.image_url}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
                 <div className="p-6 md:p-8">
                   {/* Badges */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
