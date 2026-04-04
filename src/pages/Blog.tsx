@@ -46,22 +46,13 @@ function BlogHeader() {
           </span>
         </Link>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 rounded-lg overflow-hidden border border-border">
-            <Globe className="w-4 h-4 ml-2.5 text-muted-foreground" />
-            {(["en", "ru"] as Lang[]).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all"
-                style={{
-                  background: lang === l ? "hsl(var(--primary))" : "transparent",
-                  color: lang === l ? "#fff" : "hsl(var(--muted-foreground))",
-                }}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
+          <button
+            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all hover:scale-105 border-border bg-secondary"
+            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
+          >
+            <span className="text-lg leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+          </button>
           <Link
             to="/"
             className="text-sm font-medium no-underline transition-colors hidden sm:block text-muted-foreground hover:text-foreground"
