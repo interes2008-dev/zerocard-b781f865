@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useI18n, type Lang } from "@/lib/i18n";
-import { ArrowRight, Calendar, Loader2 } from "lucide-react";
+import { ArrowRight, Calendar, Loader2, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
@@ -67,13 +68,27 @@ function BlogHeader() {
 
 export { BlogHeader };
 
+function estimateReadTime(description: string, lang: string): string {
+  const words = description.split(/\s+/).length;
+  const min = Math.max(3, Math.round(words / 40));
+  return lang === "ru" ? `${min} мин` : `${min} min`;
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] },
+  }),
+};
+
 export default function Blog() {
   const { lang } = useI18n();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [autoGenerating, setAutoGenerating] = useState(false);
 
-  // Fetch posts
   const fetchPosts = async () => {
     setLoading(true);
     const { data } = await supabase
@@ -84,7 +99,6 @@ export default function Blog() {
     setLoading(false);
   };
 
-  // Auto-generate if no post today
   const autoGenerate = async () => {
     const todayStr = new Date().toISOString().slice(0, 10);
     const { data: todayPosts } = await supabase
@@ -97,9 +111,7 @@ export default function Blog() {
     if (!todayPosts || todayPosts.length === 0) {
       setAutoGenerating(true);
       try {
-        await supabase.functions.invoke("generate-blog-post", {
-          body: {},
-        });
+        await supabase.functions.invoke("generate-blog-post", { body: {} });
         await fetchPosts();
       } catch (e) {
         console.error("Auto-generate failed:", e);
@@ -124,26 +136,38 @@ export default function Blog() {
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">
-        <h1
-          className="text-4xl md:text-5xl font-bold mb-4"
-          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+        {/* Header with gradient accent */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          {lang === "ru" ? "Блог" : "Blog"}
-        </h1>
-        <p className="text-lg mb-8 text-muted-foreground">
-          {lang === "ru"
-            ? "Статьи о криптокартах, USDT и финансах"
-            : "Articles about crypto cards, USDT, and finance"}
-        </p>
-
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-3"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            {lang === "ru" ? "Блог" : "Blog"}
+          </h1>
+          <p className="text-lg mb-3 text-muted-foreground">
+            {lang === "ru"
+              ? "Статьи о криптокартах, USDT и финансах"
+              : "Articles about crypto cards, USDT, and finance"}
+          </p>
+          {/* Gradient separator */}
+          <div className="h-px mb-10 rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.1))" }} />
+        </motion.div>
 
         {autoGenerating && (
-          <div className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5"
+          >
             <Loader2 className="w-5 h-5 animate-spin text-primary" />
             <span className="text-sm text-muted-foreground">
               {lang === "ru" ? "Генерируем новую статью..." : "Generating new article..."}
             </span>
-          </div>
+          </motion.div>
         )}
 
         {loading ? (
@@ -155,58 +179,69 @@ export default function Blog() {
             {lang === "ru" ? "Пока нет статей" : "No articles yet"}
           </p>
         ) : (
-          <div className="grid gap-6">
-            {filtered.map((post) => (
-              <Link
+          <div className="grid gap-5">
+            {filtered.map((post, idx) => (
+              <motion.div
                 key={post.id}
-                to={`/blog/${post.slug}`}
-                className="group block rounded-2xl border overflow-hidden no-underline transition-all duration-300 border-border bg-card hover:border-primary hover:-translate-y-0.5"
-                style={{ boxShadow: "none" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "none";
-                }}
+                custom={idx}
+                initial="hidden"
+                animate="visible"
+                variants={cardVariants}
               >
-                <div className="p-6 md:p-8">
-                  {/* Category badge */}
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span
-                      className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground"
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="group block rounded-2xl border overflow-hidden no-underline transition-all duration-300 border-border bg-card hover:border-primary/60"
+                  style={{
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px hsl(var(--primary) / 0.15)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  {/* Top gradient line */}
+                  <div className="h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.3))" }} />
+
+                  <div className="p-6 md:p-8">
+                    {/* Meta row */}
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
+                        {CATEGORY_LABELS[post.category]?.[lang] || post.category}
+                      </span>
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {new Date(post.published_at).toLocaleDateString(
+                          lang === "ru" ? "ru-RU" : "en-US",
+                          { year: "numeric", month: "short", day: "numeric" }
+                        )}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <Clock className="w-3.5 h-3.5" />
+                        {estimateReadTime(post.description, lang)}
+                      </span>
+                    </div>
+
+                    <h2
+                      className="text-lg md:text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors duration-200"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                     >
-                      {CATEGORY_LABELS[post.category]?.[lang] || post.category}
+                      {post.title}
+                    </h2>
+
+                    <p className="mb-4 text-sm text-muted-foreground line-clamp-2" style={{ lineHeight: 1.65 }}>
+                      {post.description}
+                    </p>
+
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3 text-primary">
+                      {lang === "ru" ? "Читать" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </span>
                   </div>
-
-                  {/* Date */}
-                  <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    {new Date(post.published_at).toLocaleDateString(
-                      lang === "ru" ? "ru-RU" : "en-US",
-                      { year: "numeric", month: "long", day: "numeric" }
-                    )}
-                  </div>
-
-                  {/* Title */}
-                  <h2
-                    className="text-xl md:text-2xl font-bold mb-3 text-foreground"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
-                    {post.title}
-                  </h2>
-
-                  {/* Description */}
-                  <p className="mb-4 text-muted-foreground" style={{ lineHeight: 1.6 }}>
-                    {post.description}
-                  </p>
-
-                  {/* Read button */}
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all group-hover:gap-3 text-primary">
-                    {lang === "ru" ? "Читать" : "Read"} <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
           </div>
         )}
