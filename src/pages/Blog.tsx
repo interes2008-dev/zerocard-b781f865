@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useI18n, type Lang } from "@/lib/i18n";
-import { ArrowRight, Calendar, Globe, Loader2 } from "lucide-react";
+import { ArrowRight, Calendar, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
