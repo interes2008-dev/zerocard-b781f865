@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
-import { ArrowRight, Menu, X, Sun, Moon, Globe } from "lucide-react";
+import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
@@ -83,19 +83,14 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2.5">
-          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
-            <Globe className="w-4 h-4 ml-2.5" style={{ color: "var(--text2)" }} />
-            {(["en", "ru"] as Lang[]).map(l => (
-              <button key={l} onClick={() => setLang(l)}
-                className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all"
-                style={{
-                  background: lang === l ? "var(--accent-color)" : "transparent",
-                  color: lang === l ? "#fff" : "var(--text2)",
-                }}>
-                {l}
-              </button>
-            ))}
-          </div>
+          <button
+            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all hover:scale-105"
+            style={{ borderColor: "var(--border-custom)", background: "var(--bg3)" }}
+            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
+          >
+            <span className="text-lg leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+          </button>
           <button onClick={toggle} className="theme-btn">
             {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
@@ -106,19 +101,14 @@ function Navbar() {
         </div>
 
         <div className="md:hidden flex items-center gap-2">
-          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--border-custom)" }}>
-            <Globe className="w-3.5 h-3.5 ml-2" style={{ color: "var(--text2)" }} />
-            {(["en", "ru"] as Lang[]).map(l => (
-              <button key={l} onClick={() => setLang(l)}
-                className="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider transition-all"
-                style={{
-                  background: lang === l ? "var(--accent-color)" : "transparent",
-                  color: lang === l ? "#fff" : "var(--text2)",
-                }}>
-                {l}
-              </button>
-            ))}
-          </div>
+          <button
+            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            className="w-8 h-8 rounded-lg flex items-center justify-center border transition-all"
+            style={{ borderColor: "var(--border-custom)", background: "var(--bg3)" }}
+            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
+          >
+            <span className="text-base leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+          </button>
           <button onClick={toggle} className="theme-btn" style={{ width: 32, height: 32 }}>
             {theme === "dark" ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
           </button>
