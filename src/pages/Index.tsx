@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
-import { ArrowRight, Menu, X, Sun, Moon, Globe } from "lucide-react";
+import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
