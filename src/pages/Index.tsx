@@ -3,6 +3,15 @@ import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
 
+import avatar1 from "@/assets/avatar-1.png";
+import avatar2 from "@/assets/avatar-2.png";
+import avatar3 from "@/assets/avatar-3.png";
+import avatar4 from "@/assets/avatar-4.png";
+import avatar5 from "@/assets/avatar-5.png";
+import avatar6 from "@/assets/avatar-6.png";
+
+const AVATAR_IMAGES = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
 
@@ -367,15 +376,15 @@ function BenefitsSection() {
 
         <div className="grid md:grid-cols-3 gap-5 mt-14">
           {benefits.map((b, i) => (
-            <FadeIn key={i} delay={i * 0.05}>
-              <div className={`glass-card glass-card-hover p-7 ${b.featured ? "benefit-featured" : ""}`}
+            <FadeIn key={i} delay={i * 0.05} className="flex">
+              <div className={`glass-card glass-card-hover p-7 flex flex-col flex-1 ${b.featured ? "benefit-featured" : ""}`}
                 style={b.wide ? { gridColumn: "span 2" } : {}}>
                 <span className="text-[28px] mb-4 block">{b.icon}</span>
                 {b.big && (
                   <div className="text-[44px] font-bold leading-none mb-2" style={{ color: "var(--accent-color)", letterSpacing: "-2px", fontFamily: "'Space Grotesk', sans-serif" }}>{b.big}</div>
                 )}
                 <div className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</div>
-                <div className="text-[13px] leading-[1.7]" style={{ color: "var(--text2)" }}>{b.desc}</div>
+                <div className="text-[13px] leading-[1.7] mt-auto" style={{ color: "var(--text2)" }}>{b.desc}</div>
               </div>
             </FadeIn>
           ))}
@@ -821,12 +830,12 @@ function AudienceSection() {
 function ReviewsSection() {
   const { t } = useI18n();
   const reviews = [
-    { text: t.rev1Text, name: t.rev1Name, role: t.rev1Role, ava: t.rev1Name.split(" ").map(w => w[0]).join("") },
-    { text: t.rev2Text, name: t.rev2Name, role: t.rev2Role, ava: t.rev2Name.split(" ").map(w => w[0]).join("") },
-    { text: t.rev3Text, name: t.rev3Name, role: t.rev3Role, ava: t.rev3Name.split(" ").map(w => w[0]).join("") },
-    { text: t.rev4Text, name: t.rev4Name, role: t.rev4Role, ava: t.rev4Name.split(" ").map(w => w[0]).join("") },
-    { text: t.rev5Text, name: t.rev5Name, role: t.rev5Role, ava: t.rev5Name.split(" ").map(w => w[0]).join("") },
-    { text: t.rev6Text, name: t.rev6Name, role: t.rev6Role, ava: t.rev6Name.split(" ").map(w => w[0]).join("") },
+    { text: t.rev1Text, name: t.rev1Name, role: t.rev1Role },
+    { text: t.rev2Text, name: t.rev2Name, role: t.rev2Role },
+    { text: t.rev3Text, name: t.rev3Name, role: t.rev3Role },
+    { text: t.rev4Text, name: t.rev4Name, role: t.rev4Role },
+    { text: t.rev5Text, name: t.rev5Name, role: t.rev5Role },
+    { text: t.rev6Text, name: t.rev6Name, role: t.rev6Role },
   ];
 
   return (
@@ -838,17 +847,21 @@ function ReviewsSection() {
           <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.reviewsDesc}</p>
         </FadeIn>
 
-        <div className="grid md:grid-cols-3 gap-5 mt-14">
+        <div className="grid md:grid-cols-3 gap-5 mt-14" style={{ alignItems: "stretch" }}>
           {reviews.map((r, i) => (
-            <FadeIn key={i} delay={i * 0.05}>
-              <div className="review-card">
+            <FadeIn key={i} delay={i * 0.05} className="flex">
+              <div className="review-card flex flex-col flex-1">
                 <div className="text-[13px] tracking-[2px] mb-3.5" style={{ color: "var(--accent-color)" }}>★★★★★</div>
-                <div className="text-sm leading-[1.7] mb-5 italic" style={{ color: "var(--text2)" }}>{r.text}</div>
-                <div className="flex items-center gap-2.5">
-                  <div className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[13px] font-bold flex-shrink-0"
-                    style={{ background: "var(--accent-color)", color: "#000" }}>
-                    {r.ava}
-                  </div>
+                <div className="text-sm leading-[1.7] mb-5 italic flex-1" style={{ color: "var(--text2)" }}>{r.text}</div>
+                <div className="flex items-center gap-3 mt-auto">
+                  <img
+                    src={AVATAR_IMAGES[i]}
+                    alt={r.name}
+                    loading="lazy"
+                    width={42}
+                    height={42}
+                    className="w-[42px] h-[42px] rounded-full object-cover flex-shrink-0 ring-2 ring-primary"
+                  />
                   <div>
                     <div className="text-[13px] font-bold">{r.name}</div>
                     <div className="text-xs mt-0.5" style={{ color: "var(--text3)" }}>{r.role}</div>
