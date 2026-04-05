@@ -312,8 +312,8 @@ const translations = {
     // FAQ
     faqBadge: "❓ FAQ",
     faqTitle: "Everything you\nwanted to ask",
-    faq1Q: "Who can get ZeroCard?",
-    faq1A: "Any Pionex user who passed KYC Level 2 and has at least 100 USDT in their account. The card is available in most supported countries. One card per user.",
+    faq1Q: "What is ZeroCard?",
+    faq1A: "ZeroCard is a virtual payment card powered by Pionex that lets you pay for international services, subscriptions and online purchases worldwide.\n\nIn simple terms, ZeroCard is the same card you get through Pionex — just presented in a simpler and more user-friendly way. The card works like a regular online payment card, but without typical banking limitations.\n\nKey features:\n• Works with international services\n• Payments go through without declines\n• Setup takes about 5 minutes\n• No monthly fees\n• Up to 1% cashback\n\nAfter clicking the button, you will be redirected to the official Pionex platform to complete registration and get your card.",
     faq2Q: "How to fund the card account?",
     faq2A: "USDT transfer from main Pionex account to card account is instant right in the app. Minimum — 1 USDT. No fees between Pionex accounts.",
     faq3Q: "How does 1% cashback work?",
