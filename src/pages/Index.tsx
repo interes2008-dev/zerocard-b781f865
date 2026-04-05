@@ -376,15 +376,15 @@ function BenefitsSection() {
 
         <div className="grid md:grid-cols-3 gap-5 mt-14">
           {benefits.map((b, i) => (
-            <FadeIn key={i} delay={i * 0.05}>
-              <div className={`glass-card glass-card-hover p-7 ${b.featured ? "benefit-featured" : ""}`}
+            <FadeIn key={i} delay={i * 0.05} className="flex">
+              <div className={`glass-card glass-card-hover p-7 flex flex-col flex-1 ${b.featured ? "benefit-featured" : ""}`}
                 style={b.wide ? { gridColumn: "span 2" } : {}}>
                 <span className="text-[28px] mb-4 block">{b.icon}</span>
                 {b.big && (
                   <div className="text-[44px] font-bold leading-none mb-2" style={{ color: "var(--accent-color)", letterSpacing: "-2px", fontFamily: "'Space Grotesk', sans-serif" }}>{b.big}</div>
                 )}
                 <div className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</div>
-                <div className="text-[13px] leading-[1.7]" style={{ color: "var(--text2)" }}>{b.desc}</div>
+                <div className="text-[13px] leading-[1.7] mt-auto" style={{ color: "var(--text2)" }}>{b.desc}</div>
               </div>
             </FadeIn>
           ))}
