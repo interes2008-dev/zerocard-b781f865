@@ -917,8 +917,8 @@ function FAQSection() {
                     </span>
                   </button>
                   <div className="overflow-hidden transition-all duration-300"
-                    style={{ maxHeight: openIdx === i ? 300 : 0, padding: openIdx === i ? "0 24px 20px" : "0 24px" }}>
-                    <div className="text-sm leading-[1.7]" style={{ color: "var(--text2)" }}>{faq.a}</div>
+                    style={{ maxHeight: openIdx === i ? 600 : 0, padding: openIdx === i ? "0 24px 20px" : "0 24px" }}>
+                    <div className="text-sm leading-[1.7]" style={{ color: "var(--text2)", whiteSpace: "pre-line" }}>{faq.a}</div>
                   </div>
                 </div>
               </FadeIn>
