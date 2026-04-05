@@ -3,6 +3,15 @@ import { motion, useInView } from "framer-motion";
 import { useI18n, Lang } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
 
+import avatar1 from "@/assets/avatar-1.png";
+import avatar2 from "@/assets/avatar-2.png";
+import avatar3 from "@/assets/avatar-3.png";
+import avatar4 from "@/assets/avatar-4.png";
+import avatar5 from "@/assets/avatar-5.png";
+import avatar6 from "@/assets/avatar-6.png";
+
+const AVATAR_IMAGES = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
+
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
 
