@@ -860,8 +860,7 @@ function ReviewsSection() {
                     loading="lazy"
                     width={42}
                     height={42}
-                    className="w-[42px] h-[42px] rounded-full object-cover flex-shrink-0 ring-2"
-                    style={{ ringColor: "var(--accent-color)" }}
+                    className="w-[42px] h-[42px] rounded-full object-cover flex-shrink-0 ring-2 ring-primary"
                   />
                   <div>
                     <div className="text-[13px] font-bold">{r.name}</div>
