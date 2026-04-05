@@ -312,8 +312,8 @@ const translations = {
     // FAQ
     faqBadge: "❓ FAQ",
     faqTitle: "Everything you\nwanted to ask",
-    faq1Q: "Who can get ZeroCard?",
-    faq1A: "Any Pionex user who passed KYC Level 2 and has at least 100 USDT in their account. The card is available in most supported countries. One card per user.",
+    faq1Q: "What is ZeroCard?",
+    faq1A: "ZeroCard is a virtual payment card powered by Pionex that lets you pay for international services, subscriptions and online purchases worldwide.\n\nIn simple terms, ZeroCard is the same card you get through Pionex — just presented in a simpler and more user-friendly way. The card works like a regular online payment card, but without typical banking limitations.\n\nKey features:\n• Works with international services\n• Payments go through without declines\n• Setup takes about 5 minutes\n• No monthly fees\n• Up to 1% cashback\n\nAfter clicking the button, you will be redirected to the official Pionex platform to complete registration and get your card.",
     faq2Q: "How to fund the card account?",
     faq2A: "USDT transfer from main Pionex account to card account is instant right in the app. Minimum — 1 USDT. No fees between Pionex accounts.",
     faq3Q: "How does 1% cashback work?",
@@ -653,8 +653,8 @@ const translations = {
     // FAQ
     faqBadge: "❓ FAQ",
     faqTitle: "Всё что\nвы хотели спросить",
-    faq1Q: "Кто может получить ZeroCard?",
-    faq1A: "Любой пользователь Pionex, прошедший KYC Level 2 и имеющий на аккаунте минимум 100 USDT. Карта доступна в большинстве поддерживаемых стран. Одному пользователю выдаётся одна карта.",
+    faq1Q: "Что такое ZeroCard?",
+    faq1A: "ZeroCard — это виртуальная платёжная карта на базе Pionex, которая позволяет оплачивать международные сервисы, подписки и онлайн-покупки по всему миру.\n\nПроще говоря, ZeroCard — это та же карта, которую вы получаете через Pionex, только в более простом и понятном виде. Карта работает как обычная онлайн-карта, но без типичных банковских ограничений.\n\nОсновные преимущества:\n• Работает с международными сервисами\n• Платежи проходят без отклонений\n• Оформление за ~5 минут\n• Без ежемесячных комиссий\n• До 1% кэшбэка\n\nПосле нажатия кнопки вы будете перенаправлены на официальную платформу Pionex для завершения регистрации и получения карты.",
     faq2Q: "Как пополнить карточный счёт?",
     faq2A: "Перевод USDT с основного счёта Pionex на карточный счёт осуществляется мгновенно прямо в приложении. Минимальная сумма — 1 USDT. Комиссии между счетами Pionex нет.",
     faq3Q: "Как работает 1% кэшбэк?",
