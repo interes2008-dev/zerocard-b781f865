@@ -133,6 +133,50 @@ function RenderContent({ content }: { content: string }) {
     }
     if (inTable) flushTable();
 
+    /* H4 — minor sub-heading */
+    if (line.startsWith("#### ")) {
+      flushList();
+      flushOrdered();
+      elements.push(
+        <h4
+          key={i}
+          className="text-foreground font-semibold"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "1rem",
+            lineHeight: 1.4,
+            marginTop: "1.5rem",
+            marginBottom: "0.5rem",
+          }}
+        >
+          {line.slice(5)}
+        </h4>
+      );
+      continue;
+    }
+
+    /* H3 — sub-heading */
+    if (line.startsWith("### ")) {
+      flushList();
+      flushOrdered();
+      elements.push(
+        <h3
+          key={i}
+          className="text-foreground font-semibold"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "1.1rem",
+            lineHeight: 1.4,
+            marginTop: "1.75rem",
+            marginBottom: "0.75rem",
+          }}
+        >
+          {line.slice(4)}
+        </h3>
+      );
+      continue;
+    }
+
     /* H2 — section heading with generous whitespace */
     if (line.startsWith("## ")) {
       flushList();
