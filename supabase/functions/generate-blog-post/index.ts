@@ -242,27 +242,44 @@ serve(async (req) => {
     const hints = TOPIC_HINTS[category.id]?.[lang as "ru" | "en"] || [];
     const hintText = hints.map((h) => `- ${h}`).join("\n");
 
+    const typographyRules = `
+TYPOGRAPHY & STRUCTURE RULES (magazine-quality reading experience):
+- Start with a compelling 2-3 sentence introduction paragraph that hooks the reader.
+- Use ## for H2 section headings (3-5 sections). Keep headings short and punchy (3-7 words).
+- Write paragraphs of 2-4 sentences each. NEVER write walls of text.
+- Add an empty line between every paragraph, heading, and list.
+- Use bullet lists (-) for features, benefits, comparisons. Keep items to 1-2 lines.
+- Use numbered lists (1.) for step-by-step instructions only.
+- Use > for one powerful quote or key insight per article.
+- Use **bold** sparingly — only for key terms and important numbers.
+- Use tables (|) for comparisons when appropriate.
+- Vary paragraph length to create visual rhythm: short punchy paragraph, then a medium one, then a list.
+- End each section with a transition sentence to the next topic.
+- Final paragraph before CTA should be a strong summary.`;
+
     const systemPrompt =
       lang === "ru"
         ? `Ты — профессиональный копирайтер для блога ZeroCard (zerocard.pro). ZeroCard — криптокарта Visa на базе Pionex с 1% кэшбэком и 5% APR на остаток USDT.
 Пиши статьи для аудитории "${category.ru}". Стиль — живой, экспертный, не рекламный. Упоминай ZeroCard органично 2-3 раза.
 В конце статьи ВСЕГДА добавь абзац-CTA: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro"
+${typographyRules}
 
 ФОРМАТ ОТВЕТА — строго JSON:
 {
-  "title": "Заголовок статьи",
+  "title": "Заголовок статьи (короткий, 5-9 слов, цепляющий)",
   "description": "Краткое описание 1-2 предложения для превью",
-  "content": "Полный текст статьи в формате markdown. Используй ## для H2 заголовков. Списки через - или 1. Таблицы через |. Длина 800-1200 слов. Структура: введение + 3-4 раздела с H2 + заключение с CTA."
+  "content": "Полный текст статьи в формате markdown. Длина 800-1200 слов. Следуй правилам типографики выше."
 }`
         : `You are a professional copywriter for ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and 5% APR on USDT balance.
 Write articles for the "${category.en}" audience. Style — engaging, expert, not salesy. Mention ZeroCard organically 2-3 times.
 At the end ALWAYS add a CTA paragraph: "Get your ZeroCard for free in 5 minutes: zerocard.pro"
+${typographyRules}
 
 RESPONSE FORMAT — strictly JSON:
 {
-  "title": "Article title",
+  "title": "Article title (short, 5-9 words, catchy)",
   "description": "Brief 1-2 sentence description for preview",
-  "content": "Full article text in markdown format. Use ## for H2 headings. Lists with - or 1. Tables with |. Length 800-1200 words. Structure: intro + 3-4 sections with H2 + conclusion with CTA."
+  "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
 }`;
 
     const userPrompt =
