@@ -42,7 +42,7 @@ function estimateReadTime(content: string, lang: string): string {
   return lang === "ru" ? `${min} мин чтения` : `${min} min read`;
 }
 
-/* ── Inline renderer (bold) ── */
+/* ── Inline renderer (bold + links) ── */
 function renderInline(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
@@ -53,32 +53,60 @@ function renderInline(text: string): React.ReactNode {
   });
 }
 
-/* ── Markdown-ish content renderer ── */
+/* ── Magazine-quality content renderer ── */
 function RenderContent({ content }: { content: string }) {
   const lines = content.split("\n");
   const elements: React.ReactNode[] = [];
   let tableRows: string[][] = [];
   let inTable = false;
+  let listBuffer: React.ReactNode[] = [];
+  let orderedBuffer: React.ReactNode[] = [];
+
+  const flushList = () => {
+    if (listBuffer.length > 0) {
+      elements.push(
+        <ul key={`ul-${elements.length}`} className="my-5 space-y-2.5 pl-1">
+          {listBuffer}
+        </ul>
+      );
+      listBuffer = [];
+    }
+  };
+
+  const flushOrdered = () => {
+    if (orderedBuffer.length > 0) {
+      elements.push(
+        <ol key={`ol-${elements.length}`} className="my-5 space-y-2.5 pl-1">
+          {orderedBuffer}
+        </ol>
+      );
+      orderedBuffer = [];
+    }
+  };
 
   const flushTable = () => {
     if (tableRows.length === 0) return;
     const header = tableRows[0];
     const body = tableRows.slice(1);
     elements.push(
-      <div key={`table-${elements.length}`} className="overflow-x-auto my-6 rounded-xl border border-border">
-        <table className="w-full text-sm" style={{ borderCollapse: "collapse" }}>
+      <div key={`table-${elements.length}`} className="overflow-x-auto my-8 rounded-xl border border-border/60">
+        <table className="w-full" style={{ borderCollapse: "collapse" }}>
           <thead>
-            <tr className="bg-secondary/60">
+            <tr style={{ background: "hsl(var(--secondary) / 0.5)" }}>
               {header.map((cell, i) => (
-                <th key={i} className="px-4 py-3 text-left font-semibold text-xs uppercase tracking-wide border-b border-border text-muted-foreground">{cell}</th>
+                <th key={i} className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-wider border-b border-border text-muted-foreground">
+                  {cell}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {body.map((row, ri) => (
-              <tr key={ri} className="border-b border-border/50 last:border-b-0 hover:bg-secondary/30 transition-colors">
+              <tr key={ri} className="border-b border-border/30 last:border-b-0 hover:bg-secondary/20 transition-colors">
                 {row.map((cell, ci) => (
-                  <td key={ci} className="px-4 py-3 text-sm text-muted-foreground">{cell}</td>
+                  <td key={ci} className="px-5 py-3.5 text-[0.9rem] text-muted-foreground" style={{ lineHeight: 1.7 }}>
+                    {cell}
+                  </td>
                 ))}
               </tr>
             ))}
@@ -93,7 +121,10 @@ function RenderContent({ content }: { content: string }) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
+    // Table rows
     if (line.startsWith("|")) {
+      flushList();
+      flushOrdered();
       const cells = line.split("|").filter(Boolean).map(c => c.trim());
       if (cells.every(c => /^[-:]+$/.test(c))) continue;
       tableRows.push(cells);
@@ -102,54 +133,127 @@ function RenderContent({ content }: { content: string }) {
     }
     if (inTable) flushTable();
 
-    /* H2 */
+    /* H2 — section heading with generous whitespace */
     if (line.startsWith("## ")) {
+      flushList();
+      flushOrdered();
       elements.push(
         <h2
           key={i}
-          className="text-lg font-bold mt-10 mb-3 text-foreground flex items-center gap-2"
-          style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.25rem", lineHeight: 1.4 }}
+          className="flex items-center gap-3 text-foreground font-bold"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "1.35rem",
+            lineHeight: 1.35,
+            marginTop: "2.5rem",
+            marginBottom: "1rem",
+            letterSpacing: "-0.01em",
+          }}
         >
-          <span className="w-1 h-5 rounded-full bg-primary inline-block" />
+          <span
+            className="inline-block w-1 rounded-full bg-primary flex-shrink-0"
+            style={{ height: "1.4em" }}
+          />
           {line.slice(3)}
         </h2>
       );
       continue;
     }
 
-    /* Unordered list */
-    if (line.startsWith("- ")) {
+    /* H3 — sub-heading */
+    if (line.startsWith("### ")) {
+      flushList();
+      flushOrdered();
       elements.push(
-        <li key={i} className="ml-5 mb-1.5 text-sm text-muted-foreground list-none flex gap-2" style={{ lineHeight: 1.75 }}>
-          <span className="text-primary mt-1.5 text-[8px]">●</span>
+        <h3
+          key={i}
+          className="text-foreground font-semibold"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "1.1rem",
+            lineHeight: 1.4,
+            marginTop: "1.75rem",
+            marginBottom: "0.75rem",
+          }}
+        >
+          {line.slice(4)}
+        </h3>
+      );
+      continue;
+    }
+
+    /* Blockquote */
+    if (line.startsWith("> ")) {
+      flushList();
+      flushOrdered();
+      elements.push(
+        <blockquote
+          key={i}
+          className="my-6 rounded-lg border-l-[3px] border-primary/50 py-3 px-5"
+          style={{ background: "hsl(var(--primary) / 0.05)" }}
+        >
+          <p className="text-[0.925rem] text-muted-foreground italic" style={{ lineHeight: 1.75 }}>
+            {renderInline(line.slice(2))}
+          </p>
+        </blockquote>
+      );
+      continue;
+    }
+
+    /* Unordered list — buffer items */
+    if (line.startsWith("- ")) {
+      flushOrdered();
+      listBuffer.push(
+        <li key={i} className="flex gap-3 text-[0.925rem] text-muted-foreground list-none" style={{ lineHeight: 1.75 }}>
+          <span className="text-primary mt-[0.55rem] text-[7px] flex-shrink-0">●</span>
           <span>{renderInline(line.slice(2))}</span>
         </li>
       );
       continue;
     }
 
-    /* Ordered list */
+    /* Ordered list — buffer items */
     const numMatch = line.match(/^(\d+)\.\s(.+)/);
     if (numMatch) {
-      elements.push(
-        <div key={i} className="flex gap-3 mb-2 text-sm text-muted-foreground" style={{ lineHeight: 1.75 }}>
-          <span className="font-bold text-primary min-w-[1.5rem] text-right">{numMatch[1]}.</span>
+      flushList();
+      orderedBuffer.push(
+        <li key={i} className="flex gap-3 text-[0.925rem] text-muted-foreground list-none" style={{ lineHeight: 1.75 }}>
+          <span className="font-bold text-primary min-w-[1.5rem] text-right flex-shrink-0 tabular-nums">
+            {numMatch[1]}.
+          </span>
           <span>{renderInline(numMatch[2])}</span>
-        </div>
+        </li>
       );
       continue;
     }
 
+    flushList();
+    flushOrdered();
+
     if (line.trim() === "") continue;
 
-    /* Paragraph */
+    /* Paragraph — optimized for reading */
     elements.push(
-      <p key={i} className="mb-4 text-sm text-muted-foreground" style={{ lineHeight: 1.8 }}>
+      <p
+        key={i}
+        className="text-muted-foreground"
+        style={{
+          fontSize: "0.95rem",
+          lineHeight: 1.85,
+          marginBottom: "1.25rem",
+          letterSpacing: "0.005em",
+          wordSpacing: "0.03em",
+          textWrap: "pretty" as any,
+          hyphens: "auto",
+        }}
+      >
         {renderInline(line)}
       </p>
     );
   }
 
+  flushList();
+  flushOrdered();
   if (inTable) flushTable();
   return <>{elements}</>;
 }
@@ -212,26 +316,33 @@ export default function BlogPost() {
     <div className="min-h-screen bg-background text-foreground">
       <BlogHeader />
 
-      <article className="w-full max-w-[900px] mx-auto px-5 md:px-8 pt-8 pb-16">
+      <article
+        className="w-full mx-auto pt-8 pb-16"
+        style={{
+          maxWidth: "720px",
+          paddingLeft: "clamp(1.25rem, 5vw, 2.5rem)",
+          paddingRight: "clamp(1.25rem, 5vw, 2.5rem)",
+        }}
+      >
 
-        {/* Back link — top */}
+        {/* Back link */}
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
-          className="mb-6"
+          className="mb-8"
         >
           <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : "All articles"}
           </Link>
         </motion.div>
 
-        {/* Meta row: category + date + read time */}
+        {/* Meta row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="flex flex-wrap items-center gap-3 mb-4"
+          className="flex flex-wrap items-center gap-3 mb-5"
         >
           <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
             {CATEGORY_LABELS[post.category]?.[lang] || post.category}
@@ -254,19 +365,28 @@ export default function BlogPost() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1 }}
-          className="text-xl md:text-2xl font-bold leading-snug mb-3 text-foreground"
-          style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.35rem, 2vw, 1.75rem)" }}
+          className="text-foreground font-bold leading-tight mb-4"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(1.5rem, 3.5vw, 2rem)",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.25,
+          }}
         >
           {post.title}
         </motion.h1>
 
-        {/* Description */}
+        {/* Lead / description */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="text-sm text-muted-foreground mb-6"
-          style={{ lineHeight: 1.65 }}
+          className="text-muted-foreground mb-8"
+          style={{
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+            fontWeight: 400,
+          }}
         >
           {post.description}
         </motion.p>
@@ -276,11 +396,11 @@ export default function BlogPost() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="h-px mb-8 origin-left rounded-full"
+          className="h-px mb-10 origin-left rounded-full"
           style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.05))" }}
         />
 
-        {/* Content sections */}
+        {/* Content — magazine reading column */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -290,19 +410,17 @@ export default function BlogPost() {
           <RenderContent content={post.content} />
         </motion.div>
 
-        {/* ── CTA block ── */}
+        {/* CTA block */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 rounded-2xl border border-primary/20 p-6 md:p-8 text-center relative overflow-hidden"
+          className="mt-14 rounded-2xl border border-primary/20 p-6 md:p-8 text-center relative overflow-hidden"
           style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.08), hsl(var(--primary) / 0.02))" }}
         >
-          {/* Subtle glow */}
           <div className="absolute inset-0 pointer-events-none" style={{
             background: "radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.12), transparent 70%)"
           }} />
-
           <div className="relative z-10">
             <h3
               className="text-lg md:text-xl font-bold mb-2 text-foreground"
@@ -326,7 +444,7 @@ export default function BlogPost() {
         </motion.div>
 
         {/* Back link — bottom */}
-        <div className="mt-8">
+        <div className="mt-10">
           <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : "All articles"}
           </Link>
