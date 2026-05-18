@@ -357,8 +357,36 @@ export default function BlogPost() {
 
   const postLang = post.lang as "ru" | "en";
 
+  const canonical = `/blog/${post.slug}`;
+  const fullUrl = `https://zerocard.pro${canonical}`;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{`${post.title} | ZeroCard Blog`}</title>
+        <meta name="description" content={post.description} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:title" content={`${post.title} | ZeroCard Blog`} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:type" content="article" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: post.title,
+          description: post.description,
+          datePublished: post.published_at,
+          dateModified: post.published_at,
+          inLanguage: postLang,
+          mainEntityOfPage: { "@type": "WebPage", "@id": fullUrl },
+          author: { "@type": "Organization", name: "ZeroCard" },
+          publisher: {
+            "@type": "Organization",
+            name: "ZeroCard",
+            url: "https://zerocard.pro",
+          },
+        })}</script>
+      </Helmet>
       <BlogHeader />
 
       <article
