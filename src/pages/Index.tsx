@@ -119,10 +119,10 @@ function Navbar() {
           >
             <span className="text-base leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
           </button>
-          <button onClick={toggle} className="theme-btn" style={{ width: 32, height: 32 }}>
+          <button onClick={toggle} className="theme-btn" style={{ width: 32, height: 32 }} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
             {theme === "dark" ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
           </button>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="w-9 h-9 flex items-center justify-center" style={{ color: "var(--text2)" }}>
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="w-9 h-9 flex items-center justify-center" style={{ color: "var(--text2)" }} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
