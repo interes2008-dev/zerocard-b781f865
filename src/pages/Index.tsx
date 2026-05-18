@@ -101,7 +101,7 @@ function Navbar() {
           >
             <span className="text-lg leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
           </button>
-          <button onClick={toggle} className="theme-btn">
+          <button onClick={toggle} className="theme-btn" aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
             {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
           <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
