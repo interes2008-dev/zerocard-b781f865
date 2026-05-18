@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { ArrowRight, Calendar, Loader2, Clock } from "lucide-react";
 import { motion } from "framer-motion";
@@ -131,8 +132,31 @@ export default function Blog() {
 
   const filtered = posts.filter((p) => p.lang === lang);
 
+  const pageTitle = lang === "ru"
+    ? "Блог ZeroCard — крипто, USDT, трейдинг и жизнь без границ"
+    : "ZeroCard Blog — crypto, USDT, trading & borderless living";
+  const pageDesc = lang === "ru"
+    ? "Статьи о криптокартах, USDT, Pionex, фрилансе и жизни за рубежом. Практические гайды для крипто-пользователей."
+    : "Articles on crypto cards, USDT spending, Pionex, freelancing, and life abroad. Practical guides for crypto users.";
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDesc} />
+        <link rel="canonical" href="/blog" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDesc} />
+        <meta property="og:url" content="/blog" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: pageTitle,
+          description: pageDesc,
+          url: "https://zerocard.pro/blog",
+        })}</script>
+      </Helmet>
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">

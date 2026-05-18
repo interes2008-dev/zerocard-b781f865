@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { useI18n, Lang } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
 
@@ -1082,18 +1083,33 @@ function DynamicMeta() {
    ═══════════════════════════════════════════════════ */
 const Index = () => (
   <div className="min-h-screen" style={{ overflowX: "clip" }}>
+    <Helmet>
+      <link rel="canonical" href="/" />
+      <meta property="og:url" content="/" />
+      <meta property="og:type" content="website" />
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FinancialProduct",
+        name: "ZeroCard",
+        description: "Virtual crypto payment card powered by Pionex — spend USDT worldwide with 1% cashback and 5% APR on balance.",
+        url: "https://zerocard.pro/",
+        provider: { "@type": "Organization", name: "Pionex" },
+      })}</script>
+    </Helmet>
     <DynamicMeta />
     <Navbar />
-    <HeroSection />
-    <StatsBar />
-    <PainSection />
-    <BenefitsSection />
-    <HowItWorks />
-    <CompareSection />
-    <AudienceSection />
-    <ReviewsSection />
-    <FAQSection />
-    <CTASection />
+    <main>
+      <HeroSection />
+      <StatsBar />
+      <PainSection />
+      <BenefitsSection />
+      <HowItWorks />
+      <CompareSection />
+      <AudienceSection />
+      <ReviewsSection />
+      <FAQSection />
+      <CTASection />
+    </main>
     <Footer />
   </div>
 );
