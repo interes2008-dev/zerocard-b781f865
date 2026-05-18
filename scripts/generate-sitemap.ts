@@ -58,7 +58,7 @@ function xml(entries: Entry[]) {
     { path: "/", lastmod: today, changefreq: "weekly", priority: "1.0" },
     { path: "/blog", lastmod: today, changefreq: "daily", priority: "0.8" },
     ...posts.map((p) => ({
-      path: `/blog/${p.slug}`,
+      path: `/blog/${encodeURIComponent(p.slug)}`,
       lastmod: p.published_at.slice(0, 10),
       changefreq: "monthly",
       priority: "0.7",
