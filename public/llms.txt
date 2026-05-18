@@ -1,0 +1,17 @@
+# ZeroCard
+
+> ZeroCard is a virtual crypto payment card powered by Pionex. Spend USDT worldwide, earn 1% cashback in crypto, and get up to 5% APR on your balance.
+
+ZeroCard lets crypto holders pay for international services, subscriptions, travel, and online shopping in 200+ countries with no monthly fees and no bank account required. Setup takes about 5 minutes via Pionex.
+
+## Pages
+
+- [Home](/): Product overview, benefits, comparison, reviews, and FAQ.
+- [Blog](/blog): Articles for crypto users, traders, freelancers, digital nomads, and more.
+
+## Blog topics
+
+- Crypto cards, USDT spending, stablecoin payments
+- Pionex trading bots and integration with ZeroCard
+- International payments, life abroad, digital nomad finance
+- Freelancer and creator monetization with crypto
