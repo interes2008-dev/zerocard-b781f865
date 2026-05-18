@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useI18n } from "@/lib/i18n";
 import { BlogHeader } from "./Blog";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Loader2 } from "lucide-react";
