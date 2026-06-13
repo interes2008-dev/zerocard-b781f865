@@ -1279,8 +1279,10 @@ const Index = () => (
       <CompareSection />
       <AudienceSection />
       <ReviewsSection />
+      <ReferralSection />
       <FAQSection />
       <CTASection />
+
     </main>
     <Footer />
   </div>
