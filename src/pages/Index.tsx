@@ -878,6 +878,178 @@ function ReviewsSection() {
 }
 
 /* ═══════════════════════════════════════════════════
+   REFERRAL — Invite & Earn
+   ═══════════════════════════════════════════════════ */
+function ReferralSection() {
+  const { lang } = useI18n();
+  const [copied, setCopied] = useState<string | null>(null);
+  const REF_CODE = "0uHzysLVYQh";
+  const NORMAL_LINK = `https://www.pionex.com/en/signUp?r=${REF_CODE}`;
+  const QUICK_LINK = `https://www.pionex.com/en/quickRegister?r=${REF_CODE}`;
+
+  const copy = (label: string, value: string) => {
+    navigator.clipboard?.writeText(value);
+    setCopied(label);
+    setTimeout(() => setCopied(null), 1600);
+  };
+
+  const tt = lang === "ru" ? {
+    badge: "💸 Реферальная программа",
+    title: "Приглашай друзей и зарабатывай\nдо 20% ребейтов",
+    desc: "Делись своей картой ZeroCard и получай долю с торговых комиссий друзей — напрямую от Pionex.",
+    bullets: ["20% со Spot", "15% с Manual Futures", "15% с Futures Bot"],
+    cardTitle: "Моя реферальная ссылка",
+    manage: "Управлять рефералами →",
+    cardNote: "Ссылка ниже уже привязана к ZeroCard — поделись с другом и получай ребейт автоматически.",
+    normalLabel: "Обычная ссылка",
+    quickLabel: "Быстрая регистрация",
+    codeLabel: "Реферальный код",
+    you: "Ты получаешь",
+    youVal: "20% (Spot) · 15% (Manual Futures) · 15% (Futures Bot)",
+    friend: "Друг получает",
+    friendVal: "0% комиссия на Spot первые 7 дней",
+    cta: "Пригласить друга",
+    redirect: "Откроется официальная страница Pionex с твоим кодом",
+  } : {
+    badge: "💸 Referral program",
+    title: "Invite friends and earn\nup to 20% rebates",
+    desc: "Share your ZeroCard and get a cut of your friends' trading fees — paid out directly by Pionex.",
+    bullets: ["20% on Spot", "15% on Manual Futures", "15% on Futures Bot"],
+    cardTitle: "My Invitation link",
+    manage: "Manage my referral link →",
+    cardNote: "The link below is already tied to ZeroCard — share with a friend and earn rebates automatically.",
+    normalLabel: "Normal link",
+    quickLabel: "Quick registration link",
+    codeLabel: "My referral code",
+    you: "You Receive",
+    youVal: "20% (Spot) · 15% (Manual Futures) · 15% (Futures Bot)",
+    friend: "Friends Receive",
+    friendVal: "0% fee on Spot for the first 7 days",
+    cta: "Invite friends",
+    redirect: "Opens the official Pionex page with your code",
+  };
+
+  const Row = ({ label, value, copyVal }: { label: string; value: string; copyVal: string }) => (
+    <div className="flex items-center gap-2 rounded-xl px-4 py-3"
+      style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="flex-1 min-w-0 text-[13px] truncate"
+        style={{ color: "rgba(255,255,255,0.92)", fontFamily: "'JetBrains Mono', monospace" }}>
+        <span style={{ color: "rgba(255,255,255,0.55)" }}>{label}: </span>{value}
+      </div>
+      <button onClick={() => copy(label, copyVal)}
+        className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors"
+        style={{ background: "rgba(255,90,42,0.15)", color: "#ff7a4a", border: "1px solid rgba(255,90,42,0.25)" }}
+        aria-label={`Copy ${label}`}>
+        {copied === label ? <Check size={15} /> : <Copy size={15} />}
+      </button>
+    </div>
+  );
+
+  return (
+    <section id="referral" className="py-24 px-5 md:px-10 relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto">
+        <FadeIn>
+          <div className="relative rounded-3xl overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #ff5a2a 0%, #ff8a3d 55%, #ffa14f 100%)",
+              boxShadow: "0 30px 80px -20px rgba(255,90,42,0.45), 0 0 0 1px rgba(255,255,255,0.08) inset",
+            }}>
+            {/* decorative arrow / rings */}
+            <svg viewBox="0 0 600 400" className="absolute inset-0 w-full h-full opacity-[0.18] pointer-events-none"
+              preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <radialGradient id="rfRing" cx="50%" cy="50%" r="50%">
+                  <stop offset="60%" stopColor="transparent" />
+                  <stop offset="100%" stopColor="#fff" />
+                </radialGradient>
+              </defs>
+              {[80, 140, 200, 260, 320].map((r, i) => (
+                <circle key={i} cx="200" cy="200" r={r} fill="none" stroke="#fff" strokeWidth="1.2" opacity={0.35 - i * 0.05} />
+              ))}
+              <path d="M120 300 L320 100 M260 100 L320 100 L320 160"
+                stroke="#fff" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.85" />
+            </svg>
+
+            <div className="relative grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-8 p-8 md:p-12 lg:p-16 items-center">
+              {/* LEFT — copy */}
+              <div className="text-white">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] font-semibold mb-5"
+                  style={{ background: "rgba(0,0,0,0.25)", border: "1px solid rgba(255,255,255,0.25)" }}>
+                  {tt.badge}
+                </div>
+                <h2 className="font-bold leading-[1.05] mb-4"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(32px, 4.4vw, 52px)", whiteSpace: "pre-line", color: "#fff" }}>
+                  {tt.title}
+                </h2>
+                <p className="text-[15px] md:text-[16px] mb-6 max-w-[520px]" style={{ color: "rgba(255,255,255,0.92)", lineHeight: 1.6 }}>
+                  {tt.desc}
+                </p>
+                <ul className="flex flex-wrap gap-2 mb-2">
+                  {tt.bullets.map(b => (
+                    <li key={b} className="px-3 py-1.5 rounded-lg text-[12.5px] font-medium"
+                      style={{ background: "rgba(0,0,0,0.28)", color: "#fff", border: "1px solid rgba(255,255,255,0.18)", fontFamily: "'JetBrains Mono', monospace" }}>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* RIGHT — referral card */}
+              <div className="rounded-2xl p-5 md:p-6"
+                style={{
+                  background: "rgba(10, 14, 28, 0.92)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  boxShadow: "0 20px 60px -15px rgba(0,0,0,0.5)",
+                  backdropFilter: "blur(20px)",
+                }}>
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h3 className="text-white font-bold text-[17px]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    {tt.cardTitle}
+                  </h3>
+                  <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+                    className="text-[12.5px] font-semibold whitespace-nowrap" style={{ color: "#ff7a4a" }}>
+                    {tt.manage}
+                  </a>
+                </div>
+                <p className="text-[12.5px] mb-4" style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>
+                  {tt.cardNote}
+                </p>
+
+                <div className="flex flex-col gap-2.5 mb-4">
+                  <Row label={tt.normalLabel} value={`https://www.pionex.…${REF_CODE}`} copyVal={NORMAL_LINK} />
+                  <Row label={tt.quickLabel} value={`…${REF_CODE}`} copyVal={QUICK_LINK} />
+                  <Row label={tt.codeLabel} value={REF_CODE} copyVal={REF_CODE} />
+                </div>
+
+                <div className="rounded-xl p-3 mb-4 text-[12px]"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", lineHeight: 1.55 }}>
+                  <div className="grid grid-cols-[110px_1fr] gap-y-2 gap-x-3" style={{ color: "rgba(255,255,255,0.85)" }}>
+                    <span style={{ color: "rgba(255,255,255,0.5)" }}>{tt.you}</span>
+                    <span className="font-semibold">{tt.youVal}</span>
+                    <span style={{ color: "rgba(255,255,255,0.5)" }}>{tt.friend}</span>
+                    <span>{tt.friendVal}</span>
+                  </div>
+                </div>
+
+                <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+                  className="block w-full text-center rounded-xl py-3.5 font-bold text-white transition-transform hover:scale-[1.01]"
+                  style={{ background: "linear-gradient(135deg, #ff5a2a, #ff7a4a)", boxShadow: "0 10px 30px -10px rgba(255,90,42,0.6)" }}>
+                  {tt.cta}
+                </a>
+                <p className="text-[11px] text-center mt-3" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  ↗ {tt.redirect}
+                </p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+
+/* ═══════════════════════════════════════════════════
    FAQ
    ═══════════════════════════════════════════════════ */
 function FAQSection() {
