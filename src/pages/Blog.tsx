@@ -125,16 +125,16 @@ export default function Blog() {
     fetchPosts().then(() => autoGenerate());
     document.title =
       lang === "ru"
-        ? "Блог | ZeroCard — криптокарта с кэшбэком"
-        : "Blog | ZeroCard — Crypto Card with Cashback";
+        ? "Блог | ZeroCard - криптокарта с кэшбэком"
+        : "Blog | ZeroCard - Crypto Card with Cashback";
     window.scrollTo(0, 0);
   }, [lang]);
 
   const filtered = posts.filter((p) => p.lang === lang);
 
   const pageTitle = lang === "ru"
-    ? "Блог ZeroCard — крипто, USDT, трейдинг и жизнь без границ"
-    : "ZeroCard Blog — crypto, USDT, trading & borderless living";
+    ? "Блог ZeroCard - крипто, USDT, трейдинг и жизнь без границ"
+    : "ZeroCard Blog - crypto, USDT, trading & borderless living";
   const pageDesc = lang === "ru"
     ? "Статьи о криптокартах, USDT, Pionex, фрилансе и жизни за рубежом. Практические гайды для крипто-пользователей."
     : "Articles on crypto cards, USDT spending, Pionex, freelancing, and life abroad. Practical guides for crypto users.";

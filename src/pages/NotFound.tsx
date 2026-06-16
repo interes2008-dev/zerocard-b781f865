@@ -12,11 +12,11 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>404 — Page not found | ZeroCard</title>
-        <meta name="description" content="The page you're looking for doesn't exist. Return to ZeroCard — the crypto card for spending USDT worldwide." />
+        <title>404 - Page not found | ZeroCard</title>
+        <meta name="description" content="The page you're looking for doesn't exist. Return to ZeroCard - the crypto card for spending USDT worldwide." />
         <meta name="robots" content="noindex, follow" />
         <link rel="canonical" href="/" />
-        <meta property="og:title" content="404 — Page not found | ZeroCard" />
+        <meta property="og:title" content="404 - Page not found | ZeroCard" />
         <meta property="og:description" content="This page doesn't exist on ZeroCard." />
         <meta property="og:url" content={location.pathname} />
       </Helmet>

@@ -165,7 +165,7 @@ function HeroSection() {
       // Typing
       timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 70 + Math.random() * 40);
     } else if (!isDeleting && displayed.length === current.length) {
-      // Pause then start deleting — first word gets a longer accent pause
+      // Pause then start deleting - first word gets a longer accent pause
       const pause = wordIdx === 0 ? 4500 : 2200;
       timer = setTimeout(() => setIsDeleting(true), pause);
     } else if (isDeleting && displayed.length > 0) {
@@ -878,7 +878,7 @@ function ReviewsSection() {
 }
 
 /* ═══════════════════════════════════════════════════
-   REFERRAL — Invite & Earn
+   REFERRAL - Invite & Earn
    ═══════════════════════════════════════════════════ */
 function ReferralSection() {
   const { lang } = useI18n();
@@ -896,11 +896,11 @@ function ReferralSection() {
   const tt = lang === "ru" ? {
     badge: "💸 Реферальная программа",
     title: "Приглашай друзей и зарабатывай\nдо 20% ребейтов",
-    desc: "Делись своей картой ZeroCard и получай долю с торговых комиссий друзей — напрямую от Pionex.",
+    desc: "Делись своей картой ZeroCard и получай долю с торговых комиссий друзей - напрямую от Pionex.",
     bullets: ["20% со Spot", "15% с Manual Futures", "15% с Futures Bot"],
     cardTitle: "Моя реферальная ссылка",
     manage: "Управлять рефералами →",
-    cardNote: "Ссылка ниже уже привязана к ZeroCard — поделись с другом и получай ребейт автоматически.",
+    cardNote: "Ссылка ниже уже привязана к ZeroCard - поделись с другом и получай ребейт автоматически.",
     normalLabel: "Обычная ссылка",
     quickLabel: "Быстрая регистрация",
     codeLabel: "Реферальный код",
@@ -913,11 +913,11 @@ function ReferralSection() {
   } : {
     badge: "💸 Referral program",
     title: "Invite friends and earn\nup to 20% rebates",
-    desc: "Share your ZeroCard and get a cut of your friends' trading fees — paid out directly by Pionex.",
+    desc: "Share your ZeroCard and get a cut of your friends' trading fees - paid out directly by Pionex.",
     bullets: ["20% on Spot", "15% on Manual Futures", "15% on Futures Bot"],
     cardTitle: "My Invitation link",
     manage: "Manage my referral link →",
-    cardNote: "The link below is already tied to ZeroCard — share with a friend and earn rebates automatically.",
+    cardNote: "The link below is already tied to ZeroCard - share with a friend and earn rebates automatically.",
     normalLabel: "Normal link",
     quickLabel: "Quick registration link",
     codeLabel: "My referral code",
@@ -971,7 +971,7 @@ function ReferralSection() {
             </svg>
 
             <div className="relative grid lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-8 p-8 md:p-12 lg:p-16 items-center">
-              {/* LEFT — copy */}
+              {/* LEFT - copy */}
               <div className="text-white">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] font-semibold mb-5"
                   style={{ background: "rgba(0,0,0,0.25)", border: "1px solid rgba(255,255,255,0.25)" }}>
@@ -994,7 +994,7 @@ function ReferralSection() {
                 </ul>
               </div>
 
-              {/* RIGHT — referral card */}
+              {/* RIGHT - referral card */}
               <div className="rounded-2xl p-5 md:p-6"
                 style={{
                   background: "rgba(10, 14, 28, 0.92)",
@@ -1212,7 +1212,7 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#website",
         url: "https://zerocard.pro/",
         name: "ZeroCard",
-        description: lang === "ru" ? "Криптокарта Pionex — трать USDT везде" : "Pionex crypto card — spend USDT everywhere",
+        description: lang === "ru" ? "Криптокарта Pionex - трать USDT везде" : "Pionex crypto card - spend USDT everywhere",
         inLanguage: lang,
         publisher: { "@id": "https://zerocard.pro/#organization" }
       },
@@ -1221,7 +1221,7 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#organization",
         name: "ZeroCard",
         url: "https://zerocard.pro/",
-        description: lang === "ru" ? "Партнёрский проект Pionex Card — криптовалютная дебетовая карта Visa/Mastercard" : "Pionex Card partner — crypto debit card Visa/Mastercard",
+        description: lang === "ru" ? "Партнёрский проект Pionex Card - криптовалютная дебетовая карта Visa/Mastercard" : "Pionex Card partner - crypto debit card Visa/Mastercard",
         sameAs: ["https://www.pionex.com/ru/signUp?r=0uHzysLVYQh"]
       },
       {
@@ -1263,7 +1263,7 @@ const Index = () => (
         "@context": "https://schema.org",
         "@type": "FinancialProduct",
         name: "ZeroCard",
-        description: "Virtual crypto payment card powered by Pionex — spend USDT worldwide with 1% cashback and 5% APR on balance.",
+        description: "Virtual crypto payment card powered by Pionex - spend USDT worldwide with 1% cashback and 5% APR on balance.",
         url: "https://zerocard.pro/",
         provider: { "@type": "Organization", name: "Pionex" },
       })}</script>

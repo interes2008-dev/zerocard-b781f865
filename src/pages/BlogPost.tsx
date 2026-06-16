@@ -134,7 +134,7 @@ function RenderContent({ content }: { content: string }) {
     }
     if (inTable) flushTable();
 
-    /* H4 — minor sub-heading */
+    /* H4 - minor sub-heading */
     if (line.startsWith("#### ")) {
       flushList();
       flushOrdered();
@@ -156,7 +156,7 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    /* H3 — sub-heading */
+    /* H3 - sub-heading */
     if (line.startsWith("### ")) {
       flushList();
       flushOrdered();
@@ -178,7 +178,7 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    /* H2 — section heading with generous whitespace */
+    /* H2 - section heading with generous whitespace */
     if (line.startsWith("## ")) {
       flushList();
       flushOrdered();
@@ -205,7 +205,7 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    /* H3 — sub-heading */
+    /* H3 - sub-heading */
     if (line.startsWith("### ")) {
       flushList();
       flushOrdered();
@@ -245,7 +245,7 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    /* Unordered list — buffer items */
+    /* Unordered list - buffer items */
     if (line.startsWith("- ")) {
       flushOrdered();
       listBuffer.push(
@@ -257,7 +257,7 @@ function RenderContent({ content }: { content: string }) {
       continue;
     }
 
-    /* Ordered list — buffer items */
+    /* Ordered list - buffer items */
     const numMatch = line.match(/^(\d+)\.\s(.+)/);
     if (numMatch) {
       flushList();
@@ -277,7 +277,7 @@ function RenderContent({ content }: { content: string }) {
 
     if (line.trim() === "") continue;
 
-    /* Paragraph — optimized for reading */
+    /* Paragraph - optimized for reading */
     elements.push(
       <p
         key={i}
@@ -473,7 +473,7 @@ export default function BlogPost() {
           style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.05))" }}
         />
 
-        {/* Content — magazine reading column */}
+        {/* Content - magazine reading column */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -516,7 +516,7 @@ export default function BlogPost() {
           </div>
         </motion.div>
 
-        {/* Back link — bottom */}
+        {/* Back link - bottom */}
         <div className="mt-10">
           <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : "All articles"}
