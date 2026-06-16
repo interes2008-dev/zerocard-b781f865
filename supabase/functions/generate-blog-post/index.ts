@@ -251,11 +251,20 @@ TYPOGRAPHY & STRUCTURE RULES (magazine-quality reading experience):
 - Use bullet lists (-) for features, benefits, comparisons. Keep items to 1-2 lines.
 - Use numbered lists (1.) for step-by-step instructions only.
 - Use > for one powerful quote or key insight per article.
-- Use **bold** sparingly — only for key terms and important numbers.
+- Use **bold** sparingly - only for key terms and important numbers.
 - Use tables (|) for comparisons when appropriate.
 - Vary paragraph length to create visual rhythm: short punchy paragraph, then a medium one, then a list.
 - End each section with a transition sentence to the next topic.
-- Final paragraph before CTA should be a strong summary.`;
+- Final paragraph before CTA should be a strong summary.
+
+ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
+- NEVER use em-dash or en-dash (— –). Use a regular hyphen "-" with spaces, or split into two sentences.
+- NEVER use any emoji (no 👍 🚀 ✅ ❌ 🔥 etc.).
+- Use straight quotes " " only. NEVER use chevron quotes « » or curly quotes " " " ".
+- FORBIDDEN phrases (do not use, in any language): "В современном мире" / "In today's world", "Давайте разберёмся" / "Let's figure out", "Как уже упоминалось ранее" / "As mentioned earlier", "Таким образом, можно сделать вывод" / "Thus, we can conclude", "Итак, подведём итог" / "So, to summarize", "Кроме того" / "Moreover", "Более того" / "Furthermore", "Следовательно" / "Therefore / Consequently". Use casual connectors instead ("ну", "вот", "кстати", "а ещё", "значит", "так что" / "and", "plus", "so", "by the way").
+- Avoid perfectly long grammatically polished sentences. Break them into 2-3 short ones. Mix sentence lengths.
+- Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
+- Sound like a human writer, not a neural network.`;
 
     const systemPrompt =
       lang === "ru"
@@ -350,6 +359,41 @@ Reply with ONLY JSON without markdown wrapping.`;
       console.error("Failed to parse AI response:", rawContent);
       throw new Error("AI returned invalid JSON");
     }
+
+    // Defensive anti-AI-fingerprint cleanup (must match the rules in the system prompt).
+    const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F900}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F1E0}-\u{1F1FF}\u{FE00}-\u{FE0F}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2460}-\u{24FF}\u{25A0}-\u{25FF}\u{2B00}-\u{2BFF}]/gu;
+    const PHRASE_SUBS: Array<[RegExp, string]> = [
+      [/В\s+современном\s+мире,?\s*/gi, ""],
+      [/Давайте\s+разбер[её]мся,?\s*/gi, ""],
+      [/Как\s+уже\s+упоминалось\s+ранее,?\s*/gi, ""],
+      [/Таким\s+образом,\s+можно\s+сделать\s+вывод,?\s*/gi, ""],
+      [/Итак,\s+подвед[её]м\s+итог[аи]?,?\s*/gi, ""],
+      [/\bКроме\s+того,?\s*/g, "А ещё "],
+      [/\bкроме\s+того,?\s*/g, "а ещё "],
+      [/\bБолее\s+того,?\s*/g, "И вот ещё: "],
+      [/\bболее\s+того,?\s*/g, "и вот ещё: "],
+      [/\bСледовательно,?\s*/g, "Значит, "],
+      [/\bследовательно,?\s*/g, "значит, "],
+      [/\bIn today'?s world,?\s*/gi, ""],
+      [/\bLet'?s figure out,?\s*/gi, ""],
+      [/\bAs mentioned earlier,?\s*/gi, ""],
+      [/\bThus,\s+we\s+can\s+conclude,?\s*/gi, ""],
+      [/\bMoreover,?\s*/g, "Plus, "],
+      [/\bFurthermore,?\s*/g, "And, "],
+      [/\b(Therefore|Consequently),?\s*/g, "So, "],
+    ];
+    const sanitize = (s: string) => {
+      if (!s) return s;
+      let t = s.replace(/\s*[—–]\s*/g, " - ");
+      t = t.replace(EMOJI_RE, "");
+      t = t.replace(/[«»„“”]/g, '"');
+      for (const [re, repl] of PHRASE_SUBS) t = t.replace(re, repl);
+      t = t.replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n");
+      return t.trim();
+    };
+    article.title = sanitize(article.title);
+    article.description = sanitize(article.description);
+    article.content = sanitize(article.content);
 
     // Generate slug from title
     const slug = article.title
