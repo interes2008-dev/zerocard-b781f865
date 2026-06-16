@@ -360,6 +360,41 @@ Reply with ONLY JSON without markdown wrapping.`;
       throw new Error("AI returned invalid JSON");
     }
 
+    // Defensive anti-AI-fingerprint cleanup (must match the rules in the system prompt).
+    const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u{1F600}-\u{1F64F}\u{1F900}-\u{1F9FF}\u{2600}-\u{27BF}\u{1F1E0}-\u{1F1FF}\u{FE00}-\u{FE0F}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2460}-\u{24FF}\u{25A0}-\u{25FF}\u{2B00}-\u{2BFF}]/gu;
+    const PHRASE_SUBS: Array<[RegExp, string]> = [
+      [/В\s+современном\s+мире,?\s*/gi, ""],
+      [/Давайте\s+разбер[её]мся,?\s*/gi, ""],
+      [/Как\s+уже\s+упоминалось\s+ранее,?\s*/gi, ""],
+      [/Таким\s+образом,\s+можно\s+сделать\s+вывод,?\s*/gi, ""],
+      [/Итак,\s+подвед[её]м\s+итог[аи]?,?\s*/gi, ""],
+      [/\bКроме\s+того,?\s*/g, "А ещё "],
+      [/\bкроме\s+того,?\s*/g, "а ещё "],
+      [/\bБолее\s+того,?\s*/g, "И вот ещё: "],
+      [/\bболее\s+того,?\s*/g, "и вот ещё: "],
+      [/\bСледовательно,?\s*/g, "Значит, "],
+      [/\bследовательно,?\s*/g, "значит, "],
+      [/\bIn today'?s world,?\s*/gi, ""],
+      [/\bLet'?s figure out,?\s*/gi, ""],
+      [/\bAs mentioned earlier,?\s*/gi, ""],
+      [/\bThus,\s+we\s+can\s+conclude,?\s*/gi, ""],
+      [/\bMoreover,?\s*/g, "Plus, "],
+      [/\bFurthermore,?\s*/g, "And, "],
+      [/\b(Therefore|Consequently),?\s*/g, "So, "],
+    ];
+    const sanitize = (s: string) => {
+      if (!s) return s;
+      let t = s.replace(/\s*[—–]\s*/g, " - ");
+      t = t.replace(EMOJI_RE, "");
+      t = t.replace(/[«»„“”]/g, '"');
+      for (const [re, repl] of PHRASE_SUBS) t = t.replace(re, repl);
+      t = t.replace(/[ \t]+/g, " ").replace(/ *\n */g, "\n");
+      return t.trim();
+    };
+    article.title = sanitize(article.title);
+    article.description = sanitize(article.description);
+    article.content = sanitize(article.content);
+
     // Generate slug from title
     const slug = article.title
       .toLowerCase()
