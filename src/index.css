@@ -462,7 +462,7 @@ section, [class*="py-24"], [class*="py-8"] {
   .faq-item.open { border-color: var(--accent-border); }
 
   /* ── AUDIENCE ── */
-  /* Audience tabs grid — 7 columns */
+  /* Audience tabs grid - 7 columns */
   .audience-tabs-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
