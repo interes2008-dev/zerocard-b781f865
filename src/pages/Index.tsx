@@ -304,9 +304,11 @@ function PainSection() {
     <section className="py-24 px-5 md:px-10">
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.painBadge}</div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.painTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.painDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.painBadge}</div>
+            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.painTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.painDesc}</p>
+          </div>
         </FadeIn>
 
         <div className="grid md:grid-cols-2 gap-6 mt-14">
@@ -370,9 +372,11 @@ function BenefitsSection() {
       style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.benefitsBadge}</div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.benefitsTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.benefitsDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.benefitsBadge}</div>
+            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.benefitsTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.benefitsDesc}</p>
+          </div>
         </FadeIn>
 
         <div className="grid md:grid-cols-3 gap-5 mt-14">
@@ -421,9 +425,11 @@ function HowItWorks() {
     <section id="how" className="py-24 px-5 md:px-10">
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.howBadge}</div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.howTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.howDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.howBadge}</div>
+            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.howTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.howDesc}</p>
+          </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
@@ -573,9 +579,11 @@ function CompareSection() {
       style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.compareBadge}</div>
-          <h2 className="section-title mb-4">{t.compareTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.compareDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.compareBadge}</div>
+            <h2 className="section-title mb-4">{t.compareTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.compareDesc}</p>
+          </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
@@ -763,9 +771,11 @@ function AudienceSection() {
     <section id="audience" className="py-24 px-5 md:px-10">
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.audBadge}</div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.audTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.audDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.audBadge}</div>
+            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.audTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.audDesc}</p>
+          </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
@@ -843,9 +853,11 @@ function ReviewsSection() {
     <section className="py-24 px-5 md:px-10">
       <div className="max-w-[1160px] mx-auto">
         <FadeIn>
-          <div className="section-badge">{t.reviewsBadge}</div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.reviewsTitle}</h2>
-          <p className="text-[17px] leading-[1.7] max-w-[560px]" style={{ color: "var(--text2)" }}>{t.reviewsDesc}</p>
+          <div className="section-head mb-2">
+            <div className="section-badge">{t.reviewsBadge}</div>
+            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.reviewsTitle}</h2>
+            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.reviewsDesc}</p>
+          </div>
         </FadeIn>
 
         <div className="grid md:grid-cols-3 gap-5 mt-14" style={{ alignItems: "stretch" }}>
@@ -1080,8 +1092,10 @@ function FAQSection() {
         style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
         <div className="max-w-[800px] mx-auto">
           <FadeIn>
-            <div className="section-badge">{t.faqBadge}</div>
-            <h2 className="section-title mb-12" style={{ whiteSpace: "pre-line" }}>{t.faqTitle}</h2>
+            <div className="section-head mb-10">
+              <div className="section-badge">{t.faqBadge}</div>
+              <h2 className="section-title" style={{ whiteSpace: "pre-line" }}>{t.faqTitle}</h2>
+            </div>
           </FadeIn>
 
           <div className="flex flex-col gap-2">
