@@ -1145,8 +1145,8 @@ function CTASection() {
             <span className="w-[7px] h-[7px] rounded-full" style={{ background: "var(--accent-color)", animation: "blink 2s infinite" }} />
             {t.ctaBadge}
           </div>
-          <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.ctaTitle}</h2>
-          <p className="text-[17px] leading-[1.7] mb-9" style={{ color: "var(--text2)" }}>{t.ctaDesc}</p>
+          <h2 className="section-title mb-4 mx-auto" style={{ whiteSpace: "pre-line", background: "linear-gradient(180deg, var(--text) 0%, var(--text) 55%, color-mix(in srgb, var(--text) 72%, transparent) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", textWrap: "balance" }}>{t.ctaTitle}</h2>
+          <p className="text-[17px] leading-[1.7] mb-9 mx-auto" style={{ color: "var(--text2)", maxWidth: 560, textWrap: "pretty" }}>{t.ctaDesc}</p>
           <div className="flex justify-center gap-3 flex-wrap">
             <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.ctaCTA}</a>
             <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary-custom">{t.ctaDocs}</a>
