@@ -251,11 +251,20 @@ TYPOGRAPHY & STRUCTURE RULES (magazine-quality reading experience):
 - Use bullet lists (-) for features, benefits, comparisons. Keep items to 1-2 lines.
 - Use numbered lists (1.) for step-by-step instructions only.
 - Use > for one powerful quote or key insight per article.
-- Use **bold** sparingly — only for key terms and important numbers.
+- Use **bold** sparingly - only for key terms and important numbers.
 - Use tables (|) for comparisons when appropriate.
 - Vary paragraph length to create visual rhythm: short punchy paragraph, then a medium one, then a list.
 - End each section with a transition sentence to the next topic.
-- Final paragraph before CTA should be a strong summary.`;
+- Final paragraph before CTA should be a strong summary.
+
+ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
+- NEVER use em-dash or en-dash (— –). Use a regular hyphen "-" with spaces, or split into two sentences.
+- NEVER use any emoji (no 👍 🚀 ✅ ❌ 🔥 etc.).
+- Use straight quotes " " only. NEVER use chevron quotes « » or curly quotes " " " ".
+- FORBIDDEN phrases (do not use, in any language): "В современном мире" / "In today's world", "Давайте разберёмся" / "Let's figure out", "Как уже упоминалось ранее" / "As mentioned earlier", "Таким образом, можно сделать вывод" / "Thus, we can conclude", "Итак, подведём итог" / "So, to summarize", "Кроме того" / "Moreover", "Более того" / "Furthermore", "Следовательно" / "Therefore / Consequently". Use casual connectors instead ("ну", "вот", "кстати", "а ещё", "значит", "так что" / "and", "plus", "so", "by the way").
+- Avoid perfectly long grammatically polished sentences. Break them into 2-3 short ones. Mix sentence lengths.
+- Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
+- Sound like a human writer, not a neural network.`;
 
     const systemPrompt =
       lang === "ru"
