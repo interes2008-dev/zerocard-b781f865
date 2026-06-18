@@ -922,7 +922,7 @@ function FAQSection() {
         style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
         <div className="max-w-[800px] mx-auto">
           <FadeIn>
-            <div className="section-head mb-10">
+            <div className="section-head mb-2">
               <div className="section-badge">{t.faqBadge}</div>
               <h2 className="section-title" style={{ whiteSpace: "pre-line" }}>{t.faqTitle}</h2>
             </div>
