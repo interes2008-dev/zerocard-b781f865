@@ -328,6 +328,12 @@ const translations = {
     faq7A: "Make sure the card account has funds - some wallets do a test charge for verification. If linking shows 'contact issuer', fill out the form at support.pionex.com - team will help within 3 business days.",
     faq8Q: "How to freeze the card if phone is lost?",
     faq8A: "Log into Pionex from another device → Card section → Freeze card. Freeze is instant. You can unfreeze yourself in the app - no need to contact support.",
+    faq9Q: "How does the pay worldwide feature work?",
+    faq9A: "ZeroCard lets you pay worldwide directly from your USDT balance. When you tap the card or enter it online, Pionex instantly converts USDT into the merchant's local currency at the market rate. You can pay abroad in 200+ countries without opening a foreign bank account.",
+    faq10Q: "Where can I use pay worldwide payments?",
+    faq10A: "Anywhere Visa or Mastercard is accepted - online stores, subscriptions like Netflix and Spotify, ads platforms, travel bookings and POS terminals abroad. International payments and global transfers go through as regular card transactions, so no service can tell you are paying with crypto.",
+    faq11Q: "How to pay worldwide safely with ZeroCard?",
+    faq11A: "Your funds stay in your Pionex USDT account, not on the card itself. For safe payments abroad top up only what you plan to spend, enable 2FA, use single-use limits and freeze the card in one tap from the app if something looks off. This makes pay worldwide safer than a classic debit card linked to your main balance.",
 
     // CTA
     ctaBadge: "Free · Fast · Profitable",
@@ -669,6 +675,12 @@ const translations = {
     faq7A: "Убедись, что на карточном счёте есть средства - некоторые кошельки делают тестовое списание для верификации. Если привязка показывает «обратитесь к эмитенту», заполни форму на support.pionex.com - команда поможет в течение 3 рабочих дней.",
     faq8Q: "Как заморозить карту если потерял телефон?",
     faq8A: "Войди в Pionex с другого устройства → раздел Карта → Заморозить карту. Заморозка мгновенная. Разморозить можно самостоятельно в приложении - нет необходимости обращаться в поддержку.",
+    faq9Q: "Как работает функция плати по миру?",
+    faq9A: "ZeroCard позволяет платить по миру напрямую с баланса USDT. При оплате картой Pionex мгновенно конвертирует USDT в валюту продавца по рыночному курсу. Так ты оплачиваешь покупки за границей в 200+ странах без открытия иностранного банковского счёта.",
+    faq10Q: "Где можно использовать оплату по миру?",
+    faq10A: "Везде, где принимают Visa или Mastercard - интернет-магазины, подписки Netflix и Spotify, рекламные кабинеты, бронирование путешествий и терминалы за рубежом. Международные платежи и глобальные переводы проходят как обычные карточные операции, поэтому сервисы не видят, что ты платишь криптой.",
+    faq11Q: "Как безопасно платить по миру с ZeroCard?",
+    faq11A: "Средства хранятся на USDT-счёте Pionex, а не на самой карте. Для безопасной оплаты за границей пополняй карту только на нужную сумму, включи 2FA, ставь лимиты на разовую операцию и замораживай карту в один клик из приложения. Это делает функцию плати по миру безопаснее классической дебетовой карты, привязанной к основному счёту.",
 
     // CTA
     ctaBadge: "Бесплатно · Быстро · Выгодно",
