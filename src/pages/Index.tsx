@@ -903,7 +903,10 @@ function FAQSection() {
     { q: t.faq3Q, a: t.faq3A }, { q: t.faq4Q, a: t.faq4A },
     { q: t.faq5Q, a: t.faq5A }, { q: t.faq6Q, a: t.faq6A },
     { q: t.faq7Q, a: t.faq7A }, { q: t.faq8Q, a: t.faq8A },
-  ];
+    { q: (t as any).faq9Q, a: (t as any).faq9A },
+    { q: (t as any).faq10Q, a: (t as any).faq10A },
+    { q: (t as any).faq11Q, a: (t as any).faq11A },
+  ].filter(f => f.q && f.a);
 
   const jsonLd = {
     "@context": "https://schema.org",
