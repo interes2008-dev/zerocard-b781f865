@@ -15,7 +15,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Spend crypto like",
-    heroDesc: "ZeroCard turns USDT into an everyday payment tool - 1% cashback on everything, 5% APR on balance and zero maintenance fees. Works with Apple Pay, Google Pay and PayPal in 200+ countries.",
+    heroDesc: "ZeroCard turns USDT into an everyday payment tool so you can pay worldwide (plati po miru) with 1% cashback on everything, 5% APR on balance and zero maintenance fees. International payments, subscriptions and travel spending across 200+ countries with Apple Pay, Google Pay and PayPal.",
     heroCTA: "Get card for free →",
     heroSecondary: "How it works",
     pill1: "200+ countries",
@@ -328,6 +328,12 @@ const translations = {
     faq7A: "Make sure the card account has funds - some wallets do a test charge for verification. If linking shows 'contact issuer', fill out the form at support.pionex.com - team will help within 3 business days.",
     faq8Q: "How to freeze the card if phone is lost?",
     faq8A: "Log into Pionex from another device → Card section → Freeze card. Freeze is instant. You can unfreeze yourself in the app - no need to contact support.",
+    faq9Q: "How does the pay worldwide feature work?",
+    faq9A: "ZeroCard lets you pay worldwide directly from your USDT balance. When you tap the card or enter it online, Pionex instantly converts USDT into the merchant's local currency at the market rate. You can pay abroad in 200+ countries without opening a foreign bank account.",
+    faq10Q: "Where can I use pay worldwide payments?",
+    faq10A: "Anywhere Visa or Mastercard is accepted - online stores, subscriptions like Netflix and Spotify, ads platforms, travel bookings and POS terminals abroad. International payments and global transfers go through as regular card transactions, so no service can tell you are paying with crypto.",
+    faq11Q: "How to pay worldwide safely with ZeroCard?",
+    faq11A: "Your funds stay in your Pionex USDT account, not on the card itself. For safe payments abroad top up only what you plan to spend, enable 2FA, use single-use limits and freeze the card in one tap from the app if something looks off. This makes pay worldwide safer than a classic debit card linked to your main balance.",
 
     // CTA
     ctaBadge: "Free · Fast · Profitable",
@@ -341,8 +347,8 @@ const translations = {
     footerNote: "Independent partner site. Not an official Pionex resource. All links contain partner referral code. Terms and fees may change - check current info at pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard - Crypto Card Pionex | 1% Cashback, 5% APR, Apple Pay | Spend USDT Everywhere",
-    metaDesc: "ZeroCard by Pionex - virtual Visa/Mastercard for USDT. 1% cashback on every purchase, 5% APR on balance, Apple Pay and Google Pay, 0 annual fees. Works in 200+ countries.",
+    metaTitle: "ZeroCard - Pay Worldwide with USDT | Crypto Card, 1% Cashback, 5% APR",
+    metaDesc: "Pay worldwide (plati po miru) with ZeroCard - virtual Visa/Mastercard for USDT. International payments, global transfers, 1% cashback, 5% APR on balance, Apple Pay and Google Pay in 200+ countries.",
   },
   ru: {
     // Nav
@@ -356,7 +362,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Трать крипту как",
-    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент - 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий за обслуживание. Работает с Apple Pay, Google Pay и PayPal в 200+ странах.",
+    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент - плати по миру без ограничений, получай 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий. Международные платежи, оплата за границей и глобальные переводы в 200+ странах через Apple Pay, Google Pay и PayPal.",
     heroCTA: "Получить карту бесплатно →",
     heroSecondary: "Как это работает",
     pill1: "200+ стран",
@@ -669,6 +675,12 @@ const translations = {
     faq7A: "Убедись, что на карточном счёте есть средства - некоторые кошельки делают тестовое списание для верификации. Если привязка показывает «обратитесь к эмитенту», заполни форму на support.pionex.com - команда поможет в течение 3 рабочих дней.",
     faq8Q: "Как заморозить карту если потерял телефон?",
     faq8A: "Войди в Pionex с другого устройства → раздел Карта → Заморозить карту. Заморозка мгновенная. Разморозить можно самостоятельно в приложении - нет необходимости обращаться в поддержку.",
+    faq9Q: "Как работает функция плати по миру?",
+    faq9A: "ZeroCard позволяет платить по миру напрямую с баланса USDT. При оплате картой Pionex мгновенно конвертирует USDT в валюту продавца по рыночному курсу. Так ты оплачиваешь покупки за границей в 200+ странах без открытия иностранного банковского счёта.",
+    faq10Q: "Где можно использовать оплату по миру?",
+    faq10A: "Везде, где принимают Visa или Mastercard - интернет-магазины, подписки Netflix и Spotify, рекламные кабинеты, бронирование путешествий и терминалы за рубежом. Международные платежи и глобальные переводы проходят как обычные карточные операции, поэтому сервисы не видят, что ты платишь криптой.",
+    faq11Q: "Как безопасно платить по миру с ZeroCard?",
+    faq11A: "Средства хранятся на USDT-счёте Pionex, а не на самой карте. Для безопасной оплаты за границей пополняй карту только на нужную сумму, включи 2FA, ставь лимиты на разовую операцию и замораживай карту в один клик из приложения. Это делает функцию плати по миру безопаснее классической дебетовой карты, привязанной к основному счёту.",
 
     // CTA
     ctaBadge: "Бесплатно · Быстро · Выгодно",
@@ -682,8 +694,8 @@ const translations = {
     footerNote: "Независимый партнёрский сайт. Не является официальным ресурсом Pionex. Все ссылки содержат реферальный код партнёра. Условия и сборы могут изменяться - проверяй актуальную информацию на pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard - Криптокарта Pionex | 1% кэшбэк, 5% APR, Apple Pay | Трать USDT везде",
-    metaDesc: "ZeroCard на базе Pionex - виртуальная Visa/Mastercard для USDT. 1% кэшбэк на каждую покупку, 5% годовых на остаток, Apple Pay и Google Pay, 0 годовых сборов. Работает в 200+ странах.",
+    metaTitle: "ZeroCard - Плати по миру криптой | Криптокарта Pionex, 1% кэшбэк, 5% APR",
+    metaDesc: "Плати по миру с ZeroCard - виртуальная Visa/Mastercard на базе Pionex. Международные платежи, оплата за границей и глобальные переводы в USDT. 1% кэшбэк, 5% годовых на остаток, Apple Pay и Google Pay в 200+ странах.",
   },
 } as const;
 

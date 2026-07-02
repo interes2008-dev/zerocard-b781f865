@@ -264,7 +264,20 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - FORBIDDEN phrases (do not use, in any language): "В современном мире" / "In today's world", "Давайте разберёмся" / "Let's figure out", "Как уже упоминалось ранее" / "As mentioned earlier", "Таким образом, можно сделать вывод" / "Thus, we can conclude", "Итак, подведём итог" / "So, to summarize", "Кроме того" / "Moreover", "Более того" / "Furthermore", "Следовательно" / "Therefore / Consequently". Use casual connectors instead ("ну", "вот", "кстати", "а ещё", "значит", "так что" / "and", "plus", "so", "by the way").
 - Avoid perfectly long grammatically polished sentences. Break them into 2-3 short ones. Mix sentence lengths.
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
-- Sound like a human writer, not a neural network.`;
+- Sound like a human writer, not a neural network.
+
+SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwide"):
+- Primary key phrase: RU "плати по миру", EN "pay worldwide". Use it naturally, no keyword stuffing.
+- The "title" MUST contain the primary key phrase (RU: "плати по миру"; EN: "pay worldwide") in a natural way.
+- The "description" MUST contain the primary key phrase once, naturally.
+- The article "content" MUST:
+  1. Include the primary key phrase in the first 100 words of the intro.
+  2. Include the primary key phrase in at least one H2 or H3 subheading.
+  3. Use the phrase 3-5 times total across the article (no more), plus related LSI phrases spread naturally throughout.
+- Related LSI phrases to weave in (RU): "международные платежи", "платить за границей", "карта для оплаты по миру", "безопасная оплата в других странах", "глобальные переводы", "оплата по всему миру".
+- Related LSI phrases to weave in (EN): "international payments", "paying abroad", "card for global payments", "safe payments in other countries", "global transfers", "spending worldwide".
+- Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
+- Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
     const systemPrompt =
       lang === "ru"
