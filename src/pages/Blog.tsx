@@ -125,19 +125,19 @@ export default function Blog() {
     fetchPosts().then(() => autoGenerate());
     document.title =
       lang === "ru"
-        ? "Блог | ZeroCard - криптокарта с кэшбэком"
-        : "Blog | ZeroCard - Crypto Card with Cashback";
+        ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
+        : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
     window.scrollTo(0, 0);
   }, [lang]);
 
   const filtered = posts.filter((p) => p.lang === lang);
 
   const pageTitle = lang === "ru"
-    ? "Блог ZeroCard - крипто, USDT, трейдинг и жизнь без границ"
-    : "ZeroCard Blog - crypto, USDT, trading & borderless living";
+    ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
+    : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
   const pageDesc = lang === "ru"
-    ? "Статьи о криптокартах, USDT, Pionex, фрилансе и жизни за рубежом. Практические гайды для крипто-пользователей."
-    : "Articles on crypto cards, USDT spending, Pionex, freelancing, and life abroad. Practical guides for crypto users.";
+    ? "Статьи о том, как платить по миру криптой: международные платежи, оплата за границей, глобальные переводы, USDT, Pionex и жизнь без банковских ограничений."
+    : "Guides on how to pay worldwide with crypto: international payments, spending abroad, global transfers, USDT, Pionex and life without banking limits.";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
