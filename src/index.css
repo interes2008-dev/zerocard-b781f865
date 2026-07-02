@@ -239,8 +239,12 @@ section, [class*="py-24"], [class*="py-8"] {
   }
 
   :lang(ru) .hero-title {
-    font-size: clamp(30px, 4.7vw, 58px);
-    letter-spacing: -2.5px;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(46px, 6.2vw, 86px);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    text-transform: none;
   }
 
   .gradient-text {
