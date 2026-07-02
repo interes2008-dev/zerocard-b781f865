@@ -15,7 +15,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Spend crypto like",
-    heroDesc: "ZeroCard turns USDT into an everyday payment tool so you can pay worldwide (plati po miru) with 1% cashback on everything, 5% APR on balance and zero maintenance fees. International payments, subscriptions and travel spending across 200+ countries with Apple Pay, Google Pay and PayPal.",
+    heroDesc: "ZeroCard turns USDT into an everyday payment tool. Pay worldwide (plati po miru) - 200+ countries, Apple Pay, Google Pay and PayPal. Get 1% cashback on everything, 5% APR on balance and zero fees. International payments, subscriptions and travel spending in one card.",
     heroCTA: "Get card for free →",
     heroSecondary: "How it works",
     pill1: "200+ countries",
@@ -362,7 +362,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Трать крипту как",
-    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент - плати по миру без ограничений, получай 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий. Международные платежи, оплата за границей и глобальные переводы в 200+ странах через Apple Pay, Google Pay и PayPal.",
+    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент. Плати по миру - 200+ стран, Apple Pay, Google Pay и PayPal. 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий. Международные платежи и переводы за границей в одной карте.",
     heroCTA: "Получить карту бесплатно →",
     heroSecondary: "Как это работает",
     pill1: "200+ стран",
