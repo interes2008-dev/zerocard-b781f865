@@ -15,7 +15,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Spend crypto like",
-    heroDesc: "ZeroCard turns USDT into an everyday payment tool - 1% cashback on everything, 5% APR on balance and zero maintenance fees. Works with Apple Pay, Google Pay and PayPal in 200+ countries.",
+    heroDesc: "ZeroCard turns USDT into an everyday payment tool so you can pay worldwide (plati po miru) with 1% cashback on everything, 5% APR on balance and zero maintenance fees. International payments, subscriptions and travel spending across 200+ countries with Apple Pay, Google Pay and PayPal.",
     heroCTA: "Get card for free →",
     heroSecondary: "How it works",
     pill1: "200+ countries",
@@ -341,8 +341,8 @@ const translations = {
     footerNote: "Independent partner site. Not an official Pionex resource. All links contain partner referral code. Terms and fees may change - check current info at pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard - Crypto Card Pionex | 1% Cashback, 5% APR, Apple Pay | Spend USDT Everywhere",
-    metaDesc: "ZeroCard by Pionex - virtual Visa/Mastercard for USDT. 1% cashback on every purchase, 5% APR on balance, Apple Pay and Google Pay, 0 annual fees. Works in 200+ countries.",
+    metaTitle: "ZeroCard - Pay Worldwide with USDT | Crypto Card, 1% Cashback, 5% APR",
+    metaDesc: "Pay worldwide (plati po miru) with ZeroCard - virtual Visa/Mastercard for USDT. International payments, global transfers, 1% cashback, 5% APR on balance, Apple Pay and Google Pay in 200+ countries.",
   },
   ru: {
     // Nav
@@ -356,7 +356,7 @@ const translations = {
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
     heroTitle1: "Трать крипту как",
-    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент - 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий за обслуживание. Работает с Apple Pay, Google Pay и PayPal в 200+ странах.",
+    heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент - плати по миру без ограничений, получай 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий. Международные платежи, оплата за границей и глобальные переводы в 200+ странах через Apple Pay, Google Pay и PayPal.",
     heroCTA: "Получить карту бесплатно →",
     heroSecondary: "Как это работает",
     pill1: "200+ стран",
@@ -682,8 +682,8 @@ const translations = {
     footerNote: "Независимый партнёрский сайт. Не является официальным ресурсом Pionex. Все ссылки содержат реферальный код партнёра. Условия и сборы могут изменяться - проверяй актуальную информацию на pionex.com. © 2026 ZeroCard.",
 
     // SEO
-    metaTitle: "ZeroCard - Криптокарта Pionex | 1% кэшбэк, 5% APR, Apple Pay | Трать USDT везде",
-    metaDesc: "ZeroCard на базе Pionex - виртуальная Visa/Mastercard для USDT. 1% кэшбэк на каждую покупку, 5% годовых на остаток, Apple Pay и Google Pay, 0 годовых сборов. Работает в 200+ странах.",
+    metaTitle: "ZeroCard - Плати по миру криптой | Криптокарта Pionex, 1% кэшбэк, 5% APR",
+    metaDesc: "Плати по миру с ZeroCard - виртуальная Visa/Mastercard на базе Pionex. Международные платежи, оплата за границей и глобальные переводы в USDT. 1% кэшбэк, 5% годовых на остаток, Apple Pay и Google Pay в 200+ странах.",
   },
 } as const;
 
