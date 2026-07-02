@@ -724,6 +724,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return "ru";
   });
 
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, []);
+
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
     localStorage.setItem("zerocard-lang", l);
