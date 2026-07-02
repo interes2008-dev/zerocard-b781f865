@@ -232,10 +232,10 @@ section, [class*="py-24"], [class*="py-8"] {
 
   .hero-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(38px, 5.5vw, 72px);
+    font-size: clamp(34px, 5.2vw, 64px);
     font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -2.5px;
+    line-height: 1.08;
+    letter-spacing: -2px;
   }
 
   .gradient-text {
