@@ -238,6 +238,11 @@ section, [class*="py-24"], [class*="py-8"] {
     letter-spacing: -2px;
   }
 
+  :lang(ru) .hero-title {
+    font-size: clamp(30px, 4.7vw, 58px);
+    letter-spacing: -2.5px;
+  }
+
   .gradient-text {
     color: var(--accent-color);
   }
