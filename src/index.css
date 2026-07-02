@@ -240,9 +240,9 @@ section, [class*="py-24"], [class*="py-8"] {
 
   :lang(ru) .hero-title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(46px, 6.2vw, 86px);
+    font-size: clamp(34px, 4.5vw, 64px);
     font-weight: 300;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     line-height: 1.05;
     text-transform: none;
   }
