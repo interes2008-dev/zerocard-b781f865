@@ -361,7 +361,7 @@ const translations = {
 
     // Hero
     heroBadge: "Pionex Card · Visa & Mastercard",
-    heroTitle1: "Трать крипту как",
+    heroTitle1: "Платите криптовалютой по всему миру",
     heroDesc: "ZeroCard превращает USDT в ежедневный платёжный инструмент. Плати по миру - 200+ стран, Apple Pay, Google Pay и PayPal. 1% кэшбэк на всё, 5% годовых на остаток и ноль комиссий. Международные платежи и переводы за границей в одной карте.",
     heroCTA: "Получить карту бесплатно →",
     heroSecondary: "Как это работает",
