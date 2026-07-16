@@ -30,6 +30,86 @@ function FadeIn({ children, className = "", delay = 0 }: { children: React.React
   );
 }
 
+/* ─── Scroll progress bar ─── */
+function ScrollProgress() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const h = document.documentElement;
+        const p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+        el.style.transform = `scaleX(${p})`;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+  return <div ref={ref} className="scroll-progress" aria-hidden="true" />;
+}
+
+/* ─── Count-up number (animates first number found in string) ─── */
+function CountUp({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-30px" });
+  const [txt, setTxt] = useState(value);
+  useEffect(() => {
+    if (!inView) return;
+    const m = value.match(/(\d+(?:[.,]\d+)?)/);
+    if (!m || m.index === undefined || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTxt(value);
+      return;
+    }
+    const target = parseFloat(m[1].replace(",", "."));
+    const dec = /[.,]/.test(m[1]) ? 1 : 0;
+    const pre = value.slice(0, m.index);
+    const post = value.slice(m.index + m[1].length);
+    const t0 = performance.now();
+    const dur = 1400;
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+      setTxt(pre + (target * e).toFixed(dec) + post);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+  return <span ref={ref}>{txt}</span>;
+}
+
+/* ─── Cursor spotlight on cards (Linear/Vercel style) ─── */
+function useSpotlight() {
+  useEffect(() => {
+    if (!window.matchMedia("(pointer:fine)").matches) return;
+    let raf = 0;
+    let ev: PointerEvent | null = null;
+    const onMove = (e: PointerEvent) => {
+      ev = e;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        if (!ev) return;
+        const cards = document.querySelectorAll<HTMLElement>(".glass-card, .review-card, .aud-pain, .pain-row");
+        cards.forEach(card => {
+          const r = card.getBoundingClientRect();
+          if (r.bottom < -80 || r.top > window.innerHeight + 80) return;
+          card.style.setProperty("--mx", `${ev!.clientX - r.left}px`);
+          card.style.setProperty("--my", `${ev!.clientY - r.top}px`);
+        });
+      });
+    };
+    document.addEventListener("pointermove", onMove, { passive: true });
+    return () => { document.removeEventListener("pointermove", onMove); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+}
+
 /* ─── Theme toggle hook ─── */
 function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
@@ -217,7 +297,7 @@ function HeroSection() {
             <div className="h-badge"><span className="dot" /><span>{c.badge}</span></div>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h1>
+            <h1 className={lang === "ru" ? "h1-ru" : undefined}>
               <span className="thin">{c.h1a}</span><br />
               {c.h1b} <span className="accent">{c.h1accent}</span>
             </h1>
@@ -235,9 +315,9 @@ function HeroSection() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="h-stats">
-              <div className="h-stat"><div className="num">200<em>+</em></div><div className="lbl">{c.st1}</div></div>
-              <div className="h-stat"><div className="num"><em>1%</em></div><div className="lbl">{c.st2}</div></div>
-              <div className="h-stat"><div className="num"><em>5%</em></div><div className="lbl">{c.st3}</div></div>
+              <div className="h-stat"><div className="num"><CountUp value="200" /><em>+</em></div><div className="lbl">{c.st1}</div></div>
+              <div className="h-stat"><div className="num"><em><CountUp value="1%" /></em></div><div className="lbl">{c.st2}</div></div>
+              <div className="h-stat"><div className="num"><em><CountUp value="5%" /></em></div><div className="lbl">{c.st3}</div></div>
               <div className="h-stat"><div className="num">$0</div><div className="lbl">{c.st4}</div></div>
             </div>
           </FadeIn>
@@ -309,12 +389,12 @@ function StatsBar() {
 
   return (
     <div className="border-t border-b py-8 px-5 md:px-10 backdrop-blur-sm"
-      style={{ background: "rgba(4,28,62,0.7)", borderColor: "var(--border-custom)" }}>
+      style={{ background: "color-mix(in srgb, var(--bg2) 82%, transparent)", borderColor: "var(--border-custom)" }}>
       <div className="max-w-[1160px] mx-auto grid grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <FadeIn key={s.label} delay={i * 0.05}>
             <div className="text-center px-6" style={{ borderRight: i < stats.length - 1 ? "1px solid var(--border-custom)" : "none" }}>
-              <div className="text-4xl font-bold tracking-tight" style={{ color: "var(--blue)", letterSpacing: "-1.5px", fontFamily: "'Space Grotesk', sans-serif" }}>{s.val}</div>
+              <div className="text-4xl font-bold tracking-tight" style={{ color: "var(--blue)", letterSpacing: "-1.5px", fontFamily: "'Space Grotesk', sans-serif" }}><CountUp value={s.val} /></div>
               <div className="text-[13px] font-medium mt-1" style={{ color: "var(--text2)" }}>{s.label}</div>
             </div>
           </FadeIn>
@@ -1134,8 +1214,11 @@ function DynamicMeta() {
 /* ═══════════════════════════════════════════════════
    PAGE COMPOSITION
    ═══════════════════════════════════════════════════ */
-const Index = () => (
+const Index = () => {
+  useSpotlight();
+  return (
   <div className="min-h-screen" style={{ overflowX: "clip" }}>
+    <ScrollProgress />
     <Helmet>
       <link rel="canonical" href="/" />
       <meta property="og:url" content="/" />
@@ -1166,6 +1249,7 @@ const Index = () => (
     </main>
     <Footer />
   </div>
-);
+  );
+};
 
 export default Index;
