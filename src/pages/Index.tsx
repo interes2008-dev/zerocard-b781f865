@@ -151,108 +151,141 @@ function Navbar() {
    HERO (with typewriter)
    ═══════════════════════════════════════════════════ */
 function HeroSection() {
-  const { t } = useI18n();
-  const phrases = [t.tw1, t.tw2, t.tw3, t.tw4, t.tw5, t.tw6, t.tw7, t.tw8, t.tw9, t.tw10, t.tw11, t.tw12, t.tw13];
-  const [wordIdx, setWordIdx] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { lang } = useI18n();
+  const stageRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const current = phrases[wordIdx];
-    let timer: ReturnType<typeof setTimeout>;
+    const stage = stageRef.current;
+    const card = cardRef.current;
+    if (!stage || !card) return;
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (rm || !window.matchMedia("(pointer:fine)").matches) return;
+    const onMove = (e: MouseEvent) => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateX(${8 - y * 10}deg) rotateY(${-14 + x * 14}deg)`;
+    };
+    const onLeave = () => { card.style.transform = "rotateX(8deg) rotateY(-14deg)"; };
+    stage.addEventListener("mousemove", onMove);
+    stage.addEventListener("mouseleave", onLeave);
+    return () => {
+      stage.removeEventListener("mousemove", onMove);
+      stage.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
 
-    if (!isDeleting && displayed.length < current.length) {
-      // Typing
-      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 70 + Math.random() * 40);
-    } else if (!isDeleting && displayed.length === current.length) {
-      // Pause then start deleting - first word gets a longer accent pause
-      const pause = wordIdx === 0 ? 4500 : 2200;
-      timer = setTimeout(() => setIsDeleting(true), pause);
-    } else if (isDeleting && displayed.length > 0) {
-      // Deleting
-      timer = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 35);
-    } else if (isDeleting && displayed.length === 0) {
-      // Move to next word
-      setIsDeleting(false);
-      setWordIdx(prev => (prev + 1) % phrases.length);
-    }
-
-    return () => clearTimeout(timer);
-  }, [displayed, isDeleting, wordIdx, phrases]);
+  const c = lang === "ru" ? {
+    badge: "Pionex Card · Visa & Mastercard · выпуск за 5 минут",
+    h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "по всему миру",
+    sub: (<>ZeroCard выпускается на базе биржи <b>Pionex</b>, лицензированной в США (MSB) и Сингапуре. Пополняете карту в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите в любой стране, где принимают Visa. Банк, проверки дохода и ожидание пластика не нужны.</>),
+    cta1: "Выпустить карту бесплатно", cta2: "Как это работает",
+    st1: "стран для оплаты", st2: "кэшбэк на каждую покупку", st3: "годовых на остаток USDT", st4: "выпуск и обслуживание",
+    status: "Активирован", caption: "на базе биржи pionex · лицензия msb (сша)",
+    fc1a: "Apple Pay · Оплачено", fc1b: "Кофейня, Стамбул · $4.20",
+    fc2a: "Кэшбэк начислен", fc2b: "+0.84 USDT за покупку",
+    fc3a: "+5% APR", fc3b: "на остаток, ежедневно",
+    trust: "Карта работает там, где вы уже платите",
+  } : {
+    badge: "Pionex Card · Visa & Mastercard · issued in 5 minutes",
+    h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "everywhere you go",
+    sub: (<>ZeroCard is issued by <b>Pionex</b>, an exchange licensed in the US (MSB) and Singapore. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend in any country where Visa works. No bank account, no income checks, nothing to wait for.</>),
+    cta1: "Get your free card", cta2: "How it works",
+    st1: "countries to spend in", st2: "cashback on every purchase", st3: "APR on your USDT balance", st4: "issue and maintenance fees",
+    status: "Activated", caption: "powered by pionex exchange · us msb licensed",
+    fc1a: "Apple Pay · Paid", fc1b: "Coffee shop, Istanbul · $4.20",
+    fc2a: "Cashback earned", fc2b: "+0.84 USDT on purchase",
+    fc3a: "+5% APR", fc3b: "on balance, paid daily",
+    trust: "Works everywhere you already pay",
+  };
 
   const pills = [
-    { icon: "🌍", label: t.pill1 }, { icon: "🍎", label: t.pill2 },
-    { icon: "📱", label: t.pill3 }, { icon: "🆓", label: t.pill4 },
-    { icon: "⚡", label: t.pill5 },
-  ];
-
-  const tickerItems = [
-    { icon: "🍎", label: t.tickerApple }, { icon: "📱", label: t.tickerGoogle },
-    { icon: "🅿️", label: t.tickerPaypal }, { icon: "💳", label: t.tickerVisa },
-    { icon: "🔴", label: t.tickerMastercard }, { icon: "✈️", label: t.tickerTrip },
-    { icon: "📲", label: t.tickerLine }, { icon: "💹", label: t.tickerWechat },
-    { icon: "🛍️", label: t.tickerAlipay }, { icon: "📲", label: t.tickerSamsung },
+    { em: "🍎", label: "Apple Pay" }, { em: "🤖", label: "Google Pay" },
+    { em: "🅿️", label: "PayPal" }, { em: "💳", label: "Visa" },
+    { em: "🔴", label: "Mastercard" }, { em: "✈️", label: "Trip.com" },
+    { em: "💬", label: "LINE Pay" }, { em: "💚", label: "WeChat Pay" },
+    { em: "🛍️", label: "Alipay" }, { em: "📱", label: "Samsung Pay" },
   ];
 
   return (
-    <section className="text-center relative" style={{ maxWidth: 1160, margin: "0 auto", padding: "96px 40px 80px" }}>
-      {/* Centred spotlight */}
-      <div className="absolute pointer-events-none z-0" style={{
-        top: 40, left: "50%", transform: "translateX(-50%)",
-        width: 800, height: 420,
-        background: "radial-gradient(ellipse at center, rgba(255,90,42,0.08) 0%, rgba(60,120,240,0.07) 50%, transparent 75%)",
-      }} />
-      <div className="relative z-[1]">
-        <FadeIn>
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-semibold mb-7"
-            style={{ background: "var(--accent-bg)", border: "1px solid var(--accent-border)", color: "var(--accent-color)", fontFamily: "'JetBrains Mono', monospace" }}>
-            <span className="w-[7px] h-[7px] rounded-full" style={{ background: "var(--accent-color)", animation: "blink 2s infinite" }} />
-            <span style={{ opacity: 0.6 }}>$</span> {t.heroBadge}
+    <section className="hero-v2">
+      <div className="hero-v2-inner">
+        {/* LEFT COLUMN */}
+        <div>
+          <FadeIn>
+            <div className="h-badge"><span className="dot" /><span>{c.badge}</span></div>
+          </FadeIn>
+          <FadeIn delay={0.05}>
+            <h1>
+              <span className="thin">{c.h1a}</span><br />
+              {c.h1b} <span className="accent">{c.h1accent}</span>
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <p className="h-sub">{c.sub}</p>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <div className="h-cta-row">
+              <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="h-btn h-btn-primary">
+                <span>{c.cta1}</span><span className="arr">→</span>
+              </a>
+              <a href="#how" className="h-btn h-btn-ghost">{c.cta2}</a>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div className="h-stats">
+              <div className="h-stat"><div className="num">200<em>+</em></div><div className="lbl">{c.st1}</div></div>
+              <div className="h-stat"><div className="num"><em>1%</em></div><div className="lbl">{c.st2}</div></div>
+              <div className="h-stat"><div className="num"><em>5%</em></div><div className="lbl">{c.st3}</div></div>
+              <div className="h-stat"><div className="num">$0</div><div className="lbl">{c.st4}</div></div>
+            </div>
+          </FadeIn>
+        </div>
+
+        {/* RIGHT COLUMN: PIONEX-STYLE CARD */}
+        <div className="card-stage" ref={stageRef}>
+          <div className="pcard" ref={cardRef}>
+            <div className="stripes"><span className="s1" /><span className="s2" /></div>
+            <div className="card-top">
+              <svg className="p-logo" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M12 42V8h13.5c7.5 0 12.5 4.6 12.5 11.2 0 6.7-5 11.3-12.5 11.3H20.5V42H12Z" fill="#fff" />
+                <path d="M20.5 15.2v8.1h4.6c3 0 4.8-1.5 4.8-4s-1.8-4.1-4.8-4.1h-4.6Z" fill="#f2662b" />
+                <path d="M31 6.5 38.5 3l-2.3 8.2L31 6.5Z" fill="#fff" />
+              </svg>
+              <div className="status-pill">{c.status}</div>
+            </div>
+            <div className="card-mid"><div className="tier">virtual · usdt</div></div>
+            <div className="card-bottom">
+              <div className="card-num"><span className="dots">•&nbsp;•&nbsp;•&nbsp;•</span> 5157</div>
+              <div className="mc"><i /><i /></div>
+            </div>
           </div>
-        </FadeIn>
 
-        <FadeIn delay={0.05}>
-          <h1 className="hero-title mb-6">
-            {t.heroTitle1}<br />
-            <span className="typewriter-wrap">
-              <span className="typewriter-word">{displayed}</span>
-              <span className="typewriter-cursor" />
-            </span>
-          </h1>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <p className="text-lg leading-[1.7] font-normal mb-10 mx-auto text-balance" style={{ color: "var(--text2)", maxWidth: 660 }}>
-            {t.heroDesc}
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.15}>
-          <div className="flex justify-center gap-3 flex-wrap mb-14">
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.heroCTA}</a>
-            <a href="#how" className="btn-secondary-custom">{t.heroSecondary}</a>
+          <div className="float-chip fc-1">
+            <div className="ic">✓</div>
+            <div><span>{c.fc1a}</span><small>{c.fc1b}</small></div>
           </div>
-        </FadeIn>
-
-        <FadeIn delay={0.2}>
-          <div className="flex justify-center items-center gap-2 flex-wrap text-[13px] font-medium" style={{ color: "var(--text2)" }}>
-            {pills.map(p => (
-              <div key={p.label} className="pill">
-                <span className="text-[15px]">{p.icon}</span>{p.label}
-              </div>
-            ))}
+          <div className="float-chip fc-2">
+            <div className="ic">%</div>
+            <div><span>{c.fc2a}</span><small>{c.fc2b}</small></div>
           </div>
-        </FadeIn>
+          <div className="float-chip fc-3">
+            <div className="ic">↗</div>
+            <div><span>{c.fc3a}</span><small>{c.fc3b}</small></div>
+          </div>
 
-        {/* Wallet ticker */}
-        <div className="mt-14 overflow-hidden relative py-1">
-          <div className="absolute top-0 bottom-0 left-0 w-[120px] z-[2]" style={{ background: `linear-gradient(90deg, var(--bg), transparent)` }} />
-          <div className="absolute top-0 bottom-0 right-0 w-[120px] z-[2]" style={{ background: `linear-gradient(-90deg, var(--bg), transparent)` }} />
-          <div className="flex gap-3 w-max" style={{ animation: "ticker-scroll 22s linear infinite" }}>
-            {[...tickerItems, ...tickerItems].map((item, i) => (
-              <div key={i} className="wallet-chip">
-                <span className="text-[17px]">{item.icon}</span>{item.label}
-              </div>
+          <div className="card-caption">{c.caption}</div>
+        </div>
+      </div>
+
+      {/* MARQUEE */}
+      <div className="trust">
+        <div className="trust-label">{c.trust}</div>
+        <div className="marquee">
+          <div className="marquee-track">
+            {[...pills, ...pills].map((p, i) => (
+              <div key={i} className="logo-pill"><span className="em">{p.em}</span>{p.label}</div>
             ))}
           </div>
         </div>
@@ -260,6 +293,7 @@ function HeroSection() {
     </section>
   );
 }
+
 
 /* ═══════════════════════════════════════════════════
    STATS BAR
