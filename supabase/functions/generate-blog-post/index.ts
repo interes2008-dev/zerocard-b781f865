@@ -266,17 +266,11 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
 - Sound like a human writer, not a neural network.
 
-SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwide"):
-- Primary key phrase: RU "плати по миру", EN "pay worldwide". Use it naturally, no keyword stuffing.
-- The "title" MUST contain the primary key phrase (RU: "плати по миру"; EN: "pay worldwide") in a natural way.
-- The "description" MUST contain the primary key phrase once, naturally.
-- The article "content" MUST:
-  1. Include the primary key phrase in the first 100 words of the intro.
-  2. Include the primary key phrase in at least one H2 or H3 subheading.
-  3. Use the phrase 3-5 times total across the article (no more), plus related LSI phrases spread naturally throughout.
-- Related LSI phrases to weave in (RU): "международные платежи", "платить за границей", "карта для оплаты по миру", "безопасная оплата в других странах", "глобальные переводы", "оплата по всему миру".
-- Related LSI phrases to weave in (EN): "international payments", "paying abroad", "card for global payments", "safe payments in other countries", "global transfers", "spending worldwide".
-- Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
+SEO RULES (mandatory):
+- Focus the article on the actual topic and audience category. Pick a keyword that naturally fits the topic (e.g. "криптокарта", "USDT кэшбэк", "Pionex боты", "crypto card", "USDT cashback") - NOT a forced "плати по миру" / "pay worldwide" phrase.
+- FORBIDDEN key phrases (do not use anywhere in title, description or content): "плати по миру", "платите по миру", "плати по всему миру", "pay worldwide", "pay around the world", "paying worldwide". These are banned.
+- Use the chosen topical keyword naturally 3-5 times, plus related LSI phrases relevant to the audience.
+- Add at least one internal markdown link to /blog or the homepage / with natural anchor text tied to the article's topic.
 - Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
     const systemPrompt =
