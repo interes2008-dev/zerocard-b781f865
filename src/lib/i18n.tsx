@@ -1,6 +1,12 @@
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
 
-export type Lang = "en" | "ru";
+export type Lang = "en" | "ru" | "de";
+
+export const LANGS: { id: Lang; flag: string; label: string }[] = [
+  { id: "ru", flag: "🇷🇺", label: "Русский" },
+  { id: "en", flag: "🇬🇧", label: "English" },
+  { id: "de", flag: "🇩🇪", label: "Deutsch" },
+];
 
 const translations = {
   en: {
@@ -697,6 +703,353 @@ const translations = {
     metaTitle: "ZeroCard - Плати по миру криптой | Криптокарта Pionex, 1% кэшбэк, 5% APR",
     metaDesc: "Плати по миру с ZeroCard - виртуальная Visa/Mastercard на базе Pionex. Международные платежи, оплата за границей и глобальные переводы в USDT. 1% кэшбэк, 5% годовых на остаток, Apple Pay и Google Pay в 200+ странах.",
   },
+  de: {
+    // Nav
+    navBenefits: "Vorteile",
+    navAudience: "Für wen",
+    navHow: "So geht's",
+    navCompare: "Vergleich",
+    navFAQ: "FAQ",
+    navGetCard: "Karte holen →",
+
+    // Hero
+    heroBadge: "Pionex Card · Visa & Mastercard",
+    heroTitle1: "Weltweit mit Krypto bezahlen",
+    heroDesc: "ZeroCard macht aus USDT ein Zahlungsmittel für jeden Tag. Bezahle in über 200 Ländern, mit Apple Pay, Google Pay und PayPal. Dazu 1% Cashback auf alles, 5% Zinsen auf dein Guthaben und keine Gebühren. Auslandszahlungen, Abos und Reisen laufen über eine einzige Karte.",
+    heroCTA: "Karte kostenlos holen →",
+    heroSecondary: "So funktioniert's",
+    pill1: "200+ Länder",
+    pill2: "Apple Pay",
+    pill3: "Google Pay",
+    pill4: "0 € Jahresgebühr",
+    pill5: "Sofort aufladen",
+
+    // Typewriter phrases (13)
+    tw1: "echtes Geld", tw2: "Kaffee und Taxi", tw3: "Netflix und Spotify",
+    tw4: "Steam und Xbox", tw5: "Adobe und Figma", tw6: "Essen und Einkäufe",
+    tw7: "ChatGPT und Claude", tw8: "Hotels und Flüge", tw9: "Abos",
+    tw10: "Meta-Werbung", tw11: "Bestellungen bei Lieferanten", tw12: "alles was du willst",
+    tw13: "den echten Alltag",
+
+    // Ticker wallets
+    tickerApple: "Apple Pay", tickerGoogle: "Google Pay", tickerPaypal: "PayPal",
+    tickerVisa: "Visa", tickerMastercard: "Mastercard", tickerTrip: "Trip.com",
+    tickerLine: "LINE Pay", tickerWechat: "WeChat Pay", tickerAlipay: "Alipay",
+    tickerSamsung: "Samsung Pay",
+
+    // Stats
+    stat1Val: "1%", stat1Label: "Cashback bei jedem Einkauf",
+    stat2Val: "5%", stat2Label: "Zinsen aufs Guthaben (stündlich)",
+    stat3Val: "5M+", stat3Label: "Pionex-Nutzer",
+    stat4Val: "$0", stat4Label: "Jahres- und Ausgabegebühr",
+
+    // Pain section
+    painBadge: "⚡ Warum du eine Karte brauchst",
+    painTitle: "Deine Krypto sollte arbeiten,\nnicht nur herumliegen",
+    painDesc: "Millionen halten USDT auf der Börse und kommen im Alltag nicht daran. ZeroCard ändert das.",
+    painBadLabel: "✕ Ohne ZeroCard",
+    painGoodLabel: "✓ Mit ZeroCard",
+    painBad1: "<strong>Krypto ist eingefroren.</strong> USDT liegt auf der Börse. Damit kaufst du keinen Kaffee, zahlst kein Abo und hebst kein Bargeld ab.",
+    painBad2: "<strong>Auszahlung kostet.</strong> Umtausch plus Banküberweisung frisst jedes Mal 3 bis 5%.",
+    painBad3: "<strong>Tagelanges Warten.</strong> Banküberweisungen brauchen 1 bis 3 Tage. Wer jetzt Geld braucht, hat Pech.",
+    painBad4: "<strong>Guthaben wächst nicht.</strong> Das Geld liegt einfach da: keine Zinsen, kein Cashback.",
+    painBad5: "<strong>Im Ausland wird's teuer.</strong> Die lokale Karte wird abgelehnt oder kostet happige Fremdwährungsgebühren.",
+    painGood1: "<strong>Sofort ausgeben.</strong> Karte in Sekunden aus Pionex aufladen und überall mit USDT zahlen, wo Visa oder Mastercard läuft.",
+    painGood2: "<strong>Cashback deckt die Gebühr.</strong> 1% Cashback gegen 1% Transaktionsgebühr. Unterm Strich: <strong>praktisch null Kosten</strong>.",
+    painGood3: "<strong>Sofort einsatzbereit.</strong> Mit einem Tipp in Apple Pay hinterlegen und eine Minute später per Handy zahlen.",
+    painGood4: "<strong>5% Zinsen aufs Guthaben.</strong> Dein USDT auf der Karte verdient jede Stunde mit, auch nachts.",
+    painGood5: "<strong>Weltweit.</strong> 200+ Länder, 100M+ Händler. Visa ohne Fremdwährungsgebühr, Mastercard 0% in den meisten Regionen.",
+
+    // Benefits
+    benefitsBadge: "💰 Vorteile",
+    benefitsTitle: "Alles was eine\nKrypto-Karte können muss",
+    benefitsDesc: "Gebaut für alle, die ihre Krypto jeden Tag im echten Leben nutzen wollen.",
+    ben1Icon: "💰", ben1Big: "1%", ben1Title: "Unbegrenztes Cashback in USDT", ben1Desc: "Jeder Einkauf bringt 1% in USDT direkt aufs Kartenkonto zurück. Kein Limit, kein Ablaufdatum, keine Ausnahmen. Gibst du 1000 $ aus, bekommst du 10 $ zurück. Automatisch, jedes Mal. Gutschrift erfolgt binnen 24 Stunden.",
+    ben2Icon: "📊", ben2Big: "5%", ben2Title: "Zinsen aufs Guthaben", ben2Desc: "USDT auf der Karte bringt 5% pro Jahr, stündlich verzinst. Keine klassische Bank bietet das auf einem Girokonto.",
+    ben3Icon: "🍎", ben3Title: "Apple Pay und Google Pay", ben3Desc: "Karte mit einem Tipp direkt in der Pionex-App zu Apple Pay hinzufügen. Kontaktlos per NFC an jedem Terminal weltweit.",
+    ben4Icon: "✈️", ben4Big: "5%", ben4Title: "Cashback bei Trip.com", ben4Desc: "Flüge und Hotels über Trip.com buchen und 5% in Krypto zurückbekommen. Mehr reisen, weniger zahlen.",
+    ben5Icon: "🛡️", ben5Title: "Schutz auf Bankniveau", ben5Desc: "Transaktionen werden in Echtzeit überwacht, die Karte sperrst du sofort in der App, dazu vollständige KYC-Verifizierung.",
+    ben6Icon: "⚡", ben6Title: "Sofort aufladen", ben6Desc: "Die USDT-Übertragung vom Pionex-Hauptkonto auf die Karte dauert Sekunden. Minimum 1 USDT. Zwischen den Konten fallen keine Gebühren an.",
+    ben7Icon: "🆓", ben7Title: "Null Gebühren", ben7Desc: "Keine Jahresgebühr. Keine Ausgabegebühr. Keine versteckten Kosten. Kostenlos beantragen, dauerhaft kostenlos nutzen.",
+
+    // How it works
+    howBadge: "📋 So geht's",
+    howTitle: "In wenigen\nSchritten fertig",
+    howDesc: "Kein Papierkram, keine Warteschlange. Alles läuft über die Pionex-App.",
+    howTab1: "Karte holen", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
+    step1Title: "Registrierung", step1Desc: "Pionex-Konto per E-Mail oder Google anlegen. Dauert 2 Minuten.",
+    step2Title: "KYC Level 2", step2Desc: "Ausweisfoto plus Selfie. Die Prüfung dauert meist 10 Minuten.",
+    step3Title: "Beantragen", step3Desc: "App → Wallet → Karte → Beantragen. Freigabe innerhalb von 24 Stunden.",
+    step4Title: "Konto aufladen", step4Desc: "USDT vom Hauptkonto auf die Karte schicken. Ab 1 USDT, sofort verfügbar.",
+    step5Title: "Zahlen und verdienen", step5Desc: "Zu Apple Pay oder Google Pay hinzufügen. Cashback und Zinsen laufen ab der ersten Sekunde.",
+    howCTA: "Jetzt starten, kostenlos →",
+    appleVisa: "Visa mit einem Tipp", appleVisaType: "iOS · direkt in der App", appleVisaRecommended: "Empfohlen",
+    appleStep1: "Pionex-App auf die neueste Version bringen",
+    appleStep2: "Kartenseite öffnen und auf 'Zu Apple Wallet hinzufügen' tippen",
+    appleStep3: "Daten bestätigen, Bedingungen akzeptieren",
+    appleStep4: "Per Face ID oder Touch ID freigeben",
+    appleStep5: "Fertig, Karte ist drin",
+    appleMC: "Mastercard manuell", appleMCType: "iOS · über die Wallet-App", appleMCAlt: "Alternative",
+    appleMCStep1: "Apple Wallet öffnen, oben rechts auf '+' tippen",
+    appleMCStep2: "'Debit- oder Kreditkarte' auswählen",
+    appleMCStep3: "Kartendaten von Pionex manuell eingeben",
+    appleMCStep4: "Bedingungen lesen und annehmen",
+    appleMCStep5: "Per SMS oder E-Mail bestätigen",
+    appleDevices: "Passende Geräte", appleDevicesType: "Voraussetzungen für Apple Pay",
+    appleReq1: "iPhone 6 oder neuer", appleReq2: "Apple Watch (alle Modelle)", appleReq3: "iPad mit NFC", appleReq4: "Mac mit Touch ID oder Face ID", appleReq5: "Kontaktlose NFC-Terminals",
+    gpTitle: "Google Pay", gpType: "Android · manuell hinzufügen", gpSupported: "Unterstützt",
+    gpStep1: "Google-Pay-App öffnen", gpStep2: "Auf 'Zahlung' → 'Karte hinzufügen' tippen", gpStep3: "Kartendaten von Pionex manuell eingeben", gpStep4: "Bedingungen akzeptieren", gpStep5: "Per SMS oder E-Mail bestätigen, fertig",
+    gpReqTitle: "Voraussetzungen", gpReqType: "Was du für Google Pay brauchst",
+    gpReq1: "Android 7.0 (Nougat) oder neuer", gpReq2: "Gerät mit NFC-Chip", gpReq3: "Google-Pay-App installiert", gpReq4: "NFC in den Einstellungen aktiviert",
+    gpHowTitle: "So bezahlst du", gpHowType: "Kontaktlos zahlen",
+    gpHow1: "Handy entsperren", gpHow2: "Ans NFC-Terminal halten", gpHow3: "Auf die Bestätigung am Display warten", gpHow4: "Cashback wird automatisch gutgeschrieben",
+    ppTitle: "PayPal", ppType: "Online einkaufen", ppSupported: "Unterstützt",
+    ppStep1: "PayPal öffnen, Bereich 'Wallet'", ppStep2: "Auf 'Karte oder Konto hinzufügen' tippen", ppStep3: "'Debit- oder Kreditkarte' auswählen", ppStep4: "Kartendaten von Pionex manuell eingeben", ppStep5: "Bestätigen und online loslegen",
+    ppUsesTitle: "Wofür es taugt", ppUsesType: "Onlineshops und Dienste",
+    ppUse1: "Amazon, eBay, AliExpress", ppUse2: "Netflix, Spotify, Adobe", ppUse3: "Flüge und Hotels", ppUse4: "Freelance-Plattformen", ppUse5: "100M+ Onlineshops",
+    ppOtherTitle: "Andere Wallets", ppOtherType: "LINE Pay, WeChat, Alipay",
+    ppOther1: "Gewünschte Wallet-App öffnen", ppOther2: "Zum Bereich 'Karten' oder 'Wallet' gehen", ppOther3: "'Karte hinzufügen' wählen", ppOther4: "Kartendaten von Pionex eingeben", ppOther5: "Der Verifizierung folgen",
+
+    // Compare
+    compareBadge: "📊 Vergleich",
+    compareTitle: "ZeroCard vs. Alternativen",
+    compareDesc: "Warum ZeroCard bei allen wichtigen Punkten vor klassischen Banken und anderen Krypto-Karten liegt.",
+    compParam: "Kriterium", compZero: "✦ ZeroCard (Pionex)", compBank: "Normale Bankkarte", compOther: "Andere Krypto-Karten",
+    comp1P: "Cashback", comp1Z: "1% auf alles, ohne Limit", comp1B: "0 bis 1% (mit Bedingungen)", comp1O: "0 bis 2% (begrenzt)",
+    comp2P: "Zinsen aufs Guthaben", comp2Z: "5% pro Jahr (stündlich)", comp2B: "✕ 0 bis 0,5%", comp2O: "✕ Nein",
+    comp3P: "Jahresgebühr", comp3Z: "✓ $0", comp3B: "✕ 50 bis 500 $/Jahr", comp3O: "~ Meist $0",
+    comp4P: "Ausgabegebühr", comp4Z: "✓ $0", comp4B: "✕ Oft kostenpflichtig", comp4O: "~ Manchmal",
+    comp5P: "Fremdwährungsgebühr (Visa)", comp5Z: "✓ 0%", comp5B: "✕ 1,5 bis 3%", comp5O: "~ 0 bis 2%",
+    comp6P: "Apple Pay / Google Pay", comp6Z: "✓", comp6B: "✓", comp6O: "~ Manchmal",
+    comp7P: "Sofort mit Krypto aufladen", comp7Z: "✓", comp7B: "✕", comp7O: "~ Manchmal",
+    comp8P: "Reise-Cashback (Trip.com)", comp8Z: "5%", comp8B: "~ Manchmal", comp8O: "✕ Selten",
+    comp9P: "PayPal, LINE Pay", comp9Z: "✓", comp9B: "~ Teilweise", comp9O: "✕ Selten",
+
+    // Audience
+    audBadge: "👥 Für wen",
+    audTitle: "ZeroCard löst genau\ndein Problem",
+    audDesc: "Egal was du machst, die Karte arbeitet für dich. Such dir deine Kategorie aus.",
+    audCTA: "ZeroCard kostenlos holen →",
+
+    audTab1: "🪙 Krypto-Holder", audTab2: "📈 Trader", audTab3: "🤖 Pionex-Nutzer",
+    audTab4: "✨ KI-Nutzer", audTab5: "🔒 Gesperrte Karten", audTab6: "🌍 Digital Nomads",
+    audTab7: "💼 Freelancer", audTab8: "💰 Anleger",
+    audTab9: "🎬 Blogger & Kreative", audTab10: "🎮 Gamer",
+    audTab11: "🛍️ E-Commerce", audTab12: "🛂 Auswanderer",
+    audTab13: "👨‍👩‍👧 Eltern im Ausland", audTab14: "⚡ Arbitrageure",
+
+    // Audience: Crypto
+    aud1Icon: "🪙", aud1Tag: "⚡ Kernzielgruppe", aud1Title: "Krypto-Holder",
+    aud1Desc: "Du hältst USDT, BTC, ETH, aber im Alltag bringt dir das nichts. Mit ZeroCard gibst du Krypto so einfach aus wie Euro, in jedem Laden weltweit.",
+    aud1S1V: "1%", aud1S1L: "Cashback in USDT", aud1S2V: "$0", aud1S2L: "Jahresgebühr", aud1S3V: "200+", aud1S3L: "Länder",
+    aud1P1Icon: "🔒", aud1P1Title: "Krypto steckt auf der Börse fest", aud1P1Body: "Millionen halten USDT auf Pionex, Binance oder Bybit und kommen ohne Auszahlung an keinen Cent. Jede Auszahlung kostet 1 bis 3 Tage Wartezeit und 1 bis 3% Gebühr.",
+    aud1P1Sol: "✦ ZeroCard: in Sekunden aufladen und überall zahlen, wo Visa akzeptiert wird",
+    aud1P2Icon: "💸", aud1P2Title: "Umtausch frisst dein Geld", aud1P2Body: "200 $ aus Krypto ausgeben? Umtausch plus Auszahlung plus Überweisung, schon sind 8 bis 15 $ weg. Jedes Mal. Aufs Jahr gerechnet sind das Tausende.",
+    aud1P2Sol: "✦ ZeroCard: 1% Cashback deckt die Transaktionsgebühr, unterm Strich praktisch null",
+    aud1P3Icon: "📉", aud1P3Title: "Totes Kapital auf der Börse", aud1P3Body: "USDT liegt auf der Börse und verdient nichts. Keine Zinsen, keine Rendite, es wartet nur darauf, ausgegeben zu werden.",
+    aud1P3Sol: "✦ ZeroCard: 5% Zinsen aufs Guthaben, dein Geld arbeitet stündlich, auch ohne Trading",
+
+    // Audience: Traders
+    aud2Icon: "📈", aud2Tag: "🏆 Trader aller Märkte", aud2Title: "Krypto-, Aktien- und Forex-Trader",
+    aud2Desc: "Pionex ist die führende Plattform für Trading-Bots: über 60 Mrd. Volumen im Monat, 5M+ Nutzer, 6 Jahre am Markt. Dein Trading-Gewinn sollte ohne Umwege zu echtem Geld werden.",
+    aud2S1V: "$60B", aud2S1L: "Volumen/Monat", aud2S2V: "5M+", aud2S2L: "Trader", aud2S3V: "6 J.", aud2S3L: "am Markt",
+    aud2P1Icon: "🤑", aud2P1Title: "Gewinn da, ausgeben unmöglich", aud2P1Body: "Guter Trade geschlossen, Gewinn in USDT gesichert. Für einen echten Einkauf brauchst du aber tagelange Auszahlung. Der Moment ist weg.",
+    aud2P1Sol: "✦ ZeroCard: Gewinn sofort auf der Karte, noch am selben Tag ausgeben",
+    aud2P2Icon: "🏦", aud2P2Title: "Banken blockieren Börsen-Überweisungen", aud2P2Body: "Viele Banken markieren Zahlungen von Krypto-Börsen als verdächtig. Konten werden gesperrt, Überweisungen verzögert, Nerven liegen blank.",
+    aud2P2Sol: "✦ ZeroCard: keine Banküberweisung nötig, USDT geht direkt auf Visa oder Mastercard",
+    aud2P3Icon: "💹", aud2P3Title: "Reserve-USDT arbeitet nicht", aud2P3Body: "Zwischen Trades halten viele eine USDT-Reserve. Wochenlang liegt dieses Kapital brach.",
+    aud2P3Sol: "✦ ZeroCard: 5% Zinsen stündlich, die Reserve verdient mit, bis der nächste Trade kommt",
+
+    // Audience: Bots
+    aud3Icon: "🤖", aud3Tag: "🥇 Pionex-Nutzer", aud3Title: "Nutzer von Trading-Bots",
+    aud3Desc: "Du nutzt schon Grid Bot, DCA Bot oder andere Strategien bei Pionex? ZeroCard ist der logische nächste Schritt: Bot-Gewinne werden ohne Umweg zu echtem Geld.",
+    aud3S1V: "16+", aud3S1L: "Bot-Typen", aud3S2V: "24/7", aud3S2L: "im Einsatz", aud3S3V: "$0", aud3S3L: "für die Karte",
+    aud3P1Icon: "🔄", aud3P1Title: "Bot-Gewinn lässt sich nicht ausgeben", aud3P1Body: "Der Grid Bot läuft rund um die Uhr und sammelt USDT. Um den Gewinn zu nutzen, folgt eine mehrstufige Auszahlung. Von passivem Einkommen bleibt da wenig übrig.",
+    aud3P1Sol: "✦ ZeroCard: Karte mit einem Tipp vom Pionex-Hauptkonto laden, Gewinn ist sofort verfügbar",
+    aud3P2Icon: "💰", aud3P2Title: "Freies USDT liegt nutzlos herum", aud3P2Body: "Zwischen zwei Bot-Läufen parkst du USDT als Reserve. Es liegt einfach da und verdient nichts, jeden Tag entgeht dir Ertrag.",
+    aud3P2Sol: "✦ ZeroCard: einen Teil auf die Karte schieben, 5% Zinsen laufen stündlich, während der Bot pausiert",
+    aud3P3Icon: "🔗", aud3P3Title: "Alles läuft über Pionex, wozu noch eine Bank", aud3P3Body: "Du vertraust Pionex bereits dein Kapital an. Ein Bankkonto eröffnen und noch eine Verifizierung durchlaufen heißt mehr Aufwand und mehr Risiko.",
+    aud3P3Sol: "✦ ZeroCard: alles in einer App, traden, sparen und zahlen ohne Dienstwechsel",
+
+    // Audience: AI
+    aud4Icon: "✨", aud4Tag: "🚀 Wachstumssegment", aud4Title: "Nutzer von KI-Plattformen",
+    aud4Desc: "ChatGPT Plus, Claude Pro, Midjourney, Runway, ElevenLabs, Suno, Perplexity Pro kosten 10 bis 200 $ im Monat und nehmen nur internationale Karten.",
+    aud4S1V: "$20", aud4S1L: "ChatGPT Plus/Mon.", aud4S2V: "$30", aud4S2L: "Claude Pro/Mon.", aud4S3V: "+1%", aud4S3L: "Cashback zurück",
+    aud4P1Icon: "🚫", aud4P1Title: "'Ihre Karte wird nicht akzeptiert'", aud4P1Body: "Du willst ChatGPT Plus, Claude Pro oder Midjourney bezahlen, aber deine lokale Karte geht nicht durch. Der Dienst wäre da, die Zahlung nicht.",
+    aud4P1Sol: "✦ ZeroCard: internationale Visa, akzeptiert überall wo ausländische Abos laufen",
+    aud4P2Icon: "🔄", aud4P2Title: "Viele Abos, ständiger Ärger", aud4P2Body: "ChatGPT plus Claude plus Midjourney plus Runway macht 80 bis 150 $ im Monat über verschiedene Wege. Jedes Mal suchst du nach einer Zahlungsmethode, die funktioniert.",
+    aud4P2Sol: "✦ ZeroCard: eine Karte für alle Abos, dazu jeden Monat 1% Cashback zurück",
+    aud4P3Icon: "💳", aud4P3Title: "Virtuelle Karten laufen ab und werden gesperrt", aud4P3Body: "Einweg-Karten für Abos hören regelmäßig auf zu funktionieren. Neu hinterlegen, wieder von vorn, endlose Routine.",
+    aud4P3Sol: "✦ ZeroCard: stabile Visa oder Mastercard mit festen Daten, Abos laufen ohne Unterbrechung",
+
+    // Audience: Blocked
+    aud5Icon: "🔒", aud5Tag: "🆘 Besonders wichtig", aud5Title: "Gesperrte Karten",
+    aud5Desc: "Sanktionen, Umzug, Länderwechsel, Bankprobleme: es gibt viele Gründe, plötzlich ohne funktionierende Karte dazustehen. ZeroCard hängt an keinem nationalen Bankensystem.",
+    aud5S1V: "200+", aud5S1L: "Länder", aud5S2V: "Visa", aud5S2L: "& Mastercard", aud5S3V: "0%", aud5S3L: "FX bei Visa",
+    aud5P1Icon: "🌐", aud5P1Title: "Karte nach dem Umzug gesperrt", aud5P1Body: "Du ziehst um, die Bank friert die Karte ein oder sie wird in Läden schlicht nicht akzeptiert.",
+    aud5P1Sol: "✦ ZeroCard: läuft in 200+ Ländern, ohne Bindung an eine Bank oder ein Land",
+    aud5P2Icon: "🏦", aud5P2Title: "Bank sperrt das Konto ohne Vorwarnung", aud5P2Body: "Banken sperren Konten aus undurchsichtigen Gründen: auffällige Zahlungen, technische Probleme, Sanktionslisten. Die Entsperrung zieht sich über Wochen.",
+    aud5P2Sol: "✦ ZeroCard: Infrastruktur auf Pionex-Basis, unabhängig von deiner Bank",
+    aud5P3Icon: "💱", aud5P3Title: "Kein Zugang zum Fremdwährungskonto", aud5P3Body: "In manchen Ländern ist ein Devisenkonto oder auch nur der offizielle Kauf von Dollar praktisch unmöglich.",
+    aud5P3Sol: "✦ ZeroCard: USDT-Konto, ein an den Dollar gekoppelter Stablecoin, weltweit verfügbar",
+
+    // Audience: Nomads
+    aud6Icon: "🌍", aud6Tag: "✈️ Digital Nomads", aud6Title: "Reisende und Nomaden",
+    aud6Desc: "Du lebst zwischen Ländern und löst überall dasselbe Problem: hier und jetzt zahlen, ohne beim Umtausch draufzuzahlen. ZeroCard ist eine Karte für die ganze Welt.",
+    aud6S1V: "0%", aud6S1L: "FX bei Visa", aud6S2V: "5%", aud6S2L: "Trip.com-Cashback", aud6S3V: "NFC", aud6S3L: "überall",
+    aud6P1Icon: "💱", aud6P1Title: "Umtausch kostet jeden Tag", aud6P1Body: "In Thailand Baht, in Vietnam Dong, in der Türkei Lira. Jedes Mal 2 bis 3% Umtausch, dazu die Fremdwährungsgebühr der Bank. Im Monat sind das schnell 50 bis 100 $.",
+    aud6P1Sol: "✦ ZeroCard Visa: 0% Fremdwährungsgebühr, du zahlst den echten Kurs ohne Bankaufschlag",
+    aud6P2Icon: "🏨", aud6P2Title: "Flüge und Hotels sind teuer", aud6P2Body: "Wer ständig unterwegs ist, gibt 5000 bis 15000 $ im Jahr für Flüge und Unterkunft aus. Jedes Prozent Rabatt ist bares Geld.",
+    aud6P2Sol: "✦ ZeroCard: 5% Cashback bei Trip.com, bei 5000 $ Flugkosten sind das 250 $ zurück in USDT",
+    aud6P3Icon: "📵", aud6P3Title: "Karte von zu Hause streikt plötzlich", aud6P3Body: "Die Bank sieht Zahlungen aus fünf Ländern in einem Monat und sperrt die Karte als verdächtig.",
+    aud6P3Sol: "✦ ZeroCard: Krypto-Infrastruktur sperrt nicht wegen 'auffälliger Geografie', sie läuft überall",
+
+    // Audience: Freelance
+    aud7Icon: "💼", aud7Tag: "🖥️ Freelancer und Remote", aud7Title: "Freelancer und Remote-Angestellte",
+    aud7Desc: "Du wirst in Krypto oder Stablecoins bezahlt? ZeroCard ist der kürzeste Weg vom Zahlungseingang zum echten Einkauf.",
+    aud7S1V: "⚡", aud7S1L: "sofort", aud7S2V: "1%", aud7S2L: "Cashback", aud7S3V: "5%", aud7S3L: "Zinsen",
+    aud7P1Icon: "⏳", aud7P1Title: "Kunde zahlt in USDT, das Geld liegt fest", aud7P1Body: "Der internationale Kunde hat in USDT überwiesen. Für Miete oder Einkauf brauchst du eine Auszahlung zur Bank: 2 bis 5 Werktage plus Gebühren.",
+    aud7P1Sol: "✦ ZeroCard: USDT kommt an, Sekunden später auf der Karte, sofort im Laden zahlen",
+    aud7P2Icon: "🛠️", aud7P2Title: "Arbeitswerkzeuge kosten Dollar", aud7P2Body: "Figma, Notion, GitHub Pro, Adobe CC, AWS: alles 10 bis 50 $ im Monat und alles braucht eine internationale Karte.",
+    aud7P2Sol: "✦ ZeroCard: alle Abos über eine Karte und bei jeder Zahlung 1% zurück",
+    aud7P3Icon: "📊", aud7P3Title: "Ersparnisse in USDT bringen nichts", aud7P3Body: "Du hältst eine USDT-Reserve für schlechte Zeiten. Klug gedacht, aber das Geld liegt ohne Zinsen und ohne Wachstum herum.",
+    aud7P3Sol: "✦ ZeroCard: 5% Zinsen, 1000 $ auf der Karte bringen rund 50 $ im Jahr, ganz nebenbei",
+
+    // Audience: Investors
+    aud8Icon: "💰", aud8Tag: "📊 Passives Einkommen", aud8Title: "Anleger und Sparer",
+    aud8Desc: "Du parkst Kapital in Stablecoins als Absicherung oder wartest auf den Einstieg? ZeroCard macht aus dem Warten Ertrag: 5% Zinsen, stündlich gutgeschrieben.",
+    aud8S1V: "5%", aud8S1L: "Zinsen/Jahr", aud8S2V: "24/7", aud8S2L: "Gutschrift", aud8S3V: "USDT", aud8S3L: "Stablecoin",
+    aud8P1Icon: "😴", aud8P1Title: "Wartendes Kapital verdient nichts", aud8P1Body: "Position in USDT geschlossen, jetzt wartest du auf die Korrektur zum Wiedereinstieg. Das Kapital liegt tot da: eine Woche, ein Monat, drei Monate.",
+    aud8P1Sol: "✦ ZeroCard: 5% Zinsen aufs Guthaben, 10.000 $ Wartekapital bringen rund 42 $ im Monat",
+    aud8P2Icon: "🏦", aud8P2Title: "Bankzinsen liegen unter der Inflation", aud8P2Body: "Klassische Banken zahlen 1 bis 3% aufs Dollar-Tagesgeld, weniger als die Inflation. Dazu musst du das Geld 6 bis 12 Monate festlegen.",
+    aud8P2Sol: "✦ ZeroCard: 5% Zinsen ohne Bindung, das Geld bleibt jederzeit verfügbar",
+    aud8P3Icon: "💸", aud8P3Title: "Erträge liegen unerreichbar herum", aud8P3Body: "Deine Investmenterträge kommen in Krypto an. Um sie wirklich zu nutzen, wartet der lange Weg über die Bank.",
+    aud8P3Sol: "✦ ZeroCard: Ertrag geht auf die Karte und ist sofort ausgabefähig, ohne Bank und ohne Wartezeit",
+
+    // Audience: Youtubers/Creatives
+    aud9Icon: "🎬", aud9Tag: "🔥 Content-Macher", aud9Title: "Blogger, Streamer, Kreative",
+    aud9Desc: "YouTube, Twitch, TikTok, Patreon, Substack zahlen in Dollar, aber die Auszahlung auf eine Karte kostet immer etwas. ZeroCard schafft das in Sekunden.",
+    aud9S1V: "0%", aud9S1L: "FX-Umtausch", aud9S2V: "1%", aud9S2L: "Cashback zurück", aud9S3V: "⚡", aud9S3L: "sofort",
+    aud9P1Icon: "💳", aud9P1Title: "Plattformen nehmen deine Karte nicht", aud9P1Body: "Du willst über YouTube Ads werben oder Canva Pro und Adobe bezahlen? Lokale Karte abgelehnt. Also Umwege suchen und dabei Zeit und Geld verlieren.",
+    aud9P1Sol: "✦ ZeroCard: internationale Visa, akzeptiert in allen Werbekonten und Kreativ-Tools",
+    aud9P2Icon: "🎨", aud9P2Title: "Werkzeuge kosten Dollar", aud9P2Body: "Adobe CC, Figma, Final Cut, DaVinci Resolve: der Creator-Stack kostet 100 bis 300 $ im Monat und braucht eine internationale Karte.",
+    aud9P2Sol: "✦ ZeroCard: alle Abos über eine Karte plus 1% Cashback, bei 300 $ sind das rund 3 $ zurück",
+    aud9P3Icon: "📊", aud9P3Title: "Monetarisierung kommt in Krypto an", aud9P3Body: "Manche Plattformen zahlen in USDT oder BTC. Echtes Geld, aber der Weg zum Alltag ohne Verluste ist eine eigene Geschichte.",
+    aud9P3Sol: "✦ ZeroCard: USDT von der Plattform, Sekunden später auf der Karte, Produktionskosten noch heute zahlen",
+
+    // Audience: Gamers
+    aud10Icon: "🎮", aud10Tag: "👾 Gamer und Play-to-Earn", aud10Title: "Gamer und Play-to-Earn-Spieler",
+    aud10Desc: "Steam, Epic, PlayStation, Xbox Game Pass brauchen alle eine internationale Karte. Wenn du zusätzlich mit Play-to-Earn verdienst, ist ZeroCard der kürzeste Weg vom Game-Token zum echten Einkauf.",
+    aud10S1V: "100M+", aud10S1L: "Visa-Händler", aud10S2V: "$0", aud10S2L: "für die Karte", aud10S3V: "1%", aud10S3L: "Cashback",
+    aud10P1Icon: "🕹️", aud10P1Title: "Steam, Epic und Xbox lehnen die Karte ab", aud10P1Body: "Du willst ein Spiel, ein DLC oder Ingame-Währung kaufen, die Karte wird abgelehnt. Bleibt der Key-Reseller mit 20 bis 30% Aufschlag.",
+    aud10P1Sol: "✦ ZeroCard: direkt bei Steam oder Epic zum echten Preis zahlen und Cashback kassieren",
+    aud10P2Icon: "🪙", aud10P2Title: "Play-to-Earn-Token bleiben virtuell", aud10P2Body: "USDT in Axie, Gods Unchained oder einem anderen P2E-Spiel verdient: echtes Geld, aber im Café oder Laden nutzlos ohne komplizierte Auszahlung.",
+    aud10P2Sol: "✦ ZeroCard: Spielgewinn in Sekunden auf der Karte, ausgeben in jedem Laden weltweit",
+    aud10P3Icon: "💸", aud10P3Title: "Gaming-Abos summieren sich", aud10P3Body: "Xbox Game Pass Ultimate, PlayStation Plus, EA Play: 50 bis 150 $ im Jahr, jedes davon braucht eine ausländische Karte. Beim Umtausch gehen nochmal 3 bis 5% verloren.",
+    aud10P3Sol: "✦ ZeroCard: alle Gaming-Abos über eine Karte plus 1% zurück, auf Dauer echtes Geld",
+
+    // Audience: E-commerce
+    aud11Icon: "🛍️", aud11Tag: "📦 E-Commerce und Dropshipping", aud11Title: "Onlinehändler und Dropshipper",
+    aud11Desc: "AliExpress, Amazon, Shopify, Lieferanten: für den Einkauf braucht es überall eine internationale Karte. Und wenn du Krypto als Zahlung annimmst, schließt ZeroCard den Kreis.",
+    aud11S1V: "0%", aud11S1L: "FX bei Visa", aud11S2V: "1%", aud11S2L: "Cashback", aud11S3V: "5%", aud11S3L: "Zinsen",
+    aud11P1Icon: "📦", aud11P1Title: "Lieferanten wollen eine ausländische Karte", aud11P1Body: "AliExpress, Amazon FBA, Alibaba: du kaufst Ware ein, die lokale Karte wird abgelehnt oder kostet 2 bis 3% FX. Bei 5000 $ Einkauf sind das jedes Mal 100 bis 150 $ extra.",
+    aud11P1Sol: "✦ ZeroCard Visa: 0% FX, bei jedem internationalen Lieferanten ohne Aufschlag einkaufen",
+    aud11P2Icon: "🔁", aud11P2Title: "Kunden zahlen in Krypto, das Geld steckt fest", aud11P2Body: "USDT als Zahlung anzunehmen ist bequem für den Kunden. Willst du in Ware oder Werbung reinvestieren, wartet der lange Weg über Börse und Bank.",
+    aud11P2Sol: "✦ ZeroCard: USDT-Zahlung direkt auf die Karte, Ware kaufen oder Werbung schalten noch am selben Tag",
+    aud11P3Icon: "📣", aud11P3Title: "Meta und Google Ads brauchen eine ausländische Karte", aud11P3Body: "Facebook Ads, Google Ads, TikTok Ads blockieren lokale Karten. Ohne funktionierende Karte steht das Geschäft still.",
+    aud11P3Sol: "✦ ZeroCard: in den Werbekonten hinterlegen und auf jeden Werbedollar 1% Cashback bekommen",
+
+    // Audience: Expats
+    aud12Icon: "🛂", aud12Tag: "✈️ Expats und Neuankömmlinge", aud12Title: "Auswanderer und frisch Umgezogene",
+    aud12Desc: "Neu im Land? Die ersten Monate sind zäh: das lokale Konto lässt auf sich warten, die Karte von zu Hause ist gesperrt, das Bargeld schwindet. ZeroCard läuft ab Tag eins, in jedem Land.",
+    aud12S1V: "200+", aud12S1L: "Länder", aud12S2V: "5 Min.", aud12S2L: "bis zur Karte", aud12S3V: "$0", aud12S3L: "Gebühr",
+    aud12P1Icon: "🏦", aud12P1Title: "Die lokale Bank lässt dich warten", aud12P1Body: "In Deutschland, Portugal oder den Emiraten dauert ein Konto für Neuankömmlinge 2 bis 6 Wochen. Miete, Essen und Nahverkehr wollen trotzdem bezahlt werden.",
+    aud12P1Sol: "✦ ZeroCard: KYC in 10 Minuten, die Karte läuft noch am selben Tag, während die Bank prüft",
+    aud12P2Icon: "🔄", aud12P2Title: "Geld von der Familie kommt in Krypto", aud12P2Body: "Die Eltern schicken USDT, das ist günstiger und schneller als SWIFT. Nur: wie wird daraus etwas, womit du im Laden zahlst?",
+    aud12P2Sol: "✦ ZeroCard: USDT von der Familie sofort auf die Karte, im Supermarkt der neuen Stadt zahlen",
+    aud12P3Icon: "💱", aud12P3Title: "Zwei Konten in zwei Ländern nerven", aud12P3Body: "Das Geld liegt im alten Land, ausgegeben wird im neuen. Jede Überweisung kostet Gebühren, Kurs und Zeit.",
+    aud12P3Sol: "✦ ZeroCard: ein USDT-Konto funktioniert überall, ohne Bindung an Land oder Bank",
+
+    // Audience: Parents
+    aud13Icon: "👨‍👩‍👧", aud13Tag: "❤️ Familien auf Distanz", aud13Title: "Eltern mit Kindern im Ausland",
+    aud13Desc: "Das Kind studiert oder arbeitet im Ausland. Geld über die Bank schicken heißt Gebühren, Wechselkurs und 3 bis 5 Tage. Krypto ist schneller, aber das Kind braucht eine funktionierende Karte. ZeroCard löst das ein für alle Mal.",
+    aud13S1V: "⚡", aud13S1L: "sofort", aud13S2V: "$0", aud13S2L: "Ausgabe", aud13S3V: "5%", aud13S3L: "Zinsen",
+    aud13P1Icon: "🏫", aud13P1Title: "Überweisung ans Kind dauert und kostet", aud13P1Body: "SWIFT an den Sohn in Deutschland oder die Tochter in den USA: 25 bis 50 $ Gebühr, dazu Umrechnung und 3 bis 5 Werktage. Teuer, langsam und für beide Seiten nervig.",
+    aud13P1Sol: "✦ ZeroCard: USDT schicken, Kind lädt die Karte, Geld ist in einer Minute da statt in Tagen",
+    aud13P2Icon: "😟", aud13P2Title: "Kind sitzt im Notfall ohne Geld da", aud13P2Body: "Handy kaputt, Portemonnaie weg, Konto gesperrt. Geld muss jetzt da sein, nicht in drei Tagen nach SWIFT.",
+    aud13P2Sol: "✦ ZeroCard: USDT im Notfall schicken, Karte in Minuten aufgeladen, Problem gelöst, egal wo auf der Welt",
+    aud13P3Icon: "📈", aud13P3Title: "Rücklage fürs Kind wächst nicht", aud13P3Body: "Du hältst eine USDT-Reserve für alle Fälle. Das Geld liegt nur da und bringt beim Warten nichts ein.",
+    aud13P3Sol: "✦ ZeroCard: 5% Zinsen laufen stündlich aufs Kartenguthaben, die Rücklage wächst beim Warten",
+
+    // Audience: Arbitrage
+    aud14Icon: "⚡", aud14Tag: "🔁 P2P und Krypto-Arbitrage", aud14Title: "Arbitrageure und P2P-Trader",
+    aud14Desc: "Du verdienst an Kursunterschieden zwischen Börsen oder im P2P-Handel? Deine Marge hängt daran, wie schnell Geld sich bewegt. ZeroCard gibt dir sofortigen USDT-Zugriff, ohne Verzögerung und ohne Banklimits.",
+    aud14S1V: "⚡", aud14S1L: "sofort", aud14S2V: "5%", aud14S2L: "Zinsen in der Pause", aud14S3V: "1%", aud14S3L: "Cashback überall",
+    aud14P1Icon: "⏱️", aud14P1Title: "Jede Sekunde Verzögerung kostet Marge", aud14P1Body: "Ein Arbitrage-Fenster lebt Minuten. Während das Geld 1 bis 3 Tage durch die Bank wandert, ist es längst zu. Über den Gewinn entscheidet die Geschwindigkeit.",
+    aud14P1Sol: "✦ ZeroCard: Karte in Sekunden aus Pionex laden, das Geld ist da, wenn es gebraucht wird",
+    aud14P2Icon: "🏦", aud14P2Title: "Banken blockieren häufige P2P-Zahlungen", aud14P2Body: "Regelmäßige Überweisungen zwischen Konten wecken Misstrauen. Konto gesperrt, Zahlungen verzögert, das Geschäft steht.",
+    aud14P2Sol: "✦ ZeroCard: USDT bewegt sich innerhalb von Pionex, ganz ohne Bank, also ohne Sperren und Rückfragen",
+    aud14P3Icon: "💤", aud14P3Title: "USDT in der Pause verdient nichts", aud14P3Body: "Zwischen zwei Fenstern hältst du USDT als Reserve. Nötig für die Geschwindigkeit, aber das Geld liegt brach, mal Stunden, mal Tage.",
+    aud14P3Sol: "✦ ZeroCard: 5% Zinsen stündlich, die Reserve verdient auch beim Warten auf den nächsten Deal",
+
+    // Reviews
+    reviewsBadge: "⭐ Erfahrungen",
+    reviewsTitle: "Sie geben ihr Geld\nschon schlauer aus",
+    reviewsDesc: "Echte Nutzer über den Alltag mit ZeroCard in der Tasche.",
+    rev1Text: "«Endlich kann ich Krypto im echten Leben ausgeben. In 30 Sekunden bei Apple Pay hinterlegt und zahle jetzt im Supermarkt per Handy. Das Cashback kommt von allein.»",
+    rev1Name: "Alex M.", rev1Role: "Trader, Dubai",
+    rev2Text: "«5% aufs Kartenguthaben schlägt jedes Bankkonto. Das Geld verdient auch dann, wenn ich es nicht ausgebe. Cashback kommt obendrauf.»",
+    rev2Name: "Sergej K.", rev2Role: "DeFi-Investor, Thailand",
+    rev3Text: "«Keine Ausgabegebühr, keine Jahresgebühr. Über das Cashback zahlen die mir am Ende dafür, dass ich die Karte nutze. Hotel über Trip.com gebucht und 5% zurückbekommen.»",
+    rev3Name: "Nikita L.", rev3Role: "Digital Nomad, Bali",
+    rev4Text: "«KYC in 8 Minuten durch, Antrag über Nacht freigegeben. Am nächsten Tag zahlte ich schon per Google Pay. Die Karte läuft überall ohne Zicken.»",
+    rev4Name: "Mark T.", rev4Role: "Entwickler, Singapur",
+    rev5Text: "«Bei PayPal hinterlegt und zahle jetzt in allen Onlineshops mit USDT. Amazon, AliExpress, Adobe, überall ohne Umtausch und ohne Kursverluste.»",
+    rev5Name: "Pavel R.", rev5Role: "Unternehmer, Zypern",
+    rev6Text: "«Im Grunde eine ganz normale Karte, nur deutlich lohnender. Man vergisst, dass es Krypto ist: Handy dranhalten, fertig.»",
+    rev6Name: "Nina B.", rev6Role: "Freelancerin, Amsterdam",
+
+    // FAQ
+    faqBadge: "❓ FAQ",
+    faqTitle: "Alles was du\nwissen willst",
+    faq1Q: "Was ist ZeroCard?",
+    faq1A: "ZeroCard ist eine virtuelle Zahlungskarte auf Basis von Pionex. Damit bezahlst du internationale Dienste, Abos und Online-Einkäufe weltweit.\n\nEinfach gesagt: ZeroCard ist dieselbe Karte, die du über Pionex bekommst, nur verständlicher erklärt. Sie funktioniert wie eine normale Online-Zahlungskarte, aber ohne die üblichen Bankgrenzen.\n\nDas Wichtigste:\n• Läuft bei internationalen Diensten\n• Zahlungen gehen durch, ohne Ablehnung\n• Einrichtung dauert etwa 5 Minuten\n• Keine monatlichen Gebühren\n• Bis zu 1% Cashback\n\nNach dem Klick auf den Button landest du auf der offiziellen Pionex-Plattform, wo du die Registrierung abschließt und deine Karte bekommst.",
+    faq2Q: "Wie lade ich das Kartenkonto auf?",
+    faq2A: "Die USDT-Übertragung vom Pionex-Hauptkonto aufs Kartenkonto passiert sofort in der App. Minimum 1 USDT. Zwischen Pionex-Konten fallen keine Gebühren an.",
+    faq3Q: "Wie funktioniert das 1% Cashback?",
+    faq3A: "Jeder Einkauf bringt 1% des Umsatzes in USDT aufs Kartenkonto zurück, gutgeschrieben binnen 24 Stunden. Kein Limit, kein Ablaufdatum, keine Ausnahmen. 500 $ ausgegeben heißt 5 $ zurück.",
+    faq4Q: "Wie werden die 5% Zinsen berechnet?",
+    faq4A: "Die 5% pro Jahr laufen auf dein USDT-Guthaben im Kartenkonto und werden stündlich verzinst. Dein Geld verdient durchgehend, auch nachts.",
+    faq5Q: "Ist die Karte physisch oder virtuell?",
+    faq5A: "Aktuell gibt es nur die virtuelle Karte. Du kannst sie in Apple Pay, Google Pay, PayPal und anderen Wallets hinterlegen und kontaktlos zahlen. Eine physische Karte ist für später geplant.",
+    faq6Q: "Visa oder Mastercard, was nehmen?",
+    faq6A: "Beide Karten bieten dieselben Vorteile: 1% Cashback, 5% Zinsen, keine Jahresgebühr. Der Unterschied liegt bei der Währungsumrechnung: Visa nimmt 0%, Mastercard in manchen Regionen bis zu 2%. Wer viel international zahlt, fährt mit Visa besser.",
+    faq7Q: "Was tun, wenn Apple Pay die Karte nicht annimmt?",
+    faq7A: "Sorge dafür, dass Guthaben auf dem Kartenkonto liegt, manche Wallets buchen zur Prüfung einen Testbetrag ab. Erscheint beim Hinterlegen 'Kontaktieren Sie den Herausgeber', füll das Formular auf support.pionex.com aus. Das Team meldet sich binnen 3 Werktagen.",
+    faq8Q: "Wie sperre ich die Karte, wenn das Handy weg ist?",
+    faq8A: "Melde dich von einem anderen Gerät bei Pionex an, geh in den Kartenbereich und sperre die Karte. Die Sperre greift sofort. Entsperren kannst du selbst in der App, dafür brauchst du keinen Support.",
+    faq9Q: "Wie funktioniert das Bezahlen weltweit?",
+    faq9A: "Mit ZeroCard zahlst du weltweit direkt von deinem USDT-Guthaben. Beim Bezahlen im Laden oder online rechnet Pionex USDT sofort in die Währung des Händlers um, zum Marktkurs. So zahlst du in über 200 Ländern, ohne dort ein Bankkonto zu eröffnen.",
+    faq10Q: "Wo kann ich damit bezahlen?",
+    faq10A: "Überall wo Visa oder Mastercard akzeptiert wird: Onlineshops, Abos wie Netflix und Spotify, Werbeplattformen, Reisebuchungen und Kartenterminals im Ausland. Für den Händler sieht es aus wie eine ganz normale Kartenzahlung, niemand merkt, dass Krypto dahintersteckt.",
+    faq11Q: "Wie zahle ich mit ZeroCard sicher im Ausland?",
+    faq11A: "Dein Geld bleibt auf dem Pionex-USDT-Konto und nicht auf der Karte selbst. Lade nur auf, was du ausgeben willst, aktiviere 2FA, arbeite mit Limits und sperr die Karte mit einem Tipp in der App, wenn dir etwas komisch vorkommt. Damit bist du sicherer unterwegs als mit einer klassischen Debitkarte, die direkt am Hauptkonto hängt.",
+
+    // CTA
+    ctaBadge: "Kostenlos · Schnell · Lohnend",
+    ctaTitle: "Fang jetzt an,\nKrypto auszugeben",
+    ctaDesc: "Schließ dich Millionen Pionex-Nutzern an, die schon Cashback sammeln, Zinsen kassieren und USDT wie mit jeder normalen Karte ausgeben.",
+    ctaCTA: "ZeroCard kostenlos holen →",
+    ctaDocs: "Dokumentation",
+    ctaDisclaimer: "KYC Level 2 nötig · ab 100 USDT · virtuelle Karte · Visa & Mastercard",
+
+    // Footer
+    footerNote: "Unabhängige Partnerseite, kein offizielles Pionex-Angebot. Alle Links enthalten einen Partner-Referral-Code. Konditionen und Gebühren können sich ändern, den aktuellen Stand findest du auf pionex.com. © 2026 ZeroCard.",
+
+    // SEO
+    metaTitle: "ZeroCard: weltweit mit USDT bezahlen | Krypto-Karte, 1% Cashback, 5% Zinsen",
+    metaDesc: "Mit ZeroCard weltweit bezahlen: virtuelle Visa/Mastercard für USDT. Auslandszahlungen, 1% Cashback, 5% Zinsen aufs Guthaben, Apple Pay und Google Pay in über 200 Ländern.",
+  },
 } as const;
 
 type Translations = { [K in keyof typeof translations.en]: string };
@@ -716,10 +1069,17 @@ const I18nContext = createContext<I18nContextType>({
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
     if (typeof window !== "undefined") {
+      const q = new URLSearchParams(window.location.search).get("lang") as Lang;
+      if (q === "en" || q === "ru" || q === "de") {
+        localStorage.setItem("zerocard-lang", q);
+        return q;
+      }
       const saved = localStorage.getItem("zerocard-lang") as Lang;
-      if (saved && (saved === "en" || saved === "ru")) return saved;
-      const browserLang = navigator.language.startsWith("ru") ? "ru" : "en";
-      return browserLang as Lang;
+      if (saved && (saved === "en" || saved === "ru" || saved === "de")) return saved;
+      const nav = navigator.language.toLowerCase();
+      if (nav.startsWith("ru")) return "ru";
+      if (nav.startsWith("de")) return "de";
+      return "en";
     }
     return "ru";
   });
@@ -730,6 +1090,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = l;
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const t = translations[lang] as unknown as Translations;
 
   return (
@@ -737,6 +1101,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       {children}
     </I18nContext.Provider>
   );
+}
+
+export function nextLang(current: Lang): Lang {
+  const i = LANGS.findIndex(l => l.id === current);
+  return LANGS[(i + 1) % LANGS.length].id;
 }
 
 export function useI18n() {

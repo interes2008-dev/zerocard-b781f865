@@ -283,6 +283,143 @@ As with any financial product - don't keep more on the card than you plan to spe
 Get your card for free: zerocard.pro`,
     },
   ],
+  de: [
+    {
+      slug: "usdt-ausgeben",
+      title: "USDT im Alltag ausgeben: so geht's",
+      date: "2026-03-30",
+      description: "Wir zeigen, wie du USDT wie ganz normales Geld ausgibst, ohne Umtausch und ohne unnötige Gebühren.",
+      content: `Fast jeder Krypto-Halter kennt das Problem: das USDT liegt auf der Börse, und im Laden zückst du trotzdem die Bankkarte.
+
+Jedes Mal umzutauschen nervt: Gebühren, Wartezeit, Kursverluste. Wir haben uns angeschaut, welche Wege wirklich funktionieren, um USDT direkt auszugeben.
+
+## Weg 1: Krypto-Karte
+
+Die bequemste Variante. Eine Krypto-Karte ist eine ganz normale Visa oder Mastercard, die an ein USDT-Wallet hängt. Du lädst sie mit Krypto auf und zahlst überall.
+
+ZeroCard läuft über Pionex, bringt 1% Cashback auf alle Einkäufe und 5% Zinsen aufs Guthaben. Funktioniert mit Apple Pay und Google Pay, eingerichtet ist sie in 5 Minuten.
+
+Dafür spricht:
+
+- Läuft überall, wo Visa akzeptiert wird
+- Kein Umtausch bei jedem Kauf
+- Cashback in USDT bei jedem Einkauf
+
+Dagegen spricht:
+
+- Eine Identitätsprüfung ist Pflicht
+
+## Weg 2: P2P-Handel
+
+Du verkaufst USDT direkt an eine andere Person, etwa über Binance P2P, Bybit oder LocalBitcoins, und bekommst Euro auf deine Bankkarte.
+
+Dafür: flexible Kurse, viele Zahlungswege.
+
+Dagegen: du brauchst jedes Mal einen Käufer, und Betrugsrisiken gibt es auch.
+
+## Weg 3: Krypto-Banken
+
+Manche Neobanken nehmen Krypto-Einzahlungen an. Das ist selten, und die Konditionen sind meist schlechter als bei einer spezialisierten Krypto-Karte.
+
+## Fazit
+
+Wer USDT regelmäßig ausgeben will, fährt mit einer Krypto-Karte am einfachsten und günstigsten. Einmal einrichten, danach einfach zahlen.
+
+ZeroCard bekommst du kostenlos auf zerocard.pro, die Karte ist in 5 Minuten da.`,
+    },
+    {
+      slug: "beste-krypto-karten-2026",
+      title: "Beste Krypto-Karten 2026: ein ehrlicher Vergleich",
+      date: "2026-03-30",
+      description: "ZeroCard, Crypto.com, Binance Card und Bybit Card im Vergleich: was sich 2026 wirklich lohnt.",
+      content: `Der Markt für Krypto-Karten ist gewachsen, die Auswahl ist groß. Die Konditionen unterscheiden sich allerdings deutlich, und das Kleingedruckte entscheidet. Hier die wichtigsten Anbieter, ehrlich betrachtet.
+
+## Crypto.com Visa
+
+Eine der bekanntesten Karten. Cashback zwischen 1% und 8%, aber nur wenn du CRO-Token stakest. Ohne Staking bleiben magere Konditionen.
+
+Sinnvoll, wenn du bereit bist, 400 bis 4000 $ in CRO festzulegen. Sonst lohnt sich der Aufwand nicht.
+
+## Binance Card
+
+Läuft über Binance. Cashback in BNB, bis zu 8%, hängt aber ebenfalls an deinem BNB-Guthaben. Wegen regulatorischer Fragen ist die Verfügbarkeit je nach Land unterschiedlich.
+
+## Bybit Card
+
+Solide Option, läuft zuverlässig. Apple Pay wird nicht überall unterstützt. Cashback bis 2%, abhängig vom Kontolevel.
+
+## ZeroCard
+
+Die Karte auf Pionex-Basis. Der Unterschied liegt in der Einfachheit: 1% Cashback bekommt jeder, ohne Bedingungen. Kein Staking, keine Umsatzvorgaben.
+
+Dazu 5% Zinsen aufs Guthaben, dein Geld verdient also mit, während es auf der Karte liegt. Das bieten die meisten Wettbewerber nicht.
+
+## Vergleichstabelle
+
+| Karte | Cashback | Zinsen | Apple Pay | Bedingungen |
+|---|---|---|---|---|
+| ZeroCard | 1% für alle | 5% | Ja | Keine |
+| Crypto.com | bis 8% | Nein | Ja | CRO-Staking |
+| Binance Card | bis 8% | Nein | Ja | BNB-Guthaben |
+| Bybit Card | bis 2% | Nein | Teilweise | Kontolevel |
+
+## Fazit
+
+Wer sich nicht mit Bedingungen herumschlagen will und einfach eine Karte braucht, die läuft, nimmt ZeroCard. Wer bereit ist, tief ins Ökosystem einzusteigen und Token für hohes Cashback zu staken, schaut sich Crypto.com an.
+
+ZeroCard kostenlos holen: zerocard.pro`,
+    },
+    {
+      slug: "was-ist-eine-krypto-karte",
+      title: "Was ist eine Krypto-Karte und wie funktioniert sie",
+      date: "2026-03-30",
+      description: "Einfach erklärt: was eine Krypto-Karte ist, wie du an eine kommst und für wen sie sich lohnt.",
+      content: `Eine Krypto-Karte ist eine ganz normale Visa oder Mastercard, die nicht an ein Bankkonto hängt, sondern an ein Krypto-Wallet.
+
+Alles andere läuft genau gleich: du zahlst im Laden, online, per Apple Pay. Der einzige Unterschied ist, dass auf deiner Karte Krypto liegt und keine Euro.
+
+## Was technisch passiert
+
+Wenn du mit einer Krypto-Karte zahlst, läuft Folgendes ab:
+
+1. Das Terminal fordert den Betrag in Landeswährung an
+2. Das System rechnet die nötige Summe automatisch aus deinem USDT um
+3. Der Händler bekommt ganz normales Geld
+4. Du bekommst Cashback in USDT
+
+Das dauert Sekunden, du hältst einfach Karte oder Handy dran.
+
+## Für wen sich das lohnt
+
+**Freelancer und Remote-Arbeitende**: wer in Krypto bezahlt wird, gibt sein Honorar mit einer Krypto-Karte sofort aus, ohne den Umweg über den Umtausch.
+
+**Reisende**: die Karte läuft in über 200 Ländern, überall wo Visa akzeptiert wird. Über die Währung musst du nicht nachdenken.
+
+**Stablecoin-Anleger**: wer USDT hält, nutzt es damit jeden Tag und bekommt nebenbei 5% Zinsen aufs Guthaben.
+
+**Alle, die eine Alternative zur Bank suchen**: für eine Krypto-Karte brauchst du kein Bankkonto.
+
+## So kommst du an eine Karte
+
+Am Beispiel von ZeroCard:
+
+1. Auf zerocard.pro gehen
+2. Registrierung und Verifizierung abschließen (5 Minuten)
+3. Karte mit USDT aufladen
+4. Apple Pay oder Google Pay verbinden
+5. Überall bezahlen
+
+Die Karte ist virtuell, du wartest also auf kein Plastik und legst sofort los.
+
+## Ist das sicher?
+
+ZeroCard läuft auf der Infrastruktur von Pionex, einer Börse mit über 3 Millionen Nutzern, aktiv seit 2019. Pionex hält Lizenzen in mehreren Jurisdiktionen.
+
+Wie bei jedem Finanzprodukt gilt: halte auf der Karte nicht mehr, als du ausgeben willst.
+
+Karte kostenlos holen: zerocard.pro`,
+    },
+  ],
 };
 
 export function getPostBySlug(slug: string, lang: Lang): Post | undefined {

@@ -12,7 +12,10 @@ interface Entry {
   lastmod?: string;
   changefreq?: string;
   priority?: string;
+  alternates?: boolean;
 }
+
+const LANGS = ["ru", "en", "de"];
 
 async function fetchPosts(): Promise<{ slug: string; published_at: string }[]> {
   try {
@@ -41,13 +44,22 @@ function xml(entries: Entry[]) {
         e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
         e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
         e.priority ? `    <priority>${e.priority}</priority>` : null,
+        ...(e.alternates
+          ? [
+              ...LANGS.map(
+                (l) =>
+                  `    <xhtml:link rel="alternate" hreflang="${l}" href="${BASE_URL}${e.path}?lang=${l}"/>`
+              ),
+              `    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${e.path}"/>`,
+            ]
+          : []),
         "  </url>",
       ]
         .filter(Boolean)
         .join("\n")
     )
     .join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`;
 }
 
 (async () => {
@@ -55,8 +67,8 @@ function xml(entries: Entry[]) {
   const posts = await fetchPosts();
 
   const entries: Entry[] = [
-    { path: "/", lastmod: today, changefreq: "weekly", priority: "1.0" },
-    { path: "/blog", lastmod: today, changefreq: "daily", priority: "0.8" },
+    { path: "/", lastmod: today, changefreq: "weekly", priority: "1.0", alternates: true },
+    { path: "/blog", lastmod: today, changefreq: "daily", priority: "0.8", alternates: true },
     ...posts.map((p) => ({
       path: `/blog/${encodeURIComponent(p.slug)}`,
       lastmod: p.published_at.slice(0, 10),

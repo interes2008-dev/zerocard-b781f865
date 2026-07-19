@@ -8,20 +8,20 @@ const corsHeaders = {
 };
 
 const CATEGORIES = [
-  { id: "crypto", ru: "Криптаны", en: "Crypto Users" },
-  { id: "traders", ru: "Трейдеры", en: "Traders" },
-  { id: "pionex", ru: "Pionex Боты", en: "Pionex Bots" },
-  { id: "ai-users", ru: "ИИ-пользователи", en: "AI Users" },
-  { id: "blocked", ru: "Заблокированные карты", en: "Blocked Cards" },
-  { id: "nomads", ru: "Digital Nomads", en: "Digital Nomads" },
-  { id: "freelancers", ru: "Фрилансеры", en: "Freelancers" },
-  { id: "investors", ru: "Инвесторы", en: "Investors" },
-  { id: "creators", ru: "Блогеры & Creatives", en: "Bloggers & Creatives" },
-  { id: "gamers", ru: "Геймеры", en: "Gamers" },
-  { id: "ecommerce", ru: "Интернет-торговля", en: "E-commerce" },
-  { id: "emigrants", ru: "Эмигранты", en: "Emigrants" },
-  { id: "parents", ru: "Родители за рубежом", en: "Parents Abroad" },
-  { id: "arbitrage", ru: "Арбитражники", en: "Arbitrage Traders" },
+  { id: "crypto", ru: "Криптаны", en: "Crypto Users" , de: "Krypto-Holder" },
+  { id: "traders", ru: "Трейдеры", en: "Traders" , de: "Trader" },
+  { id: "pionex", ru: "Pionex Боты", en: "Pionex Bots" , de: "Pionex-Bots" },
+  { id: "ai-users", ru: "ИИ-пользователи", en: "AI Users" , de: "KI-Nutzer" },
+  { id: "blocked", ru: "Заблокированные карты", en: "Blocked Cards" , de: "Gesperrte Karten" },
+  { id: "nomads", ru: "Digital Nomads", en: "Digital Nomads" , de: "Digital Nomads" },
+  { id: "freelancers", ru: "Фрилансеры", en: "Freelancers" , de: "Freelancer" },
+  { id: "investors", ru: "Инвесторы", en: "Investors" , de: "Anleger" },
+  { id: "creators", ru: "Блогеры & Creatives", en: "Bloggers & Creatives" , de: "Blogger & Kreative" },
+  { id: "gamers", ru: "Геймеры", en: "Gamers" , de: "Gamer" },
+  { id: "ecommerce", ru: "Интернет-торговля", en: "E-commerce" , de: "E-Commerce" },
+  { id: "emigrants", ru: "Эмигранты", en: "Emigrants" , de: "Auswanderer" },
+  { id: "parents", ru: "Родители за рубежом", en: "Parents Abroad" , de: "Eltern im Ausland" },
+  { id: "arbitrage", ru: "Арбитражники", en: "Arbitrage Traders" , de: "Arbitrageure" },
 ];
 
 const TOPIC_HINTS: Record<string, { ru: string[]; en: string[] }> = {
@@ -53,12 +53,12 @@ const TOPIC_HINTS: Record<string, { ru: string[]; en: string[] }> = {
     ru: [
       "Как использовать прибыль с Pionex ботов в реальной жизни",
       "ZeroCard + Pionex: идеальная связка для пассивного дохода",
-      "Автоматический доход и криптокарта — как это работает",
+      "Автоматический доход и криптокарта: как это работает",
     ],
     en: [
       "How to use Pionex bot profits in real life",
       "ZeroCard + Pionex: perfect combo for passive income",
-      "Automated income and crypto card — how it works",
+      "Automated income and crypto card: how it works",
     ],
   },
   "ai-users": {
@@ -101,12 +101,12 @@ const TOPIC_HINTS: Record<string, { ru: string[]; en: string[] }> = {
     ru: [
       "Как фрилансеру получать оплату в крипте и сразу тратить",
       "Криптокарта для удалённой работы: полный гайд",
-      "Получил оплату в USDT — как потратить без потерь",
+      "Получил оплату в USDT: как потратить без потерь",
     ],
     en: [
       "How freelancers can receive crypto payments and spend instantly",
       "Crypto card for remote work: complete guide",
-      "Got paid in USDT — how to spend without losses",
+      "Got paid in USDT: how to spend without losses",
     ],
   },
   investors: {
@@ -125,12 +125,12 @@ const TOPIC_HINTS: Record<string, { ru: string[]; en: string[] }> = {
     ru: [
       "Как блогер монетизирует крипту через карту",
       "Криптокарта для творческих профессий: дизайнеры, фото, видео",
-      "Получаю донаты в крипте — как их тратить",
+      "Получаю донаты в крипте: как их тратить",
     ],
     en: [
       "How bloggers monetize crypto through a card",
       "Crypto card for creative professionals: designers, photo, video",
-      "Receiving crypto donations — how to spend them",
+      "Receiving crypto donations: how to spend them",
     ],
   },
   gamers: {
@@ -161,12 +161,12 @@ const TOPIC_HINTS: Record<string, { ru: string[]; en: string[] }> = {
     ru: [
       "Криптокарта для эмигранта: деньги без местного банка",
       "Как переводить деньги семье через USDT без комиссий",
-      "Переехал за рубеж — как открыть карту без местного банка",
+      "Переехал за рубеж: как открыть карту без местного банка",
     ],
     en: [
       "Crypto card for emigrants: money without a local bank",
       "How to send money to family via USDT without fees",
-      "Moved abroad — how to get a card without a local bank",
+      "Moved abroad: how to get a card without a local bank",
     ],
   },
   parents: {
@@ -215,7 +215,8 @@ serve(async (req) => {
     // Determine language: forced or based on day parity
     const today = new Date();
     const dayOfMonth = today.getDate();
-    const lang = forceLang || (dayOfMonth % 2 === 0 ? "ru" : "en");
+    const LANGS = ["ru", "en", "de"] as const;
+    const lang = forceLang || LANGS[dayOfMonth % 3];
 
     // Pick category: forced or rotate
     let category: typeof CATEGORIES[0];
@@ -239,7 +240,8 @@ serve(async (req) => {
     const existingTitles = (existing || []).map((p) => p.title).join("\n- ");
     const existingSlugs = (existing || []).map((p) => p.slug);
 
-    const hints = TOPIC_HINTS[category.id]?.[lang as "ru" | "en"] || [];
+    const hintsByLang = TOPIC_HINTS[category.id] as Record<string, string[]> | undefined;
+    const hints = hintsByLang?.[lang] || hintsByLang?.en || [];
     const hintText = hints.map((h) => `- ${h}`).join("\n");
 
     const typographyRules = `
@@ -266,39 +268,76 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
 - Sound like a human writer, not a neural network.
 
-SEO RULES (mandatory):
-- Focus the article on the actual topic and audience category. Pick a keyword that naturally fits the topic (e.g. "криптокарта", "USDT кэшбэк", "Pionex боты", "crypto card", "USDT cashback") - NOT a forced "плати по миру" / "pay worldwide" phrase.
-- FORBIDDEN key phrases (do not use anywhere in title, description or content): "плати по миру", "платите по миру", "плати по всему миру", "pay worldwide", "pay around the world", "paying worldwide". These are banned.
-- Use the chosen topical keyword naturally 3-5 times, plus related LSI phrases relevant to the audience.
-- Add at least one internal markdown link to /blog or the homepage / with natural anchor text tied to the article's topic.
+SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwide"):
+- Primary key phrase: RU "плати по миру", EN "pay worldwide". Use it naturally, no keyword stuffing.
+- The "title" MUST contain the primary key phrase (RU: "плати по миру"; EN: "pay worldwide") in a natural way.
+- The "description" MUST contain the primary key phrase once, naturally.
+- The article "content" MUST:
+  1. Include the primary key phrase in the first 100 words of the intro.
+  2. Include the primary key phrase in at least one H2 or H3 subheading.
+  3. Use the phrase 3-5 times total across the article (no more), plus related LSI phrases spread naturally throughout.
+- Related LSI phrases to weave in (RU): "международные платежи", "платить за границей", "карта для оплаты по миру", "безопасная оплата в других странах", "глобальные переводы", "оплата по всему миру".
+- Related LSI phrases to weave in (EN): "international payments", "paying abroad", "card for global payments", "safe payments in other countries", "global transfers", "spending worldwide".
+- Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
 - Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
-    const systemPrompt =
+    const systemPromptDe = `Du bist Texter für den ZeroCard-Blog (zerocard.pro). ZeroCard ist eine Visa-Krypto-Karte auf Pionex-Basis mit 1% Cashback und 5% Zinsen aufs USDT-Guthaben.
+Schreib Artikel für die Zielgruppe "${category.de}". Der Ton ist lebendig und fachkundig, keine Werbesprache. Erwähne ZeroCard 2 bis 3 Mal beiläufig.
+Am Ende IMMER einen CTA-Absatz anhängen: "ZeroCard in 5 Minuten kostenlos holen: zerocard.pro"
+Schreib ausschließlich auf Deutsch, in der Du-Form.
+${typographyRules}
+
+ZUSÄTZLICHE REGELN FÜR DEUTSCH:
+- Verbotene Floskeln: "Darüber hinaus", "Des Weiteren", "Zusammenfassend lässt sich sagen", "In der heutigen Zeit", "Abschließend". Nimm stattdessen lockere Anschlüsse: "und", "dazu", "also", "übrigens", "kurz gesagt".
+- Kein Gedankenstrich (- -). Nutz Komma, Punkt, Doppelpunkt oder Klammern.
+- Keine Emojis, nur gerade Anführungszeichen.
+- Als Hauptkeyword dient "weltweit bezahlen". Bau es natürlich ein, im Titel, in der Description, im ersten Absatz und in einer Zwischenüberschrift.
+- Verwandte Begriffe: "Auslandszahlungen", "im Ausland bezahlen", "Karte für weltweite Zahlungen", "globale Überweisungen", "sicher im Ausland zahlen".
+
+ANTWORTFORMAT, strikt JSON:
+{
+  "title": "Titel des Artikels (kurz, 5 bis 9 Wörter, macht neugierig)",
+  "description": "Kurze Beschreibung in 1 bis 2 Sätzen für die Vorschau",
+  "content": "Vollständiger Artikeltext als Markdown. Länge 800 bis 1200 Wörter. Halte dich an die Typografie-Regeln oben."
+}`;
+
+    const systemPromptRuEn =
       lang === "ru"
-        ? `Ты — профессиональный копирайтер для блога ZeroCard (zerocard.pro). ZeroCard — криптокарта Visa на базе Pionex с 1% кэшбэком и 5% APR на остаток USDT.
-Пиши статьи для аудитории "${category.ru}". Стиль — живой, экспертный, не рекламный. Упоминай ZeroCard органично 2-3 раза.
+        ? `Ты: профессиональный копирайтер для блога ZeroCard (zerocard.pro). ZeroCard: криптокарта Visa на базе Pionex с 1% кэшбэком и 5% APR на остаток USDT.
+Пиши статьи для аудитории "${category.ru}". Стиль: живой, экспертный, не рекламный. Упоминай ZeroCard органично 2-3 раза.
 В конце статьи ВСЕГДА добавь абзац-CTA: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro"
 ${typographyRules}
 
-ФОРМАТ ОТВЕТА — строго JSON:
+ФОРМАТ ОТВЕТА: строго JSON:
 {
   "title": "Заголовок статьи (короткий, 5-9 слов, цепляющий)",
   "description": "Краткое описание 1-2 предложения для превью",
   "content": "Полный текст статьи в формате markdown. Длина 800-1200 слов. Следуй правилам типографики выше."
 }`
         : `You are a professional copywriter for ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and 5% APR on USDT balance.
-Write articles for the "${category.en}" audience. Style — engaging, expert, not salesy. Mention ZeroCard organically 2-3 times.
+Write articles for the "${category.en}" audience. Style: engaging, expert, not salesy. Mention ZeroCard organically 2-3 times.
 At the end ALWAYS add a CTA paragraph: "Get your ZeroCard for free in 5 minutes: zerocard.pro"
 ${typographyRules}
 
-RESPONSE FORMAT — strictly JSON:
+RESPONSE FORMAT: strictly JSON:
 {
   "title": "Article title (short, 5-9 words, catchy)",
   "description": "Brief 1-2 sentence description for preview",
   "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
 }`;
 
-    const userPrompt =
+    const systemPrompt = lang === "de" ? systemPromptDe : systemPromptRuEn;
+
+    const userPromptDe = `Schreib einen neuen Artikel für die Kategorie "${category.de}".
+Hier ein paar Themenbeispiele als Inspiration, denk dir aber ein eigenes aus:
+${hintText}
+
+Diese Titel gibt es schon, wiederhol sie NICHT:
+- ${existingTitles || "keine"}
+
+Antworte NUR mit JSON, ohne Markdown-Umrandung.`;
+
+    const userPromptRuEn =
       lang === "ru"
         ? `Напиши новую статью для категории "${category.ru}".
 Вот примеры тем (вдохновляйся, но придумай свою уникальную):
@@ -316,6 +355,8 @@ Do NOT repeat these titles (already published):
 - ${existingTitles || "none"}
 
 Reply with ONLY JSON without markdown wrapping.`;
+
+    const userPrompt = lang === "de" ? userPromptDe : userPromptRuEn;
 
     const aiResponse = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",

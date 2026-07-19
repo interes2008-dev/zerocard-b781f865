@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useI18n, Lang } from "@/lib/i18n";
+import { useI18n, Lang, LANGS } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon, Copy, Check } from "lucide-react";
 
 import avatar1 from "@/assets/avatar-1.png";
@@ -128,6 +128,51 @@ function useTheme() {
   return { theme, toggle };
 }
 
+/* ─── Language switcher (dropdown) ─── */
+function LangSwitcher({ compact }: { compact?: boolean }) {
+  const { lang, setLang } = useI18n();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const current = LANGS.find(l => l.id === lang) ?? LANGS[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("mousedown", onDown); document.removeEventListener("keydown", onKey); };
+  }, [open]);
+
+  const size = compact ? 32 : 36;
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="rounded-lg flex items-center justify-center border transition-all hover:scale-105"
+        style={{ width: size, height: size, borderColor: "var(--border-custom)", background: "var(--bg3)" }}
+        aria-label="Choose language" aria-haspopup="listbox" aria-expanded={open}
+      >
+        <span className={compact ? "text-base leading-none" : "text-lg leading-none"}>{current.flag}</span>
+      </button>
+      {open && (
+        <div className="lang-menu" role="listbox">
+          {LANGS.map(l => (
+            <button key={l.id} role="option" aria-selected={l.id === lang}
+              onClick={() => { setLang(l.id); setOpen(false); }}
+              className={`lang-item ${l.id === lang ? "active" : ""}`}>
+              <span className="text-base leading-none">{l.flag}</span>
+              <span>{l.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    NAVBAR
    ═══════════════════════════════════════════════════ */
@@ -173,14 +218,7 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-2.5">
-          <button
-            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
-            className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all hover:scale-105"
-            style={{ borderColor: "var(--border-custom)", background: "var(--bg3)" }}
-            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
-          >
-            <span className="text-lg leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
-          </button>
+          <LangSwitcher />
           <button onClick={toggle} className="theme-btn" aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
             {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
@@ -191,14 +229,7 @@ function Navbar() {
         </div>
 
         <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
-            className="w-8 h-8 rounded-lg flex items-center justify-center border transition-all"
-            style={{ borderColor: "var(--border-custom)", background: "var(--bg3)" }}
-            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
-          >
-            <span className="text-base leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
-          </button>
+          <LangSwitcher compact />
           <button onClick={toggle} className="theme-btn" style={{ width: 32, height: 32 }} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
             {theme === "dark" ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
           </button>
@@ -256,7 +287,8 @@ function HeroSection() {
     };
   }, []);
 
-  const c = lang === "ru" ? {
+  const copies = {
+    ru: {
     badge: "Pionex Card · Visa & Mastercard · выпуск за 5 минут",
     h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "по всему миру",
     sub: (<>ZeroCard выпускается на базе биржи <b>Pionex</b>, лицензированной в США (MSB) и Сингапуре. Пополняете карту в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите в любой стране, где принимают Visa. Банк, проверки дохода и ожидание пластика не нужны.</>),
@@ -267,7 +299,20 @@ function HeroSection() {
     fc2a: "Кэшбэк начислен", fc2b: "+0.84 USDT за покупку",
     fc3a: "+5% APR", fc3b: "на остаток, ежедневно",
     trust: "Карта работает там, где вы уже платите",
-  } : {
+    },
+    de: {
+    badge: "Pionex Card · Visa & Mastercard · in 5 Minuten fertig",
+    h1a: "USDT im Wallet.", h1b: "Zahle mit Krypto", h1accent: "überall auf der Welt",
+    sub: (<>ZeroCard läuft über die Börse <b>Pionex</b>, lizenziert in den USA (MSB) und Singapur. Du lädst die Karte mit USDT, hinterlegst sie in <b>Apple&nbsp;Pay</b> oder <b>Google&nbsp;Pay</b> und zahlst in jedem Land, in dem Visa akzeptiert wird. Ohne Bankkonto, ohne Einkommensnachweis, ohne Warten auf Plastik.</>),
+    cta1: "Karte kostenlos holen", cta2: "So funktioniert's",
+    st1: "Länder zum Bezahlen", st2: "Cashback bei jedem Einkauf", st3: "Zinsen aufs USDT-Guthaben", st4: "Ausgabe und Führung",
+    status: "Aktiviert", caption: "über die börse pionex · msb-lizenz (usa)",
+    fc1a: "Apple Pay · Bezahlt", fc1b: "Café, Istanbul · $4.20",
+    fc2a: "Cashback gutgeschrieben", fc2b: "+0.84 USDT für den Einkauf",
+    fc3a: "+5% Zinsen", fc3b: "aufs Guthaben, täglich",
+    trust: "Die Karte läuft dort, wo du längst bezahlst",
+    },
+    en: {
     badge: "Pionex Card · Visa & Mastercard · issued in 5 minutes",
     h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "everywhere you go",
     sub: (<>ZeroCard is issued by <b>Pionex</b>, an exchange licensed in the US (MSB) and Singapore. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend in any country where Visa works. No bank account, no income checks, nothing to wait for.</>),
@@ -278,7 +323,9 @@ function HeroSection() {
     fc2a: "Cashback earned", fc2b: "+0.84 USDT on purchase",
     fc3a: "+5% APR", fc3b: "on balance, paid daily",
     trust: "Works everywhere you already pay",
+    },
   };
+  const c = copies[lang] ?? copies.en;
 
   const pills = [
     { em: "🍎", label: "Apple Pay" }, { em: "🤖", label: "Google Pay" },
@@ -297,7 +344,7 @@ function HeroSection() {
             <div className="h-badge"><span className="dot" /><span>{c.badge}</span></div>
           </FadeIn>
           <FadeIn delay={0.05}>
-            <h1 className={lang === "ru" ? "h1-ru" : undefined}>
+            <h1 className={lang === "en" ? undefined : `h1-${lang}`}>
               <span className="thin">{c.h1a}</span><br />
               {c.h1b} <span className="accent">{c.h1accent}</span>
             </h1>
@@ -1139,6 +1186,8 @@ function Footer() {
 /* ═══════════════════════════════════════════════════
    DYNAMIC META
    ═══════════════════════════════════════════════════ */
+const OG_LOCALE: Record<string, string> = { ru: "ru_RU", en: "en_US", de: "de_DE" };
+
 function DynamicMeta() {
   const { t, lang } = useI18n();
   useEffect(() => {
@@ -1150,6 +1199,7 @@ function DynamicMeta() {
     setMeta("name", "description", t.metaDesc);
     setMeta("property", "og:title", t.metaTitle);
     setMeta("property", "og:description", t.metaDesc);
+    setMeta("property", "og:locale", OG_LOCALE[lang] ?? "en_US");
   }, [t, lang]);
 
   const schema = {
@@ -1173,7 +1223,9 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#website",
         url: "https://zerocard.pro/",
         name: "ZeroCard",
-        description: lang === "ru" ? "Криптокарта Pionex - трать USDT везде" : "Pionex crypto card - spend USDT everywhere",
+        description: lang === "ru" ? "Криптокарта Pionex - трать USDT везде"
+          : lang === "de" ? "Pionex Krypto-Karte: USDT überall ausgeben"
+          : "Pionex crypto card - spend USDT everywhere",
         inLanguage: lang,
         publisher: { "@id": "https://zerocard.pro/#organization" }
       },
@@ -1182,7 +1234,9 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#organization",
         name: "ZeroCard",
         url: "https://zerocard.pro/",
-        description: lang === "ru" ? "Партнёрский проект Pionex Card - криптовалютная дебетовая карта Visa/Mastercard" : "Pionex Card partner - crypto debit card Visa/Mastercard",
+        description: lang === "ru" ? "Партнёрский проект Pionex Card - криптовалютная дебетовая карта Visa/Mastercard"
+          : lang === "de" ? "Partnerprojekt der Pionex Card: Krypto-Debitkarte von Visa und Mastercard"
+          : "Pionex Card partner - crypto debit card Visa/Mastercard",
         sameAs: ["https://www.pionex.com/ru/signUp?r=0uHzysLVYQh"]
       },
       {
@@ -1190,6 +1244,8 @@ function DynamicMeta() {
         name: "ZeroCard by Pionex",
         description: lang === "ru"
           ? "Виртуальная дебетовая карта Visa/Mastercard для трат в USDT. 1% кэшбэк, 5% APR на остаток, Apple Pay, Google Pay, 0 годовых сборов."
+          : lang === "de"
+          ? "Virtuelle Debitkarte von Visa und Mastercard für Zahlungen in USDT. 1% Cashback, 5% Zinsen aufs Guthaben, Apple Pay, Google Pay, keine Jahresgebühr."
           : "Virtual Visa/Mastercard debit card for USDT spending. 1% cashback, 5% APR on balance, Apple Pay, Google Pay, 0 annual fees.",
         url: "https://zerocard.pro/",
         provider: {
@@ -1202,7 +1258,9 @@ function DynamicMeta() {
           "@type": "Offer",
           price: "0",
           priceCurrency: "USD",
-          description: lang === "ru" ? "Бесплатный выпуск и обслуживание" : "Free issuance and maintenance"
+          description: lang === "ru" ? "Бесплатный выпуск и обслуживание"
+            : lang === "de" ? "Ausgabe und Führung kostenlos"
+            : "Free issuance and maintenance"
         }
       }
     ]
@@ -1220,8 +1278,8 @@ const Index = () => {
   <div className="min-h-screen" style={{ overflowX: "clip" }}>
     <ScrollProgress />
     <Helmet>
-      <link rel="canonical" href="/" />
-      <meta property="og:url" content="/" />
+      <link rel="canonical" href="https://zerocard.pro/" />
+      <meta property="og:url" content="https://zerocard.pro/" />
       <meta property="og:type" content="website" />
       <script type="application/ld+json">{JSON.stringify({
         "@context": "https://schema.org",

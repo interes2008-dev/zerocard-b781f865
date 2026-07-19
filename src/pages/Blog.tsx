@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useI18n, type Lang } from "@/lib/i18n";
+import { useI18n, nextLang, LANGS, type Lang } from "@/lib/i18n";
 import { ArrowRight, Calendar, Loader2, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -49,17 +49,17 @@ function BlogHeader() {
         </Link>
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            onClick={() => setLang(nextLang(lang))}
             className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all hover:scale-105 border-border bg-secondary"
-            title={lang === "ru" ? "Switch to English" : "Переключить на русский"}
+            title={`${LANGS.find(l => l.id === lang)?.label} → ${LANGS.find(l => l.id === nextLang(lang))?.label}`}
           >
-            <span className="text-lg leading-none">{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+            <span className="text-lg leading-none">{LANGS.find(l => l.id === lang)?.flag}</span>
           </button>
           <Link
             to="/"
             className="text-sm font-medium no-underline transition-colors hidden sm:block text-muted-foreground hover:text-foreground"
           >
-            {lang === "ru" ? "← На главную" : "← Home"}
+            {lang === "ru" ? "← На главную" : lang === "de" ? "← Zur Startseite" : "← Home"}
           </Link>
         </div>
       </div>
@@ -72,7 +72,7 @@ export { BlogHeader };
 function estimateReadTime(description: string, lang: string): string {
   const words = description.split(/\s+/).length;
   const min = Math.max(3, Math.round(words / 40));
-  return lang === "ru" ? `${min} мин` : `${min} min`;
+  return lang === "ru" ? `${min} мин` : `${min} Min.`.replace("Min.", lang === "de" ? "Min." : "min");
 }
 
 const cardVariants = {
@@ -170,7 +170,7 @@ export default function Blog() {
             className="text-4xl md:text-5xl font-bold mb-3"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            {lang === "ru" ? "Блог" : "Blog"}
+            {"Blog"}
           </h1>
           <p className="text-lg mb-3 text-muted-foreground">
             {lang === "ru"
@@ -189,7 +189,7 @@ export default function Blog() {
           >
             <Loader2 className="w-5 h-5 animate-spin text-primary" />
             <span className="text-sm text-muted-foreground">
-              {lang === "ru" ? "Генерируем новую статью..." : "Generating new article..."}
+              {lang === "ru" ? "Генерируем новую статью..." : lang === "de" ? "Neuer Artikel wird erstellt..." : "Generating new article..."}
             </span>
           </motion.div>
         )}
@@ -200,7 +200,7 @@ export default function Blog() {
           </div>
         ) : filtered.length === 0 ? (
           <p className="text-center py-20 text-muted-foreground">
-            {lang === "ru" ? "Пока нет статей" : "No articles yet"}
+            {lang === "ru" ? "Пока нет статей" : lang === "de" ? "Noch keine Artikel" : "No articles yet"}
           </p>
         ) : (
           <div className="grid gap-5">
@@ -239,7 +239,7 @@ export default function Blog() {
                       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(post.published_at).toLocaleDateString(
-                          lang === "ru" ? "ru-RU" : "en-US",
+                          lang === "ru" ? "ru-RU" : lang === "de" ? "de-DE" : "en-US",
                           { year: "numeric", month: "short", day: "numeric" }
                         )}
                       </span>
@@ -261,7 +261,7 @@ export default function Blog() {
                     </p>
 
                     <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3 text-primary">
-                      {lang === "ru" ? "Читать" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      {lang === "ru" ? "Читать" : lang === "de" ? "Lesen" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </Link>

@@ -686,6 +686,29 @@ section, [class*="py-24"], [class*="py-8"] {
     transition: all 0.2s;
   }
   .theme-btn:hover { border-color: var(--border2); color: var(--text); }
+
+  /* Language dropdown */
+  .lang-menu {
+    position: absolute; top: calc(100% + 8px); right: 0; z-index: 120;
+    min-width: 168px; padding: 6px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    display: flex; flex-direction: column; gap: 2px;
+    animation: langIn .16s ease-out;
+  }
+  @keyframes langIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  .lang-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 8px;
+    font-size: 14px; font-weight: 500; text-align: left;
+    color: var(--text2); background: transparent; border: none; cursor: pointer;
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+  }
+  .lang-item:hover { background: var(--bg3); color: var(--text); }
+  .lang-item.active { color: var(--accent-color); background: var(--accent-bg); font-weight: 600; }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -741,6 +764,7 @@ section, [class*="py-24"], [class*="py-8"] {
   color: var(--text);
 }
 .hero-v2 h1.h1-ru { font-size: clamp(32px, 4.25vw, 54px); }
+.hero-v2 h1.h1-de { font-size: clamp(33px, 4.4vw, 56px); }
 .hero-v2 h1 .thin { font-weight: 400; color: color-mix(in srgb, var(--text) 78%, transparent); }
 .hero-v2 h1 .accent {
   font-family: 'Playfair Display', serif;

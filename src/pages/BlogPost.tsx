@@ -40,7 +40,7 @@ interface BlogPostData {
 function estimateReadTime(content: string, lang: string): string {
   const words = content.split(/\s+/).length;
   const min = Math.max(2, Math.round(words / 200));
-  return lang === "ru" ? `${min} мин чтения` : `${min} min read`;
+  return lang === "ru" ? `${min} мин чтения` : lang === "de" ? `${min} Min. Lesezeit` : `${min} min read`;
 }
 
 /* ── Inline renderer (bold + links) ── */
@@ -406,7 +406,7 @@ export default function BlogPost() {
           className="mb-8"
         >
           <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : "All articles"}
+            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : "All articles"}
           </Link>
         </motion.div>
 
@@ -519,7 +519,7 @@ export default function BlogPost() {
         {/* Back link - bottom */}
         <div className="mt-10">
           <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : "All articles"}
+            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : "All articles"}
           </Link>
         </div>
       </article>
