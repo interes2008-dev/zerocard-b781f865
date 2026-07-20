@@ -362,7 +362,7 @@ RESPONSE FORMAT: strictly JSON:
   "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
 }`;
 
-    const systemPrompt = lang === "de" ? systemPromptDe : systemPromptRuEn;
+    const systemPrompt = (lang === "de" ? systemPromptDe : systemPromptRuEn) + hotBoost;
 
     const userPromptDe = `Schreib einen neuen Artikel für die Kategorie "${category.de}".
 Hier ein paar Themenbeispiele als Inspiration, denk dir aber ein eigenes aus:
