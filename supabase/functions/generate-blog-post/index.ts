@@ -208,14 +208,41 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const forceLang = body.lang as string | undefined;
     const forceCategory = body.category as string | undefined;
+    const hot = body.hot === true || body.hot === "true";
+    // "all" mode: generate one HOT article for every supported language in one call
+    const allLangs = body.all_langs === true || body.all_langs === "true";
+
+    const LANGS = ["ru", "en", "de"] as const;
+
+    if (allLangs) {
+      const results: any[] = [];
+      for (const l of LANGS) {
+        try {
+          const r = await fetch(`${supabaseUrl}/functions/v1/generate-blog-post`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: req.headers.get("Authorization") || `Bearer ${supabaseKey}`,
+              apikey: supabaseKey,
+            },
+            body: JSON.stringify({ lang: l, hot: true, category: forceCategory }),
+          });
+          results.push({ lang: l, status: r.status, body: await r.json().catch(() => ({})) });
+        } catch (err) {
+          results.push({ lang: l, error: String(err) });
+        }
+      }
+      return new Response(JSON.stringify({ success: true, results }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     // Determine language: forced or based on day parity
     const today = new Date();
     const dayOfMonth = today.getDate();
-    const LANGS = ["ru", "en", "de"] as const;
     const lang = forceLang || LANGS[dayOfMonth % 3];
 
     // Pick category: forced or rotate
@@ -243,6 +270,15 @@ serve(async (req) => {
     const hintsByLang = TOPIC_HINTS[category.id] as Record<string, string[]> | undefined;
     const hints = hintsByLang?.[lang] || hintsByLang?.en || [];
     const hintText = hints.map((h) => `- ${h}`).join("\n");
+
+    // HOT / trending topic booster - injected into system prompt when hot=true
+    const hotBoost = hot
+      ? (lang === "ru"
+        ? `\n\nРЕЖИМ ГОРЯЧЕЙ ТЕМЫ (hot=true):\n- Тема должна быть максимально актуальной прямо сейчас (${today.toISOString().slice(0,10)}): свежие тренды крипты, USDT, Pionex, ботов, стейблкоинов, санкций и блокировок карт, международных платежей в ${today.getFullYear()}.\n- Заголовок цепляющий, кликабельный, с цифрой или острым вопросом.\n- Пиши как топовый автор трендового Telegram-канала: живо, с примерами и конкретикой.\n- Приведи 1-2 актуальных факта или числа из ${today.getFullYear()} (без выдуманной статистики).`
+        : lang === "de"
+        ? `\n\nHOT-TOPIC-MODUS (hot=true):\n- Wähl ein Thema, das gerade jetzt (${today.toISOString().slice(0,10)}) heiß ist: aktuelle Krypto-Trends, USDT, Pionex, Bots, Stablecoins, Kartensperren, internationale Zahlungen in ${today.getFullYear()}.\n- Titel klickstark, mit einer Zahl oder scharfen Frage.\n- Schreib wie ein Top-Autor in einem trendigen Krypto-Newsletter: lebendig, konkret, mit Beispielen.\n- Nenn 1-2 aktuelle Fakten oder Zahlen aus ${today.getFullYear()} (keine erfundenen Statistiken).`
+        : `\n\nHOT TOPIC MODE (hot=true):\n- Pick a topic that is trending right now (${today.toISOString().slice(0,10)}): fresh crypto trends, USDT, Pionex, bots, stablecoins, card blocks and sanctions, international payments in ${today.getFullYear()}.\n- Title must be catchy and clickable, with a number or a sharp question.\n- Write like a top author of a trending crypto newsletter: lively, with concrete examples.\n- Include 1-2 real, current facts or numbers from ${today.getFullYear()} (do not invent statistics).`)
+      : "";
 
     const typographyRules = `
 TYPOGRAPHY & STRUCTURE RULES (magazine-quality reading experience):
@@ -326,7 +362,7 @@ RESPONSE FORMAT: strictly JSON:
   "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
 }`;
 
-    const systemPrompt = lang === "de" ? systemPromptDe : systemPromptRuEn;
+    const systemPrompt = (lang === "de" ? systemPromptDe : systemPromptRuEn) + hotBoost;
 
     const userPromptDe = `Schreib einen neuen Artikel für die Kategorie "${category.de}".
 Hier ein paar Themenbeispiele als Inspiration, denk dir aber ein eigenes aus:
