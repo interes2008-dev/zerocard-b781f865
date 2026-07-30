@@ -138,7 +138,6 @@ export default function Blog() {
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">
-        {/* Header with gradient accent */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
