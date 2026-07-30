@@ -88,7 +88,6 @@ export default function Blog() {
   const { lang } = useI18n();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [autoGenerating, setAutoGenerating] = useState(false);
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -100,38 +99,8 @@ export default function Blog() {
     setLoading(false);
   };
 
-  const autoGenerate = async () => {
-    const todayStr = new Date().toISOString().slice(0, 10);
-    const { data: todayPosts } = await supabase
-      .from("blog_posts")
-      .select("id, lang")
-      .gte("published_at", todayStr + "T00:00:00Z")
-      .lte("published_at", todayStr + "T23:59:59Z");
-
-    const SITE_LANGS = ["ru", "en", "de"] as const;
-    const covered = new Set((todayPosts || []).map((p: any) => p.lang));
-    const missing = SITE_LANGS.filter((l) => !covered.has(l));
-
-    if (missing.length === 0) return;
-
-    setAutoGenerating(true);
-    try {
-      // Generate one HOT article per missing language, sequentially to avoid rate limits
-      for (const l of missing) {
-        try {
-          await supabase.functions.invoke("generate-blog-post", { body: { lang: l, hot: true } });
-        } catch (e) {
-          console.error(`Auto-generate failed for ${l}:`, e);
-        }
-      }
-      await fetchPosts();
-    } finally {
-      setAutoGenerating(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPosts().then(() => autoGenerate());
+    fetchPosts();
     document.title =
       lang === "ru"
         ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
@@ -169,7 +138,6 @@ export default function Blog() {
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">
-        {/* Header with gradient accent */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -190,18 +158,6 @@ export default function Blog() {
           <div className="h-px mb-10 rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.1))" }} />
         </motion.div>
 
-        {autoGenerating && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5"
-          >
-            <Loader2 className="w-5 h-5 animate-spin text-primary" />
-            <span className="text-sm text-muted-foreground">
-              {lang === "ru" ? "Генерируем новую статью..." : lang === "de" ? "Neuer Artikel wird erstellt..." : "Generating new article..."}
-            </span>
-          </motion.div>
-        )}
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
