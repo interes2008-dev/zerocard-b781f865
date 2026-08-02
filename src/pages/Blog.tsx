@@ -112,14 +112,8 @@ const cardVariants = {
 
 export default function Blog() {
   const { lang } = useI18n();
-<<<<<<< HEAD
   const [posts, setPosts] = useState<BlogPost[]>(() => getSeededPosts() ?? []);
   const [loading, setLoading] = useState(() => getSeededPosts() === null);
-  const [autoGenerating, setAutoGenerating] = useState(false);
-=======
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
->>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
 
   const fetchPosts = async () => {
     setLoading(true);
