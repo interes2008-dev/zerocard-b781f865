@@ -215,7 +215,7 @@ serve(async (req) => {
     // "all" mode: generate one HOT article for every supported language in one call
     const allLangs = body.all_langs === true || body.all_langs === "true";
 
-    const LANGS = ["ru", "en", "de"] as const;
+    const LANGS = ["ru", "en", "de", "es", "pt", "it", "fr"] as const;
 
     if (allLangs) {
       const results: any[] = [];
@@ -271,13 +271,31 @@ serve(async (req) => {
     const hints = hintsByLang?.[lang] || hintsByLang?.en || [];
     const hintText = hints.map((h) => `- ${h}`).join("\n");
 
-    // HOT / trending topic booster - injected into system prompt when hot=true
+    // HOT / trending topic booster - injected into system prompt when hot=true.
+    // Trend anchors refreshed from 2026 market data (stablecoin card volumes, Visa/Mastercard
+    // stablecoin programs, USDT dominance in card settlement, blocked cards, nomad payments).
+    const HOT_ANGLES = [
+      "stablecoin cards becoming a mainstream payment standard in 2026",
+      "USDT settling the majority of crypto card spending",
+      "crypto card volumes growing triple digits year over year",
+      "Visa and Mastercard expanding stablecoin card programs across 50+ countries",
+      "paying for AI subscriptions (ChatGPT, Claude, Midjourney) with crypto",
+      "what to do when a bank card gets blocked abroad",
+      "spending Pionex bot profits without touching a bank",
+      "earning yield on an idle USDT balance while still spending it",
+      "cheap cross-border money transfers with stablecoins instead of SWIFT",
+      "travel and digital nomad payments in 200+ countries",
+    ];
+    const dayIdx = Math.floor(Date.now() / 86400000);
+    const hotAngle = HOT_ANGLES[dayIdx % HOT_ANGLES.length];
+
     const hotBoost = hot
-      ? (lang === "ru"
-        ? `\n\nРЕЖИМ ГОРЯЧЕЙ ТЕМЫ (hot=true):\n- Тема должна быть максимально актуальной прямо сейчас (${today.toISOString().slice(0,10)}): свежие тренды крипты, USDT, Pionex, ботов, стейблкоинов, санкций и блокировок карт, международных платежей в ${today.getFullYear()}.\n- Заголовок цепляющий, кликабельный, с цифрой или острым вопросом.\n- Пиши как топовый автор трендового Telegram-канала: живо, с примерами и конкретикой.\n- Приведи 1-2 актуальных факта или числа из ${today.getFullYear()} (без выдуманной статистики).`
-        : lang === "de"
-        ? `\n\nHOT-TOPIC-MODUS (hot=true):\n- Wähl ein Thema, das gerade jetzt (${today.toISOString().slice(0,10)}) heiß ist: aktuelle Krypto-Trends, USDT, Pionex, Bots, Stablecoins, Kartensperren, internationale Zahlungen in ${today.getFullYear()}.\n- Titel klickstark, mit einer Zahl oder scharfen Frage.\n- Schreib wie ein Top-Autor in einem trendigen Krypto-Newsletter: lebendig, konkret, mit Beispielen.\n- Nenn 1-2 aktuelle Fakten oder Zahlen aus ${today.getFullYear()} (keine erfundenen Statistiken).`
-        : `\n\nHOT TOPIC MODE (hot=true):\n- Pick a topic that is trending right now (${today.toISOString().slice(0,10)}): fresh crypto trends, USDT, Pionex, bots, stablecoins, card blocks and sanctions, international payments in ${today.getFullYear()}.\n- Title must be catchy and clickable, with a number or a sharp question.\n- Write like a top author of a trending crypto newsletter: lively, with concrete examples.\n- Include 1-2 real, current facts or numbers from ${today.getFullYear()} (do not invent statistics).`)
+      ? `\n\nHOT TOPIC MODE (hot=true):
+- Today is ${today.toISOString().slice(0, 10)}. The topic must feel current for ${today.getFullYear()}.
+- Trend anchor for this article: "${hotAngle}". Build the topic around it, adapted to the target audience.
+- The title must be catchy and clickable: a number, a sharp question or a concrete promise.
+- Write like a top author of a trending crypto newsletter: lively, concrete, with real examples.
+- Include 1-2 realistic, current facts or numbers. Never invent precise statistics you cannot support; prefer approximations ("about", "roughly").`
       : "";
 
     const typographyRules = `
@@ -304,95 +322,87 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
 - Sound like a human writer, not a neural network.
 
-SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwide"):
-- Primary key phrase: RU "плати по миру", EN "pay worldwide". Use it naturally, no keyword stuffing.
-- The "title" MUST contain the primary key phrase (RU: "плати по миру"; EN: "pay worldwide") in a natural way.
-- The "description" MUST contain the primary key phrase once, naturally.
-- The article "content" MUST:
-  1. Include the primary key phrase in the first 100 words of the intro.
-  2. Include the primary key phrase in at least one H2 or H3 subheading.
-  3. Use the phrase 3-5 times total across the article (no more), plus related LSI phrases spread naturally throughout.
-- Related LSI phrases to weave in (RU): "международные платежи", "платить за границей", "карта для оплаты по миру", "безопасная оплата в других странах", "глобальные переводы", "оплата по всему миру".
-- Related LSI phrases to weave in (EN): "international payments", "paying abroad", "card for global payments", "safe payments in other countries", "global transfers", "spending worldwide".
-- Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
-- Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
+SEO RULES (keyword-agnostic, helpful-content first):
+- Pick ONE natural primary topic phrase for the article in the target language (for example "crypto card", "USDT card", "stablecoin payments", "pay for subscriptions with crypto"). NEVER use the phrase "плати по миру" / "pay worldwide" - it is FORBIDDEN.
+- Put that phrase in the title, in the description and in the first 100 words, naturally. No keyword stuffing.
+- Use it in at least one H2 and 3-5 times total across the article, plus related terms spread naturally.
+- Add at least one internal markdown link to /blog or the homepage / with descriptive anchor text.
+- Keep it natural and genuinely useful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
-    const systemPromptDe = `Du bist Texter für den ZeroCard-Blog (zerocard.pro). ZeroCard ist eine Visa-Krypto-Karte auf Pionex-Basis mit 1% Cashback und 5% Zinsen aufs USDT-Guthaben.
-Schreib Artikel für die Zielgruppe "${category.de}". Der Ton ist lebendig und fachkundig, keine Werbesprache. Erwähne ZeroCard 2 bis 3 Mal beiläufig.
-Am Ende IMMER einen CTA-Absatz anhängen: "ZeroCard in 5 Minuten kostenlos holen: zerocard.pro"
-Schreib ausschließlich auf Deutsch, in der Du-Form.
+    // Per-language meta: language name, audience label, CTA line and localized extras.
+    const LANG_META: Record<string, { name: string; audience: string; cta: string; extra: string }> = {
+      ru: {
+        name: "Russian (русский)",
+        audience: category.ru,
+        cta: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro",
+        extra: 'Обращайся к читателю на "ты". Никаких кавычек-ёлочек, только прямые.',
+      },
+      en: {
+        name: "English",
+        audience: category.en,
+        cta: "Get your ZeroCard for free in 5 minutes: zerocard.pro",
+        extra: "Use simple, direct American English. Avoid corporate filler.",
+      },
+      de: {
+        name: "German (Deutsch)",
+        audience: category.de,
+        cta: "ZeroCard in 5 Minuten kostenlos holen: zerocard.pro",
+        extra:
+          'Schreib in der Du-Form. Verbotene Floskeln: "Darüber hinaus", "Des Weiteren", "Zusammenfassend lässt sich sagen", "In der heutigen Zeit". Nimm lockere Anschlüsse: "und", "dazu", "also", "übrigens".',
+      },
+      es: {
+        name: "Spanish (español)",
+        audience: category.en,
+        cta: "Consigue tu ZeroCard gratis en 5 minutos: zerocard.pro",
+        extra: 'Tutea al lector. Evita frases hechas como "En el mundo actual" o "En conclusión".',
+      },
+      pt: {
+        name: "Brazilian Portuguese (português do Brasil)",
+        audience: category.en,
+        cta: "Peça seu ZeroCard de graça em 5 minutos: zerocard.pro",
+        extra: 'Fale de "você". Evite clichês como "Nos dias de hoje" ou "Em conclusão".',
+      },
+      it: {
+        name: "Italian (italiano)",
+        audience: category.en,
+        cta: "Attiva ZeroCard gratis in 5 minuti: zerocard.pro",
+        extra: 'Dai del "tu" al lettore. Evita frasi fatte come "Al giorno d\'oggi" o "In conclusione".',
+      },
+      fr: {
+        name: "French (français)",
+        audience: category.en,
+        cta: "Obtiens ta ZeroCard gratuitement en 5 minutes : zerocard.pro",
+        extra: 'Tutoie le lecteur. Évite les clichés comme "De nos jours" ou "En conclusion".',
+      },
+    };
+
+    const meta = LANG_META[lang] ?? LANG_META.en;
+
+    const systemPrompt = `You are a professional copywriter for the ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and up to 5% APR on the USDT balance.
+
+CRITICAL: write the ENTIRE output (title, description, content) in ${meta.name}. Do not mix languages. Do not translate literally from English - write natively.
+
+Target audience: "${meta.audience}". Tone: lively, expert, never salesy. Mention ZeroCard organically 2-3 times.
+At the very end ALWAYS add a CTA paragraph: "${meta.cta}"
+Language note: ${meta.extra}
 ${typographyRules}
 
-ZUSÄTZLICHE REGELN FÜR DEUTSCH:
-- Verbotene Floskeln: "Darüber hinaus", "Des Weiteren", "Zusammenfassend lässt sich sagen", "In der heutigen Zeit", "Abschließend". Nimm stattdessen lockere Anschlüsse: "und", "dazu", "also", "übrigens", "kurz gesagt".
-- Kein Gedankenstrich (- -). Nutz Komma, Punkt, Doppelpunkt oder Klammern.
-- Keine Emojis, nur gerade Anführungszeichen.
-- Als Hauptkeyword dient "weltweit bezahlen". Bau es natürlich ein, im Titel, in der Description, im ersten Absatz und in einer Zwischenüberschrift.
-- Verwandte Begriffe: "Auslandszahlungen", "im Ausland bezahlen", "Karte für weltweite Zahlungen", "globale Überweisungen", "sicher im Ausland zahlen".
-
-ANTWORTFORMAT, strikt JSON:
+RESPONSE FORMAT: strictly JSON, no markdown wrapper:
 {
-  "title": "Titel des Artikels (kurz, 5 bis 9 Wörter, macht neugierig)",
-  "description": "Kurze Beschreibung in 1 bis 2 Sätzen für die Vorschau",
-  "content": "Vollständiger Artikeltext als Markdown. Länge 800 bis 1200 Wörter. Halte dich an die Typografie-Regeln oben."
-}`;
+  "title": "Article title in ${meta.name} (short, 5-9 words, catchy)",
+  "description": "Brief 1-2 sentence preview description in ${meta.name}",
+  "content": "Full article in markdown, written in ${meta.name}. Length 800-1200 words. Follow the typography rules above."
+}` + hotBoost;
 
-    const systemPromptRuEn =
-      lang === "ru"
-        ? `Ты: профессиональный копирайтер для блога ZeroCard (zerocard.pro). ZeroCard: криптокарта Visa на базе Pionex с 1% кэшбэком и 5% APR на остаток USDT.
-Пиши статьи для аудитории "${category.ru}". Стиль: живой, экспертный, не рекламный. Упоминай ZeroCard органично 2-3 раза.
-В конце статьи ВСЕГДА добавь абзац-CTA: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro"
-${typographyRules}
+    const userPrompt = `Write a new article for the "${meta.audience}" category, entirely in ${meta.name}.
 
-ФОРМАТ ОТВЕТА: строго JSON:
-{
-  "title": "Заголовок статьи (короткий, 5-9 слов, цепляющий)",
-  "description": "Краткое описание 1-2 предложения для превью",
-  "content": "Полный текст статьи в формате markdown. Длина 800-1200 слов. Следуй правилам типографики выше."
-}`
-        : `You are a professional copywriter for ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and 5% APR on USDT balance.
-Write articles for the "${category.en}" audience. Style: engaging, expert, not salesy. Mention ZeroCard organically 2-3 times.
-At the end ALWAYS add a CTA paragraph: "Get your ZeroCard for free in 5 minutes: zerocard.pro"
-${typographyRules}
-
-RESPONSE FORMAT: strictly JSON:
-{
-  "title": "Article title (short, 5-9 words, catchy)",
-  "description": "Brief 1-2 sentence description for preview",
-  "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
-}`;
-
-    const systemPrompt = (lang === "de" ? systemPromptDe : systemPromptRuEn) + hotBoost;
-
-    const userPromptDe = `Schreib einen neuen Artikel für die Kategorie "${category.de}".
-Hier ein paar Themenbeispiele als Inspiration, denk dir aber ein eigenes aus:
+Topic examples for inspiration (create your own unique angle, do not copy):
 ${hintText}
 
-Diese Titel gibt es schon, wiederhol sie NICHT:
-- ${existingTitles || "keine"}
-
-Antworte NUR mit JSON, ohne Markdown-Umrandung.`;
-
-    const userPromptRuEn =
-      lang === "ru"
-        ? `Напиши новую статью для категории "${category.ru}".
-Вот примеры тем (вдохновляйся, но придумай свою уникальную):
-${hintText}
-
-НЕ повторяй эти заголовки (уже опубликованы):
-- ${existingTitles || "нет"}
-
-Ответь ТОЛЬКО JSON без markdown-обёртки.`
-        : `Write a new article for the "${category.en}" category.
-Here are topic examples (use as inspiration, but create your own unique topic):
-${hintText}
-
-Do NOT repeat these titles (already published):
+Do NOT repeat these already published titles:
 - ${existingTitles || "none"}
 
-Reply with ONLY JSON without markdown wrapping.`;
-
-    const userPrompt = lang === "de" ? userPromptDe : userPromptRuEn;
+Reply with ONLY the JSON object.`;
 
     const aiResponse = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
