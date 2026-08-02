@@ -322,18 +322,12 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
 - Sound like a human writer, not a neural network.
 
-SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwide"):
-- Primary key phrase: RU "плати по миру", EN "pay worldwide". Use it naturally, no keyword stuffing.
-- The "title" MUST contain the primary key phrase (RU: "плати по миру"; EN: "pay worldwide") in a natural way.
-- The "description" MUST contain the primary key phrase once, naturally.
-- The article "content" MUST:
-  1. Include the primary key phrase in the first 100 words of the intro.
-  2. Include the primary key phrase in at least one H2 or H3 subheading.
-  3. Use the phrase 3-5 times total across the article (no more), plus related LSI phrases spread naturally throughout.
-- Related LSI phrases to weave in (RU): "международные платежи", "платить за границей", "карта для оплаты по миру", "безопасная оплата в других странах", "глобальные переводы", "оплата по всему миру".
-- Related LSI phrases to weave in (EN): "international payments", "paying abroad", "card for global payments", "safe payments in other countries", "global transfers", "spending worldwide".
-- Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
-- Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
+SEO RULES (keyword-agnostic, helpful-content first):
+- Pick ONE natural primary topic phrase for the article in the target language (for example "crypto card", "USDT card", "stablecoin payments", "pay for subscriptions with crypto"). NEVER use the phrase "плати по миру" / "pay worldwide" - it is FORBIDDEN.
+- Put that phrase in the title, in the description and in the first 100 words, naturally. No keyword stuffing.
+- Use it in at least one H2 and 3-5 times total across the article, plus related terms spread naturally.
+- Add at least one internal markdown link to /blog or the homepage / with descriptive anchor text.
+- Keep it natural and genuinely useful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
     // Per-language meta: language name, audience label, CTA line and localized extras.
     const LANG_META: Record<string, { name: string; audience: string; cta: string; extra: string }> = {
