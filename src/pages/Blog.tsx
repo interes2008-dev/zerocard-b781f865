@@ -125,48 +125,9 @@ export default function Blog() {
     setLoading(false);
   };
 
-<<<<<<< HEAD
-  const autoGenerate = async () => {
-    const todayStr = new Date().toISOString().slice(0, 10);
-    const { data: todayPosts } = await supabase
-      .from("blog_posts")
-      .select("id, lang")
-      .gte("published_at", todayStr + "T00:00:00Z")
-      .lte("published_at", todayStr + "T23:59:59Z");
-
-    const SITE_LANGS = ["ru", "en", "de"] as const;
-    const covered = new Set((todayPosts || []).map((p: any) => p.lang));
-    const missing = SITE_LANGS.filter((l) => !covered.has(l));
-
-    if (missing.length === 0) return;
-
-    setAutoGenerating(true);
-    try {
-      // Generate one HOT article per missing language, sequentially to avoid rate limits
-      for (const l of missing) {
-        try {
-          await supabase.functions.invoke("generate-blog-post", { body: { lang: l, hot: true } });
-        } catch (e) {
-          console.error(`Auto-generate failed for ${l}:`, e);
-        }
-      }
-      await fetchPosts();
-    } finally {
-      setAutoGenerating(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts().then(() => autoGenerate());
-    document.title = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
-=======
   useEffect(() => {
     fetchPosts();
-    document.title =
-      lang === "ru"
-        ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
-        : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
->>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
+    document.title = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
     window.scrollTo(0, 0);
   }, [lang]);
 
