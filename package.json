@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predev": "bunx tsx scripts/generate-sitemap.ts",
-    "prebuild": "bunx tsx scripts/generate-sitemap.ts"
+    "prebuild": "bunx tsx scripts/generate-sitemap.ts",
+    "build:ssg": "npx tsx scripts/generate-sitemap.ts && vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs && rm -rf dist-server"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

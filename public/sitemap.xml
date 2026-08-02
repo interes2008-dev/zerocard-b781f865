@@ -2,22 +2,198 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zerocard.pro/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/en</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/de</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/es</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/pt</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/it</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/fr</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/"/>
   </url>
   <url>
     <loc>https://zerocard.pro/blog</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/blog?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/blog?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/en/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/de/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/es/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/pt/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/it/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
+  </url>
+  <url>
+    <loc>https://zerocard.pro/fr/blog</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://zerocard.pro/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerocard.pro/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://zerocard.pro/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://zerocard.pro/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt/blog"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://zerocard.pro/it/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr/blog"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zerocard.pro/blog"/>
   </url>
 </urlset>

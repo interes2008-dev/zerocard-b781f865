@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, langHref, type Lang } from "@/lib/i18n";
 import { BlogHeader } from "./Blog";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { getSeededPost } from "@/lib/blogSeed";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 
@@ -40,7 +41,7 @@ interface BlogPostData {
 function estimateReadTime(content: string, lang: string): string {
   const words = content.split(/\s+/).length;
   const min = Math.max(2, Math.round(words / 200));
-  return lang === "ru" ? `${min} мин чтения` : lang === "de" ? `${min} Min. Lesezeit` : `${min} min read`;
+  return lang === "ru" ? `${min} мин чтения` : lang === "de" ? `${min} Min. Lesezeit` : lang === "es" ? `${min} min de lectura` : lang === "pt" ? `${min} min de leitura` : `${min} min read`;
 }
 
 /* ── Inline renderer (bold + links) ── */
@@ -307,8 +308,9 @@ function RenderContent({ content }: { content: string }) {
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const { lang } = useI18n();
-  const [post, setPost] = useState<BlogPostData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const seeded = getSeededPost(slug);
+  const [post, setPost] = useState<BlogPostData | null>(seeded ?? null);
+  const [loading, setLoading] = useState(!seeded);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -330,14 +332,14 @@ export default function BlogPost() {
 
   useEffect(() => {
     if (!post) return;
-    document.title = `${post.title} | ZeroCard Blog`;
+    document.title = post.title;
     const setMeta = (attr: string, key: string, value: string) => {
       let el = document.querySelector(`meta[${attr}="${key}"]`);
       if (!el) { el = document.createElement("meta"); el.setAttribute(attr, key); document.head.appendChild(el); }
       el.setAttribute("content", value);
     };
     setMeta("name", "description", post.description);
-    setMeta("property", "og:title", `${post.title} | ZeroCard Blog`);
+    setMeta("property", "og:title", post.title);
     setMeta("property", "og:description", post.description);
     setMeta("property", "og:type", "article");
   }, [post]);
@@ -353,11 +355,18 @@ export default function BlogPost() {
     );
   }
 
-  if (notFound || !post) return <Navigate to="/blog" replace />;
+  if (notFound || !post) return <Navigate to={langHref(lang, "/blog")} replace />;
 
-  const postLang = post.lang as "ru" | "en";
+  // An article always belongs to one language. If it is opened under a different
+  // language prefix (deep link, fallback route, old URL), send the reader to the
+  // correct address instead of showing foreign-language text in this shell.
+  if (post.lang && post.lang !== lang) {
+    return <Navigate to={langHref(post.lang as Lang, `/blog/${post.slug}`)} replace />;
+  }
 
-  const canonical = `/blog/${post.slug}`;
+  const postLang = post.lang as Lang;
+
+  const canonical = langHref(lang, `/blog/${post.slug}`);
   const fullUrl = `https://zerocard.pro${canonical}`;
 
   return (
@@ -365,26 +374,44 @@ export default function BlogPost() {
       <Helmet>
         <title>{`${post.title} | ZeroCard Blog`}</title>
         <meta name="description" content={post.description} />
-        <link rel="canonical" href={canonical} />
+        <link rel="canonical" href={fullUrl} />
         <meta property="og:title" content={`${post.title} | ZeroCard Blog`} />
         <meta property="og:description" content={post.description} />
-        <meta property="og:url" content={canonical} />
+        <meta property="og:url" content={fullUrl} />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://zerocard.pro/og-image.png" />
+        <meta property="og:locale" content={postLang === "ru" ? "ru_RU" : postLang === "de" ? "de_DE" : postLang === "es" ? "es_ES" : postLang === "pt" ? "pt_BR" : "en_US"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${post.title} | ZeroCard Blog`} />
+        <meta name="twitter:description" content={post.description} />
+        <meta name="twitter:image" content="https://zerocard.pro/og-image.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
           headline: post.title,
           description: post.description,
+          image: "https://zerocard.pro/og-image.png",
+          url: fullUrl,
           datePublished: post.published_at,
           dateModified: post.published_at,
           inLanguage: postLang,
           mainEntityOfPage: { "@type": "WebPage", "@id": fullUrl },
-          author: { "@type": "Organization", name: "ZeroCard" },
+          author: { "@type": "Organization", name: "ZeroCard", url: "https://zerocard.pro" },
           publisher: {
             "@type": "Organization",
             name: "ZeroCard",
             url: "https://zerocard.pro",
+            logo: { "@type": "ImageObject", url: "https://zerocard.pro/favicon.png" },
           },
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "ZeroCard", item: "https://zerocard.pro/" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: `https://zerocard.pro${langHref(lang, "/blog")}` },
+            { "@type": "ListItem", position: 3, name: post.title, item: fullUrl },
+          ],
         })}</script>
       </Helmet>
       <BlogHeader />
@@ -405,8 +432,8 @@ export default function BlogPost() {
           transition={{ duration: 0.3 }}
           className="mb-8"
         >
-          <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : "All articles"}
+          <Link to={langHref(lang, "/blog")} className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : lang === "es" ? "Todos los artículos" : lang === "pt" ? "Todos os artigos" : "All articles"}
           </Link>
         </motion.div>
 
@@ -423,7 +450,7 @@ export default function BlogPost() {
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar className="w-3.5 h-3.5" />
             {new Date(post.published_at).toLocaleDateString(
-              postLang === "ru" ? "ru-RU" : "en-US",
+              postLang === "ru" ? "ru-RU" : postLang === "es" ? "es-ES" : postLang === "pt" ? "pt-BR" : "en-US",
               { year: "numeric", month: "long", day: "numeric" }
             )}
           </span>
@@ -499,10 +526,10 @@ export default function BlogPost() {
               className="text-lg md:text-xl font-bold mb-2 text-foreground"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              {postLang === "ru" ? "Получить карту бесплатно за 5 минут" : "Get Your Card for Free in 5 Minutes"}
+              {postLang === "ru" ? "Получить карту бесплатно за 5 минут" : postLang === "es" ? "Consigue tu tarjeta gratis en 5 minutos" : postLang === "pt" ? "Pegue seu cartão grátis em 5 minutos" : "Get Your Card for Free in 5 Minutes"}
             </h3>
             <p className="mb-5 text-sm text-muted-foreground">
-              {postLang === "ru" ? "Криптокарта с 1% кэшбэком и 5% годовых на остаток USDT" : "Crypto card with 1% cashback and 5% APR on USDT balance"}
+              {postLang === "ru" ? "Криптокарта с 1% кэшбэком и 5% годовых на остаток USDT" : postLang === "es" ? "Tarjeta cripto con 1% de reembolso y 5% anual sobre el saldo en USDT" : postLang === "pt" ? "Cartão cripto com 1% de cashback e 5% ao ano sobre o saldo em USDT" : "Crypto card with 1% cashback and 5% APR on USDT balance"}
             </p>
             <a
               href={SIGNUP_URL}
@@ -511,15 +538,15 @@ export default function BlogPost() {
               className="inline-flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold text-primary-foreground bg-primary hover:opacity-90 transition-all hover:scale-[1.02] hover:shadow-lg"
               style={{ boxShadow: "0 4px 16px hsl(var(--primary) / 0.3)" }}
             >
-              {postLang === "ru" ? "Оформить ZeroCard" : "Get ZeroCard"} <ArrowRight className="w-4 h-4" />
+              {postLang === "ru" ? "Оформить ZeroCard" : postLang === "es" ? "Consigue ZeroCard" : postLang === "pt" ? "Pegar o ZeroCard" : "Get ZeroCard"} <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </motion.div>
 
         {/* Back link - bottom */}
         <div className="mt-10">
-          <Link to="/blog" className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : "All articles"}
+          <Link to={langHref(lang, "/blog")} className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> {lang === "ru" ? "Все статьи" : lang === "de" ? "Alle Artikel" : lang === "es" ? "Todos los artículos" : lang === "pt" ? "Todos os artigos" : "All articles"}
           </Link>
         </div>
       </article>

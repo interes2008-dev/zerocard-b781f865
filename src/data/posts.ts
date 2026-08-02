@@ -9,6 +9,10 @@ export interface Post {
 }
 
 export const posts: Record<Lang, Post[]> = {
+  es: [],
+  pt: [],
+  it: [],
+  fr: [],
   ru: [
     {
       slug: "kak-potratit-usdt",

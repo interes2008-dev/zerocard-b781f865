@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Trash2, Plus, ArrowLeft } from "lucide-react";
 
@@ -87,6 +88,10 @@ export default function BlogAdmin() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 md:p-10">
+      <Helmet>
+        <title>Admin | ZeroCard</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className="max-w-[1000px] mx-auto">
         <Link
           to="/blog"

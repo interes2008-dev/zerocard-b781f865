@@ -6,6 +6,13 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="manifest" href="/manifest.json" />
 
+    <!-- Performance: preconnect to third-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://shstklmyehdrepyttlhr.supabase.co" />
+    <link rel="dns-prefetch" href="https://shstklmyehdrepyttlhr.supabase.co" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Golos+Text:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" />
+
     <!-- SEO CORE -->
     <title>ZeroCard - Плати по миру криптой | Криптокарта USDT, 1% кэшбэк + 5% APR</title>
     <meta name="description" content="Плати по миру с ZeroCard - виртуальная криптокарта на базе Pionex для оплаты в 200+ странах. Международные платежи и глобальные переводы в USDT, 1% кэшбэк, 5% годовых на остаток, Apple Pay и Google Pay.">
@@ -27,9 +34,10 @@
     
     
     <meta property="og:url" content="https://zerocard.pro/">
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/NPPb5Pp04vXzVHRtrcEOvCzQp892/social-images/social-1774845398828-Снимок_экрана_2026-03-26_в_10.05.53.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://zerocard.pro/og-image.png">
+    <meta property="og:image:width" content="1376">
+    <meta property="og:image:height" content="768">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="ZeroCard - плати по миру криптой, криптокарта Pionex Visa с 1% кэшбэк и 5% APR">
     <meta property="og:locale" content="ru_RU">
 
@@ -37,15 +45,20 @@
     <meta name="twitter:card" content="summary_large_image">
     
     
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/NPPb5Pp04vXzVHRtrcEOvCzQp892/social-images/social-1774845398828-Снимок_экрана_2026-03-26_в_10.05.53.webp">
+    <meta name="twitter:image" content="https://zerocard.pro/og-image.png">
     <meta name="twitter:site" content="@zerocard">
 
     <!-- Geo & Language -->
     <meta name="geo.region" content="RU">
     <meta name="language" content="Russian">
-    <link rel="alternate" hreflang="ru" href="https://zerocard.pro/?lang=ru">
-    <link rel="alternate" hreflang="en" href="https://zerocard.pro/?lang=en">
-    <link rel="alternate" hreflang="de" href="https://zerocard.pro/?lang=de">
+    <link rel="canonical" href="https://zerocard.pro/">
+    <link rel="alternate" hreflang="ru" href="https://zerocard.pro/">
+    <link rel="alternate" hreflang="en" href="https://zerocard.pro/en">
+    <link rel="alternate" hreflang="de" href="https://zerocard.pro/de">
+    <link rel="alternate" hreflang="es" href="https://zerocard.pro/es">
+    <link rel="alternate" hreflang="pt" href="https://zerocard.pro/pt">
+    <link rel="alternate" hreflang="it" href="https://zerocard.pro/it">
+    <link rel="alternate" hreflang="fr" href="https://zerocard.pro/fr">
     <link rel="alternate" hreflang="x-default" href="https://zerocard.pro/">
     
   
@@ -55,9 +68,22 @@
   <meta name="twitter:title" content="ZeroCard - Плати по миру криптой | Криптокарта USDT, 1% кэшбэк + 5% APR">
   <meta property="og:description" content="Плати по миру с ZeroCard - криптокарта на базе Pionex. Международные платежи и оплата за границей в USDT, 1% кэшбэк, 5% годовых, Apple Pay. Работает в 200+ странах.">
   <meta name="twitter:description" content="Плати по миру с ZeroCard - криптокарта на базе Pionex. Международные платежи и оплата за границей в USDT, 1% кэшбэк, 5% годовых, Apple Pay. Работает в 200+ странах.">
-</head>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110833760', 'ym');
+        ym(110833760, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <!-- /Yandex.Metrika counter -->
+  </head>
 
   <body>
+    <noscript><div><img src="https://mc.yandex.ru/watch/110833760" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

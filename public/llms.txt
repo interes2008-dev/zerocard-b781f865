@@ -4,6 +4,8 @@
 
 ZeroCard lets crypto holders pay for international services, subscriptions, travel, and online shopping in 200+ countries with no monthly fees and no bank account required. Setup takes about 5 minutes via Pionex.
 
+The site is available in 5 languages: English (?lang=en), Russian (?lang=ru), German (?lang=de), Spanish (?lang=es), and Portuguese (?lang=pt).
+
 ## Pages
 
 - [Home](/): Product overview, benefits, comparison, reviews, and FAQ.

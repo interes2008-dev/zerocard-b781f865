@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useI18n, nextLang, LANGS, type Lang } from "@/lib/i18n";
+import { useI18n, langHref } from "@/lib/i18n";
 import { ArrowRight, Calendar, Loader2, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { getSeededPosts } from "@/lib/blogSeed";
+import { LangSwitcher } from "@/components/LangSwitcher";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 
 const CATEGORY_LABELS: Record<string, Record<string, string>> = {
-  crypto: { ru: "🌐 Криптаны", en: "🌐 Crypto Users" },
-  traders: { ru: "📈 Трейдеры", en: "📈 Traders" },
-  pionex: { ru: "🤖 Pionex Боты", en: "🤖 Pionex Bots" },
-  "ai-users": { ru: "✨ ИИ-пользователи", en: "✨ AI Users" },
-  blocked: { ru: "🔒 Заблокированные карты", en: "🔒 Blocked Cards" },
-  nomads: { ru: "🌍 Digital Nomads", en: "🌍 Digital Nomads" },
-  freelancers: { ru: "💼 Фрилансеры", en: "💼 Freelancers" },
-  investors: { ru: "💰 Инвесторы", en: "💰 Investors" },
-  creators: { ru: "🎨 Блогеры & Creatives", en: "🎨 Bloggers & Creatives" },
-  gamers: { ru: "🎮 Геймеры", en: "🎮 Gamers" },
-  ecommerce: { ru: "🛒 Интернет-торговля", en: "🛒 E-commerce" },
-  emigrants: { ru: "🌏 Эмигранты", en: "🌏 Emigrants" },
-  parents: { ru: "👨‍👩‍👧 Родители за рубежом", en: "👨‍👩‍👧 Parents Abroad" },
-  arbitrage: { ru: "⚡ Арбитражники", en: "⚡ Arbitrage Traders" },
+  crypto: { ru: "🌐 Криптаны", en: "🌐 Crypto Users", es: "🌐 Con cripto", pt: "🌐 Com cripto", de: "🌐 Krypto-Nutzer", it: "🌐 Utenti crypto", fr: "🌐 Utilisateurs crypto" },
+  traders: { ru: "📈 Трейдеры", en: "📈 Traders", es: "📈 Traders", pt: "📈 Traders", de: "📈 Trader", it: "📈 Trader", fr: "📈 Traders" },
+  pionex: { ru: "🤖 Pionex Боты", en: "🤖 Pionex Bots", es: "🤖 Bots de Pionex", pt: "🤖 Bots da Pionex", de: "🤖 Pionex Bots", it: "🤖 Bot Pionex", fr: "🤖 Bots Pionex" },
+  "ai-users": { ru: "✨ ИИ-пользователи", en: "✨ AI Users", es: "✨ Usuarios de IA", pt: "✨ Usuários de IA", de: "✨ KI-Nutzer", it: "✨ Utenti IA", fr: "✨ Utilisateurs IA" },
+  blocked: { ru: "🔒 Заблокированные карты", en: "🔒 Blocked Cards", es: "🔒 Tarjetas bloqueadas", pt: "🔒 Cartões bloqueados", de: "🔒 Gesperrte Karten", it: "🔒 Carte bloccate", fr: "🔒 Cartes bloquées" },
+  nomads: { ru: "🌍 Digital Nomads", en: "🌍 Digital Nomads", es: "🌍 Nómadas digitales", pt: "🌍 Nômades digitais", de: "🌍 Digitale Nomaden", it: "🌍 Nomadi digitali", fr: "🌍 Nomades numériques" },
+  freelancers: { ru: "💼 Фрилансеры", en: "💼 Freelancers", es: "💼 Freelancers", pt: "💼 Freelancers", de: "💼 Freelancer", it: "💼 Freelance", fr: "💼 Freelances" },
+  investors: { ru: "💰 Инвесторы", en: "💰 Investors", es: "💰 Inversores", pt: "💰 Investidores", de: "💰 Investoren", it: "💰 Investitori", fr: "💰 Investisseurs" },
+  creators: { ru: "🎨 Блогеры & Creatives", en: "🎨 Bloggers & Creatives", es: "🎨 Creadores", pt: "🎨 Criadores", de: "🎨 Blogger & Kreative", it: "🎨 Blogger e creativi", fr: "🎨 Blogueurs et créatifs" },
+  gamers: { ru: "🎮 Геймеры", en: "🎮 Gamers", es: "🎮 Gamers", pt: "🎮 Gamers", de: "🎮 Gamer", it: "🎮 Gamer", fr: "🎮 Gamers" },
+  ecommerce: { ru: "🛒 Интернет-торговля", en: "🛒 E-commerce", es: "🛒 E-commerce", pt: "🛒 E-commerce", de: "🛒 E-Commerce", it: "🛒 E-commerce", fr: "🛒 E-commerce" },
+  emigrants: { ru: "🌏 Эмигранты", en: "🌏 Emigrants", es: "🌏 Emigrantes", pt: "🌏 Emigrantes", de: "🌏 Auswanderer", it: "🌏 Emigrati", fr: "🌏 Expatriés" },
+  parents: { ru: "👨‍👩‍👧 Родители за рубежом", en: "👨‍👩‍👧 Parents Abroad", es: "👨‍👩‍👧 Padres en el extranjero", pt: "👨‍👩‍👧 Pais no exterior", de: "👨‍👩‍👧 Eltern im Ausland", it: "👨‍👩‍👧 Genitori all'estero", fr: "👨‍👩‍👧 Parents à l'étranger" },
+  arbitrage: { ru: "⚡ Арбитражники", en: "⚡ Arbitrage Traders", es: "⚡ Arbitrajistas", pt: "⚡ Arbitradores", de: "⚡ Arbitrage-Trader", it: "⚡ Arbitraggisti", fr: "⚡ Arbitragistes" },
 };
 
 interface BlogPost {
@@ -36,30 +38,54 @@ interface BlogPost {
   published_at: string;
 }
 
+const EMPTY_STATE: Record<string, string> = {
+  ru: "Пока нет статей",
+  en: "No articles yet",
+  de: "Noch keine Artikel",
+  es: "Todavía no hay artículos",
+  pt: "Ainda não há artigos",
+  it: "Ancora nessun articolo",
+  fr: "Pas encore d'articles",
+};
+
+const BLOG_TITLES: Record<string, string> = {
+  ru: "Блог ZeroCard - плати по миру, крипта, USDT и Pionex",
+  en: "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex",
+  de: "ZeroCard Blog - weltweit zahlen, Krypto, USDT und Pionex",
+  es: "Blog de ZeroCard: paga por el mundo, cripto, USDT y Pionex",
+  pt: "Blog do ZeroCard: pague pelo mundo, cripto, USDT e Pionex",
+  it: "Blog di ZeroCard: paga in tutto il mondo, crypto, USDT e Pionex",
+  fr: "Blog ZeroCard : payer en USDT partout, crypto et Pionex",
+};
+
+const BACK_HOME: Record<string, string> = {
+  ru: "← На главную",
+  en: "← Home",
+  de: "← Zur Startseite",
+  es: "← Al inicio",
+  pt: "← Início",
+  it: "← Alla home",
+  fr: "← Accueil",
+};
+
 function BlogHeader() {
-  const { lang, setLang } = useI18n();
+  const { lang } = useI18n();
   return (
     <header className="sticky top-0 z-50 backdrop-blur-[20px] border-b border-border" style={{ background: "rgba(2,13,31,0.92)" }}>
       <div className="max-w-[1160px] mx-auto px-5 md:px-10 flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2.5 no-underline text-foreground">
+        <Link to={langHref(lang, "/")} className="flex items-center gap-2.5 no-underline text-foreground">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base bg-primary">💳</div>
           <span className="text-lg font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Zero<span className="text-primary">Card</span>
           </span>
         </Link>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setLang(nextLang(lang))}
-            className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all hover:scale-105 border-border bg-secondary"
-            title={`${LANGS.find(l => l.id === lang)?.label} → ${LANGS.find(l => l.id === nextLang(lang))?.label}`}
-          >
-            <span className="text-lg leading-none">{LANGS.find(l => l.id === lang)?.flag}</span>
-          </button>
+          <LangSwitcher />
           <Link
-            to="/"
+            to={langHref(lang, "/")}
             className="text-sm font-medium no-underline transition-colors hidden sm:block text-muted-foreground hover:text-foreground"
           >
-            {lang === "ru" ? "← На главную" : lang === "de" ? "← Zur Startseite" : "← Home"}
+            {BACK_HOME[lang] ?? BACK_HOME.en}
           </Link>
         </div>
       </div>
@@ -72,7 +98,7 @@ export { BlogHeader };
 function estimateReadTime(description: string, lang: string): string {
   const words = description.split(/\s+/).length;
   const min = Math.max(3, Math.round(words / 40));
-  return lang === "ru" ? `${min} мин` : `${min} Min.`.replace("Min.", lang === "de" ? "Min." : "min");
+  return lang === "ru" ? `${min} мин` : lang === "es" ? `${min} min` : lang === "pt" ? `${min} min` : `${min} Min.`.replace("Min.", lang === "de" ? "Min." : "min");
 }
 
 const cardVariants = {
@@ -86,8 +112,8 @@ const cardVariants = {
 
 export default function Blog() {
   const { lang } = useI18n();
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<BlogPost[]>(() => getSeededPosts() ?? []);
+  const [loading, setLoading] = useState(() => getSeededPosts() === null);
   const [autoGenerating, setAutoGenerating] = useState(false);
 
   const fetchPosts = async () => {
@@ -104,29 +130,35 @@ export default function Blog() {
     const todayStr = new Date().toISOString().slice(0, 10);
     const { data: todayPosts } = await supabase
       .from("blog_posts")
-      .select("id")
+      .select("id, lang")
       .gte("published_at", todayStr + "T00:00:00Z")
-      .lte("published_at", todayStr + "T23:59:59Z")
-      .limit(1);
+      .lte("published_at", todayStr + "T23:59:59Z");
 
-    if (!todayPosts || todayPosts.length === 0) {
-      setAutoGenerating(true);
-      try {
-        await supabase.functions.invoke("generate-blog-post", { body: {} });
-        await fetchPosts();
-      } catch (e) {
-        console.error("Auto-generate failed:", e);
+    const SITE_LANGS = ["ru", "en", "de"] as const;
+    const covered = new Set((todayPosts || []).map((p: any) => p.lang));
+    const missing = SITE_LANGS.filter((l) => !covered.has(l));
+
+    if (missing.length === 0) return;
+
+    setAutoGenerating(true);
+    try {
+      // Generate one HOT article per missing language, sequentially to avoid rate limits
+      for (const l of missing) {
+        try {
+          await supabase.functions.invoke("generate-blog-post", { body: { lang: l, hot: true } });
+        } catch (e) {
+          console.error(`Auto-generate failed for ${l}:`, e);
+        }
       }
+      await fetchPosts();
+    } finally {
       setAutoGenerating(false);
     }
   };
 
   useEffect(() => {
     fetchPosts().then(() => autoGenerate());
-    document.title =
-      lang === "ru"
-        ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
-        : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
+    document.title = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
     window.scrollTo(0, 0);
   }, [lang]);
 
@@ -134,9 +166,17 @@ export default function Blog() {
 
   const pageTitle = lang === "ru"
     ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
+    : lang === "es"
+    ? "Blog de ZeroCard: paga por el mundo, cripto, USDT y Pionex"
+    : lang === "pt"
+    ? "Blog do ZeroCard: pague pelo mundo, cripto, USDT e Pionex"
     : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
   const pageDesc = lang === "ru"
     ? "Статьи о том, как платить по миру криптой: международные платежи, оплата за границей, глобальные переводы, USDT, Pionex и жизнь без банковских ограничений."
+    : lang === "es"
+    ? "Guías para pagar por el mundo con cripto: pagos internacionales, gastar en el extranjero, transferencias globales, USDT, Pionex y una vida sin límites bancarios."
+    : lang === "pt"
+    ? "Guias de como pagar pelo mundo com cripto: pagamentos internacionais, gastar no exterior, transferências globais, USDT, Pionex e uma vida sem limites bancários."
     : "Guides on how to pay worldwide with crypto: international payments, spending abroad, global transfers, USDT, Pionex and life without banking limits.";
 
   return (
@@ -144,10 +184,10 @@ export default function Blog() {
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDesc} />
-        <link rel="canonical" href="/blog" />
+        <link rel="canonical" href={`https://zerocard.pro${langHref(lang, "/blog")}`} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
-        <meta property="og:url" content="/blog" />
+        <meta property="og:url" content={`https://zerocard.pro${langHref(lang, "/blog")}`} />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -155,6 +195,14 @@ export default function Blog() {
           name: pageTitle,
           description: pageDesc,
           url: "https://zerocard.pro/blog",
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "ZeroCard", item: "https://zerocard.pro/" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://zerocard.pro/blog" },
+          ],
         })}</script>
       </Helmet>
       <BlogHeader />
@@ -175,6 +223,10 @@ export default function Blog() {
           <p className="text-lg mb-3 text-muted-foreground">
             {lang === "ru"
               ? "Статьи о криптокартах, USDT и финансах"
+              : lang === "es"
+              ? "Artículos sobre tarjetas cripto, USDT y finanzas"
+              : lang === "pt"
+              ? "Artigos sobre cartões cripto, USDT e finanças"
               : "Articles about crypto cards, USDT, and finance"}
           </p>
           {/* Gradient separator */}
@@ -189,7 +241,7 @@ export default function Blog() {
           >
             <Loader2 className="w-5 h-5 animate-spin text-primary" />
             <span className="text-sm text-muted-foreground">
-              {lang === "ru" ? "Генерируем новую статью..." : lang === "de" ? "Neuer Artikel wird erstellt..." : "Generating new article..."}
+              {lang === "ru" ? "Генерируем новую статью..." : lang === "de" ? "Neuer Artikel wird erstellt..." : lang === "es" ? "Generando un nuevo artículo..." : lang === "pt" ? "Gerando um novo artigo..." : "Generating new article..."}
             </span>
           </motion.div>
         )}
@@ -200,7 +252,7 @@ export default function Blog() {
           </div>
         ) : filtered.length === 0 ? (
           <p className="text-center py-20 text-muted-foreground">
-            {lang === "ru" ? "Пока нет статей" : lang === "de" ? "Noch keine Artikel" : "No articles yet"}
+            {EMPTY_STATE[lang] ?? EMPTY_STATE.en}
           </p>
         ) : (
           <div className="grid gap-5">
@@ -213,7 +265,7 @@ export default function Blog() {
                 variants={cardVariants}
               >
                 <Link
-                  to={`/blog/${post.slug}`}
+                  to={langHref(lang, `/blog/${post.slug}`)}
                   className="group block rounded-2xl border overflow-hidden no-underline transition-all duration-300 border-border bg-card hover:border-primary/60"
                   style={{
                     boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
@@ -239,7 +291,7 @@ export default function Blog() {
                       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(post.published_at).toLocaleDateString(
-                          lang === "ru" ? "ru-RU" : lang === "de" ? "de-DE" : "en-US",
+                          lang === "ru" ? "ru-RU" : lang === "de" ? "de-DE" : lang === "es" ? "es-ES" : lang === "pt" ? "pt-BR" : "en-US",
                           { year: "numeric", month: "short", day: "numeric" }
                         )}
                       </span>
@@ -261,7 +313,7 @@ export default function Blog() {
                     </p>
 
                     <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3 text-primary">
-                      {lang === "ru" ? "Читать" : lang === "de" ? "Lesen" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      {lang === "ru" ? "Читать" : lang === "de" ? "Lesen" : lang === "es" ? "Leer" : lang === "pt" ? "Ler" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </Link>

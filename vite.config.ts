@@ -9,6 +9,11 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // For the prerender (SSR) build, bundle deps so Node can run the output
+  // without ESM/CJS named-export interop errors.
+  ssr: {
+    noExternal: true,
+  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {

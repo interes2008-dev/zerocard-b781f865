@@ -12,5 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /blog/admin
 
 Sitemap: https://zerocard.pro/sitemap.xml

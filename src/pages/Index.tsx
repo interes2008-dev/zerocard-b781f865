@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useInView } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useI18n, Lang, LANGS } from "@/lib/i18n";
+import { useI18n, langHref } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon, Copy, Check } from "lucide-react";
+import { BenefitIcon, IconDefs, StepIcon, PainIcon, WalletIcon, type WalletIconName, ReferralIcon } from "@/components/BenefitIcons";
+import { LangSwitcher } from "@/components/LangSwitcher";
 
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
@@ -16,17 +17,72 @@ const AVATAR_IMAGES = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
 
+// Official Pionex channels (verified from Pionex's own Telegram bio, Google Play
+// listing and blog). These are Pionex's channels, labelled as such in the footer.
+const PIONEX_SOCIALS = {
+  telegram: "https://t.me/pionexen",
+  x: "https://x.com/pionex_com",
+  youtube: "https://www.youtube.com/channel/UCyrwYO_v1sFnZnEYk-NWYMw",
+  discord: "https://discord.gg/F5x4kD2XYB",
+  reddit: "https://www.reddit.com/r/Pionex/",
+  facebook: "https://www.facebook.com/pionexglobal",
+  email: "mailto:service@pionex.com",
+};
+
+/* ─── Lightweight reveal-on-scroll (no animation library) ─── */
+function useInViewOnce<T extends HTMLElement>(margin = "-60px") {
+  const ref = useRef<T>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: margin }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [margin]);
+  return { ref, inView };
+}
+
+/* ─── Reusable accessible-tab keyboard handler ─── */
+function handleTabKey<T extends { id: string }>(
+  e: React.KeyboardEvent<HTMLButtonElement>,
+  tabs: T[],
+  activeId: string,
+  setActive: (id: string) => void
+) {
+  const idx = tabs.findIndex((tb) => tb.id === activeId);
+  let next = idx;
+  if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (idx + 1) % tabs.length;
+  else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (idx - 1 + tabs.length) % tabs.length;
+  else if (e.key === "Home") next = 0;
+  else if (e.key === "End") next = tabs.length - 1;
+  else return;
+  e.preventDefault();
+  const nextId = tabs[next].id;
+  setActive(nextId);
+  e.currentTarget.parentElement?.querySelector<HTMLButtonElement>(`[data-tab-id="${nextId}"]`)?.focus();
+}
+
 /* ─── Animated wrapper ─── */
-function FadeIn({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+function FadeIn({ children, className = "", delay = 0, ...rest }: { children: React.ReactNode; className?: string; delay?: number } & React.HTMLAttributes<HTMLDivElement>) {
+  const { ref, inView } = useInViewOnce<HTMLDivElement>();
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}>
+    <div
+      ref={ref}
+      className={`reveal ${inView ? "reveal-in" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}s` }}
+      {...rest}
+    >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -55,8 +111,7 @@ function ScrollProgress() {
 
 /* ─── Count-up number (animates first number found in string) ─── */
 function CountUp({ value }: { value: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-30px" });
+  const { ref, inView } = useInViewOnce<HTMLSpanElement>("-30px");
   const [txt, setTxt] = useState(value);
   useEffect(() => {
     if (!inView) return;
@@ -129,55 +184,12 @@ function useTheme() {
 }
 
 /* ─── Language switcher (dropdown) ─── */
-function LangSwitcher({ compact }: { compact?: boolean }) {
-  const { lang, setLang } = useI18n();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const current = LANGS.find(l => l.id === lang) ?? LANGS[0];
-
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => { document.removeEventListener("mousedown", onDown); document.removeEventListener("keydown", onKey); };
-  }, [open]);
-
-  const size = compact ? 32 : 36;
-  return (
-    <div className="relative" ref={ref}>
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="rounded-lg flex items-center justify-center border transition-all hover:scale-105"
-        style={{ width: size, height: size, borderColor: "var(--border-custom)", background: "var(--bg3)" }}
-        aria-label="Choose language" aria-haspopup="listbox" aria-expanded={open}
-      >
-        <span className={compact ? "text-base leading-none" : "text-lg leading-none"}>{current.flag}</span>
-      </button>
-      {open && (
-        <div className="lang-menu" role="listbox">
-          {LANGS.map(l => (
-            <button key={l.id} role="option" aria-selected={l.id === lang}
-              onClick={() => { setLang(l.id); setOpen(false); }}
-              className={`lang-item ${l.id === lang ? "active" : ""}`}>
-              <span className="text-base leading-none">{l.flag}</span>
-              <span>{l.label}</span>
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 /* ═══════════════════════════════════════════════════
    NAVBAR
    ═══════════════════════════════════════════════════ */
 function Navbar() {
-  const { t, lang, setLang } = useI18n();
+  const { t, lang } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggle } = useTheme();
 
@@ -193,7 +205,7 @@ function Navbar() {
     { label: t.navHow, href: "#how" },
     { label: t.navCompare, href: "#compare" },
     { label: t.navFAQ, href: "#faq" },
-    { label: lang === "ru" ? "Блог" : "Blog", href: "/blog" },
+    { label: lang === "ru" ? "Блог" : "Blog", href: langHref(lang, "/blog") },
   ];
 
   return (
@@ -323,6 +335,54 @@ function HeroSection() {
     fc2a: "Cashback earned", fc2b: "+0.84 USDT on purchase",
     fc3a: "+5% APR", fc3b: "on balance, paid daily",
     trust: "Works everywhere you already pay",
+    },
+    es: {
+    badge: "Pionex Card · Visa & Mastercard · emitida en 5 minutos",
+    h1a: "USDT en tu saldo.", h1b: "Paga con cripto", h1accent: "por todo el mundo",
+    sub: (<>ZeroCard se emite a través del exchange <b>Pionex</b>, con licencia en EE.UU. (MSB) y Singapur. Recargas la tarjeta en USDT, la añades a <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> y pagas en cualquier país donde acepten Visa. Sin banco, sin justificar ingresos, sin esperar el plástico.</>),
+    cta1: "Consigue tu tarjeta gratis", cta2: "Cómo funciona",
+    st1: "países donde pagar", st2: "de reembolso en cada compra", st3: "anual sobre el saldo en USDT", st4: "emisión y mantenimiento",
+    status: "Activada", caption: "a través del exchange pionex · licencia msb (ee.uu.)",
+    fc1a: "Apple Pay · Pagado", fc1b: "Cafetería, Estambul · $4.20",
+    fc2a: "Reembolso acreditado", fc2b: "+0.84 USDT por la compra",
+    fc3a: "+5% anual", fc3b: "sobre el saldo, cada día",
+    trust: "La tarjeta funciona donde ya pagas",
+    },
+    pt: {
+    badge: "Pionex Card · Visa & Mastercard · emitido em 5 minutos",
+    h1a: "USDT no saldo.", h1b: "Pague com cripto", h1accent: "pelo mundo todo",
+    sub: (<>O ZeroCard é emitido pela corretora <b>Pionex</b>, licenciada nos EUA (MSB) e em Singapura. Você recarrega o cartão em USDT, adiciona ao <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> e paga em qualquer país que aceite Visa. Sem banco, sem comprovar renda, sem esperar o plástico.</>),
+    cta1: "Pegue seu cartão grátis", cta2: "Como funciona",
+    st1: "países para pagar", st2: "de cashback em cada compra", st3: "ao ano sobre o saldo em USDT", st4: "emissão e manutenção",
+    status: "Ativado", caption: "pela corretora pionex · licença msb (eua)",
+    fc1a: "Apple Pay · Pago", fc1b: "Cafeteria, Istambul · $4.20",
+    fc2a: "Cashback creditado", fc2b: "+0.84 USDT pela compra",
+    fc3a: "+5% ao ano", fc3b: "sobre o saldo, todo dia",
+    trust: "O cartão funciona onde você já paga",
+    },
+    it: {
+    badge: "Pionex Card · Visa & Mastercard · emessa in 5 minuti",
+    h1a: "USDT sul saldo.", h1b: "Paga in crypto", h1accent: "in tutto il mondo",
+    sub: (<>ZeroCard è emessa tramite l'exchange <b>Pionex</b>, con licenza negli Stati Uniti (MSB) e a Singapore. Ricarichi la carta in USDT, la aggiungi ad <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> e paghi in qualsiasi paese dove accettano Visa. Senza banca, senza prove di reddito, senza aspettare la plastica.</>),
+    cta1: "Ottieni la carta gratis", cta2: "Come funziona",
+    st1: "paesi dove pagare", st2: "di cashback su ogni acquisto", st3: "annuo sul saldo in USDT", st4: "emissione e gestione",
+    status: "Attivata", caption: "tramite l'exchange pionex · licenza msb (usa)",
+    fc1a: "Apple Pay · Pagato", fc1b: "Caffè, Istanbul · $4.20",
+    fc2a: "Cashback accreditato", fc2b: "+0.84 USDT per l'acquisto",
+    fc3a: "+5% annuo", fc3b: "sul saldo, ogni giorno",
+    trust: "La carta funziona dove paghi già",
+    },
+    fr: {
+    badge: "Pionex Card · Visa & Mastercard · émise en 5 minutes",
+    h1a: "USDT sur le solde.", h1b: "Payez en crypto", h1accent: "partout dans le monde",
+    sub: (<>ZeroCard est émise via l'exchange <b>Pionex</b>, licencié aux États-Unis (MSB) et à Singapour. Vous rechargez la carte en USDT, vous l'ajoutez à <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> et vous payez dans tout pays où Visa est acceptée. Sans banque, sans justificatif de revenus, sans attendre le plastique.</>),
+    cta1: "Obtenez votre carte gratuite", cta2: "Comment ça marche",
+    st1: "pays où payer", st2: "de cashback sur chaque achat", st3: "par an sur le solde en USDT", st4: "émission et gestion",
+    status: "Activée", caption: "via l'exchange pionex · licence msb (états-unis)",
+    fc1a: "Apple Pay · Payé", fc1b: "Café, Istanbul · $4.20",
+    fc2a: "Cashback crédité", fc2b: "+0.84 USDT pour l'achat",
+    fc3a: "+5% par an", fc3b: "sur le solde, chaque jour",
+    trust: "La carte fonctionne là où vous payez déjà",
     },
   };
   const c = copies[lang] ?? copies.en;
@@ -458,8 +518,8 @@ function PainSection() {
   const { t } = useI18n();
   const bads = [t.painBad1, t.painBad2, t.painBad3, t.painBad4, t.painBad5];
   const goods = [t.painGood1, t.painGood2, t.painGood3, t.painGood4, t.painGood5];
-  const badIcons = ["🔒", "💸", "⏳", "📉", "🌍"];
-  const goodIcons = ["⚡", "🔄", "✅", "📈", "🌐"];
+  const badIcons = ["locked", "drain", "wait", "declining", "geoblock"] as const;
+  const goodIcons = ["instant", "offset", "ready", "yield", "global"] as const;
 
   return (
     <section className="py-24 px-5 md:px-10">
@@ -483,7 +543,7 @@ function PainSection() {
               {bads.map((text, i) => (
                 <FadeIn key={i} delay={i * 0.04}>
                   <div className="pain-row bad">
-                    <span className="text-xl flex-shrink-0 mt-0.5">{badIcons[i]}</span>
+                    <PainIcon name={badIcons[i]} variant="bad" />
                     <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
                   </div>
                 </FadeIn>
@@ -500,7 +560,7 @@ function PainSection() {
               {goods.map((text, i) => (
                 <FadeIn key={i} delay={i * 0.04}>
                   <div className="pain-row good">
-                    <span className="text-xl flex-shrink-0 mt-0.5">{goodIcons[i]}</span>
+                    <PainIcon name={goodIcons[i]} variant="good" />
                     <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
                   </div>
                 </FadeIn>
@@ -519,13 +579,13 @@ function PainSection() {
 function BenefitsSection() {
   const { t } = useI18n();
   const benefits = [
-    { icon: t.ben1Icon, big: t.ben1Big, title: t.ben1Title, desc: t.ben1Desc, wide: true, featured: true },
-    { icon: t.ben2Icon, big: t.ben2Big, title: t.ben2Title, desc: t.ben2Desc },
-    { icon: t.ben3Icon, title: t.ben3Title, desc: t.ben3Desc },
-    { icon: t.ben4Icon, big: t.ben4Big, title: t.ben4Title, desc: t.ben4Desc },
-    { icon: t.ben5Icon, title: t.ben5Title, desc: t.ben5Desc },
-    { icon: t.ben6Icon, title: t.ben6Title, desc: t.ben6Desc },
-    { icon: t.ben7Icon, title: t.ben7Title, desc: t.ben7Desc },
+    { key: "cashback" as const, big: t.ben1Big, title: t.ben1Title, desc: t.ben1Desc, featured: true, feats: [t.ben1Fa, t.ben1Fb, t.ben1Fc] },
+    { key: "growth" as const, big: t.ben2Big, title: t.ben2Title, desc: t.ben2Desc, feats: [t.ben2Fa, t.ben2Fb, t.ben2Fc] },
+    { key: "tap" as const, title: t.ben3Title, desc: t.ben3Desc, feats: [t.ben3Fa, t.ben3Fb, t.ben3Fc] },
+    { key: "travel" as const, big: t.ben4Big, title: t.ben4Title, desc: t.ben4Desc, feats: [t.ben4Fa, t.ben4Fb, t.ben4Fc] },
+    { key: "shield" as const, title: t.ben5Title, desc: t.ben5Desc, feats: [t.ben5Fa, t.ben5Fb, t.ben5Fc] },
+    { key: "instant" as const, title: t.ben6Title, desc: t.ben6Desc, feats: [t.ben6Fa, t.ben6Fb, t.ben6Fc] },
+    { key: "free" as const, title: t.ben7Title, desc: t.ben7Desc, feats: [t.ben7Fa, t.ben7Fb, t.ben7Fc] },
   ];
 
   return (
@@ -543,17 +603,37 @@ function BenefitsSection() {
         <div className="grid md:grid-cols-3 gap-5 mt-14">
           {benefits.map((b, i) => (
             <FadeIn key={i} delay={i * 0.05} className="flex">
-              <div className={`glass-card glass-card-hover p-7 flex flex-col flex-1 ${b.featured ? "benefit-featured" : ""}`}
-                style={b.wide ? { gridColumn: "span 2" } : {}}>
-                <span className="text-[28px] mb-4 block">{b.icon}</span>
+              <div className={`glass-card glass-card-hover p-7 flex flex-col flex-1 ${b.featured ? "benefit-featured" : ""}`}>
+                <BenefitIcon name={b.key} featured={!!b.featured} />
                 {b.big && (
                   <div className="text-[44px] font-bold leading-none mb-2" style={{ color: "var(--accent-color)", letterSpacing: "-2px", fontFamily: "'Space Grotesk', sans-serif" }}>{b.big}</div>
                 )}
-                <div className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</div>
-                <div className="text-[13px] leading-[1.7] mt-auto" style={{ color: "var(--text2)" }}>{b.desc}</div>
+                <h3 className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</h3>
+                <div className="text-[13px] leading-[1.7]" style={{ color: "var(--text2)" }}>{b.desc}</div>
+                {b.feats && (
+                  <ul className="ben-feats mt-auto">
+                    {b.feats.filter(Boolean).map((fx, k) => (
+                      <li key={k} className="ben-feat"><span className="ben-dot" aria-hidden />{fx}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </FadeIn>
           ))}
+
+          {/* CTA card fills the remaining columns of the last row */}
+          <FadeIn delay={benefits.length * 0.05} className="flex grid-span-2">
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="ben-cta flex-1">
+              <div className="ben-cta__glow" aria-hidden />
+              <div className="relative z-[1] flex flex-col md:flex-row md:items-center gap-6 md:gap-8 h-full">
+                <div className="flex-1">
+                  <h3 className="text-[26px] font-extrabold mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.6px" }}>{t.benCtaTitle}</h3>
+                  <p className="text-[14px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.9)", maxWidth: 460 }}>{t.benCtaDesc}</p>
+                </div>
+                <span className="ben-cta__btn">{t.ctaCTA}</span>
+              </div>
+            </a>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -575,11 +655,11 @@ function HowItWorks() {
   ];
 
   const steps = [
-    { num: "01", title: t.step1Title, desc: t.step1Desc },
-    { num: "02", title: t.step2Title, desc: t.step2Desc },
-    { num: "03", title: t.step3Title, desc: t.step3Desc },
-    { num: "04", title: t.step4Title, desc: t.step4Desc },
-    { num: "05", title: t.step5Title, desc: t.step5Desc },
+    { num: "01", icon: "register" as const, title: t.step1Title, desc: t.step1Desc },
+    { num: "02", icon: "verify" as const, title: t.step2Title, desc: t.step2Desc },
+    { num: "03", icon: "apply" as const, title: t.step3Title, desc: t.step3Desc },
+    { num: "04", icon: "topup" as const, title: t.step4Title, desc: t.step4Desc },
+    { num: "05", icon: "spend" as const, title: t.step5Title, desc: t.step5Desc },
   ];
 
   return (
@@ -594,9 +674,13 @@ function HowItWorks() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="flex gap-2 flex-wrap mt-12 mb-8">
+          <div className="flex gap-2 flex-wrap mt-12 mb-8" role="tablist" aria-label={t.howTitle.replace(/\n/g, " ")}>
             {tabs.map(tab => (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                role="tab" id={`howtab-${tab.id}`} data-tab-id={tab.id}
+                aria-selected={activeTab === tab.id} aria-controls={`howpanel-${tab.id}`}
+                tabIndex={activeTab === tab.id ? 0 : -1}
+                onKeyDown={(e) => handleTabKey(e, tabs, activeTab, setActiveTab)}
                 className={`how-tab ${activeTab === tab.id ? "active" : ""}`}>
                 {tab.label}
               </button>
@@ -605,16 +689,14 @@ function HowItWorks() {
         </FadeIn>
 
         {activeTab === "apply" && (
-          <FadeIn>
+          <FadeIn role="tabpanel" id="howpanel-apply" aria-labelledby="howtab-apply">
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 relative">
-              <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px" style={{ background: "var(--border-custom)" }} />
+              <div className="hidden lg:block absolute top-[27px] left-[10%] right-[10%] h-px" style={{ background: "var(--border-custom)" }} />
               {steps.map((s, i) => (
                 <div key={i} className="text-center px-3">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 relative z-[1] text-xl font-extrabold transition-all group"
-                    style={{ background: "var(--bg2)", border: "2px solid var(--border-custom)", color: "var(--accent-color)", fontFamily: "'Inter', sans-serif" }}
-                    onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--accent-color)"; e.currentTarget.style.background = "var(--accent-bg)"; e.currentTarget.style.boxShadow = "0 0 0 4px var(--accent-bg)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-custom)"; e.currentTarget.style.background = "var(--bg2)"; e.currentTarget.style.boxShadow = "none"; }}>
-                    {s.num}
+                  <div className="relative w-[54px] mx-auto mb-5 z-[1]">
+                    <StepIcon name={s.icon} />
+                    <span className="step-num">{s.num}</span>
                   </div>
                   <div className="text-sm font-bold mb-2">{s.title}</div>
                   <div className="text-[13px] leading-[1.6]" style={{ color: "var(--text2)" }}>{s.desc}</div>
@@ -625,39 +707,39 @@ function HowItWorks() {
         )}
 
         {activeTab === "apple" && (
-          <FadeIn>
+          <FadeIn role="tabpanel" id="howpanel-apple" aria-labelledby="howtab-apple">
             <div className="grid md:grid-cols-3 gap-4">
-              <WalletCard icon="🍎" name={t.appleVisa} type={t.appleVisaType} badge={t.appleVisaRecommended} badgeColor="green"
+              <WalletCard icon="phoneTap" name={t.appleVisa} type={t.appleVisaType} badge={t.appleVisaRecommended} badgeColor="green"
                 steps={[t.appleStep1, t.appleStep2, t.appleStep3, t.appleStep4, t.appleStep5]} />
-              <WalletCard icon="🍎" name={t.appleMC} type={t.appleMCType} badge={t.appleMCAlt} badgeColor="blue"
+              <WalletCard icon="cardAdd" name={t.appleMC} type={t.appleMCType} badge={t.appleMCAlt} badgeColor="blue"
                 steps={[t.appleMCStep1, t.appleMCStep2, t.appleMCStep3, t.appleMCStep4, t.appleMCStep5]} />
-              <WalletCard icon="ℹ️" name={t.appleDevices} type={t.appleDevicesType} featured
+              <WalletCard icon="devices" name={t.appleDevices} type={t.appleDevicesType} featured
                 steps={[t.appleReq1, t.appleReq2, t.appleReq3, t.appleReq4, t.appleReq5]} checkmarks />
             </div>
           </FadeIn>
         )}
 
         {activeTab === "google" && (
-          <FadeIn>
+          <FadeIn role="tabpanel" id="howpanel-google" aria-labelledby="howtab-google">
             <div className="grid md:grid-cols-3 gap-4">
-              <WalletCard icon="📱" name={t.gpTitle} type={t.gpType} badge={t.gpSupported} badgeColor="green"
+              <WalletCard icon="nfcCard" name={t.gpTitle} type={t.gpType} badge={t.gpSupported} badgeColor="green"
                 steps={[t.gpStep1, t.gpStep2, t.gpStep3, t.gpStep4, t.gpStep5]} />
-              <WalletCard icon="📋" name={t.gpReqTitle} type={t.gpReqType} featured
+              <WalletCard icon="checklist" name={t.gpReqTitle} type={t.gpReqType} featured
                 steps={[t.gpReq1, t.gpReq2, t.gpReq3, t.gpReq4]} checkmarks />
-              <WalletCard icon="💡" name={t.gpHowTitle} type={t.gpHowType}
+              <WalletCard icon="tapHand" name={t.gpHowTitle} type={t.gpHowType}
                 steps={[t.gpHow1, t.gpHow2, t.gpHow3, t.gpHow4]} />
             </div>
           </FadeIn>
         )}
 
         {activeTab === "paypal" && (
-          <FadeIn>
+          <FadeIn role="tabpanel" id="howpanel-paypal" aria-labelledby="howtab-paypal">
             <div className="grid md:grid-cols-3 gap-4">
-              <WalletCard icon="🅿️" name={t.ppTitle} type={t.ppType} badge={t.ppSupported} badgeColor="green"
+              <WalletCard icon="online" name={t.ppTitle} type={t.ppType} badge={t.ppSupported} badgeColor="green"
                 steps={[t.ppStep1, t.ppStep2, t.ppStep3, t.ppStep4, t.ppStep5]} />
-              <WalletCard icon="🌐" name={t.ppUsesTitle} type={t.ppUsesType} featured
+              <WalletCard icon="shopping" name={t.ppUsesTitle} type={t.ppUsesType} featured
                 steps={[t.ppUse1, t.ppUse2, t.ppUse3, t.ppUse4, t.ppUse5]} checkmarks />
-              <WalletCard icon="📲" name={t.ppOtherTitle} type={t.ppOtherType}
+              <WalletCard icon="wallets" name={t.ppOtherTitle} type={t.ppOtherType}
                 steps={[t.ppOther1, t.ppOther2, t.ppOther3, t.ppOther4, t.ppOther5]} />
             </div>
           </FadeIn>
@@ -675,14 +757,14 @@ function HowItWorks() {
 
 /* Wallet Card component */
 function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, checkmarks }: {
-  icon: string; name: string; type: string; steps: string[];
+  icon: WalletIconName; name: string; type: string; steps: string[];
   badge?: string; badgeColor?: string; featured?: boolean; checkmarks?: boolean;
 }) {
   return (
     <div className="glass-card glass-card-hover p-6"
       style={featured ? { background: "var(--accent-bg)", borderColor: "var(--accent-border)" } : {}}>
       <div className="flex justify-between items-center mb-5">
-        <span className="text-[30px]">{icon}</span>
+        <WalletIcon name={icon} />
         {badge && (
           <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full"
             style={{
@@ -694,7 +776,7 @@ function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, chec
           </span>
         )}
       </div>
-      <div className="text-[17px] font-bold mb-1" style={featured ? { color: "var(--accent-color)", fontFamily: "'Space Grotesk', sans-serif" } : { fontFamily: "'Space Grotesk', sans-serif" }}>{name}</div>
+      <h3 className="text-[17px] font-bold mb-1" style={featured ? { color: "var(--accent-color)", fontFamily: "'Space Grotesk', sans-serif" } : { fontFamily: "'Space Grotesk', sans-serif" }}>{name}</h3>
       <div className="text-xs mb-4" style={{ color: "var(--text3)" }}>{type}</div>
       <div className="flex flex-col gap-1.5">
         {steps.map((step, i) => (
@@ -714,6 +796,45 @@ function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, chec
 /* ═══════════════════════════════════════════════════
    COMPARE TABLE
    ═══════════════════════════════════════════════════ */
+/* ─── Comparison: status parsing so every cell renders consistently ─── */
+type CmpStatus = "good" | "partial" | "bad" | "none";
+
+function parseCell(raw: string): { status: CmpStatus; text: string } {
+  const v = (raw ?? "").trim();
+  if (v.startsWith("\u2713")) return { status: "good", text: v.slice(1).trim() };
+  if (v.startsWith("\u2715") || v.startsWith("\u2716")) return { status: "bad", text: v.slice(1).trim() };
+  if (v.startsWith("~")) return { status: "partial", text: v.slice(1).trim() };
+  return { status: "none", text: v };
+}
+
+function CmpMark({ status }: { status: CmpStatus }) {
+  if (status === "none") return null;
+  const paths: Record<Exclude<CmpStatus, "none">, React.ReactNode> = {
+    good: <path d="M4.5 10.5 8 14l7.5-8" />,
+    partial: <path d="M5 10h10" />,
+    bad: <path d="M6 6l8 8M14 6l-8 8" />,
+  };
+  return (
+    <span className={`cmp-mark cmp-mark--${status}`} aria-hidden>
+      <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        {paths[status]}
+      </svg>
+    </span>
+  );
+}
+
+function CmpValue({ raw, featured }: { raw: string; featured?: boolean }) {
+  const { status, text } = parseCell(raw);
+  // The ZeroCard column always shows a check: every row there is a win.
+  const st: CmpStatus = featured ? (status === "none" ? "good" : status) : status;
+  return (
+    <span className={`cmp-val cmp-val--${st}`}>
+      <CmpMark status={st} />
+      {text && <span className="cmp-txt">{text}</span>}
+    </span>
+  );
+}
+
 function CompareSection() {
   const { t } = useI18n();
   const rows = [
@@ -728,13 +849,6 @@ function CompareSection() {
     [t.comp9P, t.comp9Z, t.comp9B, t.comp9O],
   ];
 
-  const cellStyle = (val: string) => {
-    if (val.startsWith("✓")) return { color: "var(--green)" };
-    if (val.startsWith("✕")) return { color: "var(--red)", opacity: 0.7 };
-    if (val.startsWith("~")) return { color: "var(--accent-color)" };
-    return {};
-  };
-
   return (
     <section id="compare" className="py-24 px-5 md:px-10 border-t border-b"
       style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
@@ -748,12 +862,17 @@ function CompareSection() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="mt-14 overflow-x-auto rounded-2xl border" style={{ borderColor: "var(--border-custom)" }}>
+          <div className="cmp-wrap mt-14">
             <table className="compare-table">
               <thead>
                 <tr>
                   <th>{t.compParam}</th>
-                  <th className="col-zero">{t.compZero}</th>
+                  <th className="col-zero">
+                    <span className="cmp-th-zero">
+                      <span className="cmp-th-name">{t.compZero}</span>
+                      <span className="cmp-th-badge">{t.compBest}</span>
+                    </span>
+                  </th>
                   <th>{t.compBank}</th>
                   <th>{t.compOther}</th>
                 </tr>
@@ -761,14 +880,32 @@ function CompareSection() {
               <tbody>
                 {rows.map((row, i) => (
                   <tr key={i}>
-                    <td>{row[0]}</td>
-                    <td className="col-zero"><strong>{row[1]}</strong></td>
-                    <td style={cellStyle(row[2])}>{row[2]}</td>
-                    <td style={cellStyle(row[3])}>{row[3]}</td>
+                    <td className="cmp-param">{row[0]}</td>
+                    <td className="col-zero" data-label={t.compZero}><CmpValue raw={row[1]} featured /></td>
+                    <td data-label={t.compBank}><CmpValue raw={row[2]} /></td>
+                    <td data-label={t.compOther}><CmpValue raw={row[3]} /></td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Legend: makes the marks unambiguous */}
+          <div className="cmp-legend">
+            <span className="cmp-legend__item"><CmpMark status="good" />{t.compLegendGood}</span>
+            <span className="cmp-legend__item"><CmpMark status="partial" />{t.compLegendPartial}</span>
+            <span className="cmp-legend__item"><CmpMark status="bad" />{t.compLegendBad}</span>
+          </div>
+
+          {/* Verdict strip */}
+          <div className="cmp-verdict">
+            <div className="cmp-verdict__text">
+              <span className="cmp-verdict__score">9 / 9</span>
+              <span>{t.compWins}</span>
+            </div>
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary cmp-verdict__btn">
+              {t.ctaCTA}
+            </a>
           </div>
         </FadeIn>
       </div>
@@ -940,9 +1077,13 @@ function AudienceSection() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="audience-tabs-grid mt-12 mb-10">
+          <div className="audience-tabs-grid mt-12 mb-10" role="tablist" aria-label={t.audTitle.replace(/\n/g, " ")}>
             {tabs.map(tab => (
               <button key={tab.id} onClick={() => setActiveAud(tab.id)}
+                role="tab" id={`audtab-${tab.id}`} data-tab-id={tab.id}
+                aria-selected={activeAud === tab.id} aria-controls="audpanel"
+                tabIndex={activeAud === tab.id ? 0 : -1}
+                onKeyDown={(e) => handleTabKey(e, tabs, activeAud, setActiveAud)}
                 className={`aud-tab ${activeAud === tab.id ? "active" : ""}`}>
                 {tab.label}
               </button>
@@ -950,13 +1091,13 @@ function AudienceSection() {
           </div>
         </FadeIn>
 
-        <FadeIn key={activeAud}>
+        <FadeIn key={activeAud} role="tabpanel" id="audpanel" aria-labelledby={`audtab-${activeAud}`}>
           <div className="grid md:grid-cols-[1fr_1.6fr] gap-8 items-start">
             {/* Left card */}
             <div className="glass-card p-8 md:sticky md:top-20">
               <span className="text-5xl mb-4 block">{p.icon}</span>
               <div className="aud-tag">{p.tag}</div>
-              <div className="text-[22px] font-extrabold mb-2.5" style={{ letterSpacing: "-0.7px", fontFamily: "'Space Grotesk', sans-serif" }}>{p.title}</div>
+              <h3 className="text-[22px] font-extrabold mb-2.5" style={{ letterSpacing: "-0.7px", fontFamily: "'Space Grotesk', sans-serif" }}>{p.title}</h3>
               <div className="text-sm leading-[1.7] mb-5" style={{ color: "var(--text2)" }}>{p.desc}</div>
               <div className="flex gap-3 flex-wrap mt-5">
                 {p.stats.map((s, i) => (
@@ -1064,9 +1205,9 @@ function FAQSection() {
     { q: t.faq3Q, a: t.faq3A }, { q: t.faq4Q, a: t.faq4A },
     { q: t.faq5Q, a: t.faq5A }, { q: t.faq6Q, a: t.faq6A },
     { q: t.faq7Q, a: t.faq7A }, { q: t.faq8Q, a: t.faq8A },
-    { q: (t as any).faq9Q, a: (t as any).faq9A },
-    { q: (t as any).faq10Q, a: (t as any).faq10A },
-    { q: (t as any).faq11Q, a: (t as any).faq11A },
+    { q: t.faq9Q, a: t.faq9A },
+    { q: t.faq10Q, a: t.faq10A },
+    { q: t.faq11Q, a: t.faq11A },
   ].filter(f => f.q && f.a);
 
   const jsonLd = {
@@ -1127,6 +1268,68 @@ function FAQSection() {
 /* ═══════════════════════════════════════════════════
    CTA
    ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   REFERRAL (Pionex invite program)
+   ═══════════════════════════════════════════════════ */
+function ReferralSection() {
+  const { t } = useI18n();
+  const steps = [
+    { icon: "link" as const, title: t.refS1T, desc: t.refS1D },
+    { icon: "friends" as const, title: t.refS2T, desc: t.refS2D },
+    { icon: "percent" as const, title: t.refS3T, desc: t.refS3D },
+  ];
+  return (
+    <section id="referral" className="py-20 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
+        <FadeIn>
+          <div className="referral-band p-8 md:p-12">
+            <div className="relative z-[1] grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div>
+                <div className="ref-badge mb-5">{t.refBadge}</div>
+                <h2 className="font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(28px, 3.4vw, 42px)", lineHeight: 1.08, letterSpacing: "-0.5px", textWrap: "balance" }}>
+                  {t.refTitle}
+                </h2>
+                <p className="text-[16px] leading-[1.7] mb-6" style={{ color: "rgba(255,255,255,0.92)", maxWidth: 520, textWrap: "pretty" }}>
+                  {t.refDesc}
+                </p>
+                <div className="flex items-center gap-4 mb-7">
+                  <span className="font-extrabold leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(48px, 6vw, 64px)", letterSpacing: "-2px" }}>
+                    {t.refBig}
+                  </span>
+                  <span className="text-sm leading-[1.4]" style={{ color: "rgba(255,255,255,0.88)", maxWidth: 170 }}>
+                    {t.refBigLabel}
+                  </span>
+                </div>
+                <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-on-accent">
+                  {t.refCTA}
+                </a>
+                <p className="mt-5 text-xs leading-[1.6]" style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480 }}>
+                  {t.refNote}
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3.5">
+                {steps.map((s, i) => (
+                  <div key={i} className="ref-step">
+                    <div className="ref-chip"><ReferralIcon name={s.icon} /></div>
+                    <div>
+                      <div className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{s.title}</div>
+                      <div className="text-[13px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.85)" }}>{s.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════════════════════ */
 function CTASection() {
   const { t } = useI18n();
   return (
@@ -1155,29 +1358,146 @@ function CTASection() {
 /* ═══════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════ */
-function Footer() {
-  const { t } = useI18n();
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string; external?: boolean }[] }) {
   return (
-    <footer className="py-8 px-5 md:px-10 border-t flex flex-col md:flex-row justify-between items-center gap-4 flex-wrap"
-      style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
-      <div className="flex items-center gap-2 text-base font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-        <div className="w-[26px] h-[26px] rounded-md flex items-center justify-center text-[13px]" style={{ background: "var(--accent-color)" }}>💳</div>
-        Zero<span style={{ color: "var(--accent-color)" }}>Card</span>
-      </div>
-      {/* Color palette credits */}
-      <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1.5 rounded-lg px-3 py-1.5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-custom)" }}>
-          <div className="w-3.5 h-3.5 rounded-sm flex-shrink-0" style={{ background: "#020d1f", border: "1px solid rgba(255,255,255,0.2)" }} />
-          <span className="text-[11px]" style={{ color: "var(--text3)", fontFamily: "'JetBrains Mono', monospace" }}>#020D1F</span>
+    <div>
+      <div className="ftr-h">{title}</div>
+      <ul className="flex flex-col gap-2.5">
+        {links.map((l, i) => (
+          <li key={i}>
+            <a
+              href={l.href}
+              {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="ftr-link"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Footer() {
+  const { t, lang } = useI18n();
+
+  const product = [
+    { label: t.navBenefits, href: "#benefits" },
+    { label: t.navHow, href: "#how" },
+    { label: t.navCompare, href: "#compare" },
+    { label: t.navAudience, href: "#audience" },
+    { label: t.navFAQ, href: "#faq" },
+  ];
+  const resources = [
+    { label: lang === "ru" ? "Блог" : "Blog", href: langHref(lang, "/blog") },
+    { label: t.footReferral, href: "#referral" },
+    { label: "Pionex", href: "https://www.pionex.com/", external: true },
+    { label: t.footSupport, href: DOCS_URL, external: true },
+  ];
+  const company = [
+    { label: t.footAbout, href: langHref(lang, "/") },
+    { label: t.navGetCard.replace(" →", ""), href: SIGNUP_URL, external: true },
+    { label: t.footContact, href: PIONEX_SOCIALS.email },
+  ];
+
+  const socials = [
+    {
+      label: "Telegram",
+      href: PIONEX_SOCIALS.telegram,
+      icon: (
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden>
+          <path d="M21.9 4.3 18.7 19.4c-.24 1.06-.87 1.32-1.76.82l-4.86-3.58-2.35 2.26c-.26.26-.48.48-.98.48l.35-4.95L18.1 5.4c.39-.35-.08-.54-.6-.2L6.36 12.4l-4.8-1.5c-1.04-.33-1.06-1.04.22-1.54L20.55 2.8c.87-.32 1.63.2 1.35 1.5Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "X",
+      href: PIONEX_SOCIALS.x,
+      icon: (
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden>
+          <path d="M18.9 2.5h3.3l-7.2 8.2 8.5 11.3h-6.7l-5.2-6.9-6 6.9H1.6l7.7-8.8L1.1 2.5h6.8l4.7 6.3 5.5-6.3Zm-1.2 17.8h1.8L6.9 4.3H5l12.7 16Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "YouTube",
+      href: PIONEX_SOCIALS.youtube,
+      icon: (
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden>
+          <path d="M23 12s0-3.3-.42-4.9a2.5 2.5 0 0 0-1.75-1.75C19.2 5 12 5 12 5s-7.2 0-8.83.35A2.5 2.5 0 0 0 1.42 7.1C1 8.7 1 12 1 12s0 3.3.42 4.9a2.5 2.5 0 0 0 1.75 1.75C4.8 19 12 19 12 19s7.2 0 8.83-.35a2.5 2.5 0 0 0 1.75-1.75C23 15.3 23 12 23 12Zm-13 3.2V8.8l5.6 3.2-5.6 3.2Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "Discord",
+      href: PIONEX_SOCIALS.discord,
+      icon: (
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden>
+          <path d="M19.3 5.6A16 16 0 0 0 15 4.3l-.2.4a12 12 0 0 1 3.4 1.7 13 13 0 0 0-11.4 0A12 12 0 0 1 10.2 4.7L10 4.3A16 16 0 0 0 5.7 5.6C3 9.7 2.3 13.6 2.6 17.5a16 16 0 0 0 4.9 2.5l.6-.9c-.8-.3-1.6-.7-2.3-1.2l.6-.4a11 11 0 0 0 9.4 0l.6.4c-.7.5-1.5.9-2.3 1.2l.6.9a16 16 0 0 0 4.9-2.5c.4-4.5-.6-8.4-2.8-11.9ZM9.6 15.1c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9Zm4.8 0c-.9 0-1.7-.9-1.7-1.9s.8-1.9 1.7-1.9 1.7.9 1.7 1.9-.8 1.9-1.7 1.9Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "Reddit",
+      href: PIONEX_SOCIALS.reddit,
+      icon: (
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden>
+          <path d="M22 12a2 2 0 0 0-3.4-1.4 9.8 9.8 0 0 0-5-1.5l.9-4 2.8.6a1.4 1.4 0 1 0 .2-1l-3.3-.7a.4.4 0 0 0-.5.3l-1 4.5a9.8 9.8 0 0 0-5.1 1.5A2 2 0 1 0 3.4 14a3.6 3.6 0 0 0 0 .5c0 2.8 3.4 5.1 7.6 5.1s7.6-2.3 7.6-5.1a3.6 3.6 0 0 0 0-.5A2 2 0 0 0 22 12ZM8 13.4a1.3 1.3 0 1 1 2.6 0 1.3 1.3 0 0 1-2.6 0Zm7.3 3.5c-1 1-3 1-3.3 1s-2.3 0-3.3-1a.4.4 0 0 1 .6-.6c.6.6 1.9.8 2.7.8s2.1-.2 2.7-.8a.4.4 0 1 1 .6.6ZM15 14.7a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z" />
+        </svg>
+      ),
+    },
+    {
+      label: "Facebook",
+      href: PIONEX_SOCIALS.facebook,
+      icon: (
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden>
+          <path d="M14 9.5h2.5l.4-3H14V4.9c0-.9.3-1.4 1.5-1.4H17V.9C16.6.85 15.6.8 14.5.8c-2.3 0-3.8 1.4-3.8 3.9v1.8H8v3h2.7V23h3.3V9.5Z" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <footer className="footer-v2">
+      <div className="max-w-[1160px] mx-auto px-5 md:px-10">
+        <div className="grid gap-10 md:gap-8 md:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1fr] pt-16 pb-12">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-2 text-lg font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base" style={{ background: "var(--accent-color)" }}>💳</div>
+              Zero<span style={{ color: "var(--accent-color)" }}>Card</span>
+            </div>
+            <p className="text-sm leading-[1.7] mb-6 max-w-[330px]" style={{ color: "var(--text2)" }}>{t.footTagline}</p>
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "10px 22px", fontSize: "14px", borderRadius: "10px" }}>
+              {t.navGetCard}
+            </a>
+            <div className="mt-7">
+              <div className="ftr-h" style={{ marginBottom: 12 }}>{t.footOfficial}</div>
+              <div className="flex items-center gap-2.5 flex-wrap">
+                {socials.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="ftr-social">
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <FooterCol title={t.footColProduct} links={product} />
+          <FooterCol title={t.footColResources} links={resources} />
+          <FooterCol title={t.footColCompany} links={company} />
         </div>
-        <span className="text-[11px]" style={{ color: "var(--text3)" }}>+</span>
-        <div className="flex items-center gap-1.5 rounded-lg px-3 py-1.5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-custom)" }}>
-          <div className="w-3.5 h-3.5 rounded-sm flex-shrink-0" style={{ background: "#FF4D1C", border: "1px solid rgba(255,255,255,0.15)" }} />
-          <span className="text-[11px]" style={{ color: "var(--text3)", fontFamily: "'JetBrains Mono', monospace" }}>#FF4D1C</span>
+
+        {/* Bottom bar */}
+        <div className="ftr-bottom flex flex-col md:flex-row md:items-start justify-between gap-4 py-6">
+          <div className="flex items-center gap-4 flex-shrink-0">
+            <span className="text-xs" style={{ color: "var(--text3)" }}>{t.footRights}</span>
+          </div>
+          <p className="text-[11px] leading-[1.7] md:text-right" style={{ color: "var(--text3)", maxWidth: 620 }}>
+            {t.footerNote}
+          </p>
         </div>
-      </div>
-      <div className="text-xs leading-[1.6] max-w-[480px] text-center md:text-right" style={{ color: "var(--text3)" }}>
-        {t.footerNote}
       </div>
     </footer>
   );
@@ -1186,20 +1506,55 @@ function Footer() {
 /* ═══════════════════════════════════════════════════
    DYNAMIC META
    ═══════════════════════════════════════════════════ */
-const OG_LOCALE: Record<string, string> = { ru: "ru_RU", en: "en_US", de: "de_DE" };
+const OG_LOCALE: Record<string, string> = { ru: "ru_RU", en: "en_US", de: "de_DE", es: "es_ES", pt: "pt_BR" };
+
+const OG_IMAGE = "https://zerocard.pro/og-image.png";
 
 function DynamicMeta() {
   const { t, lang } = useI18n();
   useEffect(() => {
     document.title = t.metaTitle;
-    const setMeta = (attr: string, val: string, content: string) => {
-      const el = document.querySelector(`meta[${attr}="${val}"]`) as HTMLMetaElement;
-      if (el) el.content = content;
+    // Update an existing meta tag, or create it if it's missing.
+    const setMeta = (attr: "name" | "property", val: string, content: string) => {
+      let el = document.querySelector(`meta[${attr}="${val}"]`) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, val);
+        document.head.appendChild(el);
+      }
+      el.content = content;
     };
     setMeta("name", "description", t.metaDesc);
     setMeta("property", "og:title", t.metaTitle);
     setMeta("property", "og:description", t.metaDesc);
     setMeta("property", "og:locale", OG_LOCALE[lang] ?? "en_US");
+    setMeta("property", "og:image", OG_IMAGE);
+    setMeta("property", "og:image:alt", t.metaTitle);
+    setMeta("name", "twitter:title", t.metaTitle);
+    setMeta("name", "twitter:description", t.metaDesc);
+    setMeta("name", "twitter:image", OG_IMAGE);
+
+    // og:locale:alternate for every other language (helps i18n discovery).
+    document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((n) => n.remove());
+    Object.entries(OG_LOCALE)
+      .filter(([l]) => l !== lang)
+      .forEach(([, loc]) => {
+        const m = document.createElement("meta");
+        m.setAttribute("property", "og:locale:alternate");
+        m.content = loc;
+        document.head.appendChild(m);
+      });
+
+    // Self-referencing canonical + og:url that match the hreflang target for this language.
+    const url = "https://zerocard.pro" + langHref(lang, "/");
+    let canon = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canon) {
+      canon = document.createElement("link");
+      canon.rel = "canonical";
+      document.head.appendChild(canon);
+    }
+    canon.href = url;
+    setMeta("property", "og:url", url);
   }, [t, lang]);
 
   const schema = {
@@ -1225,6 +1580,8 @@ function DynamicMeta() {
         name: "ZeroCard",
         description: lang === "ru" ? "Криптокарта Pionex - трать USDT везде"
           : lang === "de" ? "Pionex Krypto-Karte: USDT überall ausgeben"
+          : lang === "es" ? "Tarjeta cripto Pionex: gasta USDT en cualquier parte"
+          : lang === "pt" ? "Cartão cripto Pionex: gaste USDT em qualquer lugar"
           : "Pionex crypto card - spend USDT everywhere",
         inLanguage: lang,
         publisher: { "@id": "https://zerocard.pro/#organization" }
@@ -1234,18 +1591,30 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#organization",
         name: "ZeroCard",
         url: "https://zerocard.pro/",
+        logo: "https://zerocard.pro/favicon.png",
+        image: OG_IMAGE,
         description: lang === "ru" ? "Партнёрский проект Pionex Card - криптовалютная дебетовая карта Visa/Mastercard"
           : lang === "de" ? "Partnerprojekt der Pionex Card: Krypto-Debitkarte von Visa und Mastercard"
+          : lang === "es" ? "Proyecto de afiliado de Pionex Card: tarjeta de débito cripto Visa/Mastercard"
+          : lang === "pt" ? "Projeto de afiliado da Pionex Card: cartão de débito cripto Visa/Mastercard"
           : "Pionex Card partner - crypto debit card Visa/Mastercard",
         sameAs: ["https://www.pionex.com/ru/signUp?r=0uHzysLVYQh"]
       },
       {
         "@type": "FinancialProduct",
+        "@id": "https://zerocard.pro/#product",
         name: "ZeroCard by Pionex",
+        image: OG_IMAGE,
+        brand: { "@type": "Brand", name: "Pionex" },
+        category: "Crypto debit card",
         description: lang === "ru"
           ? "Виртуальная дебетовая карта Visa/Mastercard для трат в USDT. 1% кэшбэк, 5% APR на остаток, Apple Pay, Google Pay, 0 годовых сборов."
           : lang === "de"
           ? "Virtuelle Debitkarte von Visa und Mastercard für Zahlungen in USDT. 1% Cashback, 5% Zinsen aufs Guthaben, Apple Pay, Google Pay, keine Jahresgebühr."
+          : lang === "es"
+          ? "Tarjeta de débito virtual Visa/Mastercard para gastar en USDT. 1% de reembolso, 5% anual sobre el saldo, Apple Pay, Google Pay y cero cuota anual."
+          : lang === "pt"
+          ? "Cartão de débito virtual Visa/Mastercard para gastar em USDT. 1% de cashback, 5% ao ano sobre o saldo, Apple Pay, Google Pay e zero anuidade."
           : "Virtual Visa/Mastercard debit card for USDT spending. 1% cashback, 5% APR on balance, Apple Pay, Google Pay, 0 annual fees.",
         url: "https://zerocard.pro/",
         provider: {
@@ -1260,6 +1629,8 @@ function DynamicMeta() {
           priceCurrency: "USD",
           description: lang === "ru" ? "Бесплатный выпуск и обслуживание"
             : lang === "de" ? "Ausgabe und Führung kostenlos"
+            : lang === "es" ? "Emisión y mantenimiento gratis"
+            : lang === "pt" ? "Emissão e manutenção grátis"
             : "Free issuance and maintenance"
         }
       }
@@ -1278,19 +1649,10 @@ const Index = () => {
   <div className="min-h-screen" style={{ overflowX: "clip" }}>
     <ScrollProgress />
     <Helmet>
-      <link rel="canonical" href="https://zerocard.pro/" />
-      <meta property="og:url" content="https://zerocard.pro/" />
       <meta property="og:type" content="website" />
-      <script type="application/ld+json">{JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FinancialProduct",
-        name: "ZeroCard",
-        description: "Virtual crypto payment card powered by Pionex - spend USDT worldwide with 1% cashback and 5% APR on balance.",
-        url: "https://zerocard.pro/",
-        provider: { "@type": "Organization", name: "Pionex" },
-      })}</script>
     </Helmet>
     <DynamicMeta />
+    <IconDefs />
     <Navbar />
     <main>
       <HeroSection />
@@ -1301,6 +1663,7 @@ const Index = () => {
       <CompareSection />
       <AudienceSection />
       <ReviewsSection />
+      <ReferralSection />
       <FAQSection />
       <CTASection />
 
