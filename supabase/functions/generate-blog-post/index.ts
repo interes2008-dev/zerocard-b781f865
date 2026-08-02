@@ -271,13 +271,31 @@ serve(async (req) => {
     const hints = hintsByLang?.[lang] || hintsByLang?.en || [];
     const hintText = hints.map((h) => `- ${h}`).join("\n");
 
-    // HOT / trending topic booster - injected into system prompt when hot=true
+    // HOT / trending topic booster - injected into system prompt when hot=true.
+    // Trend anchors refreshed from 2026 market data (stablecoin card volumes, Visa/Mastercard
+    // stablecoin programs, USDT dominance in card settlement, blocked cards, nomad payments).
+    const HOT_ANGLES = [
+      "stablecoin cards becoming a mainstream payment standard in 2026",
+      "USDT settling the majority of crypto card spending",
+      "crypto card volumes growing triple digits year over year",
+      "Visa and Mastercard expanding stablecoin card programs across 50+ countries",
+      "paying for AI subscriptions (ChatGPT, Claude, Midjourney) with crypto",
+      "what to do when a bank card gets blocked abroad",
+      "spending Pionex bot profits without touching a bank",
+      "earning yield on an idle USDT balance while still spending it",
+      "cheap cross-border money transfers with stablecoins instead of SWIFT",
+      "travel and digital nomad payments in 200+ countries",
+    ];
+    const dayIdx = Math.floor(Date.now() / 86400000);
+    const hotAngle = HOT_ANGLES[dayIdx % HOT_ANGLES.length];
+
     const hotBoost = hot
-      ? (lang === "ru"
-        ? `\n\nРЕЖИМ ГОРЯЧЕЙ ТЕМЫ (hot=true):\n- Тема должна быть максимально актуальной прямо сейчас (${today.toISOString().slice(0,10)}): свежие тренды крипты, USDT, Pionex, ботов, стейблкоинов, санкций и блокировок карт, международных платежей в ${today.getFullYear()}.\n- Заголовок цепляющий, кликабельный, с цифрой или острым вопросом.\n- Пиши как топовый автор трендового Telegram-канала: живо, с примерами и конкретикой.\n- Приведи 1-2 актуальных факта или числа из ${today.getFullYear()} (без выдуманной статистики).`
-        : lang === "de"
-        ? `\n\nHOT-TOPIC-MODUS (hot=true):\n- Wähl ein Thema, das gerade jetzt (${today.toISOString().slice(0,10)}) heiß ist: aktuelle Krypto-Trends, USDT, Pionex, Bots, Stablecoins, Kartensperren, internationale Zahlungen in ${today.getFullYear()}.\n- Titel klickstark, mit einer Zahl oder scharfen Frage.\n- Schreib wie ein Top-Autor in einem trendigen Krypto-Newsletter: lebendig, konkret, mit Beispielen.\n- Nenn 1-2 aktuelle Fakten oder Zahlen aus ${today.getFullYear()} (keine erfundenen Statistiken).`
-        : `\n\nHOT TOPIC MODE (hot=true):\n- Pick a topic that is trending right now (${today.toISOString().slice(0,10)}): fresh crypto trends, USDT, Pionex, bots, stablecoins, card blocks and sanctions, international payments in ${today.getFullYear()}.\n- Title must be catchy and clickable, with a number or a sharp question.\n- Write like a top author of a trending crypto newsletter: lively, with concrete examples.\n- Include 1-2 real, current facts or numbers from ${today.getFullYear()} (do not invent statistics).`)
+      ? `\n\nHOT TOPIC MODE (hot=true):
+- Today is ${today.toISOString().slice(0, 10)}. The topic must feel current for ${today.getFullYear()}.
+- Trend anchor for this article: "${hotAngle}". Build the topic around it, adapted to the target audience.
+- The title must be catchy and clickable: a number, a sharp question or a concrete promise.
+- Write like a top author of a trending crypto newsletter: lively, concrete, with real examples.
+- Include 1-2 realistic, current facts or numbers. Never invent precise statistics you cannot support; prefer approximations ("about", "roughly").`
       : "";
 
     const typographyRules = `
