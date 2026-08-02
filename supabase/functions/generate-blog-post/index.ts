@@ -335,82 +335,80 @@ SEO RULES (mandatory, primary keyword: "плати по миру" / "pay worldwi
 - Add at least one internal link to /blog or the homepage / with anchor text containing "плати по миру" / "pay worldwide" or one of the LSI phrases. Use markdown link syntax.
 - Keep the reading natural and helpful (Google Helpful Content). Never sacrifice clarity for keywords.`;
 
-    const systemPromptDe = `Du bist Texter für den ZeroCard-Blog (zerocard.pro). ZeroCard ist eine Visa-Krypto-Karte auf Pionex-Basis mit 1% Cashback und 5% Zinsen aufs USDT-Guthaben.
-Schreib Artikel für die Zielgruppe "${category.de}". Der Ton ist lebendig und fachkundig, keine Werbesprache. Erwähne ZeroCard 2 bis 3 Mal beiläufig.
-Am Ende IMMER einen CTA-Absatz anhängen: "ZeroCard in 5 Minuten kostenlos holen: zerocard.pro"
-Schreib ausschließlich auf Deutsch, in der Du-Form.
+    // Per-language meta: language name, audience label, CTA line and localized extras.
+    const LANG_META: Record<string, { name: string; audience: string; cta: string; extra: string }> = {
+      ru: {
+        name: "Russian (русский)",
+        audience: category.ru,
+        cta: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro",
+        extra: 'Обращайся к читателю на "ты". Никаких кавычек-ёлочек, только прямые.',
+      },
+      en: {
+        name: "English",
+        audience: category.en,
+        cta: "Get your ZeroCard for free in 5 minutes: zerocard.pro",
+        extra: "Use simple, direct American English. Avoid corporate filler.",
+      },
+      de: {
+        name: "German (Deutsch)",
+        audience: category.de,
+        cta: "ZeroCard in 5 Minuten kostenlos holen: zerocard.pro",
+        extra:
+          'Schreib in der Du-Form. Verbotene Floskeln: "Darüber hinaus", "Des Weiteren", "Zusammenfassend lässt sich sagen", "In der heutigen Zeit". Nimm lockere Anschlüsse: "und", "dazu", "also", "übrigens".',
+      },
+      es: {
+        name: "Spanish (español)",
+        audience: category.en,
+        cta: "Consigue tu ZeroCard gratis en 5 minutos: zerocard.pro",
+        extra: 'Tutea al lector. Evita frases hechas como "En el mundo actual" o "En conclusión".',
+      },
+      pt: {
+        name: "Brazilian Portuguese (português do Brasil)",
+        audience: category.en,
+        cta: "Peça seu ZeroCard de graça em 5 minutos: zerocard.pro",
+        extra: 'Fale de "você". Evite clichês como "Nos dias de hoje" ou "Em conclusão".',
+      },
+      it: {
+        name: "Italian (italiano)",
+        audience: category.en,
+        cta: "Attiva ZeroCard gratis in 5 minuti: zerocard.pro",
+        extra: 'Dai del "tu" al lettore. Evita frasi fatte come "Al giorno d\'oggi" o "In conclusione".',
+      },
+      fr: {
+        name: "French (français)",
+        audience: category.en,
+        cta: "Obtiens ta ZeroCard gratuitement en 5 minutes : zerocard.pro",
+        extra: 'Tutoie le lecteur. Évite les clichés comme "De nos jours" ou "En conclusion".',
+      },
+    };
+
+    const meta = LANG_META[lang] ?? LANG_META.en;
+
+    const systemPrompt = `You are a professional copywriter for the ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and up to 5% APR on the USDT balance.
+
+CRITICAL: write the ENTIRE output (title, description, content) in ${meta.name}. Do not mix languages. Do not translate literally from English - write natively.
+
+Target audience: "${meta.audience}". Tone: lively, expert, never salesy. Mention ZeroCard organically 2-3 times.
+At the very end ALWAYS add a CTA paragraph: "${meta.cta}"
+Language note: ${meta.extra}
 ${typographyRules}
 
-ZUSÄTZLICHE REGELN FÜR DEUTSCH:
-- Verbotene Floskeln: "Darüber hinaus", "Des Weiteren", "Zusammenfassend lässt sich sagen", "In der heutigen Zeit", "Abschließend". Nimm stattdessen lockere Anschlüsse: "und", "dazu", "also", "übrigens", "kurz gesagt".
-- Kein Gedankenstrich (- -). Nutz Komma, Punkt, Doppelpunkt oder Klammern.
-- Keine Emojis, nur gerade Anführungszeichen.
-- Als Hauptkeyword dient "weltweit bezahlen". Bau es natürlich ein, im Titel, in der Description, im ersten Absatz und in einer Zwischenüberschrift.
-- Verwandte Begriffe: "Auslandszahlungen", "im Ausland bezahlen", "Karte für weltweite Zahlungen", "globale Überweisungen", "sicher im Ausland zahlen".
-
-ANTWORTFORMAT, strikt JSON:
+RESPONSE FORMAT: strictly JSON, no markdown wrapper:
 {
-  "title": "Titel des Artikels (kurz, 5 bis 9 Wörter, macht neugierig)",
-  "description": "Kurze Beschreibung in 1 bis 2 Sätzen für die Vorschau",
-  "content": "Vollständiger Artikeltext als Markdown. Länge 800 bis 1200 Wörter. Halte dich an die Typografie-Regeln oben."
-}`;
+  "title": "Article title in ${meta.name} (short, 5-9 words, catchy)",
+  "description": "Brief 1-2 sentence preview description in ${meta.name}",
+  "content": "Full article in markdown, written in ${meta.name}. Length 800-1200 words. Follow the typography rules above."
+}` + hotBoost;
 
-    const systemPromptRuEn =
-      lang === "ru"
-        ? `Ты: профессиональный копирайтер для блога ZeroCard (zerocard.pro). ZeroCard: криптокарта Visa на базе Pionex с 1% кэшбэком и 5% APR на остаток USDT.
-Пиши статьи для аудитории "${category.ru}". Стиль: живой, экспертный, не рекламный. Упоминай ZeroCard органично 2-3 раза.
-В конце статьи ВСЕГДА добавь абзац-CTA: "Оформить ZeroCard бесплатно за 5 минут: zerocard.pro"
-${typographyRules}
+    const userPrompt = `Write a new article for the "${meta.audience}" category, entirely in ${meta.name}.
 
-ФОРМАТ ОТВЕТА: строго JSON:
-{
-  "title": "Заголовок статьи (короткий, 5-9 слов, цепляющий)",
-  "description": "Краткое описание 1-2 предложения для превью",
-  "content": "Полный текст статьи в формате markdown. Длина 800-1200 слов. Следуй правилам типографики выше."
-}`
-        : `You are a professional copywriter for ZeroCard blog (zerocard.pro). ZeroCard is a Visa crypto card powered by Pionex with 1% cashback and 5% APR on USDT balance.
-Write articles for the "${category.en}" audience. Style: engaging, expert, not salesy. Mention ZeroCard organically 2-3 times.
-At the end ALWAYS add a CTA paragraph: "Get your ZeroCard for free in 5 minutes: zerocard.pro"
-${typographyRules}
-
-RESPONSE FORMAT: strictly JSON:
-{
-  "title": "Article title (short, 5-9 words, catchy)",
-  "description": "Brief 1-2 sentence description for preview",
-  "content": "Full article text in markdown format. Length 800-1200 words. Follow the typography rules above."
-}`;
-
-    const systemPrompt = (lang === "de" ? systemPromptDe : systemPromptRuEn) + hotBoost;
-
-    const userPromptDe = `Schreib einen neuen Artikel für die Kategorie "${category.de}".
-Hier ein paar Themenbeispiele als Inspiration, denk dir aber ein eigenes aus:
+Topic examples for inspiration (create your own unique angle, do not copy):
 ${hintText}
 
-Diese Titel gibt es schon, wiederhol sie NICHT:
-- ${existingTitles || "keine"}
-
-Antworte NUR mit JSON, ohne Markdown-Umrandung.`;
-
-    const userPromptRuEn =
-      lang === "ru"
-        ? `Напиши новую статью для категории "${category.ru}".
-Вот примеры тем (вдохновляйся, но придумай свою уникальную):
-${hintText}
-
-НЕ повторяй эти заголовки (уже опубликованы):
-- ${existingTitles || "нет"}
-
-Ответь ТОЛЬКО JSON без markdown-обёртки.`
-        : `Write a new article for the "${category.en}" category.
-Here are topic examples (use as inspiration, but create your own unique topic):
-${hintText}
-
-Do NOT repeat these titles (already published):
+Do NOT repeat these already published titles:
 - ${existingTitles || "none"}
 
-Reply with ONLY JSON without markdown wrapping.`;
-
-    const userPrompt = lang === "de" ? userPromptDe : userPromptRuEn;
+Reply with ONLY the JSON object.`;
 
     const aiResponse = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
