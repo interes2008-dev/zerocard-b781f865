@@ -201,21 +201,6 @@ export default function Blog() {
           <div className="h-px mb-10 rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.1))" }} />
         </motion.div>
 
-<<<<<<< HEAD
-        {autoGenerating && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-3 mb-8 p-4 rounded-xl border border-primary/30 bg-primary/5"
-          >
-            <Loader2 className="w-5 h-5 animate-spin text-primary" />
-            <span className="text-sm text-muted-foreground">
-              {lang === "ru" ? "Генерируем новую статью..." : lang === "de" ? "Neuer Artikel wird erstellt..." : lang === "es" ? "Generando un nuevo artículo..." : lang === "pt" ? "Gerando um novo artigo..." : "Generating new article..."}
-            </span>
-          </motion.div>
-        )}
-=======
->>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
