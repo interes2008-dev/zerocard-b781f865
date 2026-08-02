@@ -112,9 +112,14 @@ const cardVariants = {
 
 export default function Blog() {
   const { lang } = useI18n();
+<<<<<<< HEAD
   const [posts, setPosts] = useState<BlogPost[]>(() => getSeededPosts() ?? []);
   const [loading, setLoading] = useState(() => getSeededPosts() === null);
   const [autoGenerating, setAutoGenerating] = useState(false);
+=======
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+>>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -126,6 +131,7 @@ export default function Blog() {
     setLoading(false);
   };
 
+<<<<<<< HEAD
   const autoGenerate = async () => {
     const todayStr = new Date().toISOString().slice(0, 10);
     const { data: todayPosts } = await supabase
@@ -159,6 +165,14 @@ export default function Blog() {
   useEffect(() => {
     fetchPosts().then(() => autoGenerate());
     document.title = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
+=======
+  useEffect(() => {
+    fetchPosts();
+    document.title =
+      lang === "ru"
+        ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
+        : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
+>>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
     window.scrollTo(0, 0);
   }, [lang]);
 
@@ -208,7 +222,6 @@ export default function Blog() {
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">
-        {/* Header with gradient accent */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -233,6 +246,7 @@ export default function Blog() {
           <div className="h-px mb-10 rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.1))" }} />
         </motion.div>
 
+<<<<<<< HEAD
         {autoGenerating && (
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
@@ -245,6 +259,8 @@ export default function Blog() {
             </span>
           </motion.div>
         )}
+=======
+>>>>>>> ceeeee35cb7ed71e6e2b0522a118e5c0507655b0
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
