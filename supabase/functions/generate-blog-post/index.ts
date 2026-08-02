@@ -215,7 +215,7 @@ serve(async (req) => {
     // "all" mode: generate one HOT article for every supported language in one call
     const allLangs = body.all_langs === true || body.all_langs === "true";
 
-    const LANGS = ["ru", "en", "de"] as const;
+    const LANGS = ["ru", "en", "de", "es", "pt", "it", "fr"] as const;
 
     if (allLangs) {
       const results: any[] = [];
