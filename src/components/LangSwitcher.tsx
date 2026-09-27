@@ -12,6 +12,8 @@ export function LangSwitcher({ compact }: { compact?: boolean }) {
 
   const switchTo = (id: Lang) => {
     if (typeof window !== "undefined") {
+      // Remember the choice for a year so language auto-select never overrides it.
+      document.cookie = `zc_lang=${id}; path=/; max-age=31536000; SameSite=Lax`;
       window.location.href = langHref(id, pathWithoutLang(window.location.pathname));
     }
   };

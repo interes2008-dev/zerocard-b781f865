@@ -384,8 +384,8 @@ const de = {
   footerNote: "Unabhängige Partnerseite, kein offizielles Pionex-Angebot. Alle Links enthalten einen Partner-Referral-Code. Konditionen und Gebühren können sich ändern, den aktuellen Stand findest du auf pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "ZeroCard: weltweit mit USDT zahlen, 1% Cashback, 5% Zinsen",
-  metaDesc: "Virtuelle Visa/Mastercard für USDT über Pionex. Zahlen in 200+ Ländern, Apple Pay und Google Pay, 1% Cashback, 5% Zinsen aufs Guthaben, keine Jahresgebühr.",
+  metaTitle: "Pionex Card: USDT im Ausland ausgeben, 1% Cashback, 5% Zinsen",
+  metaDesc: "So gibst du USDT mit der Pionex Card im Ausland und bei Online-Diensten aus: wo sie funktioniert, Gebühren bei Visa und Mastercard, bis zu 1% Cashback, 5% Zinsen aufs Guthaben.",
 };
 
 export default de;

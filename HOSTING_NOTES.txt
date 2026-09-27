@@ -79,3 +79,20 @@ AI-поиск и IndexNow
 - IndexNow: файл-ключ 8049633624651009799fdbe839982dd9.txt лежит в корне dist.
   После заливки новой сборки запусти:  npm run indexnow
   (отправит все URL из sitemap в Bing и Яндекс).
+
+PREVIEW IN X / TELEGRAM / VK
+- Each language has its own preview image: public/og/zerocard-<lang>-v4.jpg (1200x630 JPEG, ~70 KB).
+- Articles use the image of their language. Source template: scratchpad script make.mjs (rendered HTML).
+- To change the image later, save it under a NEW name (-v5.jpg) and update ogImage in
+  scripts/prerender.mjs and ogImageFor in src/pages/Index.tsx. X caches previews by URL for about a week,
+  a new file name forces a fresh fetch.
+- twitter:site was removed: @zerocard is not the project's account. Add your own handle there if you get one.
+
+LANGUAGE AUTO-SELECT
+- Script at the top of index.html <head>. On /, /blog and /about (Russian hub pages) a first-time visitor
+  goes to the browser language: de/es/pt/it/fr/en. Russian and CIS languages stay on Russian,
+  any other language goes to /en.
+- Articles are never redirected (the visitor picked that exact page, usually from search).
+- Bots and link-preview crawlers are never redirected, so Google/Yandex still index the Russian pages.
+- Choosing a language in the switcher sets cookie zc_lang for a year; that choice always wins.
+- To open the Russian root without redirect for testing: https://zerocard.pro/?stay

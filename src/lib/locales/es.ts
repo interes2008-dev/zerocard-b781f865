@@ -384,8 +384,8 @@ const es = {
   footerNote: "Sitio de afiliado independiente, no es un recurso oficial de Pionex. Todos los enlaces llevan un código de referido de socio. Las condiciones y comisiones pueden cambiar, consulta la información actual en pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "ZeroCard: paga con USDT por el mundo, 1% de reembolso",
-  metaDesc: "Visa/Mastercard virtual para USDT con Pionex. Paga en más de 200 países, Apple Pay y Google Pay, 1% de reembolso, 5% anual sobre el saldo, sin cuota anual.",
+  metaTitle: "Tarjeta Pionex: gasta USDT en el extranjero, 1% de reembolso",
+  metaDesc: "Cómo gastar USDT con la tarjeta Pionex fuera de tu país y en servicios online: dónde funciona, comisiones de Visa y Mastercard, hasta 1% de reembolso, 5% anual sobre el saldo.",
 };
 
 export default es;

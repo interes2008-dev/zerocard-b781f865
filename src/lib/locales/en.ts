@@ -384,8 +384,8 @@ const en = {
   footerNote: "Independent partner site. Not an official Pionex resource. All links contain partner referral code. Terms and fees may change, check current info at pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "ZeroCard: Pay Worldwide with USDT, 1% Cashback, 5% APR",
-  metaDesc: "Virtual Visa/Mastercard for USDT, powered by Pionex. Spend in 200+ countries, Apple Pay and Google Pay, 1% cashback, 5% APR on balance, no annual fee.",
+  metaTitle: "Pionex Card: spend USDT abroad, 1% cashback, 5% APR",
+  metaDesc: "How to spend USDT with the Pionex card abroad and on foreign services: where it works, Visa and Mastercard fees, up to 1% cashback, 5% APR on your balance.",
 };
 
 export default en;

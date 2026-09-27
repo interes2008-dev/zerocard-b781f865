@@ -419,7 +419,7 @@ export default function BlogPost() {
           "@type": "Article",
           headline: post.title,
           description: post.description,
-          image: "https://zerocard.pro/og-image.png",
+          image: `https://zerocard.pro/og/zerocard-${lang}-v4.jpg`,
           url: fullUrl,
           datePublished: post.published_at,
           dateModified: updatedAt,

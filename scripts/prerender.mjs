@@ -27,6 +27,7 @@ const BLOG_META = {
   fr: { title: "Blog ZeroCard : carte Pionex, bots de trading et USDT", desc: "Guides sur Pionex : la carte crypto et où elle fonctionne, grid bot, frais, avis et dépenser des USDT à l'étranger." },
 };
 
+const ogImage = (lang) => `${BASE}/og/zerocard-${LANGS.includes(lang) ? lang : "en"}-v4.jpg`;
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const inlineJson = (obj) => JSON.stringify(obj).replace(/</g, "\\u003c");
 const setMeta = (doc, re, rep) => doc.replace(re, rep);
@@ -47,6 +48,12 @@ function buildDoc({ lang, html, title, description, canonical, ogType, inlineScr
   // Per-language housekeeping: the template head is Russian.
   doc = setMeta(doc, /<meta name="language" content="[^"]*">/, `<meta name="language" content="${LANG_NAME[lang] ?? "English"}">`);
   doc = setMeta(doc, /<meta property="og:image:alt" content="[^"]*">/, `<meta property="og:image:alt" content="${esc(title)}">`);
+  doc = setMeta(doc, /<meta name="twitter:image:alt" content="[^"]*">/, `<meta name="twitter:image:alt" content="${esc(title)}">`);
+  // Localized preview image (1200x630 JPEG). The versioned file name makes X/Telegram fetch it fresh.
+  const img = ogImage(lang);
+  doc = setMeta(doc, /<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${img}">`);
+  doc = setMeta(doc, /<meta property="og:image:secure_url" content="[^"]*">/, `<meta property="og:image:secure_url" content="${img}">`);
+  doc = setMeta(doc, /<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${img}">`);
 
   // Rewrite hreflang so every page points at its own equivalents
   // (blog pages must alternate to blog pages, not to the homepages).

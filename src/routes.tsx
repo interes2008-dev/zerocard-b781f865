@@ -1,13 +1,34 @@
-import { lazy, Suspense, Fragment } from "react";
+import { lazy, Suspense, Fragment, type ComponentType } from "react";
 import { Routes, Route } from "react-router-dom";
 import { NON_DEFAULT_LANGS } from "@/lib/i18n";
 import Index from "./pages/Index";
 
-const Blog = lazy(() => import("./pages/Blog"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
+// React.lazy suspends on first render even when the chunk is already loaded,
+// so preloaded pages render their component directly.
+function lazyWithPreload(load: () => Promise<{ default: ComponentType }>) {
+  let Loaded: ComponentType | null = null;
+  const Lazy = lazy(load);
+  const Page = () => (Loaded ? <Loaded /> : <Lazy />);
+  Page.preload = () => load().then((m) => { Loaded = m.default; });
+  return Page;
+}
+const Blog = lazyWithPreload(() => import("./pages/Blog"));
+const BlogPost = lazyWithPreload(() => import("./pages/BlogPost"));
+const About = lazyWithPreload(() => import("./pages/About"));
 const BlogAdmin = lazy(() => import("./pages/BlogAdmin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const About = lazy(() => import("./pages/About"));
+
+/**
+ * Load the lazy page chunk for a prerendered URL before hydration, so React
+ * hydrates the server markup in one pass instead of suspending (error #421).
+ */
+export function preloadRoute(pathname: string): Promise<unknown> {
+  const p = pathname.replace(/^\/(en|de|es|pt|it|fr)(?=\/|$)/, "") || "/";
+  if (p === "/about") return About.preload();
+  if (p === "/blog") return Blog.preload();
+  if (p.startsWith("/blog/") && p !== "/blog/admin") return BlogPost.preload();
+  return Promise.resolve();
+}
 
 const RouteFallback = () => (
   <div style={{ minHeight: "100vh", background: "var(--bg, #020d1f)" }} aria-hidden />

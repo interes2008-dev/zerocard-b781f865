@@ -1629,9 +1629,10 @@ function Footer() {
 /* ═══════════════════════════════════════════════════
    DYNAMIC META
    ═══════════════════════════════════════════════════ */
-const OG_LOCALE: Record<string, string> = { ru: "ru_RU", en: "en_US", de: "de_DE", es: "es_ES", pt: "pt_BR" };
+const OG_LOCALE: Record<string, string> = { ru: "ru_RU", en: "en_US", de: "de_DE", es: "es_ES", pt: "pt_BR", it: "it_IT", fr: "fr_FR" };
 
-const OG_IMAGE = "https://zerocard.pro/og-image.png";
+// Localized 1200x630 preview images; bump the version in the file name to force X/Telegram to refetch.
+const ogImageFor = (lang: string) => `https://zerocard.pro/og/zerocard-${OG_LOCALE[lang] ? lang : "en"}-v4.jpg`;
 
 function DynamicMeta() {
   const { t, lang } = useI18n();
@@ -1651,11 +1652,12 @@ function DynamicMeta() {
     setMeta("property", "og:title", t.metaTitle);
     setMeta("property", "og:description", t.metaDesc);
     setMeta("property", "og:locale", OG_LOCALE[lang] ?? "en_US");
-    setMeta("property", "og:image", OG_IMAGE);
+    setMeta("property", "og:image", ogImageFor(lang));
     setMeta("property", "og:image:alt", t.metaTitle);
     setMeta("name", "twitter:title", t.metaTitle);
     setMeta("name", "twitter:description", t.metaDesc);
-    setMeta("name", "twitter:image", OG_IMAGE);
+    setMeta("name", "twitter:image", ogImageFor(lang));
+    setMeta("name", "twitter:image:alt", t.metaTitle);
 
     // og:locale:alternate for every other language (helps i18n discovery).
     document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((n) => n.remove());
@@ -1715,7 +1717,7 @@ function DynamicMeta() {
         name: "ZeroCard",
         url: "https://zerocard.pro/",
         logo: "https://zerocard.pro/favicon.png",
-        image: OG_IMAGE,
+        image: ogImageFor(lang),
         description: lang === "ru" ? "Партнёрский проект о карте Pionex: криптовалютная дебетовая Visa и Mastercard"
           : lang === "de" ? "Partnerprojekt der Pionex Card: Krypto-Debitkarte von Visa und Mastercard"
           : lang === "es" ? "Proyecto de afiliado de Pionex Card: tarjeta de débito cripto Visa/Mastercard"
@@ -1726,7 +1728,7 @@ function DynamicMeta() {
         "@type": "FinancialProduct",
         "@id": "https://zerocard.pro/#product",
         name: "ZeroCard by Pionex",
-        image: OG_IMAGE,
+        image: ogImageFor(lang),
         brand: { "@type": "Brand", name: "Pionex" },
         category: "Crypto debit card",
         description: lang === "ru"
