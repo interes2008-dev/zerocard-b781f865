@@ -4,6 +4,8 @@ import { useI18n, langHref } from "@/lib/i18n";
 import { ArrowRight, Menu, X, Sun, Moon, Copy, Check } from "lucide-react";
 import { BenefitIcon, IconDefs, StepIcon, PainIcon, WalletIcon, type WalletIconName, ReferralIcon } from "@/components/BenefitIcons";
 import { LangSwitcher } from "@/components/LangSwitcher";
+import { Link } from "react-router-dom";
+import { STATIC_POSTS } from "@/lib/staticPosts";
 
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
@@ -14,7 +16,12 @@ import avatar6 from "@/assets/avatar-6.png";
 
 const AVATAR_IMAGES = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
 
-const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
+// Pionex UI locale: Russian for /, English for every other language version.
+const signupUrlFor = (lang: string) => `https://www.pionex.com/${lang === "ru" ? "ru" : "en"}/signUp?r=0uHzysLVYQh`;
+function useSignupUrl() {
+  const { lang } = useI18n();
+  return signupUrlFor(lang);
+}
 const DOCS_URL = "https://support.pionex.com/hc/en-us/sections/47904768884633-Pionex-Card";
 
 // Official Pionex channels (verified from Pionex's own Telegram bio, Google Play
@@ -189,6 +196,7 @@ function useTheme() {
    NAVBAR
    ═══════════════════════════════════════════════════ */
 function Navbar() {
+  const SIGNUP_URL = useSignupUrl();
   const { t, lang } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggle } = useTheme();
@@ -234,7 +242,7 @@ function Navbar() {
           <button onClick={toggle} className="theme-btn" aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}>
             {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>
-          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+          <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener"
             className="btn-primary" style={{ padding: "8px 20px", fontSize: "14px", borderRadius: "10px" }}>
             {t.navGetCard}
           </a>
@@ -260,7 +268,7 @@ function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer"
+          <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener"
             className="btn-primary block text-center mt-3" style={{ padding: "12px 20px" }}>
             {t.navGetCard}
           </a>
@@ -274,6 +282,7 @@ function Navbar() {
    HERO (with typewriter)
    ═══════════════════════════════════════════════════ */
 function HeroSection() {
+  const SIGNUP_URL = useSignupUrl();
   const { lang } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -301,87 +310,87 @@ function HeroSection() {
 
   const copies = {
     ru: {
-    badge: "Pionex Card · Visa & Mastercard · выпуск за 5 минут",
-    h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "по всему миру",
-    sub: (<>ZeroCard выпускается на базе биржи <b>Pionex</b>, лицензированной в США (MSB) и Сингапуре. Пополняете карту в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите в любой стране, где принимают Visa. Банк, проверки дохода и ожидание пластика не нужны.</>),
+    badge: "Pionex Card · Visa & Mastercard · кэшбэк до 1%",
+    h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "за границей",
+    sub: (<>Карта биржи <b>Pionex</b>, зарегистрированной в FinCEN (США). Пополняете её в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите за границей и в зарубежных онлайн-сервисах. В российских магазинах карта не работает: это ограничение Pionex, подробно <a href="/blog/pionex-card-v-rossii" className="underline underline-offset-2">в нашем разборе</a>.</>),
     cta1: "Выпустить карту бесплатно", cta2: "Как это работает",
     st1: "стран для оплаты", st2: "кэшбэк на каждую покупку", st3: "годовых на остаток USDT", st4: "выпуск и обслуживание",
-    status: "Активирован", caption: "на базе биржи pionex · лицензия msb (сша)",
+    status: "Активирован", caption: "карта биржи pionex · регистрация msb в fincen (сша)",
     fc1a: "Apple Pay · Оплачено", fc1b: "Кофейня, Стамбул · $4.20",
     fc2a: "Кэшбэк начислен", fc2b: "+0.84 USDT за покупку",
-    fc3a: "+5% APR", fc3b: "на остаток, ежедневно",
-    trust: "Карта работает там, где вы уже платите",
+    fc3a: "+5% годовых", fc3b: "на остаток, каждый час",
+    trust: "Кошельки и сервисы, с которыми работает карта",
     },
     de: {
-    badge: "Pionex Card · Visa & Mastercard · in 5 Minuten fertig",
+    badge: "Pionex Card · Visa & Mastercard · bis zu 1% Cashback",
     h1a: "USDT im Wallet.", h1b: "Zahle mit Krypto", h1accent: "überall auf der Welt",
-    sub: (<>ZeroCard läuft über die Börse <b>Pionex</b>, lizenziert in den USA (MSB) und Singapur. Du lädst die Karte mit USDT, hinterlegst sie in <b>Apple&nbsp;Pay</b> oder <b>Google&nbsp;Pay</b> und zahlst in jedem Land, in dem Visa akzeptiert wird. Ohne Bankkonto, ohne Einkommensnachweis, ohne Warten auf Plastik.</>),
+    sub: (<>ZeroCard läuft über die Börse <b>Pionex</b>, bei FinCEN in den USA als MSB registriert. Du lädst die Karte mit USDT, hinterlegst sie in <b>Apple&nbsp;Pay</b> oder <b>Google&nbsp;Pay</b> und zahlst überall, wo Visa akzeptiert wird, außer bei Händlern aus den Ländern, die Pionex sperrt. Ohne Bankkonto und ohne Einkommensnachweis.</>),
     cta1: "Karte kostenlos holen", cta2: "So funktioniert's",
     st1: "Länder zum Bezahlen", st2: "Cashback bei jedem Einkauf", st3: "Zinsen aufs USDT-Guthaben", st4: "Ausgabe und Führung",
-    status: "Aktiviert", caption: "über die börse pionex · msb-lizenz (usa)",
+    status: "Aktiviert", caption: "über die börse pionex · msb-registrierung bei fincen (usa)",
     fc1a: "Apple Pay · Bezahlt", fc1b: "Café, Istanbul · $4.20",
     fc2a: "Cashback gutgeschrieben", fc2b: "+0.84 USDT für den Einkauf",
-    fc3a: "+5% Zinsen", fc3b: "aufs Guthaben, täglich",
+    fc3a: "+5% Zinsen", fc3b: "aufs Guthaben, stündlich",
     trust: "Die Karte läuft dort, wo du längst bezahlst",
     },
     en: {
-    badge: "Pionex Card · Visa & Mastercard · issued in 5 minutes",
+    badge: "Pionex Card · Visa & Mastercard · up to 1% cashback",
     h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "everywhere you go",
-    sub: (<>ZeroCard is issued by <b>Pionex</b>, an exchange licensed in the US (MSB) and Singapore. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend in any country where Visa works. No bank account, no income checks, nothing to wait for.</>),
+    sub: (<>ZeroCard runs on <b>Pionex</b>, an exchange registered with FinCEN in the US as an MSB. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend wherever Visa works, except at merchants from the countries Pionex restricts. No bank account and no income checks.</>),
     cta1: "Get your free card", cta2: "How it works",
     st1: "countries to spend in", st2: "cashback on every purchase", st3: "APR on your USDT balance", st4: "issue and maintenance fees",
-    status: "Activated", caption: "powered by pionex exchange · us msb licensed",
+    status: "Activated", caption: "powered by pionex exchange · fincen msb registered (us)",
     fc1a: "Apple Pay · Paid", fc1b: "Coffee shop, Istanbul · $4.20",
     fc2a: "Cashback earned", fc2b: "+0.84 USDT on purchase",
-    fc3a: "+5% APR", fc3b: "on balance, paid daily",
+    fc3a: "+5% APR", fc3b: "on balance, paid hourly",
     trust: "Works everywhere you already pay",
     },
     es: {
-    badge: "Pionex Card · Visa & Mastercard · emitida en 5 minutos",
+    badge: "Pionex Card · Visa & Mastercard · hasta 1% de reembolso",
     h1a: "USDT en tu saldo.", h1b: "Paga con cripto", h1accent: "por todo el mundo",
-    sub: (<>ZeroCard se emite a través del exchange <b>Pionex</b>, con licencia en EE.UU. (MSB) y Singapur. Recargas la tarjeta en USDT, la añades a <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> y pagas en cualquier país donde acepten Visa. Sin banco, sin justificar ingresos, sin esperar el plástico.</>),
+    sub: (<>ZeroCard funciona con el exchange <b>Pionex</b>, registrado como MSB ante FinCEN en EE.UU. Recargas la tarjeta en USDT, la añades a <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> y pagas donde acepten Visa, salvo en comercios de los países que Pionex restringe. Sin banco y sin justificar ingresos.</>),
     cta1: "Consigue tu tarjeta gratis", cta2: "Cómo funciona",
     st1: "países donde pagar", st2: "de reembolso en cada compra", st3: "anual sobre el saldo en USDT", st4: "emisión y mantenimiento",
-    status: "Activada", caption: "a través del exchange pionex · licencia msb (ee.uu.)",
+    status: "Activada", caption: "a través del exchange pionex · registro msb en fincen (ee.uu.)",
     fc1a: "Apple Pay · Pagado", fc1b: "Cafetería, Estambul · $4.20",
     fc2a: "Reembolso acreditado", fc2b: "+0.84 USDT por la compra",
-    fc3a: "+5% anual", fc3b: "sobre el saldo, cada día",
+    fc3a: "+5% anual", fc3b: "sobre el saldo, cada hora",
     trust: "La tarjeta funciona donde ya pagas",
     },
     pt: {
-    badge: "Pionex Card · Visa & Mastercard · emitido em 5 minutos",
+    badge: "Pionex Card · Visa & Mastercard · até 1% de cashback",
     h1a: "USDT no saldo.", h1b: "Pague com cripto", h1accent: "pelo mundo todo",
-    sub: (<>O ZeroCard é emitido pela corretora <b>Pionex</b>, licenciada nos EUA (MSB) e em Singapura. Você recarrega o cartão em USDT, adiciona ao <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> e paga em qualquer país que aceite Visa. Sem banco, sem comprovar renda, sem esperar o plástico.</>),
+    sub: (<>O ZeroCard funciona com a corretora <b>Pionex</b>, registrada como MSB na FinCEN dos EUA. Você recarrega o cartão em USDT, adiciona ao <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> e paga onde aceitam Visa, exceto em estabelecimentos dos países que a Pionex restringe. Sem banco e sem comprovar renda.</>),
     cta1: "Pegue seu cartão grátis", cta2: "Como funciona",
     st1: "países para pagar", st2: "de cashback em cada compra", st3: "ao ano sobre o saldo em USDT", st4: "emissão e manutenção",
-    status: "Ativado", caption: "pela corretora pionex · licença msb (eua)",
+    status: "Ativado", caption: "pela corretora pionex · registro msb na fincen (eua)",
     fc1a: "Apple Pay · Pago", fc1b: "Cafeteria, Istambul · $4.20",
     fc2a: "Cashback creditado", fc2b: "+0.84 USDT pela compra",
-    fc3a: "+5% ao ano", fc3b: "sobre o saldo, todo dia",
+    fc3a: "+5% ao ano", fc3b: "sobre o saldo, a cada hora",
     trust: "O cartão funciona onde você já paga",
     },
     it: {
-    badge: "Pionex Card · Visa & Mastercard · emessa in 5 minuti",
+    badge: "Pionex Card · Visa & Mastercard · fino all'1% di cashback",
     h1a: "USDT sul saldo.", h1b: "Paga in crypto", h1accent: "in tutto il mondo",
-    sub: (<>ZeroCard è emessa tramite l'exchange <b>Pionex</b>, con licenza negli Stati Uniti (MSB) e a Singapore. Ricarichi la carta in USDT, la aggiungi ad <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> e paghi in qualsiasi paese dove accettano Visa. Senza banca, senza prove di reddito, senza aspettare la plastica.</>),
+    sub: (<>ZeroCard funziona con l'exchange <b>Pionex</b>, registrato come MSB presso FinCEN negli Stati Uniti. Ricarichi la carta in USDT, la aggiungi ad <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> e paghi dove accettano Visa, tranne che presso esercenti dei paesi che Pionex limita. Senza banca e senza prove di reddito.</>),
     cta1: "Ottieni la carta gratis", cta2: "Come funziona",
     st1: "paesi dove pagare", st2: "di cashback su ogni acquisto", st3: "annuo sul saldo in USDT", st4: "emissione e gestione",
-    status: "Attivata", caption: "tramite l'exchange pionex · licenza msb (usa)",
+    status: "Attivata", caption: "tramite l'exchange pionex · registrazione msb fincen (usa)",
     fc1a: "Apple Pay · Pagato", fc1b: "Caffè, Istanbul · $4.20",
     fc2a: "Cashback accreditato", fc2b: "+0.84 USDT per l'acquisto",
-    fc3a: "+5% annuo", fc3b: "sul saldo, ogni giorno",
+    fc3a: "+5% annuo", fc3b: "sul saldo, ogni ora",
     trust: "La carta funziona dove paghi già",
     },
     fr: {
-    badge: "Pionex Card · Visa & Mastercard · émise en 5 minutes",
+    badge: "Pionex Card · Visa & Mastercard · jusqu'à 1 % de cashback",
     h1a: "USDT sur le solde.", h1b: "Payez en crypto", h1accent: "partout dans le monde",
-    sub: (<>ZeroCard est émise via l'exchange <b>Pionex</b>, licencié aux États-Unis (MSB) et à Singapour. Vous rechargez la carte en USDT, vous l'ajoutez à <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> et vous payez dans tout pays où Visa est acceptée. Sans banque, sans justificatif de revenus, sans attendre le plastique.</>),
+    sub: (<>ZeroCard fonctionne avec l'exchange <b>Pionex</b>, enregistré comme MSB auprès du FinCEN aux États-Unis. Vous rechargez la carte en USDT, vous l'ajoutez à <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> et vous payez là où Visa est acceptée, sauf chez les marchands des pays que Pionex restreint. Sans banque ni justificatif de revenus.</>),
     cta1: "Obtenez votre carte gratuite", cta2: "Comment ça marche",
     st1: "pays où payer", st2: "de cashback sur chaque achat", st3: "par an sur le solde en USDT", st4: "émission et gestion",
-    status: "Activée", caption: "via l'exchange pionex · licence msb (états-unis)",
+    status: "Activée", caption: "via l'exchange pionex · enregistrement msb fincen (états-unis)",
     fc1a: "Apple Pay · Payé", fc1b: "Café, Istanbul · $4.20",
     fc2a: "Cashback crédité", fc2b: "+0.84 USDT pour l'achat",
-    fc3a: "+5% par an", fc3b: "sur le solde, chaque jour",
+    fc3a: "+5% par an", fc3b: "sur le solde, chaque heure",
     trust: "La carte fonctionne là où vous payez déjà",
     },
   };
@@ -414,7 +423,7 @@ function HeroSection() {
           </FadeIn>
           <FadeIn delay={0.15}>
             <div className="h-cta-row">
-              <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="h-btn h-btn-primary">
+              <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="h-btn h-btn-primary">
                 <span>{c.cta1}</span><span className="arr">→</span>
               </a>
               <a href="#how" className="h-btn h-btn-ghost">{c.cta2}</a>
@@ -435,10 +444,9 @@ function HeroSection() {
           <div className="pcard" ref={cardRef}>
             <div className="stripes"><span className="s1" /><span className="s2" /></div>
             <div className="card-top">
-              <svg className="p-logo" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                <path d="M12 42V8h13.5c7.5 0 12.5 4.6 12.5 11.2 0 6.7-5 11.3-12.5 11.3H20.5V42H12Z" fill="#fff" />
-                <path d="M20.5 15.2v8.1h4.6c3 0 4.8-1.5 4.8-4s-1.8-4.1-4.8-4.1h-4.6Z" fill="#f2662b" />
-                <path d="M31 6.5 38.5 3l-2.3 8.2L31 6.5Z" fill="#fff" />
+              <svg className="p-logo" viewBox="0 0 48 36" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="46" height="34" rx="7" fill="rgba(255,255,255,.28)" stroke="rgba(255,255,255,.55)" strokeWidth="1.5" />
+                <path d="M1 12h14M1 24h14M33 12h14M33 24h14M15 1v34M33 1v34M15 18h18" stroke="rgba(255,255,255,.6)" strokeWidth="1.5" />
               </svg>
               <div className="status-pill">{c.status}</div>
             </div>
@@ -577,6 +585,7 @@ function PainSection() {
    BENEFITS
    ═══════════════════════════════════════════════════ */
 function BenefitsSection() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   const benefits = [
     { key: "cashback" as const, big: t.ben1Big, title: t.ben1Title, desc: t.ben1Desc, featured: true, feats: [t.ben1Fa, t.ben1Fb, t.ben1Fc] },
@@ -623,7 +632,7 @@ function BenefitsSection() {
 
           {/* CTA card fills the remaining columns of the last row */}
           <FadeIn delay={benefits.length * 0.05} className="flex grid-span-2">
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="ben-cta flex-1">
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="ben-cta flex-1">
               <div className="ben-cta__glow" aria-hidden />
               <div className="relative z-[1] flex flex-col md:flex-row md:items-center gap-6 md:gap-8 h-full">
                 <div className="flex-1">
@@ -644,6 +653,7 @@ function BenefitsSection() {
    HOW IT WORKS (with tabs)
    ═══════════════════════════════════════════════════ */
 function HowItWorks() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   const [activeTab, setActiveTab] = useState("apply");
 
@@ -747,7 +757,7 @@ function HowItWorks() {
 
         <FadeIn delay={0.2}>
           <div className="text-center mt-14">
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.howCTA}</a>
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary">{t.howCTA}</a>
           </div>
         </FadeIn>
       </div>
@@ -836,6 +846,7 @@ function CmpValue({ raw, featured }: { raw: string; featured?: boolean }) {
 }
 
 function CompareSection() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   const rows = [
     [t.comp1P, t.comp1Z, t.comp1B, t.comp1O],
@@ -900,10 +911,9 @@ function CompareSection() {
           {/* Verdict strip */}
           <div className="cmp-verdict">
             <div className="cmp-verdict__text">
-              <span className="cmp-verdict__score">9 / 9</span>
               <span>{t.compWins}</span>
             </div>
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary cmp-verdict__btn">
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary cmp-verdict__btn">
               {t.ctaCTA}
             </a>
           </div>
@@ -917,6 +927,7 @@ function CompareSection() {
    AUDIENCE SECTION (8 tabs)
    ═══════════════════════════════════════════════════ */
 function AudienceSection() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   const [activeAud, setActiveAud] = useState("1");
 
@@ -1129,7 +1140,7 @@ function AudienceSection() {
 
         <FadeIn delay={0.2}>
           <div className="text-center mt-12">
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.audCTA}</a>
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary">{t.audCTA}</a>
           </div>
         </FadeIn>
       </div>
@@ -1196,6 +1207,116 @@ function ReviewsSection() {
 /* ═══════════════════════════════════════════════════
    FAQ
    ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   GUIDES (links into the blog; only languages that have articles)
+   ═══════════════════════════════════════════════════ */
+const GUIDES_COPY: Record<string, { badge: string; title: string; desc: string; all: string }> = {
+  ru: { badge: "📚 Гайды", title: "Прежде чем оформлять", desc: "Где карта работает, во что обходятся покупки и как устроены боты Pionex. Без рекламных обещаний.", all: "Все статьи" },
+  en: { badge: "📚 Guides", title: "Before you sign up", desc: "Where the card works, what purchases really cost and how Pionex bots behave.", all: "All articles" },
+  de: { badge: "📚 Ratgeber", title: "Bevor du dich anmeldest", desc: "Was MiCA für Pionex in Deutschland bedeutet, was die Steuerpläne ändern und wie Grid-Bots wirklich rechnen.", all: "Alle Artikel" },
+  es: { badge: "📚 Guías", title: "Antes de registrarte", desc: "Cuánto cuesta pagar en pesos con la tarjeta, cómo funcionan los bots de Pionex y qué cambió en Europa con MiCA.", all: "Todos los artículos" },
+  pt: { badge: "📚 Guias", title: "Antes de se cadastrar", desc: "As novas regras do Banco Central para stablecoins, quanto custa pagar em reais e como funcionam os bots da Pionex.", all: "Todos os artigos" },
+  it: { badge: "📚 Guide", title: "Prima di iscriverti", desc: "Le tasse crypto al 33%, cosa cambia con MiCA per chi vive in Italia e come ragiona davvero un bot grid.", all: "Tutti gli articoli" },
+  fr: { badge: "📚 Guides", title: "Avant de vous inscrire", desc: "Pourquoi Pionex est fermé en France, ce que coûte la carte en Afrique francophone et en Suisse, et comment raisonne un bot grid.", all: "Tous les articles" },
+};
+
+function GuidesSection() {
+  const { lang } = useI18n();
+  const posts = STATIC_POSTS.filter((p) => p.lang === lang).slice(0, 6);
+  if (posts.length === 0) return null;
+  const c = GUIDES_COPY[lang] ?? GUIDES_COPY.en;
+  return (
+    <section id="guides" className="py-24 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
+        <div className="section-head mb-2">
+          <div className="section-badge">{c.badge}</div>
+          <h2 className="section-title mb-4">{c.title}</h2>
+          <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{c.desc}</p>
+        </div>
+        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12 list-none p-0">
+          {posts.map((p) => (
+            <li key={p.id}>
+              <Link to={langHref(lang, `/blog/${p.slug}`)} className="guide-card">
+                <span className="guide-card__title">{p.title}</span>
+                <span className="guide-card__desc">{p.description}</span>
+                <span className="guide-card__more">→</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="text-center mt-10">
+          <Link to={langHref(lang, "/blog")} className="btn-secondary-custom">{c.all}</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   PROMO: Pionex AI-subscription campaign (set PROMO_AI_ENABLED = false when it ends)
+   ═══════════════════════════════════════════════════ */
+const PROMO_AI_ENABLED = true;
+const PROMO_AI_URL: Record<string, string> = {
+  ru: "https://www.pionex.com/ru/activities/galaxy/paycard-ai-lottery",
+  en: "https://www.pionex.com/en/activities/galaxy/paycard-ai-lottery",
+};
+const PROMO_AI_COPY: Record<string, { badge: string; title: string; desc: string; services: string; note: string; cta: string; guide: string; guideSlug: string; rules: string }> = {
+  ru: {
+    badge: "🎁 Акция Pionex",
+    title: "Оплачивайте AI-подписки картой Pionex и выигрывайте полный кэшбэк",
+    desc: "Pionex возвращает всю сумму последнего платежа за AI-подписку, до 50 USDT за платёж. Каждая оплата AI-сервиса картой даёт попытку.",
+    services: "ChatGPT · Claude · Cursor · Grok · Suno · ElevenLabs и другие AI-сервисы",
+    note: "Сроки и правила определяет Pionex. ChatGPT и Claude официально недоступны в России и Беларуси.",
+    cta: "Зарегистрироваться и участвовать",
+    guide: "Как оплатить AI-подписку картой",
+    guideSlug: "oplata-ai-podpisok-kartoj-pionex",
+    rules: "Правила акции",
+  },
+  en: {
+    badge: "🎁 Pionex campaign",
+    title: "Pay for AI subscriptions with the Pionex Card and win a full refund",
+    desc: "Pionex refunds your latest AI subscription payment in full, up to 50 USDT per payment. Every AI service paid with the card earns an attempt.",
+    services: "ChatGPT · Claude · Cursor · Grok · Suno · ElevenLabs and other AI services",
+    note: "Terms and dates are set by Pionex. Use AI services only from countries their providers support.",
+    cta: "Sign up and take part",
+    guide: "How to pay for AI with the card",
+    guideSlug: "pay-ai-subscriptions-pionex-card",
+    rules: "Campaign rules",
+  },
+};
+
+function PromoAiSection() {
+  const { lang } = useI18n();
+  const SIGNUP_URL = useSignupUrl();
+  const c = PROMO_AI_COPY[lang];
+  if (!PROMO_AI_ENABLED || !c) return null;
+  return (
+    <section id="promo-ai" className="py-16 px-5 md:px-10">
+      <div className="max-w-[1160px] mx-auto">
+        <div className="promo-ai">
+          <div className="promo-ai__body">
+            <div className="section-badge" style={{ marginBottom: 14 }}>{c.badge}</div>
+            <h2 className="promo-ai__title">{c.title}</h2>
+            <p className="promo-ai__desc">{c.desc}</p>
+            <p className="promo-ai__services">{c.services}</p>
+            <div className="promo-ai__actions">
+              <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary">{c.cta}</a>
+              <Link to={langHref(lang, `/blog/${c.guideSlug}`)} className="btn-secondary-custom">{c.guide}</Link>
+            </div>
+            <p className="promo-ai__note">
+              {c.note} <a href={PROMO_AI_URL[lang]} target="_blank" rel="noopener noreferrer">{c.rules} →</a>
+            </p>
+          </div>
+          <div className="promo-ai__prize" aria-hidden="true">
+            <span className="promo-ai__amount">50</span>
+            <span className="promo-ai__unit">USDT</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FAQSection() {
   const { t } = useI18n();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
@@ -1272,6 +1393,7 @@ function FAQSection() {
    REFERRAL (Pionex invite program)
    ═══════════════════════════════════════════════════ */
 function ReferralSection() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   const steps = [
     { icon: "link" as const, title: t.refS1T, desc: t.refS1D },
@@ -1300,7 +1422,7 @@ function ReferralSection() {
                     {t.refBigLabel}
                   </span>
                 </div>
-                <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-on-accent">
+                <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-on-accent">
                   {t.refCTA}
                 </a>
                 <p className="mt-5 text-xs leading-[1.6]" style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480 }}>
@@ -1331,6 +1453,7 @@ function ReferralSection() {
    FINAL CTA
    ═══════════════════════════════════════════════════ */
 function CTASection() {
+  const SIGNUP_URL = useSignupUrl();
   const { t } = useI18n();
   return (
     <section className="py-24 px-5 md:px-10 text-center border-t"
@@ -1345,7 +1468,7 @@ function CTASection() {
           <h2 className="section-title mb-4 mx-auto" style={{ whiteSpace: "pre-line", background: "linear-gradient(180deg, var(--text) 0%, var(--text) 55%, color-mix(in srgb, var(--text) 72%, transparent) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", textWrap: "balance" }}>{t.ctaTitle}</h2>
           <p className="text-[17px] leading-[1.7] mb-9 mx-auto" style={{ color: "var(--text2)", maxWidth: 560, textWrap: "pretty" }}>{t.ctaDesc}</p>
           <div className="flex justify-center gap-3 flex-wrap">
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{t.ctaCTA}</a>
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary">{t.ctaCTA}</a>
             <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary-custom">{t.ctaDocs}</a>
           </div>
           <p className="mt-5 text-xs" style={{ color: "var(--text3)" }}>{t.ctaDisclaimer}</p>
@@ -1367,7 +1490,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
           <li key={i}>
             <a
               href={l.href}
-              {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...(l.external ? { target: "_blank", rel: l.href.includes("r=0uHzysLVYQh") ? "sponsored noopener" : "noopener noreferrer" } : {})}
               className="ftr-link"
             >
               {l.label}
@@ -1380,6 +1503,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
 }
 
 function Footer() {
+  const SIGNUP_URL = useSignupUrl();
   const { t, lang } = useI18n();
 
   const product = [
@@ -1396,9 +1520,8 @@ function Footer() {
     { label: t.footSupport, href: DOCS_URL, external: true },
   ];
   const company = [
-    { label: t.footAbout, href: langHref(lang, "/") },
+    { label: t.footAbout, href: langHref(lang, "/about") },
     { label: t.navGetCard.replace(" →", ""), href: SIGNUP_URL, external: true },
-    { label: t.footContact, href: PIONEX_SOCIALS.email },
   ];
 
   const socials = [
@@ -1469,7 +1592,7 @@ function Footer() {
               Zero<span style={{ color: "var(--accent-color)" }}>Card</span>
             </div>
             <p className="text-sm leading-[1.7] mb-6 max-w-[330px]" style={{ color: "var(--text2)" }}>{t.footTagline}</p>
-            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "10px 22px", fontSize: "14px", borderRadius: "10px" }}>
+            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary" style={{ padding: "10px 22px", fontSize: "14px", borderRadius: "10px" }}>
               {t.navGetCard}
             </a>
             <div className="mt-7">
@@ -1578,11 +1701,11 @@ function DynamicMeta() {
         "@id": "https://zerocard.pro/#website",
         url: "https://zerocard.pro/",
         name: "ZeroCard",
-        description: lang === "ru" ? "Криптокарта Pionex - трать USDT везде"
-          : lang === "de" ? "Pionex Krypto-Karte: USDT überall ausgeben"
-          : lang === "es" ? "Tarjeta cripto Pionex: gasta USDT en cualquier parte"
-          : lang === "pt" ? "Cartão cripto Pionex: gaste USDT em qualquer lugar"
-          : "Pionex crypto card - spend USDT everywhere",
+        description: lang === "ru" ? "Независимый гид по карте Pionex и торговым ботам Pionex"
+          : lang === "de" ? "Unabhängiger Ratgeber zur Pionex Card und zu den Pionex Trading-Bots"
+          : lang === "es" ? "Guía independiente sobre la tarjeta Pionex y los bots de trading de Pionex"
+          : lang === "pt" ? "Guia independente sobre o cartão Pionex e os bots de trading da Pionex"
+          : "Independent guide to the Pionex card and Pionex trading bots",
         inLanguage: lang,
         publisher: { "@id": "https://zerocard.pro/#organization" }
       },
@@ -1593,12 +1716,11 @@ function DynamicMeta() {
         url: "https://zerocard.pro/",
         logo: "https://zerocard.pro/favicon.png",
         image: OG_IMAGE,
-        description: lang === "ru" ? "Партнёрский проект Pionex Card - криптовалютная дебетовая карта Visa/Mastercard"
+        description: lang === "ru" ? "Партнёрский проект о карте Pionex: криптовалютная дебетовая Visa и Mastercard"
           : lang === "de" ? "Partnerprojekt der Pionex Card: Krypto-Debitkarte von Visa und Mastercard"
           : lang === "es" ? "Proyecto de afiliado de Pionex Card: tarjeta de débito cripto Visa/Mastercard"
           : lang === "pt" ? "Projeto de afiliado da Pionex Card: cartão de débito cripto Visa/Mastercard"
-          : "Pionex Card partner - crypto debit card Visa/Mastercard",
-        sameAs: ["https://www.pionex.com/ru/signUp?r=0uHzysLVYQh"]
+          : "Pionex Card affiliate guide: crypto debit card on Visa and Mastercard"
       },
       {
         "@type": "FinancialProduct",
@@ -1648,22 +1770,20 @@ const Index = () => {
   return (
   <div className="min-h-screen" style={{ overflowX: "clip" }}>
     <ScrollProgress />
-    <Helmet>
-      <meta property="og:type" content="website" />
-    </Helmet>
     <DynamicMeta />
     <IconDefs />
     <Navbar />
     <main>
       <HeroSection />
       <StatsBar />
+      <PromoAiSection />
       <PainSection />
       <BenefitsSection />
       <HowItWorks />
       <CompareSection />
       <AudienceSection />
-      <ReviewsSection />
       <ReferralSection />
+      <GuidesSection />
       <FAQSection />
       <CTASection />
 

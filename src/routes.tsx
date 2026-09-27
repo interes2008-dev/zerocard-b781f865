@@ -7,6 +7,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const BlogAdmin = lazy(() => import("./pages/BlogAdmin"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const About = lazy(() => import("./pages/About"));
 
 const RouteFallback = () => (
   <div style={{ minHeight: "100vh", background: "var(--bg, #020d1f)" }} aria-hidden />
@@ -18,6 +19,7 @@ export const AppRoutes = () => (
       {/* Russian (default, no prefix) */}
       <Route path="/" element={<Index />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/about" element={<About />} />
       <Route path="/blog/admin" element={<BlogAdmin />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
 
@@ -26,6 +28,7 @@ export const AppRoutes = () => (
         <Fragment key={l}>
           <Route path={`/${l}`} element={<Index />} />
           <Route path={`/${l}/blog`} element={<Blog />} />
+          <Route path={`/${l}/about`} element={<About />} />
           <Route path={`/${l}/blog/:slug`} element={<BlogPost />} />
         </Fragment>
       ))}

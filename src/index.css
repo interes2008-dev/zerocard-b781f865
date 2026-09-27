@@ -1472,3 +1472,44 @@ section, [class*="py-24"], [class*="py-8"] {
   .cmp-verdict__text { justify-content: center; }
   .cmp-verdict__btn { width: 100%; text-align: center; justify-content: center; }
 }
+
+
+/* ── Guides block on the homepage ── */
+.guide-card {
+  display: flex; flex-direction: column; gap: 8px; height: 100%;
+  padding: 22px 22px 18px; border-radius: 14px; text-decoration: none;
+  background: var(--bg2); border: 1px solid var(--border-custom);
+  transition: border-color .2s, transform .2s;
+}
+.guide-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+.guide-card__title { color: var(--text); font-weight: 700; font-size: 16px; line-height: 1.35; font-family: 'Space Grotesk', sans-serif; }
+.guide-card__desc { color: var(--text2); font-size: 13.5px; line-height: 1.6; flex: 1; }
+.guide-card__more { color: var(--accent-color); font-weight: 700; }
+
+/* ── Blog list entrance (CSS only, content stays visible without JS) ── */
+@keyframes blogCardIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.blog-card-in { animation: blogCardIn .45s ease-out both; }
+@media (prefers-reduced-motion: reduce) { .blog-card-in { animation: none; } }
+
+
+/* ── Promo: AI subscriptions campaign ── */
+.promo-ai {
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+  padding: 36px 40px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent-bg), var(--bg2) 60%);
+  border: 1px solid var(--accent-border);
+}
+.promo-ai__title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 12px; text-wrap: balance; }
+.promo-ai__desc { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 640px; margin-bottom: 10px; }
+.promo-ai__services { color: var(--text); font-size: 14px; font-weight: 600; margin-bottom: 22px; }
+.promo-ai__actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.promo-ai__note { color: var(--text3); font-size: 12.5px; line-height: 1.6; }
+.promo-ai__note a { color: var(--accent-color); text-decoration: none; white-space: nowrap; }
+.promo-ai__prize { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 168px; height: 168px; border-radius: 50%; border: 1px solid var(--accent-border); background: radial-gradient(circle, var(--accent-bg), transparent 70%); }
+.promo-ai__amount { font-family: 'Space Grotesk', sans-serif; font-size: 58px; font-weight: 700; line-height: 1; color: var(--accent-color); letter-spacing: -0.03em; }
+.promo-ai__unit { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .14em; color: var(--text2); margin-top: 4px; }
+@media (max-width: 760px) {
+  .promo-ai { grid-template-columns: 1fr; padding: 26px 22px; }
+  .promo-ai__prize { display: none; }
+  .promo-ai__actions a { width: 100%; justify-content: center; text-align: center; }
+}

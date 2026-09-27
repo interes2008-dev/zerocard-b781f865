@@ -1,0 +1,65 @@
+# ZeroCard: prerendered multi-language site (Apache / REG.RU)
+#
+# Every page is a real file: /blog/<slug>/index.html, /en/blog/<slug>/index.html ...
+# Public URLs have NO trailing slash (/blog/<slug>), matching canonical tags.
+# These rules map a clean URL to its index.html internally, so Apache never has
+# to guess with DirectoryIndex/DirectorySlash (the old setup answered 403 for
+# article folders).
+
+Options -Indexes -MultiViews +FollowSymLinks
+AddDefaultCharset utf-8
+AddType text/markdown .md
+AddCharset utf-8 .md .txt .xml
+DirectoryIndex index.html
+DirectorySlash Off
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Old ?lang=xx links -> /xx (301)
+  RewriteCond %{QUERY_STRING} (^|&)lang=(en|de|es|pt|it|fr)(&|$) [NC]
+  RewriteRule ^$ /%2? [R=301,L]
+
+  # 2. Explicit /index.html in the address -> clean URL (301)
+  RewriteCond %{THE_REQUEST} \s/+(.*?)/?index\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L,NE]
+
+  # 3. Trailing slash -> no trailing slash, except the site root (301)
+  RewriteCond %{REQUEST_URI} ^/(.+)/$
+  RewriteRule ^ /%1 [R=301,L]
+
+  # 4. Real files (assets, sitemap.xml, robots.txt, images) are served as is
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 5. Clean URL of a prerendered page -> its index.html
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.+)$ /$1/index.html [L]
+
+  # 6. Unknown article -> blog index of that language (the app shows the list)
+  RewriteRule ^(en|de|es|pt|it|fr)/blog/.+$ /$1/blog/index.html [L]
+  RewriteRule ^blog/.+$ /blog/index.html [L]
+
+  # 7. Anything else -> app shell (it renders the 404 page itself)
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+# /blog/admin is excluded from indexing in robots.txt
+
+# Caching: HTML always revalidated (updates show at once), hashed assets cached for a year
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(js|css|woff2?|png|jpe?g|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <Files "sw.js">
+    Header set Cache-Control "no-cache"
+  </Files>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/xml application/xml text/plain
+</IfModule>

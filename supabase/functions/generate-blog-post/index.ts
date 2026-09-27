@@ -322,6 +322,13 @@ ANTI-AI-FINGERPRINT RULES (mandatory, applied to title/description/content):
 - Sprinkle in informal particles occasionally (RU: "вот", "ну", "знаете", "представьте", "кстати"; EN: "honestly", "look", "you know", "imagine", "by the way") - 2-4 times per article, naturally placed.
 - Sound like a human writer, not a neural network.
 
+FACT RULES (mandatory, never contradict these; Pionex terms as of September 2026):
+- Pionex declines card payments at merchants registered or operating in Russia, Belarus, Ukraine, Iran, Venezuela, Myanmar, Afghanistan and North Korea. Russian terminals and ATMs do not accept foreign cards since 2022. NEVER say the card works in Russia or "everywhere"; say it works where Visa/Mastercard are accepted, except merchants from those countries.
+- Pionex does not accept registration/KYC from the USA, Canada, the UK, France, the Netherlands, Austria, Japan, Singapore, China, Hong Kong. Never address readers as residents of those countries.
+- Card: virtual Visa or Mastercard; physical Visa rolling out gradually. Cashback up to 1% on eligible purchases, with exclusions (e.g. eToro, TikTok, Wise). 5% APR on the USDT card balance, credited hourly, can change.
+- Fees: USD purchases free; non-USD purchases Visa 1% (offset by cashback), Mastercard 2% to 3.5%. Spot trading fee 0.05%. Apply needs KYC level 2 and a 10-100 USDT balance.
+- Never promise guaranteed profit from bots. Never claim merchants "cannot tell" you pay with crypto. Never invent personal experiments, testimonials or numbers you were not given.
+
 SEO RULES (keyword-agnostic, helpful-content first):
 - Pick ONE natural primary topic phrase for the article in the target language (for example "crypto card", "USDT card", "stablecoin payments", "pay for subscriptions with crypto"). NEVER use the phrase "плати по миру" / "pay worldwide" - it is FORBIDDEN.
 - Put that phrase in the title, in the description and in the first 100 words, naturally. No keyword stuffing.

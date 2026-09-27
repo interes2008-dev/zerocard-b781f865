@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useI18n, langHref } from "@/lib/i18n";
 import { ArrowRight, Calendar, Loader2, Clock } from "lucide-react";
-import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { getSeededPosts } from "@/lib/blogSeed";
+import { mergeWithStatic } from "@/lib/staticPosts";
+import { useHeadMeta } from "@/lib/headMeta";
 import { LangSwitcher } from "@/components/LangSwitcher";
 
 const SIGNUP_URL = "https://www.pionex.com/ru/signUp?r=0uHzysLVYQh";
 
-const CATEGORY_LABELS: Record<string, Record<string, string>> = {
+export const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   crypto: { ru: "🌐 Криптаны", en: "🌐 Crypto Users", es: "🌐 Con cripto", pt: "🌐 Com cripto", de: "🌐 Krypto-Nutzer", it: "🌐 Utenti crypto", fr: "🌐 Utilisateurs crypto" },
   traders: { ru: "📈 Трейдеры", en: "📈 Traders", es: "📈 Traders", pt: "📈 Traders", de: "📈 Trader", it: "📈 Trader", fr: "📈 Traders" },
   pionex: { ru: "🤖 Pionex Боты", en: "🤖 Pionex Bots", es: "🤖 Bots de Pionex", pt: "🤖 Bots da Pionex", de: "🤖 Pionex Bots", it: "🤖 Bot Pionex", fr: "🤖 Bots Pionex" },
@@ -24,6 +25,7 @@ const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   ecommerce: { ru: "🛒 Интернет-торговля", en: "🛒 E-commerce", es: "🛒 E-commerce", pt: "🛒 E-commerce", de: "🛒 E-Commerce", it: "🛒 E-commerce", fr: "🛒 E-commerce" },
   emigrants: { ru: "🌏 Эмигранты", en: "🌏 Emigrants", es: "🌏 Emigrantes", pt: "🌏 Emigrantes", de: "🌏 Auswanderer", it: "🌏 Emigrati", fr: "🌏 Expatriés" },
   parents: { ru: "👨‍👩‍👧 Родители за рубежом", en: "👨‍👩‍👧 Parents Abroad", es: "👨‍👩‍👧 Padres en el extranjero", pt: "👨‍👩‍👧 Pais no exterior", de: "👨‍👩‍👧 Eltern im Ausland", it: "👨‍👩‍👧 Genitori all'estero", fr: "👨‍👩‍👧 Parents à l'étranger" },
+  card: { ru: "💳 Карта Pionex", en: "💳 Pionex Card", es: "💳 Tarjeta Pionex", pt: "💳 Cartão Pionex", de: "💳 Pionex Card", it: "💳 Carta Pionex", fr: "💳 Carte Pionex" },
   arbitrage: { ru: "⚡ Арбитражники", en: "⚡ Arbitrage Traders", es: "⚡ Arbitrajistas", pt: "⚡ Arbitradores", de: "⚡ Arbitrage-Trader", it: "⚡ Arbitraggisti", fr: "⚡ Arbitragistes" },
 };
 
@@ -49,13 +51,33 @@ const EMPTY_STATE: Record<string, string> = {
 };
 
 const BLOG_TITLES: Record<string, string> = {
-  ru: "Блог ZeroCard - плати по миру, крипта, USDT и Pionex",
-  en: "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex",
-  de: "ZeroCard Blog - weltweit zahlen, Krypto, USDT und Pionex",
-  es: "Blog de ZeroCard: paga por el mundo, cripto, USDT y Pionex",
-  pt: "Blog do ZeroCard: pague pelo mundo, cripto, USDT e Pionex",
-  it: "Blog di ZeroCard: paga in tutto il mondo, crypto, USDT e Pionex",
-  fr: "Blog ZeroCard : payer en USDT partout, crypto et Pionex",
+  ru: "Блог ZeroCard: карта Pionex, торговые боты и USDT",
+  en: "ZeroCard blog: Pionex Card, trading bots and USDT",
+  de: "ZeroCard Blog: Pionex Card, Trading-Bots und USDT",
+  es: "Blog de ZeroCard: tarjeta Pionex, bots de trading y USDT",
+  pt: "Blog do ZeroCard: cartão Pionex, bots de trading e USDT",
+  it: "Blog di ZeroCard: carta Pionex, bot di trading e USDT",
+  fr: "Blog ZeroCard : carte Pionex, bots de trading et USDT",
+};
+
+const BLOG_DESCS: Record<string, string> = {
+  ru: "Гайды по Pionex: криптокарта и где она работает, настройка грид-бота, комиссии, отзывы, трата USDT за границей.",
+  en: "Guides on Pionex: the crypto card and where it works, grid bot setup, fees, reviews and spending USDT abroad.",
+  de: "Ratgeber zu Pionex: die Krypto-Karte und wo sie funktioniert, Grid-Bot, Gebühren, Erfahrungen und USDT im Ausland ausgeben.",
+  es: "Guías sobre Pionex: la tarjeta cripto y dónde funciona, bot grid, comisiones, opiniones y gastar USDT en el extranjero.",
+  pt: "Guias sobre a Pionex: o cartão cripto e onde funciona, bot grid, taxas, avaliações e gastar USDT no exterior.",
+  it: "Guide su Pionex: la carta crypto e dove funziona, grid bot, commissioni, recensioni e spendere USDT all'estero.",
+  fr: "Guides sur Pionex : la carte crypto et où elle fonctionne, grid bot, frais, avis et dépenser des USDT à l'étranger.",
+};
+
+const BLOG_SUBTITLES: Record<string, string> = {
+  ru: "Карта Pionex, торговые боты и USDT без рекламных обещаний",
+  en: "The Pionex card, trading bots and USDT, without the hype",
+  de: "Pionex Card, Trading-Bots und USDT, ohne Werbeversprechen",
+  es: "La tarjeta Pionex, bots de trading y USDT, sin promesas vacías",
+  pt: "O cartão Pionex, bots de trading e USDT, sem promessas vazias",
+  it: "La carta Pionex, bot di trading e USDT, senza promesse vuote",
+  fr: "La carte Pionex, les bots de trading et l'USDT, sans promesses creuses",
 };
 
 const BACK_HOME: Record<string, string> = {
@@ -101,87 +123,61 @@ function estimateReadTime(description: string, lang: string): string {
   return lang === "ru" ? `${min} мин` : lang === "es" ? `${min} min` : lang === "pt" ? `${min} min` : `${min} Min.`.replace("Min.", lang === "de" ? "Min." : "min");
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.45, ease: "easeOut" as const },
-  }),
-};
+
+
+function posts_empty(lang: string): boolean {
+  const seeded = getSeededPosts() as BlogPost[] | null;
+  return mergeWithStatic(seeded).every((p) => p.lang !== lang) && seeded === null;
+}
 
 export default function Blog() {
   const { lang } = useI18n();
-  const [posts, setPosts] = useState<BlogPost[]>(() => getSeededPosts() ?? []);
-  const [loading, setLoading] = useState(() => getSeededPosts() === null);
+  const [posts, setPosts] = useState<BlogPost[]>(() => mergeWithStatic(getSeededPosts() as BlogPost[] | null) as BlogPost[]);
+  const [loading, setLoading] = useState(() => posts_empty(lang));
 
   const fetchPosts = async () => {
-    setLoading(true);
     const { data } = await supabase
       .from("blog_posts")
       .select("id, slug, title, description, lang, category, image_url, published_at")
       .order("published_at", { ascending: false });
-    setPosts(data || []);
+    setPosts(mergeWithStatic((data as BlogPost[] | null) ?? (getSeededPosts() as BlogPost[] | null)) as BlogPost[]);
     setLoading(false);
   };
 
   useEffect(() => {
     fetchPosts();
-    document.title = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
     window.scrollTo(0, 0);
   }, [lang]);
 
   const filtered = posts.filter((p) => p.lang === lang);
 
-  const pageTitle = lang === "ru"
-    ? "Блог ZeroCard - плати по миру, крипта, USDT и Pionex"
-    : lang === "es"
-    ? "Blog de ZeroCard: paga por el mundo, cripto, USDT y Pionex"
-    : lang === "pt"
-    ? "Blog do ZeroCard: pague pelo mundo, cripto, USDT e Pionex"
-    : "ZeroCard Blog - pay worldwide, crypto, USDT & Pionex";
-  const pageDesc = lang === "ru"
-    ? "Статьи о том, как платить по миру криптой: международные платежи, оплата за границей, глобальные переводы, USDT, Pionex и жизнь без банковских ограничений."
-    : lang === "es"
-    ? "Guías para pagar por el mundo con cripto: pagos internacionales, gastar en el extranjero, transferencias globales, USDT, Pionex y una vida sin límites bancarios."
-    : lang === "pt"
-    ? "Guias de como pagar pelo mundo com cripto: pagamentos internacionais, gastar no exterior, transferências globais, USDT, Pionex e uma vida sem limites bancários."
-    : "Guides on how to pay worldwide with crypto: international payments, spending abroad, global transfers, USDT, Pionex and life without banking limits.";
+  const pageTitle = BLOG_TITLES[lang] ?? BLOG_TITLES.en;
+  const pageDesc = BLOG_DESCS[lang] ?? BLOG_DESCS.en;
+  useHeadMeta({ title: pageTitle, description: pageDesc, canonical: `https://zerocard.pro${langHref(lang, "/blog")}`, ogType: "website" });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDesc} />
-        <link rel="canonical" href={`https://zerocard.pro${langHref(lang, "/blog")}`} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDesc} />
-        <meta property="og:url" content={`https://zerocard.pro${langHref(lang, "/blog")}`} />
-        <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: pageTitle,
           description: pageDesc,
-          url: "https://zerocard.pro/blog",
+          url: `https://zerocard.pro${langHref(lang, "/blog")}`,
         })}</script>
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "ZeroCard", item: "https://zerocard.pro/" },
-            { "@type": "ListItem", position: 2, name: "Blog", item: "https://zerocard.pro/blog" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: `https://zerocard.pro${langHref(lang, "/blog")}` },
           ],
         })}</script>
       </Helmet>
       <BlogHeader />
 
       <main className="max-w-[900px] mx-auto px-5 md:px-10 py-16 md:py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div>
           <h1
             className="text-4xl md:text-5xl font-bold mb-3"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -189,17 +185,11 @@ export default function Blog() {
             {"Blog"}
           </h1>
           <p className="text-lg mb-3 text-muted-foreground">
-            {lang === "ru"
-              ? "Статьи о криптокартах, USDT и финансах"
-              : lang === "es"
-              ? "Artículos sobre tarjetas cripto, USDT y finanzas"
-              : lang === "pt"
-              ? "Artigos sobre cartões cripto, USDT e finanças"
-              : "Articles about crypto cards, USDT, and finance"}
+            {BLOG_SUBTITLES[lang] ?? BLOG_SUBTITLES.en}
           </p>
           {/* Gradient separator */}
           <div className="h-px mb-10 rounded-full" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.1))" }} />
-        </motion.div>
+        </div>
 
 
         {loading ? (
@@ -213,13 +203,7 @@ export default function Blog() {
         ) : (
           <div className="grid gap-5">
             {filtered.map((post, idx) => (
-              <motion.div
-                key={post.id}
-                custom={idx}
-                initial="hidden"
-                animate="visible"
-                variants={cardVariants}
-              >
+              <div key={post.id} className="blog-card-in" style={{ animationDelay: `${Math.min(idx, 8) * 60}ms` }}>
                 <Link
                   to={langHref(lang, `/blog/${post.slug}`)}
                   className="group block rounded-2xl border overflow-hidden no-underline transition-all duration-300 border-border bg-card hover:border-primary/60"
@@ -247,7 +231,7 @@ export default function Blog() {
                       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(post.published_at).toLocaleDateString(
-                          lang === "ru" ? "ru-RU" : lang === "de" ? "de-DE" : lang === "es" ? "es-ES" : lang === "pt" ? "pt-BR" : "en-US",
+                          ({ ru: "ru-RU", de: "de-DE", es: "es-ES", pt: "pt-BR", it: "it-IT", fr: "fr-FR" } as Record<string, string>)[lang] ?? "en-US",
                           { year: "numeric", month: "short", day: "numeric" }
                         )}
                       </span>
@@ -269,11 +253,11 @@ export default function Blog() {
                     </p>
 
                     <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3 text-primary">
-                      {lang === "ru" ? "Читать" : lang === "de" ? "Lesen" : lang === "es" ? "Leer" : lang === "pt" ? "Ler" : "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      {({ ru: "Читать", de: "Lesen", es: "Leer", pt: "Ler", it: "Leggi", fr: "Lire" } as Record<string, string>)[lang] ?? "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </span>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

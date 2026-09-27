@@ -1,7 +1,25 @@
 // Runs before `vite dev`/`vite build`; writes public/sitemap.xml with
 // language subdirectory URLs (/, /en, /de, /es, /pt) and path-based hreflang.
-import { writeFileSync } from "fs";
-import { resolve } from "path";
+import { writeFileSync, readdirSync, readFileSync, existsSync } from "fs";
+import { resolve, join } from "path";
+
+// Articles stored in the repo (src/content/blog/<lang>/<slug>.md)
+function repoPosts(): { slug: string; published_at: string; lang: string; group?: string }[] {
+  const dir = resolve("src/content/blog");
+  if (!existsSync(dir)) return [];
+  const out: { slug: string; published_at: string; lang: string; group?: string }[] = [];
+  for (const lang of readdirSync(dir)) {
+    const ld = join(dir, lang);
+    for (const f of readdirSync(ld).filter((x) => x.endsWith(".md"))) {
+      const raw = readFileSync(join(ld, f), "utf-8");
+      const slug = raw.match(/^slug:\s*(.+)$/m)?.[1].trim() ?? f.replace(/\.md$/, "");
+      const date = raw.match(/^date:\s*(.+)$/m)?.[1].trim() ?? new Date().toISOString().slice(0, 10);
+      const group = raw.match(/^group:\s*(.+)$/m)?.[1].trim();
+      out.push({ slug, published_at: date, lang, group });
+    }
+  }
+  return out;
+}
 
 const BASE_URL = "https://zerocard.pro";
 const SUPABASE_URL = "https://shstklmyehdrepyttlhr.supabase.co";
@@ -23,6 +41,7 @@ interface Entry {
   changefreq?: string;
   priority?: string;
   alternatesFor?: string; // neutral path if this URL has language alternates
+  alternates?: { lang: string; href: string }[]; // explicit alternates (translated articles)
 }
 
 async function fetchPosts(): Promise<{ slug: string; published_at: string; lang?: string }[]> {
@@ -55,6 +74,7 @@ function xml(entries: Entry[]) {
               `    <xhtml:link rel="alternate" hreflang="x-default" href="${BASE_URL}${e.alternatesFor}"/>`,
             ]
           : []),
+        ...(e.alternates ?? []).map((a) => `    <xhtml:link rel="alternate" hreflang="${a.lang}" href="${BASE_URL}${a.href}"/>`),
         "  </url>",
       ]
         .filter(Boolean)
@@ -66,7 +86,10 @@ function xml(entries: Entry[]) {
 
 (async () => {
   const today = new Date().toISOString().slice(0, 10);
-  const posts = await fetchPosts();
+  const remote = await fetchPosts();
+  const local = repoPosts();
+  const localKeys = new Set(local.map((p) => `${p.lang}:${p.slug}`));
+  const posts = [...local, ...remote.filter((p) => !localKeys.has(`${p.lang ?? "ru"}:${p.slug}`))];
 
   const entries: Entry[] = [];
 
@@ -74,6 +97,7 @@ function xml(entries: Entry[]) {
   const neutral = [
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/blog", changefreq: "daily", priority: "0.8" },
+    { path: "/about", changefreq: "monthly", priority: "0.5" },
   ];
   for (const n of neutral) {
     for (const lang of LANGS) {
@@ -84,11 +108,20 @@ function xml(entries: Entry[]) {
   // Blog posts under their own language prefix
   for (const p of posts) {
     const lang = (LANGS as readonly string[]).includes(p.lang ?? "") ? (p.lang as Lang) : "ru";
+    const group = (p as { group?: string }).group;
+    const sibs = group ? local.filter((x) => x.group === group) : [];
+    const alternates = sibs.length > 1
+      ? [
+          ...sibs.map((x) => ({ lang: x.lang, href: lp(x.lang as Lang, `/blog/${encodeURIComponent(x.slug)}`) })),
+          ...(sibs.find((x) => x.lang === "en") ? [{ lang: "x-default", href: lp("en", `/blog/${sibs.find((x) => x.lang === "en")!.slug}`) }] : []),
+        ]
+      : undefined;
     entries.push({
       loc: lp(lang, `/blog/${encodeURIComponent(p.slug)}`),
       lastmod: p.published_at?.slice(0, 10),
       changefreq: "monthly",
       priority: "0.7",
+      alternates,
     });
   }
 
