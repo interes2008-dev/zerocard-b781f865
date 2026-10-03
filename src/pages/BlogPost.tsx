@@ -23,6 +23,7 @@ interface BlogPostData {
   lang: string;
   category: string;
   published_at: string;
+  image_url?: string | null;
 }
 
 function estimateReadTime(content: string, lang: string): string {
@@ -419,7 +420,7 @@ export default function BlogPost() {
           "@type": "Article",
           headline: post.title,
           description: post.description,
-          image: `https://zerocard.pro/og/zerocard-${lang}-v4.jpg`,
+          image: post.image_url ? `https://zerocard.pro${post.image_url.replace(/\.webp$/, ".jpg")}` : `https://zerocard.pro/og/zerocard-${lang}-v4.jpg`,
           url: fullUrl,
           datePublished: post.published_at,
           dateModified: updatedAt,
@@ -512,6 +513,16 @@ export default function BlogPost() {
         >
           {post.description}
         </p>
+
+        {post.image_url && (
+          <img
+            src={post.image_url}
+            srcSet={`${post.image_url.replace(/\.webp$/, "-640.webp")} 640w, ${post.image_url} 1200w`}
+            sizes="(min-width: 800px) 760px, 100vw"
+            width={1200} height={675} alt="" decoding="async" fetchPriority="high"
+            className="post-cover"
+          />
+        )}
 
         {/* Gradient separator */}
         <div className="h-px mb-10 origin-left rounded-full"

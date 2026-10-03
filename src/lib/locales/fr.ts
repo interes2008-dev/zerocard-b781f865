@@ -82,7 +82,7 @@ const fr = {
   // How it works
   howBadge: "📋 Comment ça marche",
   howTitle: "Prête en quelques\nétapes simples",
-  howDesc: "Pas de paperasse. Pas de files d'attente. Tout depuis l'app Pionex.",
+  howDesc: "Tout se passe dans l'app Pionex, de l'inscription au premier achat.",
   howTab1: "Obtenir la carte", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Inscription", step1Desc: "Créez un compte Pionex par e-mail ou Google. 2 minutes suffisent.",
   step2Title: "KYC niveau 2", step2Desc: "Photo du document plus selfie. La vérification prend en général 10 minutes.",
@@ -335,7 +335,7 @@ const fr = {
   faq5Q: "La carte est-elle physique ou virtuelle ?",
   faq5A: "La carte principale est virtuelle : vous l'ajoutez à Apple Pay, Google Pay, PayPal et d'autres wallets. Pionex déploie progressivement une Visa physique ; si votre compte est éligible, l'option apparaît dans l'application.",
   faq6Q: "Visa ou Mastercard, laquelle choisir ?",
-  faq6A: "Les avantages sont identiques : jusqu'à 1 % de cashback, 5 % par an sur le solde, pas de cotisation. La différence porte sur les achats hors dollar : Visa prend 1 %, que le cashback compense, Mastercard de 2 % à 3,5 %. Les achats en dollars sont gratuits avec les deux. Pour dépenser en devise locale, Visa est plus avantageuse.",
+  faq6A: "Les deux cartes offrent du cashback et 5 % par an sur le solde, sans cotisation. La différence, ce sont les frais. Selon les données Pionex de septembre 2026, Visa prend 1 % sur chaque achat et le cashback jusqu'à 1 % compense à peu près. Mastercard coûte jusqu'à 3,5 %, et une page de Pionex indique seulement 0,1 % de cashback pour les nouvelles demandes. Si vous avez le choix, prenez Visa. En Chine, Alipay et WeChat Pay ne fonctionnent qu'avec Visa.",
   faq7Q: "Que faire si l'association à Apple Pay échoue ?",
   faq7A: "Assurez-vous que le compte de la carte est approvisionné : certains wallets font un débit test pour la vérification. Si l'association affiche 'contactez l'émetteur', remplissez le formulaire sur support.pionex.com, l'équipe vous aidera sous 3 jours ouvrés.",
   faq8Q: "Comment bloquer la carte si je perds mon téléphone ?",
@@ -362,16 +362,16 @@ const fr = {
   refCTA: "Obtenez votre carte et invitez →",
   refNote: "Le taux et les paliers du programme de parrainage sont fixés par Pionex et peuvent changer. Conditions à jour sur pionex.com.",
   // CTA
-  ctaBadge: "Gratuit · Rapide · Avantageux",
+  ctaBadge: "Environ 10 minutes",
   ctaTitle: "Commencez à dépenser\nvotre crypto dès maintenant",
-  ctaDesc: "Rejoignez les millions d'utilisateurs Pionex qui gagnent déjà du cashback, touchent des intérêts et dépensent leurs USDT comme avec une carte normale.",
+  ctaDesc: "La carte est émise gratuitement dans l'app Pionex. Il faut une pièce d'identité et un selfie pour la vérification, et la demande est en général validée sous un jour.",
   ctaCTA: "Obtenir ZeroCard gratuitement →",
   ctaDocs: "Documentation",
   ctaDisclaimer: "KYC niveau 2 requis · Solde de 10 à 100 USDT pour la demande · Carte virtuelle · Visa et Mastercard",
 
   // Footer
   // Footer columns
-  footTagline: "Une carte crypto pour la vie réelle. Dépensez vos USDT partout dans le monde, gagnez du cashback et gardez le contrôle de votre argent.",
+  footTagline: "Un guide indépendant sur la carte et les bots Pionex. Nous expliquons où la carte fonctionne et ce que coûtent vraiment les achats.",
   footColProduct: "Produit",
   footColResources: "Ressources",
   footColCompany: "Infos",
@@ -385,7 +385,7 @@ const fr = {
 
   // SEO
   metaTitle: "Carte Pionex : dépensez vos USDT à l'étranger, 1% cashback",
-  metaDesc: "Comment dépenser vos USDT avec la carte Pionex à l'étranger et sur les services en ligne : où elle marche, frais Visa et Mastercard, jusqu'à 1% de cashback, 5% par an sur le solde.",
+  metaDesc: "Dépenser vos USDT avec la carte Pionex à l'étranger et en ligne : où elle marche, frais Visa et Mastercard, jusqu'à 1% de cashback, 5% par an.",
 };
 
 export default fr;

@@ -8,6 +8,7 @@ group: grid-bot
 sources: grid-bot, fees
 updated: 2026-09-27
 category: bots
+cover: grid-bot
 ---
 
 Um bot grid não adivinha para onde o mercado vai. Ele monta uma escada de ordens de compra abaixo do preço e de venda acima, e embolsa um lucro pequeno toda vez que o preço vai e volta entre dois degraus. Em mercado lateral funciona bem. Numa tendência forte pode te deixar segurando uma moeda que só cai. Vale entender os dois lados antes de colocar dinheiro.

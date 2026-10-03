@@ -7,6 +7,7 @@ order: 1
 sources: kyc-countries, mica
 updated: 2026-09-27
 category: bots
+cover: mica
 ---
 
 Si vous vivez en France, la réponse courte est non : vous ne pouvez pas ouvrir de compte sur pionex.com. La réponse longue dépend du pays où vous résidez, parce que la francophonie ne se limite pas à l'Hexagone et que les règles changent d'une frontière à l'autre.

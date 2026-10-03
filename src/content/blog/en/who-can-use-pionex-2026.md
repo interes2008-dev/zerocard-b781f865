@@ -7,6 +7,7 @@ order: 3
 sources: kyc-countries, mica
 updated: 2026-09-27
 category: bots
+cover: who-can-use
 ---
 
 Search for Pionex from Berlin, Chicago and Bangalore and you'll end up in three different places. That isn't a glitch. Over the last year the exchange has split along regulatory lines, and the platform you can legally use now depends on your country of residence.

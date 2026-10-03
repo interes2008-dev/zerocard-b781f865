@@ -96,3 +96,19 @@ LANGUAGE AUTO-SELECT
 - Bots and link-preview crawlers are never redirected, so Google/Yandex still index the Russian pages.
 - Choosing a language in the switcher sets cookie zc_lang for a year; that choice always wins.
 - To open the Russian root without redirect for testing: https://zerocard.pro/?stay
+
+HOMEPAGE TOOLS AND IMAGES (October 2026)
+- src/components/HomeTools.tsx: country check, calculator, compact benefits and audience blocks, copy for 7 languages.
+  Country lists (MERCHANT_BLOCKED, SIGNUP_BLOCKED, EU_EEA) are at the top of the file. Update them when Pionex changes its notices.
+- Article covers: public/img/covers/<name>.webp (1200), <name>-640.webp, <name>.jpg (link preview). Each article sets "cover: <name>" in its frontmatter.
+- Hero: public/img/hero-card.webp (poster, first video frame), hero-card-720.webp (phones), hero-card.webm + hero-card.mp4 (8 s loop, desktop only, no sound). HERO_VIDEO in src/pages/Index.tsx switches the video off.
+
+CARD TERMS UPDATE (3 October 2026)
+- Pionex pages checked 3 September 2026 say: Visa 1% on every purchase (USD included), cashback up to 1%;
+  Mastercard up to 3.5%, cashback up to 1% in the review but 0.1% for new applications in the card comparison;
+  accounts with Russian KYC receive Mastercard. Calculator (HomeTools.tsx), FAQ faq6A/faq9A, llms facts and 9 articles follow this.
+- Two Pionex Help Center notices could not be read from the build environment (403):
+  "Pionex VISA Card Rebate Rate Update" and "Notice of Fee Structure Changes for Pionex Card". Check them and update if the numbers differ.
+- New articles: ru/zakon-282-fz-pionex, ru/pionex-card-ili-redotpay, en/pionex-card-vs-redotpay, en/pionex-xstocks-tokenized-stocks,
+  es/tarjeta-pionex-vs-redotpay, pt/xstocks-pionex-acoes-tokenizadas.
+- Sitemap lastmod now uses the article "updated" date.

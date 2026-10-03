@@ -7,6 +7,7 @@ order: 1
 sources: br-bcb
 updated: 2026-09-27
 category: crypto
+cover: stablecoins
 ---
 
 Até o ano passado, mandar USDT para fora do Brasil vivia numa zona cinzenta. Em 2026 isso acabou. As novas regras do Banco Central para ativos virtuais passaram a valer em 2 de fevereiro, e a principal mudança para quem usa stablecoin cabe numa frase: pagamento internacional com stablecoin agora é operação de câmbio.

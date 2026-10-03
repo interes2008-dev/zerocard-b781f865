@@ -8,6 +8,7 @@ group: grid-bot
 sources: grid-bot, fees
 updated: 2026-09-27
 category: bots
+cover: grid-bot
 ---
 
 A grid bot doesn't predict the market. It places a ladder of buy orders below the price and sell orders above it, then collects a small profit every time the price swings between two rungs. In a sideways market that works well. In a strong trend it can leave you holding a falling coin. Both sides are worth understanding before you fund one.

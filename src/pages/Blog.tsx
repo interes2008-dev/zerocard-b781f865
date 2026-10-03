@@ -222,7 +222,17 @@ export default function Blog() {
                   {/* Top gradient line */}
                   <div className="h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.3))" }} />
 
-                  <div className="p-6 md:p-8">
+                  <div className="md:flex">
+                  {post.image_url && (
+                    <img
+                      src={post.image_url.replace(/\.webp$/, "-640.webp")}
+                      srcSet={`${post.image_url.replace(/\.webp$/, "-640.webp")} 640w, ${post.image_url} 1200w`}
+                      sizes="(min-width: 768px) 300px, 100vw"
+                      width={640} height={360} loading={idx < 2 ? "eager" : "lazy"} decoding="async" alt=""
+                      className="blog-cover"
+                    />
+                  )}
+                  <div className="p-6 md:p-8 flex-1 min-w-0">
                     {/* Meta row */}
                     <div className="flex flex-wrap items-center gap-3 mb-3">
                       <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
@@ -255,6 +265,7 @@ export default function Blog() {
                     <span className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200 group-hover:gap-3 text-primary">
                       {({ ru: "Читать", de: "Lesen", es: "Leer", pt: "Ler", it: "Leggi", fr: "Lire" } as Record<string, string>)[lang] ?? "Read"} <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                     </span>
+                  </div>
                   </div>
                 </Link>
               </div>

@@ -17,6 +17,19 @@ export const SOURCE_SETS: Record<string, Source[]> = {
   "card-fees": [
     { title: "Pionex: Pionex Card Review, fees, cashback, APR and eligibility", url: "https://www.pionex.com/blog/pionex-card-review/" },
     { title: "Pionex: Is Pionex Card cashback worth it?", url: "https://www.pionex.com/blog/pionex-card-cashback/" },
+    { title: "Pionex: Best crypto cards for international spending in 2026 (verified September 2026)", url: "https://www.pionex.com/blog/best-crypto-cards-international-spending/" },
+  ],
+  redotpay: [
+    { title: "Pionex: Pionex Card vs RedotPay (2026)", url: "https://www.pionex.com/blog/pionex-card-vs-redotpay/" },
+    { title: "CryptoSlate: RedotPay card review 2026, fees and restricted countries", url: "https://cryptoslate.com/crypto-cards/redotpay-card-review/" },
+  ],
+  xstocks: [
+    { title: "Pionex: xStocks introduction, tokenized stocks and bots", url: "https://www.pionex.com/blog/xstocks/" },
+  ],
+  "ru-law-282": [
+    { title: "vc.ru: закон 282-ФЗ «О цифровых валютах и цифровых правах» вступил в силу 1 сентября 2026", url: "https://vc.ru/crypto/3116215-novyj-zakon-o-kriptovaljute-v-rossii" },
+    { title: "Long-Short: закон 282-ФЗ, что меняется для инвестора", url: "https://long-short.ru/article/zakon-o-cifrovyh-valyutah-282-fz-chto-menyaetsya" },
+    { title: "Хабр: что можно с криптовалютой в России с 1 сентября 2026", url: "https://habr.com/ru/articles/1077642/" },
   ],
   "grid-bot": [
     { title: "Pionex: Grid bot parameters explained", url: "https://www.pionex.com/blog/grid-bot-parameters/" },

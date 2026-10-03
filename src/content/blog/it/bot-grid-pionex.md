@@ -9,6 +9,7 @@ sources: grid-bot, mica
 updated: 2026-09-27
 category: bots
 audience: eu
+cover: grid-bot
 ---
 
 Un bot grid non prevede il mercato. Mette una scala di ordini di acquisto sotto il prezzo e di vendita sopra, e incassa un piccolo guadagno ogni volta che il prezzo oscilla tra due gradini. In un mercato laterale funziona bene. In un trend forte ti lascia con monete che continuano a scendere. Conviene capire entrambi i lati prima di metterci soldi.

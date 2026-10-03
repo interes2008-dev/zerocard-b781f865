@@ -82,7 +82,7 @@ const en = {
   // How it works
   howBadge: "📋 How it works",
   howTitle: "Ready in a few\nsimple steps",
-  howDesc: "No paperwork. No queues. Everything from the Pionex app.",
+  howDesc: "Everything happens in the Pionex app, from sign-up to your first purchase.",
   howTab1: "Get card", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registration", step1Desc: "Create a Pionex account with email or Google. Takes 2 minutes.",
   step2Title: "KYC Level 2", step2Desc: "Passport photo + selfie. Verification usually takes 10 minutes.",
@@ -335,7 +335,7 @@ const en = {
   faq5Q: "Is the card physical or virtual?",
   faq5A: "The main card is virtual: you add it to Apple Pay, Google Pay, PayPal and other wallets. Pionex is rolling out a physical Visa gradually; if your account is eligible, the option shows up in the app.",
   faq6Q: "Visa or Mastercard: which to choose?",
-  faq6A: "Rewards are the same: up to 1% cashback, 5% APR on the balance, no annual fee. The difference is in non-USD purchases: Visa charges 1%, which the cashback offsets, while Mastercard charges 2% to 3.5%. USD purchases are free on both. For spending in local currency, Visa is the better pick.",
+  faq6A: "Both cards get cashback and 5% APR on the balance, with no annual fee. The difference is the fee. Per Pionex data from September 2026, Visa takes 1% on every purchase and the cashback of up to 1% roughly offsets it. Mastercard charges up to 3.5%, and one Pionex page lists cashback for new applications at just 0.1%. If you can choose, take Visa. In China, Alipay and WeChat Pay only work with Visa.",
   faq7Q: "What if Apple Pay linking fails?",
   faq7A: "Make sure the card account has funds: some wallets do a test charge for verification. If linking shows 'contact issuer', fill out the form at support.pionex.com and the team will help within 3 business days.",
   faq8Q: "How to freeze the card if phone is lost?",
@@ -362,16 +362,16 @@ const en = {
   refCTA: "Get your card and start inviting →",
   refNote: "The rate and referral tiers are set by Pionex and can change. Current terms on pionex.com.",
   // CTA
-  ctaBadge: "Free · Fast · Profitable",
+  ctaBadge: "Takes about 10 minutes",
   ctaTitle: "Start spending crypto\nright now",
-  ctaDesc: "Join millions of Pionex users who already earn cashback, earn interest and spend USDT like a regular card.",
+  ctaDesc: "The card is issued for free in the Pionex app. You'll need an ID and a selfie for verification, and the application is usually approved within a day.",
   ctaCTA: "Get ZeroCard for free →",
   ctaDocs: "Documentation",
   ctaDisclaimer: "KYC Level 2 required · 10 to 100 USDT balance to apply · Virtual card · Visa & Mastercard",
 
   // Footer
   // Footer columns
-  footTagline: "A crypto card for real life. Spend USDT worldwide, earn cashback and keep your money under control.",
+  footTagline: "An independent guide to the Pionex card and bots. We explain where the card works and what purchases really cost.",
   footColProduct: "Product",
   footColResources: "Resources",
   footColCompany: "Info",

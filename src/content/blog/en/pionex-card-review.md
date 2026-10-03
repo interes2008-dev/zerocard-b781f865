@@ -1,13 +1,14 @@
 ---
 slug: pionex-card-review
 title: "Pionex Card review 2026: real fees, limits and where it works"
-description: "An honest look at the Pionex Card: Visa vs Mastercard costs in local currency, cashback exclusions, limits, 5% APR and the countries where payments get declined."
+description: "An honest look at the Pionex Card: Visa vs Mastercard fees, cashback exclusions, limits, 5% APR and the countries where payments get declined."
 date: 2026-09-27
 order: 1
 group: card-cost
 sources: card-fees, card-restrictions, kyc-countries
-updated: 2026-09-27
+updated: 2026-10-03
 category: card
+cover: card-cost
 ---
 
 The Pionex Card turns a USDT balance into a Visa or Mastercard you can add to Apple Pay or Google Pay. The headline numbers are easy to find: up to 1% cashback, 5% APR on the balance, no annual fee. What matters more is how those numbers behave when you pay in pesos, rupees or baht. Let's run them.
@@ -23,26 +24,24 @@ If you live elsewhere, you need:
 
 Approval is decided account by account, so treat it as likely rather than guaranteed.
 
-## The cost of a purchase depends on the currency
+## What a purchase costs
 
-Your card balance is USDT, which Pionex values one to one with the US dollar.
+Your card balance is USDT, which Pionex values one to one with the US dollar. The fees changed in September 2026. In the card review Pionex last verified on September 3, 2026:
 
-**Paying in dollars.** No conversion, no fee, and up to 1% cashback on top. You come out ahead.
+- **Visa:** 1% on every purchase, dollars included, with up to 1% cashback on eligible spending. Roughly a wash.
+- **Mastercard:** up to 3.5% on every purchase. The review lists cashback of up to 1%, while Pionex's card comparison from the same date puts it at 0.1% for new Mastercard applications.
 
-**Paying in any other currency.** A conversion fee applies:
+Earlier Pionex pages said dollar purchases carried no fee. The newer ones apply the fee to everything, so that's how we count it.
 
-- Visa: 1%, which the 1% cashback cancels out;
-- Mastercard: higher. Pionex's own pages list 2% in one place and up to 3.5% in another, and the cashback only covers part of it.
+A month for someone in Manila spending $1,500 on the card:
 
-Here's a month for someone in Manila spending $1,200 in pesos and $300 on dollar subscriptions:
-
-| | Visa | Mastercard (at 2%) |
+| | Visa | Mastercard (worst case) |
 |---|---|---|
-| Subscriptions $300 | +$3 cashback | +$3 cashback |
-| Local spending $1,200 | $12 fee, $12 cashback | $24 fee, $12 cashback |
-| Net for the month | +$3 | −$9 |
+| Fee | $15 | $52.50 |
+| Cashback | up to $15 | $1.50 |
+| Net for the month | about $0 | about −$51 |
 
-That gap is $144 a year, using the low end of the Mastercard fee. If you get to choose, choose Visa.
+If you get to choose, choose Visa. The [calculator on our homepage](/en#calc) runs the numbers for your own spending.
 
 ## Limits
 
@@ -51,7 +50,7 @@ That gap is $144 a year, using the low end of the Mastercard fee. If you get to 
 | Per purchase | 10,000 USDT | 20,000 USDT |
 | Per day | 10,000 USDT | 20,000 USDT |
 | Per month | 50,000 USDT | 100,000 USDT |
-| Physical card | rolling out gradually | virtual only |
+| Physical card | by invitation and in some promotions | virtual only |
 | Cash withdrawals | 2% plus ATM fee | not supported |
 
 Visa also adds to Apple Pay in one tap from the Pionex app and is the only network Pionex supports for Alipay and WeChat Pay.
@@ -74,7 +73,7 @@ USDT sitting on the card account earns 5% a year, credited every hour, and stays
 
 ## Verdict
 
-For someone outside the restricted lists who already holds USDT, the Visa version is a genuinely cheap way to spend: close to zero on local purchases and 1% back on dollar ones. The Mastercard only makes sense for large business payments that need its higher limits.
+For someone outside the restricted lists who already holds USDT, the Visa version is a cheap way to spend: the 1% fee and the cashback roughly cancel out. The Mastercard costs up to 3.5% a purchase, so it makes sense only when Visa isn't offered to you or you need its higher limits.
 
 [Open a Pionex account](https://www.pionex.com/en/signUp?r=0uHzysLVYQh)
 

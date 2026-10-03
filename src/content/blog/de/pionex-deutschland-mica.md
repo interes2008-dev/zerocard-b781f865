@@ -8,6 +8,7 @@ sources: mica, kyc-countries
 updated: 2026-09-27
 category: bots
 audience: eu
+cover: mica
 ---
 
 Wer 2026 aus Deutschland nach Pionex sucht, stößt schnell auf einen zweiten Namen: Webot. Das ist kein Zufall und auch kein Klon. Dahinter steckt die europäische Kryptoregulierung MiCA, deren Übergangsfrist am 1. Juli 2026 ausgelaufen ist.

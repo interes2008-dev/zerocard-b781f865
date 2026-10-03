@@ -9,6 +9,8 @@
 Options -Indexes -MultiViews +FollowSymLinks
 AddDefaultCharset utf-8
 AddType text/markdown .md
+AddType video/webm .webm
+AddType video/mp4 .mp4
 AddCharset utf-8 .md .txt .xml
 DirectoryIndex index.html
 DirectorySlash Off
@@ -52,7 +54,7 @@ DirectorySlash Off
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
-  <FilesMatch "\.(js|css|woff2?|png|jpe?g|webp|svg|ico)$">
+  <FilesMatch "\.(js|css|woff2?|png|jpe?g|webp|svg|ico|mp4|webm)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
   <Files "sw.js">

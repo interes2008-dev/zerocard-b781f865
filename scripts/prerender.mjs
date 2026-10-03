@@ -32,7 +32,7 @@ const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;"
 const inlineJson = (obj) => JSON.stringify(obj).replace(/</g, "\\u003c");
 const setMeta = (doc, re, rep) => doc.replace(re, rep);
 
-function buildDoc({ lang, html, title, description, canonical, ogType, inlineScripts, neutralPath, extraHead }) {
+function buildDoc({ lang, html, title, description, canonical, ogType, inlineScripts, neutralPath, extraHead, ogImg }) {
   let doc = template;
   doc = doc.replace(/<html lang="[^"]*"/, `<html lang="${lang}"`);
   doc = setMeta(doc, /<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
@@ -50,7 +50,9 @@ function buildDoc({ lang, html, title, description, canonical, ogType, inlineScr
   doc = setMeta(doc, /<meta property="og:image:alt" content="[^"]*">/, `<meta property="og:image:alt" content="${esc(title)}">`);
   doc = setMeta(doc, /<meta name="twitter:image:alt" content="[^"]*">/, `<meta name="twitter:image:alt" content="${esc(title)}">`);
   // Localized preview image (1200x630 JPEG). The versioned file name makes X/Telegram fetch it fresh.
-  const img = ogImage(lang);
+  const img = ogImg?.url || ogImage(lang);
+  doc = setMeta(doc, /<meta property="og:image:width" content="[^"]*">/, `<meta property="og:image:width" content="${ogImg?.w || 1200}">`);
+  doc = setMeta(doc, /<meta property="og:image:height" content="[^"]*">/, `<meta property="og:image:height" content="${ogImg?.h || 630}">`);
   doc = setMeta(doc, /<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${img}">`);
   doc = setMeta(doc, /<meta property="og:image:secure_url" content="[^"]*">/, `<meta property="og:image:secure_url" content="${img}">`);
   doc = setMeta(doc, /<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${img}">`);
@@ -154,7 +156,10 @@ for (const post of posts) {
   const title = post.title;
   const inline = `<script>window.__ZC_LANG__=${JSON.stringify(lang)};window.__ZC_T__=${inlineJson(t)};window.__ZC_POST__=${inlineJson(post)};</script>`;
   const mdLink = post.content ? `<link rel="alternate" type="text/markdown" href="${BASE}${url}.md" title="Markdown">` : "";
-  let doc = buildDoc({ lang, html, title, description: post.description, canonical: BASE + url, ogType: "article", inlineScripts: inline, extraHead: `${helmetScripts}\n    ${mdLink}` });
+  // Article cover (public/img/covers/<name>.jpg, 1200x675) doubles as its link preview.
+  const ogImg = post.image_url && /^\/img\//.test(post.image_url)
+    ? { url: BASE + post.image_url.replace(/\.webp$/, ".jpg"), w: 1200, h: 675 } : null;
+  let doc = buildDoc({ lang, html, title, description: post.description, canonical: BASE + url, ogType: "article", inlineScripts: inline, extraHead: `${helmetScripts}\n    ${mdLink}`, ogImg });
   // Articles in the same translation group point at each other; others only at themselves.
   const siblings = post.group ? posts.filter((p) => p.group === post.group) : [post];
   const alt = siblings
@@ -211,7 +216,7 @@ const FACTS = [
   "The Pionex Card is a virtual Visa or Mastercard funded with USDT; Pionex values USDT 1:1 with the US dollar.",
   "Cashback: up to 1% on eligible purchases, with exclusions (for example eToro, TikTok, Wise). Refunds reverse the cashback.",
   "5% APR on the USDT card balance, credited hourly; a current product term that can change.",
-  "Fees: USD purchases have no conversion fee. Non-USD purchases: Visa 1% (offset by the 1% cashback), Mastercard 2% to 3.5% per Pionex materials.",
+  "Fees (Pionex data, September 2026): Visa takes 1% on every purchase, roughly offset by cashback of up to 1%. Mastercard charges up to 3.5%; one Pionex page lists 0.1% cashback for new Mastercard applications. A September 2026 Pionex page says accounts verified with Russian KYC receive Mastercard instead of Visa.",
   "Limits: Visa 10,000 USDT per purchase and per day, 50,000 per month; Mastercard 20,000 / 20,000 / 100,000.",
   "Pionex declines card payments at merchants registered or operating in Russia, Belarus, Ukraine, Iran, Venezuela, Myanmar, Afghanistan and North Korea (notice of June 2026). Foreign cards do not work at Russian terminals.",
   "Pionex does not accept registration/KYC from the US, Canada, the UK, France, the Netherlands, Austria, Japan, Singapore, China, Hong Kong, among others.",

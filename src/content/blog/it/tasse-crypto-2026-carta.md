@@ -8,6 +8,7 @@ sources: it-tax
 updated: 2026-09-27
 category: crypto
 audience: eu
+cover: tax
 ---
 
 Il 2026 è l'anno in cui la crypto in Italia è diventata più cara da tenere e da usare. L'aliquota sulle plusvalenze è salita, la soglia di esenzione è sparita e dal 2026 gli exchange raccolgono i dati dei clienti per il fisco. Chi paga la spesa con una carta crypto deve saperlo, perché anche quella è un'operazione fiscale.

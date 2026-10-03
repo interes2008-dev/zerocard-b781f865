@@ -82,7 +82,7 @@ const es = {
   // How it works
   howBadge: "📋 Cómo funciona",
   howTitle: "Lista en unos\npasos sencillos",
-  howDesc: "Sin papeleo. Sin colas. Todo desde la app de Pionex.",
+  howDesc: "Todo se hace en la app de Pionex, desde el registro hasta la primera compra.",
   howTab1: "Obtener tarjeta", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registro", step1Desc: "Crea una cuenta de Pionex con tu correo o con Google. Tarda 2 minutos.",
   step2Title: "KYC nivel 2", step2Desc: "Foto del pasaporte más un selfie. La verificación suele tardar 10 minutos.",
@@ -335,7 +335,7 @@ const es = {
   faq5Q: "¿La tarjeta es física o virtual?",
   faq5A: "La tarjeta principal es virtual: la añades a Apple Pay, Google Pay, PayPal y otras carteras. Pionex está lanzando una Visa física de forma gradual; si tu cuenta califica, la opción aparece en la app.",
   faq6Q: "¿Visa o Mastercard, cuál elijo?",
-  faq6A: "Los beneficios son los mismos: hasta 1% de reembolso, 5% anual sobre el saldo y sin cuota anual. La diferencia está en las compras que no son en dólares: Visa cobra un 1%, que el reembolso compensa, y Mastercard entre un 2% y un 3,5%. Las compras en dólares son gratis con las dos. Para gastar en moneda local, mejor Visa.",
+  faq6A: "Las dos tarjetas tienen reembolso y 5% anual sobre el saldo, sin cuota anual. La diferencia está en la comisión. Según datos de Pionex de septiembre de 2026, Visa cobra un 1% por compra y el reembolso de hasta 1% lo compensa más o menos. Mastercard cobra hasta un 3,5%, y una página de Pionex indica solo un 0,1% de reembolso para solicitudes nuevas. Si puedes elegir, quédate con Visa. En China, Alipay y WeChat Pay solo funcionan con Visa.",
   faq7Q: "¿Y si falla la vinculación con Apple Pay?",
   faq7A: "Comprueba que la cuenta de la tarjeta tenga saldo, porque algunas carteras hacen un cargo de prueba para verificar. Si al vincular aparece 'contacta con el emisor', rellena el formulario en support.pionex.com y el equipo te ayudará en 3 días hábiles.",
   faq8Q: "¿Cómo congelo la tarjeta si pierdo el móvil?",
@@ -362,16 +362,16 @@ const es = {
   refCTA: "Consigue tu tarjeta e invita →",
   refNote: "La tasa y los niveles del programa de referidos los fija Pionex y pueden cambiar. Consulta las condiciones actuales en pionex.com.",
   // CTA
-  ctaBadge: "Gratis · Rápido · Rentable",
+  ctaBadge: "Te lleva unos 10 minutos",
   ctaTitle: "Empieza a gastar cripto\nahora mismo",
-  ctaDesc: "Únete a los millones de usuarios de Pionex que ya reciben reembolsos, ganan intereses y gastan USDT como con cualquier tarjeta.",
+  ctaDesc: "La tarjeta se emite gratis en la app de Pionex. Para la verificación necesitas un documento y un selfie, y la solicitud suele aprobarse en un día.",
   ctaCTA: "Consigue ZeroCard gratis →",
   ctaDocs: "Documentación",
   ctaDisclaimer: "Se necesita KYC nivel 2 · saldo de 10 a 100 USDT para solicitarla · tarjeta virtual · Visa y Mastercard",
 
   // Footer
   // Footer columns
-  footTagline: "Una tarjeta cripto para la vida real. Paga con USDT por el mundo, gana reembolso y mantén tu dinero bajo control.",
+  footTagline: "Una guía independiente sobre la tarjeta y los bots de Pionex. Explicamos dónde funciona la tarjeta y cuánto cuestan de verdad las compras.",
   footColProduct: "Producto",
   footColResources: "Recursos",
   footColCompany: "Info",
@@ -385,7 +385,7 @@ const es = {
 
   // SEO
   metaTitle: "Tarjeta Pionex: gasta USDT en el extranjero, 1% de reembolso",
-  metaDesc: "Cómo gastar USDT con la tarjeta Pionex fuera de tu país y en servicios online: dónde funciona, comisiones de Visa y Mastercard, hasta 1% de reembolso, 5% anual sobre el saldo.",
+  metaDesc: "Cómo gastar USDT con la tarjeta Pionex fuera de tu país y online: dónde funciona, comisiones de Visa y Mastercard, hasta 1% de reembolso, 5% anual.",
 };
 
 export default es;

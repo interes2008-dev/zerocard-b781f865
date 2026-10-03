@@ -8,6 +8,7 @@ sources: de-tax
 updated: 2026-09-27
 category: crypto
 audience: eu
+cover: tax
 ---
 
 Die Ein-Jahres-Regel war bisher das stärkste Argument für Krypto in Deutschland: Wer seine Coins länger als zwölf Monate hält, verkauft steuerfrei. Im September 2026 ist ein Entwurf aus dem Bundesfinanzministerium bekannt geworden, der genau das ändern will. Hier der Stand, ohne Panik und ohne Schönfärberei.

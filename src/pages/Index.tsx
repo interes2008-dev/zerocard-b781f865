@@ -1,20 +1,14 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { useI18n, langHref } from "@/lib/i18n";
-import { ArrowRight, Menu, X, Sun, Moon, Copy, Check } from "lucide-react";
-import { BenefitIcon, IconDefs, StepIcon, PainIcon, WalletIcon, type WalletIconName, ReferralIcon } from "@/components/BenefitIcons";
+import { ArrowRight, Menu, X, Sun, Moon } from "lucide-react";
+import { IconDefs, StepIcon, WalletIcon, type WalletIconName } from "@/components/BenefitIcons";
 import { LangSwitcher } from "@/components/LangSwitcher";
+import { CountryCheckSection, CalculatorSection, BenefitsCompact, AudienceCompact, toolsCopy } from "@/components/HomeTools";
 import { Link } from "react-router-dom";
 import { STATIC_POSTS } from "@/lib/staticPosts";
 
-import avatar1 from "@/assets/avatar-1.png";
-import avatar2 from "@/assets/avatar-2.png";
-import avatar3 from "@/assets/avatar-3.png";
-import avatar4 from "@/assets/avatar-4.png";
-import avatar5 from "@/assets/avatar-5.png";
-import avatar6 from "@/assets/avatar-6.png";
 
-const AVATAR_IMAGES = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6];
 
 // Pionex UI locale: Russian for /, English for every other language version.
 const signupUrlFor = (lang: string) => `https://www.pionex.com/${lang === "ru" ? "ru" : "en"}/signUp?r=0uHzysLVYQh`;
@@ -211,7 +205,7 @@ function Navbar() {
     { label: t.navBenefits, href: "#benefits" },
     { label: t.navAudience, href: "#audience" },
     { label: t.navHow, href: "#how" },
-    { label: t.navCompare, href: "#compare" },
+    { label: toolsCopy(lang).calcBadge, href: "#calc" },
     { label: t.navFAQ, href: "#faq" },
     { label: lang === "ru" ? "Блог" : "Blog", href: langHref(lang, "/blog") },
   ];
@@ -281,35 +275,30 @@ function Navbar() {
 /* ═══════════════════════════════════════════════════
    HERO (with typewriter)
    ═══════════════════════════════════════════════════ */
+// Set to true once public/img/hero-card.mp4 is in place.
+const HERO_VIDEO = true;
+
 function HeroSection() {
   const SIGNUP_URL = useSignupUrl();
   const { lang } = useI18n();
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  // The looping video only loads on wide screens with motion allowed and no data saver.
+  const [showVideo, setShowVideo] = useState(false);
   useEffect(() => {
-    const stage = stageRef.current;
-    const card = cardRef.current;
-    if (!stage || !card) return;
-    const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (rm || !window.matchMedia("(pointer:fine)").matches) return;
-    const onMove = (e: MouseEvent) => {
-      const r = stage.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `rotateX(${8 - y * 10}deg) rotateY(${-14 + x * 14}deg)`;
-    };
-    const onLeave = () => { card.style.transform = "rotateX(8deg) rotateY(-14deg)"; };
-    stage.addEventListener("mousemove", onMove);
-    stage.addEventListener("mouseleave", onLeave);
-    return () => {
-      stage.removeEventListener("mousemove", onMove);
-      stage.removeEventListener("mouseleave", onLeave);
-    };
+    const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
+    const ok = window.matchMedia("(min-width: 1024px)").matches
+      && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      && !nav.connection?.saveData;
+    if (!ok || !HERO_VIDEO) return;
+    const id = window.setTimeout(() => setShowVideo(true), 1200);
+    return () => window.clearTimeout(id);
   }, []);
 
   const copies = {
     ru: {
+    photoAlt: "Металлическая карта с оранжевой подсветкой",
     badge: "Pionex Card · Visa & Mastercard · кэшбэк до 1%",
     h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "за границей",
     sub: (<>Карта биржи <b>Pionex</b>, зарегистрированной в FinCEN (США). Пополняете её в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите за границей и в зарубежных онлайн-сервисах. В российских магазинах карта не работает: это ограничение Pionex, подробно <a href="/blog/pionex-card-v-rossii" className="underline underline-offset-2">в нашем разборе</a>.</>),
@@ -322,8 +311,9 @@ function HeroSection() {
     trust: "Кошельки и сервисы, с которыми работает карта",
     },
     de: {
+    photoAlt: "Metallkarte mit orangefarbener Kante",
     badge: "Pionex Card · Visa & Mastercard · bis zu 1% Cashback",
-    h1a: "USDT im Wallet.", h1b: "Zahle mit Krypto", h1accent: "überall auf der Welt",
+    h1a: "USDT im Wallet.", h1b: "Zahle mit Krypto", h1accent: "im Ausland und online",
     sub: (<>ZeroCard läuft über die Börse <b>Pionex</b>, bei FinCEN in den USA als MSB registriert. Du lädst die Karte mit USDT, hinterlegst sie in <b>Apple&nbsp;Pay</b> oder <b>Google&nbsp;Pay</b> und zahlst überall, wo Visa akzeptiert wird, außer bei Händlern aus den Ländern, die Pionex sperrt. Ohne Bankkonto und ohne Einkommensnachweis.</>),
     cta1: "Karte kostenlos holen", cta2: "So funktioniert's",
     st1: "Länder zum Bezahlen", st2: "Cashback bei jedem Einkauf", st3: "Zinsen aufs USDT-Guthaben", st4: "Ausgabe und Führung",
@@ -334,8 +324,9 @@ function HeroSection() {
     trust: "Die Karte läuft dort, wo du längst bezahlst",
     },
     en: {
+    photoAlt: "Metal card with an orange glowing edge",
     badge: "Pionex Card · Visa & Mastercard · up to 1% cashback",
-    h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "everywhere you go",
+    h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "abroad and online",
     sub: (<>ZeroCard runs on <b>Pionex</b>, an exchange registered with FinCEN in the US as an MSB. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend wherever Visa works, except at merchants from the countries Pionex restricts. No bank account and no income checks.</>),
     cta1: "Get your free card", cta2: "How it works",
     st1: "countries to spend in", st2: "cashback on every purchase", st3: "APR on your USDT balance", st4: "issue and maintenance fees",
@@ -346,8 +337,9 @@ function HeroSection() {
     trust: "Works everywhere you already pay",
     },
     es: {
+    photoAlt: "Tarjeta metálica con borde naranja",
     badge: "Pionex Card · Visa & Mastercard · hasta 1% de reembolso",
-    h1a: "USDT en tu saldo.", h1b: "Paga con cripto", h1accent: "por todo el mundo",
+    h1a: "USDT en tu saldo.", h1b: "Paga con cripto", h1accent: "en el extranjero",
     sub: (<>ZeroCard funciona con el exchange <b>Pionex</b>, registrado como MSB ante FinCEN en EE.UU. Recargas la tarjeta en USDT, la añades a <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> y pagas donde acepten Visa, salvo en comercios de los países que Pionex restringe. Sin banco y sin justificar ingresos.</>),
     cta1: "Consigue tu tarjeta gratis", cta2: "Cómo funciona",
     st1: "países donde pagar", st2: "de reembolso en cada compra", st3: "anual sobre el saldo en USDT", st4: "emisión y mantenimiento",
@@ -358,8 +350,9 @@ function HeroSection() {
     trust: "La tarjeta funciona donde ya pagas",
     },
     pt: {
+    photoAlt: "Cartão de metal com borda laranja",
     badge: "Pionex Card · Visa & Mastercard · até 1% de cashback",
-    h1a: "USDT no saldo.", h1b: "Pague com cripto", h1accent: "pelo mundo todo",
+    h1a: "USDT no saldo.", h1b: "Pague com cripto", h1accent: "no exterior",
     sub: (<>O ZeroCard funciona com a corretora <b>Pionex</b>, registrada como MSB na FinCEN dos EUA. Você recarrega o cartão em USDT, adiciona ao <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> e paga onde aceitam Visa, exceto em estabelecimentos dos países que a Pionex restringe. Sem banco e sem comprovar renda.</>),
     cta1: "Pegue seu cartão grátis", cta2: "Como funciona",
     st1: "países para pagar", st2: "de cashback em cada compra", st3: "ao ano sobre o saldo em USDT", st4: "emissão e manutenção",
@@ -370,8 +363,9 @@ function HeroSection() {
     trust: "O cartão funciona onde você já paga",
     },
     it: {
+    photoAlt: "Carta in metallo con bordo arancione",
     badge: "Pionex Card · Visa & Mastercard · fino all'1% di cashback",
-    h1a: "USDT sul saldo.", h1b: "Paga in crypto", h1accent: "in tutto il mondo",
+    h1a: "USDT sul saldo.", h1b: "Paga in crypto", h1accent: "all'estero",
     sub: (<>ZeroCard funziona con l'exchange <b>Pionex</b>, registrato come MSB presso FinCEN negli Stati Uniti. Ricarichi la carta in USDT, la aggiungi ad <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> e paghi dove accettano Visa, tranne che presso esercenti dei paesi che Pionex limita. Senza banca e senza prove di reddito.</>),
     cta1: "Ottieni la carta gratis", cta2: "Come funziona",
     st1: "paesi dove pagare", st2: "di cashback su ogni acquisto", st3: "annuo sul saldo in USDT", st4: "emissione e gestione",
@@ -382,8 +376,9 @@ function HeroSection() {
     trust: "La carta funziona dove paghi già",
     },
     fr: {
+    photoAlt: "Carte en métal au bord orange",
     badge: "Pionex Card · Visa & Mastercard · jusqu'à 1 % de cashback",
-    h1a: "USDT sur le solde.", h1b: "Payez en crypto", h1accent: "partout dans le monde",
+    h1a: "USDT sur le solde.", h1b: "Payez en crypto", h1accent: "à l'étranger",
     sub: (<>ZeroCard fonctionne avec l'exchange <b>Pionex</b>, enregistré comme MSB auprès du FinCEN aux États-Unis. Vous rechargez la carte en USDT, vous l'ajoutez à <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> et vous payez là où Visa est acceptée, sauf chez les marchands des pays que Pionex restreint. Sans banque ni justificatif de revenus.</>),
     cta1: "Obtenez votre carte gratuite", cta2: "Comment ça marche",
     st1: "pays où payer", st2: "de cashback sur chaque achat", st3: "par an sur le solde en USDT", st4: "émission et gestion",
@@ -441,20 +436,19 @@ function HeroSection() {
 
         {/* RIGHT COLUMN: PIONEX-STYLE CARD */}
         <div className="card-stage" ref={stageRef}>
-          <div className="pcard" ref={cardRef}>
-            <div className="stripes"><span className="s1" /><span className="s2" /></div>
-            <div className="card-top">
-              <svg className="p-logo" viewBox="0 0 48 36" fill="none" aria-hidden="true">
-                <rect x="1" y="1" width="46" height="34" rx="7" fill="rgba(255,255,255,.28)" stroke="rgba(255,255,255,.55)" strokeWidth="1.5" />
-                <path d="M1 12h14M1 24h14M33 12h14M33 24h14M15 1v34M33 1v34M15 18h18" stroke="rgba(255,255,255,.6)" strokeWidth="1.5" />
-              </svg>
-              <div className="status-pill">{c.status}</div>
-            </div>
-            <div className="card-mid"><div className="tier">virtual · usdt</div></div>
-            <div className="card-bottom">
-              <div className="card-num"><span className="dots">•&nbsp;•&nbsp;•&nbsp;•</span> 5157</div>
-              <div className="mc"><i /><i /></div>
-            </div>
+          <div className="hero-photo" ref={cardRef}>
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/img/hero-card-720.webp" />
+              <img src="/img/hero-card.webp" width={960} height={720} alt={c.photoAlt} fetchPriority="high" decoding="async" />
+            </picture>
+            {showVideo && (
+              <video className="hero-photo__video" poster="/img/hero-card.webp"
+                autoPlay muted loop playsInline preload="auto" aria-hidden="true"
+                onPlaying={(e) => e.currentTarget.classList.add("is-on")}>
+                <source src="/img/hero-card.webm" type="video/webm" />
+                <source src="/img/hero-card.mp4" type="video/mp4" />
+              </video>
+            )}
           </div>
 
           <div className="float-chip fc-1">
@@ -490,162 +484,46 @@ function HeroSection() {
 }
 
 
-/* ═══════════════════════════════════════════════════
-   STATS BAR
-   ═══════════════════════════════════════════════════ */
-function StatsBar() {
-  const { t } = useI18n();
-  const stats = [
-    { val: t.stat1Val, label: t.stat1Label },
-    { val: t.stat2Val, label: t.stat2Label },
-    { val: t.stat3Val, label: t.stat3Label },
-    { val: t.stat4Val, label: t.stat4Label },
-  ];
 
+
+
+
+
+
+function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, checkmarks }: {
+  icon: WalletIconName; name: string; type: string; steps: string[];
+  badge?: string; badgeColor?: string; featured?: boolean; checkmarks?: boolean;
+}) {
   return (
-    <div className="border-t border-b py-8 px-5 md:px-10 backdrop-blur-sm"
-      style={{ background: "color-mix(in srgb, var(--bg2) 82%, transparent)", borderColor: "var(--border-custom)" }}>
-      <div className="max-w-[1160px] mx-auto grid grid-cols-2 lg:grid-cols-4">
-        {stats.map((s, i) => (
-          <FadeIn key={s.label} delay={i * 0.05}>
-            <div className="text-center px-6" style={{ borderRight: i < stats.length - 1 ? "1px solid var(--border-custom)" : "none" }}>
-              <div className="text-4xl font-bold tracking-tight" style={{ color: "var(--blue)", letterSpacing: "-1.5px", fontFamily: "'Space Grotesk', sans-serif" }}><CountUp value={s.val} /></div>
-              <div className="text-[13px] font-medium mt-1" style={{ color: "var(--text2)" }}>{s.label}</div>
+    <div className="glass-card glass-card-hover p-6"
+      style={featured ? { background: "var(--accent-bg)", borderColor: "var(--accent-border)" } : {}}>
+      <div className="flex justify-between items-center mb-5">
+        <WalletIcon name={icon} />
+        {badge && (
+          <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full"
+            style={{
+              background: badgeColor === "blue" ? "var(--blue-bg)" : "var(--green-bg)",
+              color: badgeColor === "blue" ? "var(--blue)" : "var(--green)",
+              fontFamily: "'JetBrains Mono', monospace",
+            }}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <h3 className="text-[17px] font-bold mb-1" style={featured ? { color: "var(--accent-color)", fontFamily: "'Space Grotesk', sans-serif" } : { fontFamily: "'Space Grotesk', sans-serif" }}>{name}</h3>
+      <div className="text-xs mb-4" style={{ color: "var(--text3)" }}>{type}</div>
+      <div className="flex flex-col gap-1.5">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-start gap-2.5 text-[13px] leading-[1.5]" style={{ color: "var(--text2)" }}>
+            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-bold"
+              style={{ background: "var(--accent-bg)", color: "var(--accent-color)" }}>
+              {checkmarks ? "✓" : i + 1}
             </div>
-          </FadeIn>
+            {step}
+          </div>
         ))}
       </div>
     </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   PAIN vs SOLUTION
-   ═══════════════════════════════════════════════════ */
-function PainSection() {
-  const { t } = useI18n();
-  const bads = [t.painBad1, t.painBad2, t.painBad3, t.painBad4, t.painBad5];
-  const goods = [t.painGood1, t.painGood2, t.painGood3, t.painGood4, t.painGood5];
-  const badIcons = ["locked", "drain", "wait", "declining", "geoblock"] as const;
-  const goodIcons = ["instant", "offset", "ready", "yield", "global"] as const;
-
-  return (
-    <section className="py-24 px-5 md:px-10">
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="section-head mb-2">
-            <div className="section-badge">{t.painBadge}</div>
-            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.painTitle}</h2>
-            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.painDesc}</p>
-          </div>
-        </FadeIn>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-14">
-          <div>
-            <FadeIn>
-              <div className="text-[13px] font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: "var(--red)" }}>
-                {t.painBadLabel}
-              </div>
-            </FadeIn>
-            <div className="flex flex-col gap-2.5">
-              {bads.map((text, i) => (
-                <FadeIn key={i} delay={i * 0.04}>
-                  <div className="pain-row bad">
-                    <PainIcon name={badIcons[i]} variant="bad" />
-                    <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-          <div>
-            <FadeIn>
-              <div className="text-[13px] font-bold uppercase tracking-wider mb-4 flex items-center gap-2" style={{ color: "var(--green)" }}>
-                {t.painGoodLabel}
-              </div>
-            </FadeIn>
-            <div className="flex flex-col gap-2.5">
-              {goods.map((text, i) => (
-                <FadeIn key={i} delay={i * 0.04}>
-                  <div className="pain-row good">
-                    <PainIcon name={goodIcons[i]} variant="good" />
-                    <div className="text-sm leading-[1.6]" style={{ color: "var(--text2)" }} dangerouslySetInnerHTML={{ __html: text }} />
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   BENEFITS
-   ═══════════════════════════════════════════════════ */
-function BenefitsSection() {
-  const SIGNUP_URL = useSignupUrl();
-  const { t } = useI18n();
-  const benefits = [
-    { key: "cashback" as const, big: t.ben1Big, title: t.ben1Title, desc: t.ben1Desc, featured: true, feats: [t.ben1Fa, t.ben1Fb, t.ben1Fc] },
-    { key: "growth" as const, big: t.ben2Big, title: t.ben2Title, desc: t.ben2Desc, feats: [t.ben2Fa, t.ben2Fb, t.ben2Fc] },
-    { key: "tap" as const, title: t.ben3Title, desc: t.ben3Desc, feats: [t.ben3Fa, t.ben3Fb, t.ben3Fc] },
-    { key: "travel" as const, big: t.ben4Big, title: t.ben4Title, desc: t.ben4Desc, feats: [t.ben4Fa, t.ben4Fb, t.ben4Fc] },
-    { key: "shield" as const, title: t.ben5Title, desc: t.ben5Desc, feats: [t.ben5Fa, t.ben5Fb, t.ben5Fc] },
-    { key: "instant" as const, title: t.ben6Title, desc: t.ben6Desc, feats: [t.ben6Fa, t.ben6Fb, t.ben6Fc] },
-    { key: "free" as const, title: t.ben7Title, desc: t.ben7Desc, feats: [t.ben7Fa, t.ben7Fb, t.ben7Fc] },
-  ];
-
-  return (
-    <section id="benefits" className="py-24 px-5 md:px-10 border-t border-b"
-      style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="section-head mb-2">
-            <div className="section-badge">{t.benefitsBadge}</div>
-            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.benefitsTitle}</h2>
-            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.benefitsDesc}</p>
-          </div>
-        </FadeIn>
-
-        <div className="grid md:grid-cols-3 gap-5 mt-14">
-          {benefits.map((b, i) => (
-            <FadeIn key={i} delay={i * 0.05} className="flex">
-              <div className={`glass-card glass-card-hover p-7 flex flex-col flex-1 ${b.featured ? "benefit-featured" : ""}`}>
-                <BenefitIcon name={b.key} featured={!!b.featured} />
-                {b.big && (
-                  <div className="text-[44px] font-bold leading-none mb-2" style={{ color: "var(--accent-color)", letterSpacing: "-2px", fontFamily: "'Space Grotesk', sans-serif" }}>{b.big}</div>
-                )}
-                <h3 className="text-base font-bold mb-2.5" style={{ letterSpacing: "-0.3px" }}>{b.title}</h3>
-                <div className="text-[13px] leading-[1.7]" style={{ color: "var(--text2)" }}>{b.desc}</div>
-                {b.feats && (
-                  <ul className="ben-feats mt-auto">
-                    {b.feats.filter(Boolean).map((fx, k) => (
-                      <li key={k} className="ben-feat"><span className="ben-dot" aria-hidden />{fx}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </FadeIn>
-          ))}
-
-          {/* CTA card fills the remaining columns of the last row */}
-          <FadeIn delay={benefits.length * 0.05} className="flex grid-span-2">
-            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="ben-cta flex-1">
-              <div className="ben-cta__glow" aria-hidden />
-              <div className="relative z-[1] flex flex-col md:flex-row md:items-center gap-6 md:gap-8 h-full">
-                <div className="flex-1">
-                  <h3 className="text-[26px] font-extrabold mb-2" style={{ fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "-0.6px" }}>{t.benCtaTitle}</h3>
-                  <p className="text-[14px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.9)", maxWidth: 460 }}>{t.benCtaDesc}</p>
-                </div>
-                <span className="ben-cta__btn">{t.ctaCTA}</span>
-              </div>
-            </a>
-          </FadeIn>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -766,42 +644,6 @@ function HowItWorks() {
 }
 
 /* Wallet Card component */
-function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, checkmarks }: {
-  icon: WalletIconName; name: string; type: string; steps: string[];
-  badge?: string; badgeColor?: string; featured?: boolean; checkmarks?: boolean;
-}) {
-  return (
-    <div className="glass-card glass-card-hover p-6"
-      style={featured ? { background: "var(--accent-bg)", borderColor: "var(--accent-border)" } : {}}>
-      <div className="flex justify-between items-center mb-5">
-        <WalletIcon name={icon} />
-        {badge && (
-          <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full"
-            style={{
-              background: badgeColor === "blue" ? "var(--blue-bg)" : "var(--green-bg)",
-              color: badgeColor === "blue" ? "var(--blue)" : "var(--green)",
-              fontFamily: "'JetBrains Mono', monospace",
-            }}>
-            {badge}
-          </span>
-        )}
-      </div>
-      <h3 className="text-[17px] font-bold mb-1" style={featured ? { color: "var(--accent-color)", fontFamily: "'Space Grotesk', sans-serif" } : { fontFamily: "'Space Grotesk', sans-serif" }}>{name}</h3>
-      <div className="text-xs mb-4" style={{ color: "var(--text3)" }}>{type}</div>
-      <div className="flex flex-col gap-1.5">
-        {steps.map((step, i) => (
-          <div key={i} className="flex items-start gap-2.5 text-[13px] leading-[1.5]" style={{ color: "var(--text2)" }}>
-            <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] font-bold"
-              style={{ background: "var(--accent-bg)", color: "var(--accent-color)" }}>
-              {checkmarks ? "✓" : i + 1}
-            </div>
-            {step}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ═══════════════════════════════════════════════════
    COMPARE TABLE
@@ -809,398 +651,6 @@ function WalletCard({ icon, name, type, badge, badgeColor, steps, featured, chec
 /* ─── Comparison: status parsing so every cell renders consistently ─── */
 type CmpStatus = "good" | "partial" | "bad" | "none";
 
-function parseCell(raw: string): { status: CmpStatus; text: string } {
-  const v = (raw ?? "").trim();
-  if (v.startsWith("\u2713")) return { status: "good", text: v.slice(1).trim() };
-  if (v.startsWith("\u2715") || v.startsWith("\u2716")) return { status: "bad", text: v.slice(1).trim() };
-  if (v.startsWith("~")) return { status: "partial", text: v.slice(1).trim() };
-  return { status: "none", text: v };
-}
-
-function CmpMark({ status }: { status: CmpStatus }) {
-  if (status === "none") return null;
-  const paths: Record<Exclude<CmpStatus, "none">, React.ReactNode> = {
-    good: <path d="M4.5 10.5 8 14l7.5-8" />,
-    partial: <path d="M5 10h10" />,
-    bad: <path d="M6 6l8 8M14 6l-8 8" />,
-  };
-  return (
-    <span className={`cmp-mark cmp-mark--${status}`} aria-hidden>
-      <svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        {paths[status]}
-      </svg>
-    </span>
-  );
-}
-
-function CmpValue({ raw, featured }: { raw: string; featured?: boolean }) {
-  const { status, text } = parseCell(raw);
-  // The ZeroCard column always shows a check: every row there is a win.
-  const st: CmpStatus = featured ? (status === "none" ? "good" : status) : status;
-  return (
-    <span className={`cmp-val cmp-val--${st}`}>
-      <CmpMark status={st} />
-      {text && <span className="cmp-txt">{text}</span>}
-    </span>
-  );
-}
-
-function CompareSection() {
-  const SIGNUP_URL = useSignupUrl();
-  const { t } = useI18n();
-  const rows = [
-    [t.comp1P, t.comp1Z, t.comp1B, t.comp1O],
-    [t.comp2P, t.comp2Z, t.comp2B, t.comp2O],
-    [t.comp3P, t.comp3Z, t.comp3B, t.comp3O],
-    [t.comp4P, t.comp4Z, t.comp4B, t.comp4O],
-    [t.comp5P, t.comp5Z, t.comp5B, t.comp5O],
-    [t.comp6P, t.comp6Z, t.comp6B, t.comp6O],
-    [t.comp7P, t.comp7Z, t.comp7B, t.comp7O],
-    [t.comp8P, t.comp8Z, t.comp8B, t.comp8O],
-    [t.comp9P, t.comp9Z, t.comp9B, t.comp9O],
-  ];
-
-  return (
-    <section id="compare" className="py-24 px-5 md:px-10 border-t border-b"
-      style={{ background: "var(--bg2)", borderColor: "var(--border-custom)" }}>
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="section-head mb-2">
-            <div className="section-badge">{t.compareBadge}</div>
-            <h2 className="section-title mb-4">{t.compareTitle}</h2>
-            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.compareDesc}</p>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <div className="cmp-wrap mt-14">
-            <table className="compare-table">
-              <thead>
-                <tr>
-                  <th>{t.compParam}</th>
-                  <th className="col-zero">
-                    <span className="cmp-th-zero">
-                      <span className="cmp-th-name">{t.compZero}</span>
-                      <span className="cmp-th-badge">{t.compBest}</span>
-                    </span>
-                  </th>
-                  <th>{t.compBank}</th>
-                  <th>{t.compOther}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row, i) => (
-                  <tr key={i}>
-                    <td className="cmp-param">{row[0]}</td>
-                    <td className="col-zero" data-label={t.compZero}><CmpValue raw={row[1]} featured /></td>
-                    <td data-label={t.compBank}><CmpValue raw={row[2]} /></td>
-                    <td data-label={t.compOther}><CmpValue raw={row[3]} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Legend: makes the marks unambiguous */}
-          <div className="cmp-legend">
-            <span className="cmp-legend__item"><CmpMark status="good" />{t.compLegendGood}</span>
-            <span className="cmp-legend__item"><CmpMark status="partial" />{t.compLegendPartial}</span>
-            <span className="cmp-legend__item"><CmpMark status="bad" />{t.compLegendBad}</span>
-          </div>
-
-          {/* Verdict strip */}
-          <div className="cmp-verdict">
-            <div className="cmp-verdict__text">
-              <span>{t.compWins}</span>
-            </div>
-            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary cmp-verdict__btn">
-              {t.ctaCTA}
-            </a>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   AUDIENCE SECTION (8 tabs)
-   ═══════════════════════════════════════════════════ */
-function AudienceSection() {
-  const SIGNUP_URL = useSignupUrl();
-  const { t } = useI18n();
-  const [activeAud, setActiveAud] = useState("1");
-
-  const tabs = [
-    { id: "1", label: t.audTab1 }, { id: "2", label: t.audTab2 },
-    { id: "3", label: t.audTab3 }, { id: "4", label: t.audTab4 },
-    { id: "5", label: t.audTab5 }, { id: "6", label: t.audTab6 },
-    { id: "7", label: t.audTab7 }, { id: "8", label: t.audTab8 },
-    { id: "9", label: t.audTab9 }, { id: "10", label: t.audTab10 },
-    { id: "11", label: t.audTab11 }, { id: "12", label: t.audTab12 },
-    { id: "13", label: t.audTab13 }, { id: "14", label: t.audTab14 },
-  ];
-
-  const panels: Record<string, {
-    icon: string; tag: string; title: string; desc: string;
-    stats: { val: string; label: string }[];
-    pains: { icon: string; title: string; body: string; sol: string }[];
-  }> = {
-    "1": {
-      icon: t.aud1Icon, tag: t.aud1Tag, title: t.aud1Title, desc: t.aud1Desc,
-      stats: [{ val: t.aud1S1V, label: t.aud1S1L }, { val: t.aud1S2V, label: t.aud1S2L }, { val: t.aud1S3V, label: t.aud1S3L }],
-      pains: [
-        { icon: t.aud1P1Icon, title: t.aud1P1Title, body: t.aud1P1Body, sol: t.aud1P1Sol },
-        { icon: t.aud1P2Icon, title: t.aud1P2Title, body: t.aud1P2Body, sol: t.aud1P2Sol },
-        { icon: t.aud1P3Icon, title: t.aud1P3Title, body: t.aud1P3Body, sol: t.aud1P3Sol },
-      ],
-    },
-    "2": {
-      icon: t.aud2Icon, tag: t.aud2Tag, title: t.aud2Title, desc: t.aud2Desc,
-      stats: [{ val: t.aud2S1V, label: t.aud2S1L }, { val: t.aud2S2V, label: t.aud2S2L }, { val: t.aud2S3V, label: t.aud2S3L }],
-      pains: [
-        { icon: t.aud2P1Icon, title: t.aud2P1Title, body: t.aud2P1Body, sol: t.aud2P1Sol },
-        { icon: t.aud2P2Icon, title: t.aud2P2Title, body: t.aud2P2Body, sol: t.aud2P2Sol },
-        { icon: t.aud2P3Icon, title: t.aud2P3Title, body: t.aud2P3Body, sol: t.aud2P3Sol },
-      ],
-    },
-    "3": {
-      icon: t.aud3Icon, tag: t.aud3Tag, title: t.aud3Title, desc: t.aud3Desc,
-      stats: [{ val: t.aud3S1V, label: t.aud3S1L }, { val: t.aud3S2V, label: t.aud3S2L }, { val: t.aud3S3V, label: t.aud3S3L }],
-      pains: [
-        { icon: t.aud3P1Icon, title: t.aud3P1Title, body: t.aud3P1Body, sol: t.aud3P1Sol },
-        { icon: t.aud3P2Icon, title: t.aud3P2Title, body: t.aud3P2Body, sol: t.aud3P2Sol },
-        { icon: t.aud3P3Icon, title: t.aud3P3Title, body: t.aud3P3Body, sol: t.aud3P3Sol },
-      ],
-    },
-    "4": {
-      icon: t.aud4Icon, tag: t.aud4Tag, title: t.aud4Title, desc: t.aud4Desc,
-      stats: [{ val: t.aud4S1V, label: t.aud4S1L }, { val: t.aud4S2V, label: t.aud4S2L }, { val: t.aud4S3V, label: t.aud4S3L }],
-      pains: [
-        { icon: t.aud4P1Icon, title: t.aud4P1Title, body: t.aud4P1Body, sol: t.aud4P1Sol },
-        { icon: t.aud4P2Icon, title: t.aud4P2Title, body: t.aud4P2Body, sol: t.aud4P2Sol },
-        { icon: t.aud4P3Icon, title: t.aud4P3Title, body: t.aud4P3Body, sol: t.aud4P3Sol },
-      ],
-    },
-    "5": {
-      icon: t.aud5Icon, tag: t.aud5Tag, title: t.aud5Title, desc: t.aud5Desc,
-      stats: [{ val: t.aud5S1V, label: t.aud5S1L }, { val: t.aud5S2V, label: t.aud5S2L }, { val: t.aud5S3V, label: t.aud5S3L }],
-      pains: [
-        { icon: t.aud5P1Icon, title: t.aud5P1Title, body: t.aud5P1Body, sol: t.aud5P1Sol },
-        { icon: t.aud5P2Icon, title: t.aud5P2Title, body: t.aud5P2Body, sol: t.aud5P2Sol },
-        { icon: t.aud5P3Icon, title: t.aud5P3Title, body: t.aud5P3Body, sol: t.aud5P3Sol },
-      ],
-    },
-    "6": {
-      icon: t.aud6Icon, tag: t.aud6Tag, title: t.aud6Title, desc: t.aud6Desc,
-      stats: [{ val: t.aud6S1V, label: t.aud6S1L }, { val: t.aud6S2V, label: t.aud6S2L }, { val: t.aud6S3V, label: t.aud6S3L }],
-      pains: [
-        { icon: t.aud6P1Icon, title: t.aud6P1Title, body: t.aud6P1Body, sol: t.aud6P1Sol },
-        { icon: t.aud6P2Icon, title: t.aud6P2Title, body: t.aud6P2Body, sol: t.aud6P2Sol },
-        { icon: t.aud6P3Icon, title: t.aud6P3Title, body: t.aud6P3Body, sol: t.aud6P3Sol },
-      ],
-    },
-    "7": {
-      icon: t.aud7Icon, tag: t.aud7Tag, title: t.aud7Title, desc: t.aud7Desc,
-      stats: [{ val: t.aud7S1V, label: t.aud7S1L }, { val: t.aud7S2V, label: t.aud7S2L }, { val: t.aud7S3V, label: t.aud7S3L }],
-      pains: [
-        { icon: t.aud7P1Icon, title: t.aud7P1Title, body: t.aud7P1Body, sol: t.aud7P1Sol },
-        { icon: t.aud7P2Icon, title: t.aud7P2Title, body: t.aud7P2Body, sol: t.aud7P2Sol },
-        { icon: t.aud7P3Icon, title: t.aud7P3Title, body: t.aud7P3Body, sol: t.aud7P3Sol },
-      ],
-    },
-    "8": {
-      icon: t.aud8Icon, tag: t.aud8Tag, title: t.aud8Title, desc: t.aud8Desc,
-      stats: [{ val: t.aud8S1V, label: t.aud8S1L }, { val: t.aud8S2V, label: t.aud8S2L }, { val: t.aud8S3V, label: t.aud8S3L }],
-      pains: [
-        { icon: t.aud8P1Icon, title: t.aud8P1Title, body: t.aud8P1Body, sol: t.aud8P1Sol },
-        { icon: t.aud8P2Icon, title: t.aud8P2Title, body: t.aud8P2Body, sol: t.aud8P2Sol },
-        { icon: t.aud8P3Icon, title: t.aud8P3Title, body: t.aud8P3Body, sol: t.aud8P3Sol },
-      ],
-    },
-    "9": {
-      icon: t.aud9Icon, tag: t.aud9Tag, title: t.aud9Title, desc: t.aud9Desc,
-      stats: [{ val: t.aud9S1V, label: t.aud9S1L }, { val: t.aud9S2V, label: t.aud9S2L }, { val: t.aud9S3V, label: t.aud9S3L }],
-      pains: [
-        { icon: t.aud9P1Icon, title: t.aud9P1Title, body: t.aud9P1Body, sol: t.aud9P1Sol },
-        { icon: t.aud9P2Icon, title: t.aud9P2Title, body: t.aud9P2Body, sol: t.aud9P2Sol },
-        { icon: t.aud9P3Icon, title: t.aud9P3Title, body: t.aud9P3Body, sol: t.aud9P3Sol },
-      ],
-    },
-    "10": {
-      icon: t.aud10Icon, tag: t.aud10Tag, title: t.aud10Title, desc: t.aud10Desc,
-      stats: [{ val: t.aud10S1V, label: t.aud10S1L }, { val: t.aud10S2V, label: t.aud10S2L }, { val: t.aud10S3V, label: t.aud10S3L }],
-      pains: [
-        { icon: t.aud10P1Icon, title: t.aud10P1Title, body: t.aud10P1Body, sol: t.aud10P1Sol },
-        { icon: t.aud10P2Icon, title: t.aud10P2Title, body: t.aud10P2Body, sol: t.aud10P2Sol },
-        { icon: t.aud10P3Icon, title: t.aud10P3Title, body: t.aud10P3Body, sol: t.aud10P3Sol },
-      ],
-    },
-    "11": {
-      icon: t.aud11Icon, tag: t.aud11Tag, title: t.aud11Title, desc: t.aud11Desc,
-      stats: [{ val: t.aud11S1V, label: t.aud11S1L }, { val: t.aud11S2V, label: t.aud11S2L }, { val: t.aud11S3V, label: t.aud11S3L }],
-      pains: [
-        { icon: t.aud11P1Icon, title: t.aud11P1Title, body: t.aud11P1Body, sol: t.aud11P1Sol },
-        { icon: t.aud11P2Icon, title: t.aud11P2Title, body: t.aud11P2Body, sol: t.aud11P2Sol },
-        { icon: t.aud11P3Icon, title: t.aud11P3Title, body: t.aud11P3Body, sol: t.aud11P3Sol },
-      ],
-    },
-    "12": {
-      icon: t.aud12Icon, tag: t.aud12Tag, title: t.aud12Title, desc: t.aud12Desc,
-      stats: [{ val: t.aud12S1V, label: t.aud12S1L }, { val: t.aud12S2V, label: t.aud12S2L }, { val: t.aud12S3V, label: t.aud12S3L }],
-      pains: [
-        { icon: t.aud12P1Icon, title: t.aud12P1Title, body: t.aud12P1Body, sol: t.aud12P1Sol },
-        { icon: t.aud12P2Icon, title: t.aud12P2Title, body: t.aud12P2Body, sol: t.aud12P2Sol },
-        { icon: t.aud12P3Icon, title: t.aud12P3Title, body: t.aud12P3Body, sol: t.aud12P3Sol },
-      ],
-    },
-    "13": {
-      icon: t.aud13Icon, tag: t.aud13Tag, title: t.aud13Title, desc: t.aud13Desc,
-      stats: [{ val: t.aud13S1V, label: t.aud13S1L }, { val: t.aud13S2V, label: t.aud13S2L }, { val: t.aud13S3V, label: t.aud13S3L }],
-      pains: [
-        { icon: t.aud13P1Icon, title: t.aud13P1Title, body: t.aud13P1Body, sol: t.aud13P1Sol },
-        { icon: t.aud13P2Icon, title: t.aud13P2Title, body: t.aud13P2Body, sol: t.aud13P2Sol },
-        { icon: t.aud13P3Icon, title: t.aud13P3Title, body: t.aud13P3Body, sol: t.aud13P3Sol },
-      ],
-    },
-    "14": {
-      icon: t.aud14Icon, tag: t.aud14Tag, title: t.aud14Title, desc: t.aud14Desc,
-      stats: [{ val: t.aud14S1V, label: t.aud14S1L }, { val: t.aud14S2V, label: t.aud14S2L }, { val: t.aud14S3V, label: t.aud14S3L }],
-      pains: [
-        { icon: t.aud14P1Icon, title: t.aud14P1Title, body: t.aud14P1Body, sol: t.aud14P1Sol },
-        { icon: t.aud14P2Icon, title: t.aud14P2Title, body: t.aud14P2Body, sol: t.aud14P2Sol },
-        { icon: t.aud14P3Icon, title: t.aud14P3Title, body: t.aud14P3Body, sol: t.aud14P3Sol },
-      ],
-    },
-  };
-
-  const p = panels[activeAud];
-
-  return (
-    <section id="audience" className="py-24 px-5 md:px-10">
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="section-head mb-2">
-            <div className="section-badge">{t.audBadge}</div>
-            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.audTitle}</h2>
-            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.audDesc}</p>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <div className="audience-tabs-grid mt-12 mb-10" role="tablist" aria-label={t.audTitle.replace(/\n/g, " ")}>
-            {tabs.map(tab => (
-              <button key={tab.id} onClick={() => setActiveAud(tab.id)}
-                role="tab" id={`audtab-${tab.id}`} data-tab-id={tab.id}
-                aria-selected={activeAud === tab.id} aria-controls="audpanel"
-                tabIndex={activeAud === tab.id ? 0 : -1}
-                onKeyDown={(e) => handleTabKey(e, tabs, activeAud, setActiveAud)}
-                className={`aud-tab ${activeAud === tab.id ? "active" : ""}`}>
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </FadeIn>
-
-        <FadeIn key={activeAud} role="tabpanel" id="audpanel" aria-labelledby={`audtab-${activeAud}`}>
-          <div className="grid md:grid-cols-[1fr_1.6fr] gap-8 items-start">
-            {/* Left card */}
-            <div className="glass-card p-8 md:sticky md:top-20">
-              <span className="text-5xl mb-4 block">{p.icon}</span>
-              <div className="aud-tag">{p.tag}</div>
-              <h3 className="text-[22px] font-extrabold mb-2.5" style={{ letterSpacing: "-0.7px", fontFamily: "'Space Grotesk', sans-serif" }}>{p.title}</h3>
-              <div className="text-sm leading-[1.7] mb-5" style={{ color: "var(--text2)" }}>{p.desc}</div>
-              <div className="flex gap-3 flex-wrap mt-5">
-                {p.stats.map((s, i) => (
-                  <div key={i} className="aud-stat">
-                    <div className="text-[22px] font-bold" style={{ color: "var(--accent-color)", letterSpacing: "-1px", fontFamily: "'Space Grotesk', sans-serif" }}>{s.val}</div>
-                    <div className="text-[11px] font-medium mt-0.5" style={{ color: "var(--text3)" }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right pains */}
-            <div className="flex flex-col gap-3.5">
-              {p.pains.map((pain, i) => (
-                <div key={i} className="aud-pain">
-                  <div className="flex items-start gap-3.5 mb-2.5">
-                    <span className="text-[22px] flex-shrink-0 mt-0.5">{pain.icon}</span>
-                    <div>
-                      <div className="text-[15px] font-bold mb-1">{pain.title}</div>
-                      <div className="text-[13px] leading-[1.65]" style={{ color: "var(--text2)" }}>{pain.body}</div>
-                    </div>
-                  </div>
-                  <div className="aud-solution">{pain.sol}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-
-        <FadeIn delay={0.2}>
-          <div className="text-center mt-12">
-            <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-primary">{t.audCTA}</a>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   REVIEWS
-   ═══════════════════════════════════════════════════ */
-function ReviewsSection() {
-  const { t } = useI18n();
-  const reviews = [
-    { text: t.rev1Text, name: t.rev1Name, role: t.rev1Role },
-    { text: t.rev2Text, name: t.rev2Name, role: t.rev2Role },
-    { text: t.rev3Text, name: t.rev3Name, role: t.rev3Role },
-    { text: t.rev4Text, name: t.rev4Name, role: t.rev4Role },
-    { text: t.rev5Text, name: t.rev5Name, role: t.rev5Role },
-    { text: t.rev6Text, name: t.rev6Name, role: t.rev6Role },
-  ];
-
-  return (
-    <section className="py-24 px-5 md:px-10">
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="section-head mb-2">
-            <div className="section-badge">{t.reviewsBadge}</div>
-            <h2 className="section-title mb-4" style={{ whiteSpace: "pre-line" }}>{t.reviewsTitle}</h2>
-            <p className="text-[17px] leading-[1.7]" style={{ color: "var(--text2)" }}>{t.reviewsDesc}</p>
-          </div>
-        </FadeIn>
-
-        <div className="grid md:grid-cols-3 gap-5 mt-14" style={{ alignItems: "stretch" }}>
-          {reviews.map((r, i) => (
-            <FadeIn key={i} delay={i * 0.05} className="flex">
-              <div className="review-card flex flex-col flex-1">
-                <div className="text-[13px] tracking-[2px] mb-3.5" style={{ color: "var(--accent-color)" }}>★★★★★</div>
-                <div className="text-sm leading-[1.7] mb-5 italic flex-1" style={{ color: "var(--text2)" }}>{r.text}</div>
-                <div className="flex items-center gap-3 mt-auto">
-                  <img
-                    src={AVATAR_IMAGES[i]}
-                    alt={r.name}
-                    loading="lazy"
-                    width={42}
-                    height={42}
-                    className="w-[42px] h-[42px] rounded-full object-cover flex-shrink-0 ring-2 ring-primary"
-                  />
-                  <div>
-                    <div className="text-[13px] font-bold">{r.name}</div>
-                    <div className="text-xs mt-0.5" style={{ color: "var(--text3)" }}>{r.role}</div>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 
@@ -1237,6 +687,9 @@ function GuidesSection() {
           {posts.map((p) => (
             <li key={p.id}>
               <Link to={langHref(lang, `/blog/${p.slug}`)} className="guide-card">
+                {p.image_url && (
+                  <img src={p.image_url.replace(/\.webp$/, "-640.webp")} width={640} height={360} loading="lazy" decoding="async" alt="" className="guide-card__img" />
+                )}
                 <span className="guide-card__title">{p.title}</span>
                 <span className="guide-card__desc">{p.description}</span>
                 <span className="guide-card__more">→</span>
@@ -1389,65 +842,7 @@ function FAQSection() {
 /* ═══════════════════════════════════════════════════
    CTA
    ═══════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════
-   REFERRAL (Pionex invite program)
-   ═══════════════════════════════════════════════════ */
-function ReferralSection() {
-  const SIGNUP_URL = useSignupUrl();
-  const { t } = useI18n();
-  const steps = [
-    { icon: "link" as const, title: t.refS1T, desc: t.refS1D },
-    { icon: "friends" as const, title: t.refS2T, desc: t.refS2D },
-    { icon: "percent" as const, title: t.refS3T, desc: t.refS3D },
-  ];
-  return (
-    <section id="referral" className="py-20 px-5 md:px-10">
-      <div className="max-w-[1160px] mx-auto">
-        <FadeIn>
-          <div className="referral-band p-8 md:p-12">
-            <div className="relative z-[1] grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-              <div>
-                <div className="ref-badge mb-5">{t.refBadge}</div>
-                <h2 className="font-bold mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(28px, 3.4vw, 42px)", lineHeight: 1.08, letterSpacing: "-0.5px", textWrap: "balance" }}>
-                  {t.refTitle}
-                </h2>
-                <p className="text-[16px] leading-[1.7] mb-6" style={{ color: "rgba(255,255,255,0.92)", maxWidth: 520, textWrap: "pretty" }}>
-                  {t.refDesc}
-                </p>
-                <div className="flex items-center gap-4 mb-7">
-                  <span className="font-extrabold leading-none" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(48px, 6vw, 64px)", letterSpacing: "-2px" }}>
-                    {t.refBig}
-                  </span>
-                  <span className="text-sm leading-[1.4]" style={{ color: "rgba(255,255,255,0.88)", maxWidth: 170 }}>
-                    {t.refBigLabel}
-                  </span>
-                </div>
-                <a href={SIGNUP_URL} target="_blank" rel="sponsored noopener" className="btn-on-accent">
-                  {t.refCTA}
-                </a>
-                <p className="mt-5 text-xs leading-[1.6]" style={{ color: "rgba(255,255,255,0.72)", maxWidth: 480 }}>
-                  {t.refNote}
-                </p>
-              </div>
 
-              <div className="flex flex-col gap-3.5">
-                {steps.map((s, i) => (
-                  <div key={i} className="ref-step">
-                    <div className="ref-chip"><ReferralIcon name={s.icon} /></div>
-                    <div>
-                      <div className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{s.title}</div>
-                      <div className="text-[13px] leading-[1.6]" style={{ color: "rgba(255,255,255,0.85)" }}>{s.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
 
 /* ═══════════════════════════════════════════════════
    FINAL CTA
@@ -1509,13 +904,12 @@ function Footer() {
   const product = [
     { label: t.navBenefits, href: "#benefits" },
     { label: t.navHow, href: "#how" },
-    { label: t.navCompare, href: "#compare" },
+    { label: toolsCopy(lang).calcBadge, href: "#calc" },
     { label: t.navAudience, href: "#audience" },
     { label: t.navFAQ, href: "#faq" },
   ];
   const resources = [
     { label: lang === "ru" ? "Блог" : "Blog", href: langHref(lang, "/blog") },
-    { label: t.footReferral, href: "#referral" },
     { label: "Pionex", href: "https://www.pionex.com/", external: true },
     { label: t.footSupport, href: DOCS_URL, external: true },
   ];
@@ -1777,14 +1171,12 @@ const Index = () => {
     <Navbar />
     <main>
       <HeroSection />
-      <StatsBar />
-      <PromoAiSection />
-      <PainSection />
-      <BenefitsSection />
+      <CountryCheckSection />
+      <BenefitsCompact />
+      <CalculatorSection />
       <HowItWorks />
-      <CompareSection />
-      <AudienceSection />
-      <ReferralSection />
+      <PromoAiSection />
+      <AudienceCompact />
       <GuidesSection />
       <FAQSection />
       <CTASection />

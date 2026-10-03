@@ -6,8 +6,9 @@ date: 2026-09-27
 order: 2
 group: card-cost
 sources: card-fees, card-restrictions
-updated: 2026-09-27
+updated: 2026-10-03
 category: card
+cover: card-cost
 ---
 
 O cartão Pionex transforma saldo em USDT num Visa ou Mastercard que entra no Apple Pay e no Google Pay. Os números do anúncio são conhecidos: até 1% de cashback, 5% ao ano sobre o saldo, sem anuidade. Para quem mora no Brasil, a pergunta que importa é outra: quanto sai uma compra em reais? Vamos fazer a conta.
@@ -21,26 +22,24 @@ O Brasil não está na lista de países de onde a Pionex recusa cadastro. Para p
 
 A aprovação é analisada conta por conta.
 
-## O custo depende da moeda
+## Quanto custa cada compra
 
-O saldo do cartão fica em USDT, que a Pionex considera um para um com o dólar.
+O saldo do cartão fica em USDT, que a Pionex conta um para um com o dólar. As taxas mudaram em setembro de 2026. Na análise do cartão que a Pionex verificou pela última vez em 3 de setembro de 2026:
 
-**Compras em dólar** (Netflix, Spotify, ChatGPT, Steam, Amazon): sem conversão, sem taxa, e ainda até 1% de cashback.
+- **Visa:** 1% em cada compra, inclusive em dólar, com até 1% de cashback nas compras elegíveis. Fica mais ou menos no zero.
+- **Mastercard:** até 3,5% em cada compra. A análise fala em até 1% de cashback, mas o comparativo de cartões da Pionex da mesma data indica 0,1% para pedidos novos de Mastercard.
 
-**Compras em reais ou outra moeda:** entra uma taxa de conversão.
+Antes a Pionex dizia que compras em dólar não pagavam taxa. Os textos novos aplicam a taxa a tudo, então fazemos a conta assim.
 
-- Visa: 1%, e o cashback de 1% compensa.
-- Mastercard: mais cara. As próprias páginas da Pionex falam em 2% num lugar e em até 3,5% em outro. O cashback cobre só uma parte.
+Um mês típico em São Paulo com o equivalente a US$ 1.000 de gastos no cartão:
 
-Um mês de exemplo: US$ 300 em assinaturas em dólar e o equivalente a US$ 700 em compras em reais.
-
-| | Visa | Mastercard (a 2%) |
+| | Visa | Mastercard (pior caso) |
 |---|---|---|
-| Assinaturas US$ 300 | +US$ 3 de cashback | +US$ 3 de cashback |
-| Compras em reais US$ 700 | US$ 7 de taxa, US$ 7 de cashback | US$ 14 de taxa, US$ 7 de cashback |
-| Resultado do mês | +US$ 3 | −US$ 4 |
+| Taxa | US$ 10 | US$ 35 |
+| Cashback | até US$ 10 | US$ 1 |
+| Resultado do mês | perto de US$ 0 | perto de −US$ 34 |
 
-Se puder escolher, escolha Visa.
+Se puder escolher, escolha Visa. A [calculadora da página inicial](/pt#calc) faz a conta com os seus números.
 
 ## E o IOF?
 
@@ -55,7 +54,7 @@ O cartão Pionex não é emitido por um banco brasileiro, então a compra com el
 | Por mês | 50.000 USDT | 100.000 USDT |
 | Saque | 2% mais a taxa do caixa, só com Visa física | não disponível |
 
-O Visa físico está sendo liberado aos poucos. Se sua conta for elegível, a opção aparece no app.
+O Visa físico sai por convite e em algumas promoções. Se sua conta for elegível, a opção aparece no app.
 
 ## Onde o pagamento é recusado
 
@@ -73,7 +72,7 @@ O USDT parado na conta do cartão rende 5% ao ano, creditado a cada hora, e cont
 
 ## Resumindo
 
-Para quem já tem USDT, o Visa da Pionex deixa as compras em reais perto do custo zero e devolve 1% nas compras em dólar. O Mastercard só compensa para pagamentos grandes que precisem dos limites maiores.
+Para quem já tem USDT, o Visa da Pionex sai barato: a taxa de 1% e o cashback se compensam mais ou menos. O Mastercard custa até 3,5% por compra e só faz sentido se o Visa não for oferecido para você ou se precisar de limites maiores.
 
 [Abrir conta na Pionex](https://www.pionex.com/en/signUp?r=0uHzysLVYQh)
 

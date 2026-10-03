@@ -82,7 +82,7 @@ const it = {
   // How it works
   howBadge: "📋 Come funziona",
   howTitle: "Pronta in pochi\npassaggi semplici",
-  howDesc: "Niente burocrazia. Niente code. Tutto dall'app Pionex.",
+  howDesc: "Tutto avviene nell'app Pionex, dalla registrazione al primo acquisto.",
   howTab1: "Ottieni la carta", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registrazione", step1Desc: "Crea un account Pionex con email o Google. Bastano 2 minuti.",
   step2Title: "KYC livello 2", step2Desc: "Foto del documento più selfie. La verifica richiede di solito 10 minuti.",
@@ -335,7 +335,7 @@ const it = {
   faq5Q: "La carta è fisica o virtuale?",
   faq5A: "La carta principale è virtuale: la aggiungi ad Apple Pay, Google Pay, PayPal e altri wallet. Pionex sta introducendo una Visa fisica in modo graduale; se il tuo account è idoneo, l'opzione compare nell'app.",
   faq6Q: "Visa o Mastercard, quale scegliere?",
-  faq6A: "I vantaggi sono gli stessi: fino all'1% di cashback, 5% annuo sul saldo, nessun canone. La differenza sta negli acquisti non in dollari: Visa applica l'1%, che il cashback compensa, Mastercard dal 2% al 3,5%. Gli acquisti in dollari sono gratuiti con entrambe. Per spendere in valuta locale conviene Visa.",
+  faq6A: "Entrambe le carte hanno cashback e 5% annuo sul saldo, senza canone. La differenza è la commissione. Secondo i dati Pionex di settembre 2026, Visa prende l'1% su ogni acquisto e il cashback fino all'1% lo compensa più o meno. Mastercard costa fino al 3,5%, e una pagina di Pionex indica per le nuove richieste un cashback di appena lo 0,1%. Se puoi scegliere, prendi Visa. In Cina Alipay e WeChat Pay funzionano solo con Visa.",
   faq7Q: "Cosa fare se il collegamento ad Apple Pay non riesce?",
   faq7A: "Assicurati che il conto della carta abbia fondi: alcuni wallet fanno un addebito di prova per la verifica. Se il collegamento mostra 'contatta l'emittente', compila il modulo su support.pionex.com, il team ti aiuterà entro 3 giorni lavorativi.",
   faq8Q: "Come bloccare la carta se perdo il telefono?",
@@ -362,16 +362,16 @@ const it = {
   refCTA: "Ottieni la carta e inizia a invitare →",
   refNote: "La percentuale e i livelli del programma referral sono stabiliti da Pionex e possono cambiare. Condizioni aggiornate su pionex.com.",
   // CTA
-  ctaBadge: "Gratis · Veloce · Conveniente",
+  ctaBadge: "Ci vogliono circa 10 minuti",
   ctaTitle: "Inizia a spendere crypto\nproprio ora",
-  ctaDesc: "Unisciti ai milioni di utenti Pionex che già guadagnano cashback, ricevono interessi e spendono USDT come con una carta normale.",
+  ctaDesc: "La carta si richiede gratis nell'app Pionex. Per la verifica servono un documento e un selfie, e la richiesta di solito viene approvata entro un giorno.",
   ctaCTA: "Ottieni ZeroCard gratis →",
   ctaDocs: "Documentazione",
   ctaDisclaimer: "Richiesto KYC livello 2 · Saldo da 10 a 100 USDT per la richiesta · Carta virtuale · Visa e Mastercard",
 
   // Footer
   // Footer columns
-  footTagline: "Una carta crypto per la vita reale. Spendi USDT in tutto il mondo, guadagna cashback e tieni i tuoi soldi sotto controllo.",
+  footTagline: "Una guida indipendente alla carta e ai bot di Pionex. Spieghiamo dove funziona la carta e quanto costano davvero gli acquisti.",
   footColProduct: "Prodotto",
   footColResources: "Risorse",
   footColCompany: "Info",

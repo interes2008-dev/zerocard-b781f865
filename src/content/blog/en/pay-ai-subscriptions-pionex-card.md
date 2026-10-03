@@ -6,8 +6,9 @@ date: 2026-09-27
 order: 0
 group: ai-promo
 sources: ai-services, card-fees
-updated: 2026-09-27
+updated: 2026-10-03
 category: ai-users
+cover: ai-promo
 ---
 
 Pionex is running a campaign for its card holders: pay for an AI subscription with the Pionex Card and you get a shot at having the whole payment refunded, up to 50 USDT. Here's what's known about it, what the payment itself costs, and where the catches are.
@@ -31,13 +32,9 @@ Dates, the number of attempts and the full rules are on the [campaign page](http
 
 ## What paying costs
 
-Even without a prize, AI subscriptions are a good fit for the Pionex Card because they're billed in dollars.
+Even without a prize, AI subscriptions are a fair fit for the Pionex Card because they're billed in dollars and the card balance is USDT, which Pionex treats one to one with the dollar.
 
-- The card balance is USDT, which Pionex treats one to one with the dollar.
-- Dollar purchases carry no conversion fee.
-- Eligible purchases earn up to 1% cashback.
-
-A $20 subscription costs exactly 20 USDT and returns about 0.2 USDT. The full Visa vs Mastercard breakdown is in the [Pionex Card review](/en/blog/pionex-card-review).
+Per Pionex's card terms as of September 2026, Visa takes 1% on every purchase and pays up to 1% cashback, so a $20 subscription comes out at roughly 20 USDT. Mastercard charges up to 3.5%, which adds about 70 cents to the same subscription. The full Visa vs Mastercard breakdown is in the [Pionex Card review](/en/blog/pionex-card-review).
 
 ## Who it suits
 

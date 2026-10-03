@@ -8,6 +8,7 @@ group: grid-bot
 sources: grid-bot, fees
 updated: 2026-09-27
 category: bots
+cover: grid-bot
 ---
 
 Un bot grid ne prédit pas le marché. Il pose une échelle d'ordres d'achat sous le prix et d'ordres de vente au-dessus, puis encaisse un petit gain à chaque aller-retour du prix entre deux barreaux. Dans un marché sans tendance, ça marche bien. Dans une tendance forte, il peut vous laisser avec une crypto qui continue de baisser. Mieux vaut connaître les deux côtés avant d'y mettre de l'argent.

@@ -62,7 +62,8 @@ export const STATIC_POSTS: StaticPost[] = Object.entries(files)
       content: body,
       lang,
       category: CATEGORY_MAP[meta.category] ?? meta.category ?? "crypto",
-      image_url: null,
+      // Cover art lives in public/img/covers/<name>.webp (+ -640.webp and .jpg for link previews).
+      image_url: meta.cover ? `/img/covers/${meta.cover}.webp` : null,
       published_at: `${date}T09:00:00.000Z`,
       order: meta.order !== undefined && meta.order !== "" && !Number.isNaN(Number(meta.order)) ? Number(meta.order) : 999,
       audience: meta.audience || null,

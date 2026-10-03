@@ -8,6 +8,7 @@ sources: mica
 updated: 2026-09-27
 category: bots
 audience: eu
+cover: mica
 ---
 
 Chi cerca Pionex dall'Italia nel 2026 prima o poi incontra un altro nome: Webot. Non è una copia e non è una truffa. È l'effetto di MiCA, il regolamento europeo sulle cripto-attività, il cui periodo transitorio è finito il 1° luglio 2026.

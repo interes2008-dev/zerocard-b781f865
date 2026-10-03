@@ -9,6 +9,7 @@ sources: grid-bot, mica
 updated: 2026-09-27
 category: bots
 audience: eu
+cover: grid-bot
 ---
 
 Ein Grid-Bot sagt den Markt nicht voraus. Er legt eine Leiter aus Kauforders unter den Kurs und Verkaufsorders darüber und kassiert jedes Mal einen kleinen Gewinn, wenn der Kurs zwischen zwei Stufen pendelt. Im Seitwärtsmarkt klappt das gut. Im starken Trend bleibst du auf fallenden Coins sitzen. Beides solltest du kennen, bevor du Geld hineinsteckst.

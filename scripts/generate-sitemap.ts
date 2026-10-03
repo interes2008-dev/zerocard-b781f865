@@ -4,10 +4,10 @@ import { writeFileSync, readdirSync, readFileSync, existsSync } from "fs";
 import { resolve, join } from "path";
 
 // Articles stored in the repo (src/content/blog/<lang>/<slug>.md)
-function repoPosts(): { slug: string; published_at: string; lang: string; group?: string }[] {
+function repoPosts(): { slug: string; published_at: string; updated_at?: string; lang: string; group?: string }[] {
   const dir = resolve("src/content/blog");
   if (!existsSync(dir)) return [];
-  const out: { slug: string; published_at: string; lang: string; group?: string }[] = [];
+  const out: { slug: string; published_at: string; updated_at?: string; lang: string; group?: string }[] = [];
   for (const lang of readdirSync(dir)) {
     const ld = join(dir, lang);
     for (const f of readdirSync(ld).filter((x) => x.endsWith(".md"))) {
@@ -15,7 +15,8 @@ function repoPosts(): { slug: string; published_at: string; lang: string; group?
       const slug = raw.match(/^slug:\s*(.+)$/m)?.[1].trim() ?? f.replace(/\.md$/, "");
       const date = raw.match(/^date:\s*(.+)$/m)?.[1].trim() ?? new Date().toISOString().slice(0, 10);
       const group = raw.match(/^group:\s*(.+)$/m)?.[1].trim();
-      out.push({ slug, published_at: date, lang, group });
+      const updated = raw.match(/^updated:\s*(.+)$/m)?.[1].trim();
+      out.push({ slug, published_at: date, updated_at: updated, lang, group });
     }
   }
   return out;
@@ -118,7 +119,8 @@ function xml(entries: Entry[]) {
       : undefined;
     entries.push({
       loc: lp(lang, `/blog/${encodeURIComponent(p.slug)}`),
-      lastmod: p.published_at?.slice(0, 10),
+      // An edited article tells crawlers it changed via its "updated" date.
+      lastmod: ((p as { updated_at?: string }).updated_at || p.published_at)?.slice(0, 10),
       changefreq: "monthly",
       priority: "0.7",
       alternates,

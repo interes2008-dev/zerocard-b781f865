@@ -82,7 +82,7 @@ const pt = {
   // How it works
   howBadge: "📋 Como funciona",
   howTitle: "Pronto em poucos\npassos simples",
-  howDesc: "Sem papelada. Sem fila. Tudo pelo app da Pionex.",
+  howDesc: "Tudo acontece no app da Pionex, do cadastro até a primeira compra.",
   howTab1: "Pegar cartão", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Cadastro", step1Desc: "Crie uma conta na Pionex com seu e-mail ou com o Google. Leva 2 minutos.",
   step2Title: "KYC nível 2", step2Desc: "Foto do documento mais uma selfie. A verificação costuma levar 10 minutos.",
@@ -335,7 +335,7 @@ const pt = {
   faq5Q: "O cartão é físico ou virtual?",
   faq5A: "O cartão principal é virtual: você o adiciona ao Apple Pay, Google Pay, PayPal e outras carteiras. A Pionex está lançando um Visa físico aos poucos; se a sua conta for elegível, a opção aparece no app.",
   faq6Q: "Visa ou Mastercard, qual escolher?",
-  faq6A: "Os benefícios são os mesmos: até 1% de cashback, 5% ao ano sobre o saldo e sem anuidade. A diferença está nas compras fora do dólar: o Visa cobra 1%, que o cashback compensa, e o Mastercard de 2% a 3,5%. Compras em dólar são grátis nos dois. Para gastar em moeda local, o Visa é melhor.",
+  faq6A: "Os dois cartões têm cashback e 5% ao ano sobre o saldo, sem anuidade. A diferença está na taxa. Pelos dados da Pionex de setembro de 2026, o Visa cobra 1% por compra e o cashback de até 1% compensa mais ou menos. O Mastercard cobra até 3,5%, e uma página da Pionex indica cashback de só 0,1% para pedidos novos. Se puder escolher, fique com o Visa. Na China, Alipay e WeChat Pay só funcionam com Visa.",
   faq7Q: "E se der erro ao vincular ao Apple Pay?",
   faq7A: "Confira se a conta do cartão tem saldo, porque algumas carteiras fazem uma cobrança de teste para verificar. Se ao vincular aparecer 'entre em contato com o emissor', preencha o formulário em support.pionex.com e a equipe ajuda em até 3 dias úteis.",
   faq8Q: "Como bloqueio o cartão se perder o celular?",
@@ -362,16 +362,16 @@ const pt = {
   refCTA: "Pegue seu cartão e comece a indicar →",
   refNote: "A taxa e os níveis do programa de indicação são definidos pela Pionex e podem mudar. Condições atuais em pionex.com.",
   // CTA
-  ctaBadge: "Grátis · Rápido · Vantajoso",
+  ctaBadge: "Leva uns 10 minutos",
   ctaTitle: "Comece a gastar cripto\nagora mesmo",
-  ctaDesc: "Junte-se aos milhões de usuários da Pionex que já recebem cashback, ganham juros e gastam USDT como em qualquer cartão.",
+  ctaDesc: "O cartão sai de graça no app da Pionex. Para a verificação você precisa de um documento e uma selfie, e o pedido costuma ser aprovado em até um dia.",
   ctaCTA: "Pegue o ZeroCard grátis →",
   ctaDocs: "Documentação",
   ctaDisclaimer: "Precisa de KYC nível 2 · saldo de 10 a 100 USDT para pedir · cartão virtual · Visa e Mastercard",
 
   // Footer
   // Footer columns
-  footTagline: "Um cartão cripto para a vida real. Pague com USDT pelo mundo, ganhe cashback e mantenha seu dinheiro sob controle.",
+  footTagline: "Um guia independente sobre o cartão e os bots da Pionex. Mostramos onde o cartão funciona e quanto as compras custam de verdade.",
   footColProduct: "Produto",
   footColResources: "Recursos",
   footColCompany: "Info",
