@@ -13,7 +13,7 @@ function repoPosts(): { slug: string; published_at: string; updated_at?: string;
     for (const f of readdirSync(ld).filter((x) => x.endsWith(".md"))) {
       const raw = readFileSync(join(ld, f), "utf-8");
       const slug = raw.match(/^slug:\s*(.+)$/m)?.[1].trim() ?? f.replace(/\.md$/, "");
-      const date = raw.match(/^date:\s*(.+)$/m)?.[1].trim() ?? new Date().toISOString().slice(0, 10);
+      const date = raw.match(/^date:\s*(.+)$/m)?.[1].trim() ?? "";
       const group = raw.match(/^group:\s*(.+)$/m)?.[1].trim();
       const updated = raw.match(/^updated:\s*(.+)$/m)?.[1].trim();
       out.push({ slug, published_at: date, updated_at: updated, lang, group });
@@ -86,7 +86,6 @@ function xml(entries: Entry[]) {
 }
 
 (async () => {
-  const today = new Date().toISOString().slice(0, 10);
   const remote = await fetchPosts();
   const local = repoPosts();
   const localKeys = new Set(local.map((p) => `${p.lang}:${p.slug}`));
@@ -102,7 +101,7 @@ function xml(entries: Entry[]) {
   ];
   for (const n of neutral) {
     for (const lang of LANGS) {
-      entries.push({ loc: lp(lang, n.path), lastmod: today, changefreq: n.changefreq, priority: n.priority, alternatesFor: n.path });
+      entries.push({ loc: lp(lang, n.path), changefreq: n.changefreq, priority: n.priority, alternatesFor: n.path });
     }
   }
 
