@@ -6,6 +6,6 @@
 
 # News publications
 
-- [ ] Select current crypto-card and stablecoin payment news using sources and search demand.
-- [ ] Publish three sourced news explainers in Russian and English through the existing blog.
-- [ ] Verify article links, rendering and sitemap entries, then publish the site.
+- [x] Select current crypto-card and stablecoin payment news using sources and search demand.
+- [x] Add three sourced news explainers in Russian and English through the existing blog.
+- [x] Verify article links, rendering and sitemap entries; request site publication (deployment completion not yet confirmed).
