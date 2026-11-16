@@ -6,6 +6,20 @@
 export interface Source { title: string; url: string }
 
 export const SOURCE_SETS: Record<string, Source[]> = {
+  "okx-us-card-news": [
+    { title: "OKX: US Mastercard card launch", url: "https://www.okx.com/en-us/learn/okx-card-us" },
+    { title: "OKX: card model, collateral and repayment FAQ (updated November 5, 2026)", url: "https://www.okx.com/en-us/help/us-okx-card-what-is-the-okx-card" },
+    { title: "OKX: US card tiers, reward caps and eligibility", url: "https://www.okx.com/en-us/card" },
+    { title: "OKX: cashback programme FAQ", url: "https://www.okx.com/en-us/help/us-okx-card-cashback-program-faq" },
+  ],
+  "decard-visa-news": [
+    { title: "DCS DeCard: expanded Visa collaboration, November 12, 2026", url: "https://www.thedecard.com/en/business/resources/news/dcs-decard-visa-global-expansion" },
+    { title: "The Paypers: DeCard stablecoin-linked card expansion, November 13, 2026", url: "https://thepaypers.com/crypto-web3-and-cbdc/news/dcs-decard-expands-visa-partnership-for-stablecoin-linked-cards" },
+  ],
+  "visa-usdpt-news": [
+    { title: "Anchorage Digital: Visa settlement support starting with USDPT, November 12, 2026", url: "https://www.anchorage.com/press-room/anchorage-digital-to-support-visa-stablecoin-settlement-starting-with-usdpt" },
+    { title: "Decrypt: Anchorage stablecoins and VisaNet settlement, November 12, 2026", url: "https://decrypt.co/383098/anchorage-digital-stablecoins-settle-payments-visa-network" },
+  ],
   "card-restrictions": [
     { title: "Pionex Help Center: Why is Pionex Card usage restricted in certain regions?", url: "https://support.pionex.com/hc/en-us/articles/53400153103385-Why-is-Pionex-Card-usage-restricted-in-certain-regions" },
     { title: "Pionex: Where Does Pionex Card Work?", url: "https://www.pionex.com/blog/where-does-pionex-card-work/" },
