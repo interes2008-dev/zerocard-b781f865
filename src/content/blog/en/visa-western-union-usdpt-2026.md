@@ -1,9 +1,9 @@
 ---
 slug: visa-western-union-usdpt-2026
-title: "Visa adds Western Union's USDPT: settlement is not a new crypto card"
-description: "Visa and Anchorage's November 12 USDPT announcement explained: network settlement, USDT versus USDPT, and what actually changes for everyday stablecoin spending."
+title: "Visa stablecoin settlement: Western Union USDPT explained"
+description: "Visa and Anchorage support Western Union USDPT for network settlement. Learn how it differs from USDT spending and a consumer stablecoin card."
 date: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 order: 2
 category: crypto
 group: visa-usdpt-news-2026

@@ -1,12 +1,12 @@
 ---
 slug: grid-bot-einrichten
-title: "Grid-Bot einrichten: Spanne, Gitter und wann er Geld verliert"
-description: "So arbeitet ein Grid-Bot bei Pionex und Webot: Spanne und Gitteranzahl wählen, warum die Gebühr den Mindestabstand bestimmt, und die zwei Wege in den Verlust."
+title: "Pionex Grid Bot einrichten: Gebühren, Einstellungen, Risiken"
+description: "Grid Bot bei Pionex und Webot einrichten: Preisspanne, Anzahl der Grids und Stop-Loss. Gebühren vergleichen und Gesamtverlust trotz Grid-Gewinn verstehen."
 date: 2026-09-27
 order: 3
 group: grid-bot
 sources: grid-bot, mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 audience: eu
 cover: grid-bot

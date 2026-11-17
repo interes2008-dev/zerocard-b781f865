@@ -1,12 +1,12 @@
 ---
 slug: pionex-card-review
-title: "Pionex Card review 2026: real fees, limits and where it works"
-description: "An honest look at the Pionex Card: Visa vs Mastercard fees, cashback exclusions, limits, 5% APR and the countries where payments get declined."
+title: "Pionex Card review: fees, cashback, limits and restrictions"
+description: "Pionex Card review covering Visa and Mastercard fees, cashback exclusions, spending limits and country restrictions. Check published terms against your app."
 date: 2026-09-27
 order: 1
 group: card-cost
 sources: card-fees, card-restrictions, kyc-countries
-updated: 2026-10-03
+updated: 2026-11-17
 category: card
 cover: card-cost
 ---

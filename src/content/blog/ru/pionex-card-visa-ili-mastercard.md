@@ -1,12 +1,12 @@
 ---
 slug: pionex-card-visa-ili-mastercard
-title: "Pionex Card: Visa или Mastercard и сколько вы реально платите"
-description: "Считаем на цифрах по данным Pionex на осень 2026: комиссия Visa и Mastercard, кэшбэк, лимиты, наличные. И почему россиянам выдают Mastercard."
+title: "Pionex Card Visa или Mastercard: комиссии, кэшбэк и лимиты"
+description: "Сравнение Pionex Card Visa и Mastercard: комиссии покупок, кэшбэк, лимиты и снятие наличных по опубликованным условиям. Что доступно российским аккаунтам."
 date: 2026-09-27
 order: 3
 group: card-cost
 sources: card-fees, card-restrictions
-updated: 2026-10-03
+updated: 2026-11-17
 category: card
 keywords: [pionex card visa или mastercard, pionex card комиссия, pionex card лимиты, pionex card кэшбэк]
 cover: visa-vs-mc

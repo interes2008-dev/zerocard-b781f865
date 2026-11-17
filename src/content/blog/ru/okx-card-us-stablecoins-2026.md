@@ -1,9 +1,9 @@
 ---
 slug: okx-card-us-stablecoins-2026
-title: "OKX Card в США: оплата USDT и что скрывается за кэшбэком до 10%"
-description: "Новая Mastercard от OKX: USDT, USDC и USDG, залог вместо обычного дебетового баланса, условия кэшбэка и ограничения для пользователей за пределами США."
+title: "Криптокарта OKX Card в США: USDT, залог и условия кэшбэка"
+description: "Как устроена криптокарта OKX Card в США: залог в USDT, USDC и USDG, погашение счёта и условия кэшбэка. Кому доступна американская программа."
 date: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 order: 0
 category: crypto
 group: okx-us-card-news-2026

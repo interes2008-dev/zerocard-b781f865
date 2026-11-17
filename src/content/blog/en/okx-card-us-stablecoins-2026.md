@@ -1,9 +1,9 @@
 ---
 slug: okx-card-us-stablecoins-2026
-title: "OKX Card launches in the US: USDT spending and the 10% cashback catch"
-description: "How the US OKX Mastercard uses stablecoin collateral, who qualifies for USDG cashback, and why this launch is not a worldwide crypto debit card offer."
+title: "OKX Card US: stablecoin collateral and cashback requirements"
+description: "How OKX Card works in the US: USDT, USDC and USDG collateral, repayment and cashback conditions. A secured charge card, not a crypto debit card."
 date: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 order: 0
 category: crypto
 group: okx-us-card-news-2026

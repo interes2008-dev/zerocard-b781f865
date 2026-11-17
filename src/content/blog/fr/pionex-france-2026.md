@@ -1,11 +1,11 @@
 ---
 slug: pionex-france-2026
-title: "Pionex en France : pourquoi c'est fermé et qui peut s'inscrire"
-description: "Pionex n'accepte plus les résidents français et l'AMF a blacklisté pionex.com. Ce qui reste possible en Belgique, en Suisse et en Afrique francophone."
+title: "Pionex France : restrictions, MiCA et alternative Webot EU"
+description: "Pionex en France : restrictions de pionex.com, rôle de Webot EU sous MiCA et accès depuis la Suisse ou l'Afrique francophone. Consulter les sources datées."
 date: 2026-09-27
 order: 1
 sources: kyc-countries, mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: mica
 ---

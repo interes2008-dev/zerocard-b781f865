@@ -1,12 +1,12 @@
 ---
 slug: bot-grid-pionex
-title: "Bot grid da Pionex: como configurar e quando ele dá prejuízo"
-description: "Como o bot grid da Pionex ganha, como escolher a faixa e o número de grids, o peso da taxa de 0,05% nos grids pequenos e quando ele dá prejuízo."
+title: "Bot grid Pionex: configuração, taxas e riscos de prejuízo"
+description: "Configure um bot grid na Pionex: faixa de preços, número de grids e stop loss. Entenda as taxas e por que lucro de grid não garante lucro total."
 date: 2026-09-27
 order: 3
 group: grid-bot
 sources: grid-bot, fees
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: grid-bot
 ---

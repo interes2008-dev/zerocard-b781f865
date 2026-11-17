@@ -1,11 +1,11 @@
 ---
 slug: pionex-italia-mica
-title: "Pionex in Italia dopo MiCA: perché ora si passa da Webot"
-description: "Dal 1° luglio 2026 MiCA si applica senza periodo transitorio. Cosa significa per chi usa Pionex dall'Italia, cos'è Webot EU e cosa fare se hai già un conto."
+title: "Pionex Italia e MiCA: Webot EU, accesso e commissioni"
+description: "Pionex in Italia dopo MiCA: ruolo di Webot EU, accesso e commissioni rispetto a pionex.com. Controlla separatamente se la carta è disponibile per te."
 date: 2026-09-27
 order: 2
 sources: mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 audience: eu
 cover: mica

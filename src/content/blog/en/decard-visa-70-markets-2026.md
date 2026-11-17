@@ -1,9 +1,9 @@
 ---
 slug: decard-visa-70-markets-2026
-title: "DeCard and Visa expand stablecoin cards to 70+ markets: what is confirmed"
-description: "The November 12 DeCard announcement explained: card issuing infrastructure, corporate spending and why 70+ markets does not mean universal consumer availability."
+title: "DeCard Visa stablecoin card expansion: 70+ markets explained"
+description: "DeCard expands stablecoin card issuing capabilities with Visa. Read what 70+ markets means for partners and why consumer eligibility remains separate."
 date: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 order: 1
 category: crypto
 group: decard-visa-news-2026

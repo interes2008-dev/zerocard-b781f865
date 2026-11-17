@@ -1,11 +1,11 @@
 ---
 slug: krypto-steuer-haltefrist-2026
-title: "Krypto-Steuer 2026: fällt die Haltefrist? Was das für USDT heißt"
-description: "Der Entwurf vom September 2026 will die steuerfreie Jahresfrist abschaffen. Was geplant ist, was heute gilt und warum Zahlen mit USDT zählt."
+title: "Haltefrist Krypto und Steuer 2026: USDT-Zahlungen erklärt"
+description: "Haltefrist für Krypto, private Veräußerungen und USDT-Zahlungen: Regeln und den im Artikel beschriebenen Entwurf unterscheiden. Stand der Quellen beachten."
 date: 2026-09-27
 order: 2
 sources: de-tax
-updated: 2026-09-27
+updated: 2026-11-17
 category: crypto
 audience: eu
 cover: tax
@@ -35,7 +35,7 @@ Wichtig: Das ist ein Entwurf in der frühen Abstimmung, kein Gesetz. Dem Bundest
 
 ## Die unterschätzte Falle: Bezahlen mit USDT
 
-Viele denken, ein Stablecoin sei steuerlich neutral, weil er ja „immer einen Dollar“ wert ist. Für einen Anleger in Deutschland stimmt das nicht.
+Viele denken, ein Stablecoin sei steuerlich neutral, weil er ja "immer einen Dollar" wert ist. Für einen Anleger in Deutschland stimmt das nicht.
 
 **Jede Zahlung mit USDT ist eine Veräußerung.** Wenn du mit einer Krypto-Karte im Supermarkt zahlst, tauschst du USDT gegen eine Ware. Steuerlich ist das dasselbe wie ein Verkauf.
 

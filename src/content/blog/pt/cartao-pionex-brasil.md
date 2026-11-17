@@ -1,12 +1,12 @@
 ---
 slug: cartao-pionex-brasil
-title: "Cartão Pionex no Brasil: quanto custa pagar em reais e em dólar"
-description: "Visa ou Mastercard, cashback, limites e onde o pagamento é recusado: a conta real do cartão Pionex para quem mora no Brasil ou viaja com USDT."
+title: "Cartão cripto Pionex no Brasil: taxas, cashback e limites"
+description: "Cartão cripto Pionex para gastar USDT no Brasil: taxas Visa e Mastercard, cashback, limites e discussão sobre IOF. Confira as condições antes de solicitar."
 date: 2026-09-27
 order: 2
 group: card-cost
 sources: card-fees, card-restrictions
-updated: 2026-10-03
+updated: 2026-11-17
 category: card
 cover: card-cost
 ---

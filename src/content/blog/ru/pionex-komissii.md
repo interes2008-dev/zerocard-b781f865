@@ -1,11 +1,11 @@
 ---
 slug: pionex-komissii
-title: "Комиссии Pionex в 2026: торговля, боты, вывод и карта"
-description: "Сколько стоит торговля на Pionex: спот 0,05%, фьючерсы, боты, ввод и вывод USDT, комиссии карты. С примером расчёта для грид-бота."
+title: "Комиссии Pionex: торговля, грид-боты, вывод USDT и карта"
+description: "Какие комиссии берёт Pionex: спот, фьючерсы, грид-боты, вывод USDT и карта. Пример расчёта расходов бота и проверка тарифа перед операцией."
 date: 2026-09-27
 order: 5
 sources: fees, card-fees, affiliate
-updated: 2026-10-03
+updated: 2026-11-17
 category: bots
 keywords: [pionex комиссии, pionex комиссия за сделку, pionex fees, комиссия грид бота]
 cover: fees

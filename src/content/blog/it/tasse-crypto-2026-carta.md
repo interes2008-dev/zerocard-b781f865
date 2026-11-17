@@ -1,11 +1,11 @@
 ---
 slug: tasse-crypto-2026-carta
-title: "Tasse crypto 2026 al 33%: perché anche pagare con USDT conta"
-description: "Dal 2026 le plusvalenze crypto sono al 33%, la franchigia di 2.000 euro non c'è più e spendere USDT con una carta è imponibile. Cosa cambia."
+title: "Tasse crypto 2026: plusvalenze, USDT e pagamenti con carta"
+description: "Tasse crypto in Italia: plusvalenze, pagamenti in USDT, bot e documentazione. Leggi il quadro descritto e verifica le regole applicabili con un professionista."
 date: 2026-09-27
 order: 1
 sources: it-tax
-updated: 2026-09-27
+updated: 2026-11-17
 category: crypto
 audience: eu
 cover: tax

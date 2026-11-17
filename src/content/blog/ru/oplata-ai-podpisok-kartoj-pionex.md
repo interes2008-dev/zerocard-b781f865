@@ -1,12 +1,12 @@
 ---
 slug: oplata-ai-podpisok-kartoj-pionex
-title: "Оплата ChatGPT, Claude и Cursor картой Pionex: акция и комиссии"
-description: "Pionex возвращает полную стоимость AI-подписки до 50 USDT за платёж. Какие сервисы участвуют, сколько стоит оплата картой и кому она подходит."
+title: "Оплата ChatGPT, Claude и Cursor криптокартой Pionex"
+description: "Как оплатить ChatGPT, Claude и Cursor картой Pionex: баланс USDT, комиссии, причины отказа и ограничения сервисов. Возврат по акции не гарантирован."
 date: 2026-09-27
 order: 0
 group: ai-promo
 sources: ai-services, card-fees
-updated: 2026-10-03
+updated: 2026-11-17
 category: ai-users
 cover: ai-promo
 ---

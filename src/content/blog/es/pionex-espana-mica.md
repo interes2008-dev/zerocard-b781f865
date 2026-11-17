@@ -1,11 +1,11 @@
 ---
 slug: pionex-espana-mica
-title: "Pionex en España tras MiCA: por qué ahora te mandan a Webot"
-description: "Desde el 1 de julio de 2026 MiCA se aplica sin periodo transitorio. Qué significa para usuarios de Pionex en España, qué es Webot EU y qué hacer si ya tienes cuenta."
+title: "Pionex España tras MiCA: Webot EU, acceso y comisiones"
+description: "Pionex en España y Webot EU: qué cambia con MiCA, cómo comparar comisiones y qué revisar si ya tienes cuenta. La tarjeta requiere una comprobación aparte."
 date: 2026-09-27
 order: 3
 sources: mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 audience: eu
 cover: mica

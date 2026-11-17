@@ -1,12 +1,12 @@
 ---
 slug: carte-pionex-afrique-suisse
-title: "Carte Pionex en Afrique et en Suisse : le vrai coût d'un paiement"
-description: "Visa ou Mastercard, cashback, plafonds et pays où le paiement est refusé : le vrai coût de la carte Pionex en francs CFA, dirhams ou francs suisses."
+title: "Carte crypto Pionex en Suisse et en Afrique : frais et limites"
+description: "Carte crypto Pionex : paiements en USDT, frais Visa et Mastercard, cashback et plafonds. Vérifier les pays exclus et les conditions de votre compte."
 date: 2026-09-27
 order: 2
 group: card-cost
 sources: card-fees, card-restrictions
-updated: 2026-10-03
+updated: 2026-11-17
 category: card
 cover: card-cost
 ---

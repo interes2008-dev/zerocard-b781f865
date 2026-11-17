@@ -1,12 +1,12 @@
 ---
 slug: bot-grid-pionex
-title: "Bot grid di Pionex: come impostarlo e quando fa perdere soldi"
-description: "Come guadagna un bot grid su Pionex e Webot, come scegliere intervallo e numero di griglie, quanto pesano le commissioni e i due modi in cui finisce in perdita."
+title: "Bot grid Pionex: configurazione, commissioni e rischi"
+description: "Configura un bot grid su Pionex o Webot: intervallo, numero di griglie e stop loss. Confronta le commissioni e valuta il PnL totale, non solo i profitti grid."
 date: 2026-09-27
 order: 3
 group: grid-bot
 sources: grid-bot, mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 audience: eu
 cover: grid-bot

@@ -1,12 +1,12 @@
 ---
 slug: bot-grid-pionex
-title: "Bot grid de Pionex: cómo configurarlo y cuándo pierde dinero"
-description: "Cómo gana un bot grid en Pionex, cómo elegir rango y número de grids, qué hace la comisión del 0,05% con los grids pequeños y cuándo pierde dinero."
+title: "Bot grid Pionex: configuración, comisiones y riesgos"
+description: "Configura un bot grid en Pionex: rango de precios, número de grids y stop loss. Entiende las comisiones y la diferencia entre ganancia grid y PnL total."
 date: 2026-09-27
 order: 2
 group: grid-bot
 sources: grid-bot, fees
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: grid-bot
 ---

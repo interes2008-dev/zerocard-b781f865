@@ -1,11 +1,11 @@
 ---
 slug: pionex-deutschland-mica
-title: "Pionex in Deutschland nach MiCA: warum du jetzt bei Webot landest"
-description: "Seit Juli 2026 gilt MiCA ohne Übergangsfrist. Was das für Pionex-Nutzer in Deutschland heißt, was Webot EU ist und was für Leser in der Schweiz gilt."
+title: "Pionex Deutschland und MiCA: Webot EU, Gebühren und Zugang"
+description: "Pionex in Deutschland nach MiCA: Webot EU, Zugang und Gebühren im Vergleich zu pionex.com. Verfügbarkeit der Karte gesondert prüfen."
 date: 2026-09-27
 order: 1
 sources: mica, kyc-countries
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 audience: eu
 cover: mica

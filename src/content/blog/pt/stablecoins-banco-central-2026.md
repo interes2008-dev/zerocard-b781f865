@@ -1,11 +1,11 @@
 ---
 slug: stablecoins-banco-central-2026
-title: "Stablecoins viraram câmbio: o que o Banco Central mudou em 2026"
-description: "As resoluções 519, 520 e 521 do Banco Central valem desde fevereiro de 2026. O que muda para quem usa USDT, o limite de US$ 100 mil e a discussão sobre IOF."
+title: "Stablecoins no Brasil: Banco Central, câmbio e IOF em 2026"
+description: "Stablecoins e regras do Banco Central: enquadramento como câmbio, operações com USDT e discussão sobre IOF. Veja o contexto e as fontes citadas no artigo."
 date: 2026-09-27
 order: 1
 sources: br-bcb
-updated: 2026-09-27
+updated: 2026-11-17
 category: crypto
 cover: stablecoins
 ---

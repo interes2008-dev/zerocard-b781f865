@@ -1,12 +1,12 @@
 ---
 slug: pay-ai-subscriptions-pionex-card
-title: "Pay for ChatGPT, Claude and Cursor with the Pionex Card"
-description: "Pionex refunds your full AI subscription payment, up to 50 USDT, in its card campaign. Which services count, what paying costs and who it suits."
+title: "Pionex Card: pay for ChatGPT, Claude and Cursor with USDT"
+description: "Pay AI subscriptions with Pionex Card: USDT funding, purchase fees, service restrictions and declined payments. Campaign refunds are not guaranteed."
 date: 2026-09-27
 order: 0
 group: ai-promo
 sources: ai-services, card-fees
-updated: 2026-10-03
+updated: 2026-11-17
 category: ai-users
 cover: ai-promo
 ---

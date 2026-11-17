@@ -1,12 +1,12 @@
 ---
 slug: pionex-grid-bot-guide
-title: "Pionex grid bot: how to set it up and when it loses money"
-description: "How the Pionex grid bot makes money, how to pick the range and grid count, what the 0.05% fee does to small grids, and when a grid bot loses money."
+title: "Pionex grid bot: setup, trading fees and loss risks"
+description: "Set up a Pionex grid bot: choose a price range, grid count and stop loss. Understand trading fees and why grid profit can differ from total profit."
 date: 2026-09-27
 order: 2
 group: grid-bot
 sources: grid-bot, fees
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: grid-bot
 ---

@@ -1,11 +1,11 @@
 ---
 slug: who-can-use-pionex-2026
-title: "Who can sign up to Pionex in 2026: US, UK, EU and everyone else"
-description: "Pionex in 2026 is really three platforms. Which one you land on depends on where you live: pionex.com, Webot for the US, and Pionew Ireland for the EU under MiCA."
+title: "Pionex supported countries: US, UK, EU and restrictions"
+description: "Check Pionex supported countries and account restrictions. Compare pionex.com, Webot US and Webot EU, and separate sign-up eligibility from card acceptance."
 date: 2026-09-27
 order: 3
 sources: kyc-countries, mica
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: who-can-use
 ---

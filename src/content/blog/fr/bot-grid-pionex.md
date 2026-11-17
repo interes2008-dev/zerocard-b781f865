@@ -1,12 +1,12 @@
 ---
 slug: bot-grid-pionex
-title: "Bot grid Pionex : réglages et cas où il fait perdre de l'argent"
-description: "Comment gagne un bot grid Pionex, comment choisir la fourchette et le nombre de grilles, l'effet des frais de 0,05 % et quand il perd de l'argent."
+title: "Bot grid Pionex : configuration, frais et risques de perte"
+description: "Configurer un bot grid Pionex : fourchette de prix, nombre de grilles et stop loss. Comprendre les frais et le risque de perte malgré un gain des grilles."
 date: 2026-09-27
 order: 3
 group: grid-bot
 sources: grid-bot, fees
-updated: 2026-09-27
+updated: 2026-11-17
 category: bots
 cover: grid-bot
 ---
@@ -55,7 +55,7 @@ Avec un écart de 0,15 %, chaque cycle rapporte 0,075 USDT brut et paie 0,05 de 
 
 **Marchés peu liquides.** Sur les cryptos peu échangées, les ordres s'exécutent mal, et une nouvelle peut sauter plusieurs niveaux d'un coup.
 
-Le piège : le « gain des grilles » peut être positif alors que le bot est globalement dans le rouge, car la valeur des cryptos détenues est comptée à part. Regardez le PnL total.
+Le piège : le " gain des grilles " peut être positif alors que le bot est globalement dans le rouge, car la valeur des cryptos détenues est comptée à part. Regardez le PnL total.
 
 ## Pour démarrer
 
