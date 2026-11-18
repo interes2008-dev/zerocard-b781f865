@@ -7,6 +7,7 @@ import { LangSwitcher } from "@/components/LangSwitcher";
 import { CountryCheckSection, CalculatorSection, BenefitsCompact, AudienceCompact, toolsCopy } from "@/components/HomeTools";
 import { Link } from "react-router-dom";
 import { STATIC_POSTS } from "@/lib/staticPosts";
+import { useHeadMeta } from "@/lib/headMeta";
 
 
 
@@ -300,8 +301,8 @@ function HeroSection() {
     ru: {
     photoAlt: "Металлическая карта с оранжевой подсветкой",
     badge: "Pionex Card · Visa & Mastercard · кэшбэк до 1%",
-    h1a: "USDT на балансе.", h1b: "Платите криптовалютой", h1accent: "за границей",
-    sub: (<>Карта биржи <b>Pionex</b>, зарегистрированной в FinCEN (США). Пополняете её в USDT, добавляете в <b>Apple&nbsp;Pay</b> или <b>Google&nbsp;Pay</b> и платите за границей и в зарубежных онлайн-сервисах. В российских магазинах карта не работает: это ограничение Pionex, подробно <a href="/blog/pionex-card-v-rossii" className="underline underline-offset-2">в нашем разборе</a>.</>),
+    h1a: "Криптокарта Pionex.", h1b: "Оплата USDT", h1accent: "за границей",
+    sub: (<>ZeroCard объясняет, как работает криптовалютная карта <b>Pionex</b>: пополнение USDT, <b>Apple&nbsp;Pay</b>, <b>Google&nbsp;Pay</b>, зарубежные покупки и подписки. Комиссии зависят от Visa или Mastercard. В российских магазинах карта не работает: <a href="/blog/pionex-card-v-rossii" className="underline underline-offset-2">страны и ограничения</a>. Оформление проходит на официальном сайте Pionex.</>),
     cta1: "Выпустить карту бесплатно", cta2: "Как это работает",
     st1: "стран для оплаты", st2: "кэшбэк на каждую покупку", st3: "годовых на остаток USDT", st4: "выпуск и обслуживание",
     status: "Активирован", caption: "карта биржи pionex · регистрация msb в fincen (сша)",
@@ -313,7 +314,7 @@ function HeroSection() {
     de: {
     photoAlt: "Metallkarte mit orangefarbener Kante",
     badge: "Pionex Card · Visa & Mastercard · bis zu 1% Cashback",
-    h1a: "USDT im Wallet.", h1b: "Zahle mit Krypto", h1accent: "im Ausland und online",
+    h1a: "Pionex Krypto-Karte.", h1b: "Mit USDT zahlen", h1accent: "im Ausland",
     sub: (<>ZeroCard läuft über die Börse <b>Pionex</b>, bei FinCEN in den USA als MSB registriert. Du lädst die Karte mit USDT, hinterlegst sie in <b>Apple&nbsp;Pay</b> oder <b>Google&nbsp;Pay</b> und zahlst überall, wo Visa akzeptiert wird, außer bei Händlern aus den Ländern, die Pionex sperrt. Ohne Bankkonto und ohne Einkommensnachweis.</>),
     cta1: "Karte kostenlos holen", cta2: "So funktioniert's",
     st1: "Länder zum Bezahlen", st2: "Cashback bei jedem Einkauf", st3: "Zinsen aufs USDT-Guthaben", st4: "Ausgabe und Führung",
@@ -326,7 +327,7 @@ function HeroSection() {
     en: {
     photoAlt: "Metal card with an orange glowing edge",
     badge: "Pionex Card · Visa & Mastercard · up to 1% cashback",
-    h1a: "USDT in your wallet.", h1b: "Pay with crypto", h1accent: "abroad and online",
+    h1a: "Pionex crypto card.", h1b: "Spend USDT", h1accent: "abroad and online",
     sub: (<>ZeroCard runs on <b>Pionex</b>, an exchange registered with FinCEN in the US as an MSB. Top up with USDT, add the card to <b>Apple&nbsp;Pay</b> or <b>Google&nbsp;Pay</b> and spend wherever Visa works, except at merchants from the countries Pionex restricts. No bank account and no income checks.</>),
     cta1: "Get your free card", cta2: "How it works",
     st1: "countries to spend in", st2: "cashback on every purchase", st3: "APR on your USDT balance", st4: "issue and maintenance fees",
@@ -339,7 +340,7 @@ function HeroSection() {
     es: {
     photoAlt: "Tarjeta metálica con borde naranja",
     badge: "Pionex Card · Visa & Mastercard · hasta 1% de reembolso",
-    h1a: "USDT en tu saldo.", h1b: "Paga con cripto", h1accent: "en el extranjero",
+    h1a: "Tarjeta cripto Pionex.", h1b: "Paga con USDT", h1accent: "en el extranjero",
     sub: (<>ZeroCard funciona con el exchange <b>Pionex</b>, registrado como MSB ante FinCEN en EE.UU. Recargas la tarjeta en USDT, la añades a <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> y pagas donde acepten Visa, salvo en comercios de los países que Pionex restringe. Sin banco y sin justificar ingresos.</>),
     cta1: "Consigue tu tarjeta gratis", cta2: "Cómo funciona",
     st1: "países donde pagar", st2: "de reembolso en cada compra", st3: "anual sobre el saldo en USDT", st4: "emisión y mantenimiento",
@@ -352,7 +353,7 @@ function HeroSection() {
     pt: {
     photoAlt: "Cartão de metal com borda laranja",
     badge: "Pionex Card · Visa & Mastercard · até 1% de cashback",
-    h1a: "USDT no saldo.", h1b: "Pague com cripto", h1accent: "no exterior",
+    h1a: "Cartão cripto Pionex.", h1b: "Pague com USDT", h1accent: "no exterior",
     sub: (<>O ZeroCard funciona com a corretora <b>Pionex</b>, registrada como MSB na FinCEN dos EUA. Você recarrega o cartão em USDT, adiciona ao <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> e paga onde aceitam Visa, exceto em estabelecimentos dos países que a Pionex restringe. Sem banco e sem comprovar renda.</>),
     cta1: "Pegue seu cartão grátis", cta2: "Como funciona",
     st1: "países para pagar", st2: "de cashback em cada compra", st3: "ao ano sobre o saldo em USDT", st4: "emissão e manutenção",
@@ -365,7 +366,7 @@ function HeroSection() {
     it: {
     photoAlt: "Carta in metallo con bordo arancione",
     badge: "Pionex Card · Visa & Mastercard · fino all'1% di cashback",
-    h1a: "USDT sul saldo.", h1b: "Paga in crypto", h1accent: "all'estero",
+    h1a: "Carta crypto Pionex.", h1b: "Paga con USDT", h1accent: "all'estero",
     sub: (<>ZeroCard funziona con l'exchange <b>Pionex</b>, registrato come MSB presso FinCEN negli Stati Uniti. Ricarichi la carta in USDT, la aggiungi ad <b>Apple&nbsp;Pay</b> o <b>Google&nbsp;Pay</b> e paghi dove accettano Visa, tranne che presso esercenti dei paesi che Pionex limita. Senza banca e senza prove di reddito.</>),
     cta1: "Ottieni la carta gratis", cta2: "Come funziona",
     st1: "paesi dove pagare", st2: "di cashback su ogni acquisto", st3: "annuo sul saldo in USDT", st4: "emissione e gestione",
@@ -378,7 +379,7 @@ function HeroSection() {
     fr: {
     photoAlt: "Carte en métal au bord orange",
     badge: "Pionex Card · Visa & Mastercard · jusqu'à 1 % de cashback",
-    h1a: "USDT sur le solde.", h1b: "Payez en crypto", h1accent: "à l'étranger",
+    h1a: "Carte crypto Pionex.", h1b: "Payez en USDT", h1accent: "à l'étranger",
     sub: (<>ZeroCard fonctionne avec l'exchange <b>Pionex</b>, enregistré comme MSB auprès du FinCEN aux États-Unis. Vous rechargez la carte en USDT, vous l'ajoutez à <b>Apple&nbsp;Pay</b> ou <b>Google&nbsp;Pay</b> et vous payez là où Visa est acceptée, sauf chez les marchands des pays que Pionex restreint. Sans banque ni justificatif de revenus.</>),
     cta1: "Obtenez votre carte gratuite", cta2: "Comment ça marche",
     st1: "pays où payer", st2: "de cashback sur chaque achat", st3: "par an sur le solde en USDT", st4: "émission et gestion",
@@ -390,6 +391,15 @@ function HeroSection() {
     },
   };
   const c = copies[lang] ?? copies.en;
+  const redirectNote = {
+    ru: "Вы перейдёте на официальный сайт Pionex для регистрации и оформления карты.",
+    en: "You will leave ZeroCard for official Pionex registration and card issuance.",
+    de: "Du wechselst zur offiziellen Pionex-Website für Anmeldung und Kartenantrag.",
+    es: "Irás al sitio oficial de Pionex para registrarte y solicitar la tarjeta.",
+    pt: "Você irá ao site oficial da Pionex para cadastro e solicitação do cartão.",
+    it: "Passerai al sito ufficiale Pionex per registrarti e richiedere la carta.",
+    fr: "Vous passerez sur le site officiel Pionex pour vous inscrire et demander la carte.",
+  }[lang];
 
   const pills = [
     { em: "🍎", label: "Apple Pay" }, { em: "🤖", label: "Google Pay" },
@@ -423,6 +433,7 @@ function HeroSection() {
               </a>
               <a href="#how" className="h-btn h-btn-ghost">{c.cta2}</a>
             </div>
+            <p className="text-xs text-muted-foreground mb-6">{redirectNote}</p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <div className="h-stats">
@@ -661,8 +672,8 @@ type CmpStatus = "good" | "partial" | "bad" | "none";
    GUIDES (links into the blog; only languages that have articles)
    ═══════════════════════════════════════════════════ */
 const GUIDES_COPY: Record<string, { badge: string; title: string; desc: string; all: string }> = {
-  ru: { badge: "📚 Гайды", title: "Прежде чем оформлять", desc: "Где карта работает, во что обходятся покупки и как устроены боты Pionex. Без рекламных обещаний.", all: "Все статьи" },
-  en: { badge: "📚 Guides", title: "Before you sign up", desc: "Where the card works, what purchases really cost and how Pionex bots behave.", all: "All articles" },
+  ru: { badge: "📚 Гайды", title: "Как выбрать криптокарту: страны и комиссии", desc: "Где карта работает, во что обходятся покупки и как устроены боты Pionex. Без рекламных обещаний.", all: "Все статьи" },
+  en: { badge: "📚 Guides", title: "Compare crypto cards: countries and fees", desc: "Where the card works, what purchases really cost and how Pionex bots behave.", all: "All articles" },
   de: { badge: "📚 Ratgeber", title: "Bevor du dich anmeldest", desc: "Was MiCA für Pionex in Deutschland bedeutet, was die Steuerpläne ändern und wie Grid-Bots wirklich rechnen.", all: "Alle Artikel" },
   es: { badge: "📚 Guías", title: "Antes de registrarte", desc: "Cuánto cuesta pagar en pesos con la tarjeta, cómo funcionan los bots de Pionex y qué cambió en Europa con MiCA.", all: "Todos los artículos" },
   pt: { badge: "📚 Guias", title: "Antes de se cadastrar", desc: "As novas regras do Banco Central para stablecoins, quanto custa pagar em reais e como funcionam os bots da Pionex.", all: "Todos os artigos" },
@@ -672,7 +683,15 @@ const GUIDES_COPY: Record<string, { badge: string; title: string; desc: string; 
 
 function GuidesSection() {
   const { lang } = useI18n();
-  const posts = STATIC_POSTS.filter((p) => p.lang === lang).slice(0, 6);
+  const preferredSlugs: Record<string, string[]> = {
+    ru: ["pionex-card-v-rossii", "pionex-card-strany", "pionex-card-visa-ili-mastercard", "pionex-card-ili-redotpay", "oplata-ai-podpisok-kartoj-pionex", "pionex-komissii"],
+    en: ["pionex-card-review", "who-can-use-pionex-2026", "pionex-card-comparison", "pionex-card-vs-redotpay", "pay-ai-subscriptions-pionex-card", "pionex-grid-bot-guide"],
+  };
+  const localPosts = STATIC_POSTS.filter((p) => p.lang === lang);
+  const preferred = preferredSlugs[lang];
+  const posts = preferred
+    ? preferred.flatMap((slug) => localPosts.filter((p) => p.slug === slug)).slice(0, 6)
+    : localPosts.slice(0, 6);
   if (posts.length === 0) return null;
   const c = GUIDES_COPY[lang] ?? GUIDES_COPY.en;
   return (
@@ -1030,6 +1049,8 @@ const ogImageFor = (lang: string) => `https://zerocard.pro/og/zerocard-${OG_LOCA
 
 function DynamicMeta() {
   const { t, lang } = useI18n();
+  const pageUrl = "https://zerocard.pro" + langHref(lang, "/");
+  useHeadMeta({ title: t.metaTitle, description: t.metaDesc, canonical: pageUrl, ogType: "website", locale: OG_LOCALE[lang] ?? "en_US" });
   useEffect(() => {
     document.title = t.metaTitle;
     // Update an existing meta tag, or create it if it's missing.
@@ -1081,15 +1102,15 @@ function DynamicMeta() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://zerocard.pro/#webpage",
-        url: "https://zerocard.pro/",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
         name: t.metaTitle,
         description: t.metaDesc,
         inLanguage: lang,
         isPartOf: { "@id": "https://zerocard.pro/#website" },
         breadcrumb: {
           "@type": "BreadcrumbList",
-          itemListElement: [{ "@type": "ListItem", position: 1, name: "ZeroCard", item: "https://zerocard.pro/" }]
+          itemListElement: [{ "@type": "ListItem", position: 1, name: "ZeroCard", item: pageUrl }]
         }
       },
       {
@@ -1121,7 +1142,7 @@ function DynamicMeta() {
       {
         "@type": "FinancialProduct",
         "@id": "https://zerocard.pro/#product",
-        name: "ZeroCard by Pionex",
+        name: "Pionex Card",
         image: ogImageFor(lang),
         brand: { "@type": "Brand", name: "Pionex" },
         category: "Crypto debit card",
@@ -1140,7 +1161,7 @@ function DynamicMeta() {
           name: "Pionex",
           url: "https://www.pionex.com"
         },
-        feesAndCommissionsSpecification: "0 annual fee, 0 issuance fee, 1% transaction fee offset by 1% cashback",
+        feesAndCommissionsSpecification: "No issuance or annual fee. Published September 2026 terms: Visa purchase fee 1%, Mastercard up to 3.5%. Cashback eligibility and exclusions apply; verify current account terms.",
         offers: {
           "@type": "Offer",
           price: "0",

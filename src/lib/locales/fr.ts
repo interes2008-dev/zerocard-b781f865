@@ -81,7 +81,7 @@ const fr = {
   benCtaDesc: "Obtenez ZeroCard gratuitement en 5 minutes et gagnez du cashback dès votre premier achat.",
   // How it works
   howBadge: "📋 Comment ça marche",
-  howTitle: "Prête en quelques\nétapes simples",
+  howTitle: "Demander une carte crypto\net la recharger en USDT",
   howDesc: "Tout se passe dans l'app Pionex, de l'inscription au premier achat.",
   howTab1: "Obtenir la carte", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Inscription", step1Desc: "Créez un compte Pionex par e-mail ou Google. 2 minutes suffisent.",
@@ -323,7 +323,7 @@ const fr = {
 
   // FAQ
   faqBadge: "❓ FAQ",
-  faqTitle: "Tout ce que vous\nvouliez demander",
+  faqTitle: "Questions sur la carte crypto\net les paiements USDT",
   faq1Q: "Qu'est-ce que ZeroCard ?",
   faq1A: "ZeroCard est une carte de paiement virtuelle propulsée par Pionex qui vous permet de payer des services internationaux, des abonnements et des achats en ligne partout dans le monde.\n\nEn clair, ZeroCard est la même carte que vous obtenez via Pionex, présentée simplement de façon plus simple et plus pratique. La carte fonctionne comme une carte de paiement en ligne classique, mais sans les limites habituelles des banques.\n\nCaractéristiques principales :\n• Fonctionne avec les services internationaux\n• Une carte Visa ou Mastercard, acceptée là où ces réseaux fonctionnent\n• La configuration prend environ 5 minutes\n• Aucun frais mensuel\n• Jusqu'à 1% de cashback\n\nAprès avoir cliqué sur le bouton, vous serez redirigé vers la plateforme officielle Pionex pour finaliser l'inscription et obtenir votre carte.",
   faq2Q: "Comment recharger le compte de la carte ?",
@@ -384,8 +384,8 @@ const fr = {
   footerNote: "Site partenaire indépendant. Ce n'est pas une ressource officielle de Pionex. Tous les liens contiennent un code de parrainage partenaire. Les conditions et frais peuvent changer, vérifiez les informations à jour sur pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "Carte Pionex : dépensez vos USDT à l'étranger, 1% cashback",
-  metaDesc: "Dépenser vos USDT avec la carte Pionex à l'étranger et en ligne : où elle marche, frais Visa et Mastercard, jusqu'à 1% de cashback, 5% par an.",
+  metaTitle: "Carte crypto Pionex : USDT, frais et pays | ZeroCard",
+  metaDesc: "Carte crypto Pionex : paiements USDT, frais Visa et Mastercard, Apple Pay et pays disponibles. Résidents UE : vérifier séparément l'accès via Webot.",
 };
 
 export default fr;

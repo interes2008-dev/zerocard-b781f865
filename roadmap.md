@@ -15,3 +15,9 @@
 - [x] Match existing article topics to Semrush queries in their language markets (RU, US, DE, ES, BR, IT, FR).
 - [x] Update 40 repository articles and seven recent Cloud articles without changing URLs or adding unsupported promises.
 - [x] Verify 40 article titles, descriptions, canonicals and schemas in the browser, a saved Cloud article from the blog, mobile bounds and editorial sitemap dates. Repository changes await publication.
+
+# Homepage crypto-card search optimization
+
+- [x] Align homepage titles, descriptions and H1/H2 headings with previously researched crypto-card searches across seven language versions.
+- [x] Clarify Russian introductory product copy, redirect transparency, localized WebPage data and evergreen card guide links.
+- [x] Verify unique titles/descriptions/canonicals, one H1, localized schema, guide navigation and mobile bounds across seven languages. Changes reach the live site after publication.

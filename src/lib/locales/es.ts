@@ -81,7 +81,7 @@ const es = {
   benCtaDesc: "Consigue ZeroCard gratis en 5 minutos y gana reembolso desde tu primera compra.",
   // How it works
   howBadge: "📋 Cómo funciona",
-  howTitle: "Lista en unos\npasos sencillos",
+  howTitle: "Cómo solicitar una tarjeta cripto\ny recargar USDT",
   howDesc: "Todo se hace en la app de Pionex, desde el registro hasta la primera compra.",
   howTab1: "Obtener tarjeta", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registro", step1Desc: "Crea una cuenta de Pionex con tu correo o con Google. Tarda 2 minutos.",
@@ -323,7 +323,7 @@ const es = {
 
   // FAQ
   faqBadge: "❓ Preguntas",
-  faqTitle: "Todo lo que\nquerías preguntar",
+  faqTitle: "Preguntas sobre la tarjeta cripto\ny pagos en USDT",
   faq1Q: "¿Qué es ZeroCard?",
   faq1A: "ZeroCard es una tarjeta de pago virtual con la tecnología de Pionex que te deja pagar servicios internacionales, suscripciones y compras online en todo el mundo.\n\nDicho fácil, ZeroCard es la misma tarjeta que consigues a través de Pionex, solo que presentada de forma más simple y cómoda. Funciona como una tarjeta de pago online normal, pero sin las limitaciones típicas de la banca.\n\nLo principal:\n• Funciona con servicios internacionales\n• Una Visa o Mastercard, aceptada donde funcionan esas redes\n• La configuración lleva unos 5 minutos\n• Sin cuotas mensuales\n• Hasta un 1% de reembolso\n\nAl pulsar el botón te llevaremos a la plataforma oficial de Pionex para terminar el registro y conseguir tu tarjeta.",
   faq2Q: "¿Cómo recargo la cuenta de la tarjeta?",
@@ -384,8 +384,8 @@ const es = {
   footerNote: "Sitio de afiliado independiente, no es un recurso oficial de Pionex. Todos los enlaces llevan un código de referido de socio. Las condiciones y comisiones pueden cambiar, consulta la información actual en pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "Tarjeta Pionex: gasta USDT en el extranjero, 1% de reembolso",
-  metaDesc: "Cómo gastar USDT con la tarjeta Pionex fuera de tu país y online: dónde funciona, comisiones de Visa y Mastercard, hasta 1% de reembolso, 5% anual.",
+  metaTitle: "Tarjeta cripto Pionex: USDT y comisiones | ZeroCard",
+  metaDesc: "Tarjeta cripto Pionex para gastar USDT online y en viajes. Compara comisiones Visa y Mastercard, Apple Pay y países disponibles antes de solicitarla.",
 };
 
 export default es;

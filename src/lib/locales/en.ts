@@ -81,7 +81,7 @@ const en = {
   benCtaDesc: "Get ZeroCard free in 5 minutes and earn cashback from your very first purchase.",
   // How it works
   howBadge: "📋 How it works",
-  howTitle: "Ready in a few\nsimple steps",
+  howTitle: "How to get a crypto card\nand fund it with USDT",
   howDesc: "Everything happens in the Pionex app, from sign-up to your first purchase.",
   howTab1: "Get card", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registration", step1Desc: "Create a Pionex account with email or Google. Takes 2 minutes.",
@@ -323,7 +323,7 @@ const en = {
 
   // FAQ
   faqBadge: "❓ FAQ",
-  faqTitle: "Everything you\nwanted to ask",
+  faqTitle: "Pionex crypto card\nquestions and answers",
   faq1Q: "What is ZeroCard?",
   faq1A: "ZeroCard is a virtual payment card powered by Pionex that lets you pay for international services, subscriptions and online purchases worldwide.\n\nIn simple terms, ZeroCard is the same card you get through Pionex, just presented in a simpler and more user-friendly way. The card works like a regular online payment card, but without typical banking limitations.\n\nKey features:\n• Works with international services\n• A Visa or Mastercard card, accepted where those networks work\n• Setup takes about 5 minutes\n• No monthly fees\n• Up to 1% cashback\n\nAfter clicking the button, you will be redirected to the official Pionex platform to complete registration and get your card.",
   faq2Q: "How to fund the card account?",
@@ -384,8 +384,8 @@ const en = {
   footerNote: "Independent partner site. Not an official Pionex resource. All links contain partner referral code. Terms and fees may change, check current info at pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "Pionex Card: spend USDT abroad, 1% cashback, 5% APR",
-  metaDesc: "How to spend USDT with the Pionex card abroad and on foreign services: where it works, Visa and Mastercard fees, up to 1% cashback, 5% APR on your balance.",
+  metaTitle: "Pionex crypto card: USDT payments and fees | ZeroCard",
+  metaDesc: "Pionex crypto card for USDT spending abroad and online. Compare Visa and Mastercard fees, Apple Pay support and country eligibility before applying.",
 };
 
 export default en;

@@ -84,7 +84,7 @@ type ToolsCopy = {
 
 const COPY: Record<Lang, ToolsCopy> = {
   ru: {
-    ccBadge: "Проверка страны", ccTitle: "Работает ли карта в вашей стране",
+    ccBadge: "Проверка страны", ccTitle: "Где работает криптокарта Pionex",
     ccDesc: "У Pionex два разных списка ограничений: откуда нельзя зарегистрироваться и где не проходят покупки. Выберите страну, и вы увидите оба ответа.",
     ccPick: "Выберите страну", ccPopular: "Часто ищут",
     ccSignup: "Регистрация", ccSpend: "Покупки у местных продавцов",
@@ -99,7 +99,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Зарегистрироваться из России можно, карта пригодится в поездках и для зарубежных сервисов.",
     ccMore: "Подробный разбор", ccCta: "Оформить карту", ccSource: "Списки Pionex на сентябрь 2026 года. Они меняются без объявления, перед поездкой сверьтесь с приложением.",
 
-    calcBadge: "Калькулятор", calcTitle: "Сколько вы получите за год",
+    calcBadge: "Калькулятор", calcTitle: "Комиссии и кэшбэк: расчёт за год",
     calcDesc: "Двигайте ползунки: расчёт учитывает кэшбэк, комиссию с покупок и проценты на остаток.",
     spend: "Траты картой", perMonth: "в месяц", currency: "Валюта покупок", curUsd: "Доллары", curLocal: "Местная валюта",
     card: "Карта", balance: "Держите на карте", perYear: "за год",
@@ -107,7 +107,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Расчёт по данным Pionex на сентябрь 2026. Часть категорий без кэшбэка. В материалах Pionex цифры по Mastercard расходятся, берём худший вариант: комиссия 3,5%, кэшбэк 0,1%. Pionex может менять условия, проверяйте в приложении.",
     calcCta: "Оформить карту", visaWins: "У Visa комиссия 1% с покупки, кэшбэк до 1% её примерно перекрывает.", mcLoses: "У Mastercard комиссия до 3,5%, и кэшбэк её не покрывает. Если есть выбор, Visa выгоднее.",
 
-    benBadge: "Коротко о карте", benTitle: "Что вы получаете",
+    benBadge: "Коротко о карте", benTitle: "Условия криптокарты Pionex",
     ben: [
       { big: "1%", title: "Кэшбэк в USDT", text: "Приходит на карточный счёт в течение суток после покупки. Часть категорий Pionex из кэшбэка исключает, список есть в приложении." },
       { big: "5%", title: "Годовых на остаток", text: "Деньги на карте приносят проценты, начисление каждый час. Ставку устанавливает Pionex." },
@@ -115,7 +115,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "За выпуск и обслуживание", text: "За саму карту платить не нужно. С каждой покупки Visa берёт 1%, кэшбэк до 1% это примерно перекрывает. У Mastercard комиссия до 3,5%." },
     ],
 
-    audBadge: "Для кого", audTitle: "Кому карта реально пригодится",
+    audBadge: "Для кого", audTitle: "Криптокарта для поездок и подписок",
     aud: [
       { icon: "✈️", title: "Живёте или ездите за границу", text: "Платите телефоном в кафе и магазинах, баланс хранится в USDT. В Китае Visa работает через Alipay и WeChat Pay.", link: "/blog/pionex-card-strany", linkLabel: "Где работает карта" },
       { icon: "🤖", title: "Платите за AI и зарубежные сервисы", text: "ChatGPT, Claude, Cursor и другие подписки оплачиваются картой как обычной Visa. Сейчас у Pionex идёт акция с возвратом подписки.", link: "/blog/oplata-ai-podpisok-kartoj-pionex", linkLabel: "Про оплату AI" },
@@ -124,7 +124,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   en: {
-    ccBadge: "Country check", ccTitle: "Does the card work in your country?",
+    ccBadge: "Country check", ccTitle: "Pionex crypto card: supported countries",
     ccDesc: "Pionex keeps two separate lists: where you can't sign up and where card payments get declined. Pick a country to see both answers.",
     ccPick: "Choose a country", ccPopular: "Popular",
     ccSignup: "Sign-up", ccSpend: "Paying local merchants",
@@ -139,7 +139,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Russian residents can still sign up and use the card abroad and for foreign online services.",
     ccMore: "Full breakdown", ccCta: "Get the card", ccSource: "Pionex lists as of September 2026. They change without notice, so check the app before you travel.",
 
-    calcBadge: "Calculator", calcTitle: "What you'd get in a year",
+    calcBadge: "Calculator", calcTitle: "Crypto card fees and cashback calculator",
     calcDesc: "Move the sliders. The estimate counts cashback, the fee on purchases and interest on your balance.",
     spend: "Card spending", perMonth: "a month", currency: "Purchase currency", curUsd: "US dollars", curLocal: "Local currency",
     card: "Card", balance: "Kept on the card", perYear: "a year",
@@ -147,7 +147,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Based on Pionex data as of September 2026. Some categories earn no cashback. Pionex materials disagree on Mastercard, so we use the worst case: 3.5% fee, 0.1% cashback. Pionex can change terms, check the app.",
     calcCta: "Get the card", visaWins: "Visa charges 1% per purchase, and cashback of up to 1% roughly offsets it.", mcLoses: "Mastercard charges up to 3.5% and the cashback doesn't cover it. If you can choose, Visa costs less.",
 
-    benBadge: "The card in short", benTitle: "What you get",
+    benBadge: "The card in short", benTitle: "Pionex crypto card features and terms",
     ben: [
       { big: "1%", title: "Cashback in USDT", text: "Lands on the card account within a day of the purchase. Pionex excludes some categories, the list is in the app." },
       { big: "5%", title: "APR on your balance", text: "Money on the card earns interest, paid every hour. Pionex sets the rate." },
@@ -155,7 +155,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "To issue and keep", text: "The card itself is free. Visa takes 1% on each purchase and the cashback of up to 1% roughly offsets it. Mastercard charges up to 3.5%." },
     ],
 
-    audBadge: "Who it's for", audTitle: "Who actually gets value from it",
+    audBadge: "Who it's for", audTitle: "Crypto card for travel and subscriptions",
     aud: [
       { icon: "✈️", title: "You live or travel abroad", text: "Tap your phone in cafés and shops while your balance stays in USDT. In China, Visa works through Alipay and WeChat Pay.", link: "/en/blog/who-can-use-pionex-2026", linkLabel: "Who can sign up" },
       { icon: "🤖", title: "You pay for AI tools", text: "ChatGPT, Claude, Cursor and other subscriptions take the card like any Visa. Pionex is running a subscription refund promo right now.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "Paying for AI" },
@@ -164,7 +164,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   de: {
-    ccBadge: "Länder-Check", ccTitle: "Funktioniert die Karte in deinem Land?",
+    ccBadge: "Länder-Check", ccTitle: "Pionex Krypto-Karte: Länder und Zugang",
     ccDesc: "Pionex führt zwei getrennte Listen: wo man sich nicht anmelden kann und wo Kartenzahlungen abgelehnt werden. Wähl ein Land und du siehst beides.",
     ccPick: "Land wählen", ccPopular: "Häufig gesucht",
     ccSignup: "Anmeldung", ccSpend: "Zahlen bei Händlern vor Ort",
@@ -179,7 +179,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Eine Anmeldung aus Russland ist möglich, die Karte taugt für Reisen und ausländische Dienste.",
     ccMore: "Ausführlich", ccCta: "Karte holen", ccSource: "Listen von Pionex, Stand September 2026. Sie ändern sich ohne Ankündigung, prüf vor der Reise die App.",
 
-    calcBadge: "Rechner", calcTitle: "Was im Jahr übrig bleibt",
+    calcBadge: "Rechner", calcTitle: "Kartenkosten und Cashback berechnen",
     calcDesc: "Schieb die Regler. Gerechnet werden Cashback, Gebühr auf Käufe und Zinsen aufs Guthaben.",
     spend: "Kartenausgaben", perMonth: "pro Monat", currency: "Währung der Käufe", curUsd: "US-Dollar", curLocal: "Landeswährung",
     card: "Karte", balance: "Guthaben auf der Karte", perYear: "pro Jahr",
@@ -187,7 +187,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Stand der Pionex-Angaben: September 2026. Manche Kategorien bekommen kein Cashback. Zu Mastercard widersprechen sich die Pionex-Texte, wir rechnen mit dem schlechtesten Fall: 3,5% Gebühr, 0,1% Cashback. Pionex kann die Bedingungen ändern, prüf die App.",
     calcCta: "Karte holen", visaWins: "Visa nimmt 1% pro Kauf, das Cashback von bis zu 1% gleicht das ungefähr aus.", mcLoses: "Mastercard nimmt bis zu 3,5%, das Cashback deckt das nicht. Wenn du wählen kannst, ist Visa günstiger.",
 
-    benBadge: "Die Karte kurz", benTitle: "Was du bekommst",
+    benBadge: "Die Karte kurz", benTitle: "Pionex Krypto-Karte: Funktionen und Kosten",
     ben: [
       { big: "1%", title: "Cashback in USDT", text: "Kommt innerhalb eines Tages aufs Kartenkonto. Einige Kategorien nimmt Pionex aus, die Liste steht in der App." },
       { big: "5%", title: "Zinsen aufs Guthaben", text: "Geld auf der Karte bringt Zinsen, gutgeschrieben jede Stunde. Den Satz legt Pionex fest." },
@@ -195,7 +195,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "Für Ausgabe und Führung", text: "Die Karte selbst kostet nichts. Visa nimmt 1% pro Kauf, das Cashback von bis zu 1% gleicht es ungefähr aus. Mastercard kostet bis zu 3,5%." },
     ],
 
-    audBadge: "Für wen", audTitle: "Wem die Karte wirklich nützt",
+    audBadge: "Für wen", audTitle: "Krypto-Karte für Reisen und Abos",
     aud: [
       { icon: "✈️", title: "Du lebst oder reist im Ausland", text: "Mit dem Handy in Café und Laden zahlen, das Guthaben bleibt in USDT. In China läuft Visa über Alipay und WeChat Pay.", link: "/en/blog/who-can-use-pionex-2026", linkLabel: "Wer sich anmelden kann" },
       { icon: "🤖", title: "Du zahlst KI-Abos", text: "ChatGPT, Claude, Cursor und Co. nehmen die Karte wie jede Visa. Pionex erstattet gerade bei einer Aktion Abo-Zahlungen.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "KI-Abos bezahlen" },
@@ -204,7 +204,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   es: {
-    ccBadge: "Consulta por país", ccTitle: "¿Funciona la tarjeta en tu país?",
+    ccBadge: "Consulta por país", ccTitle: "Tarjeta cripto Pionex: países y acceso",
     ccDesc: "Pionex tiene dos listas distintas: desde dónde no te puedes registrar y dónde se rechazan los pagos. Elige un país y verás las dos respuestas.",
     ccPick: "Elige un país", ccPopular: "Más buscados",
     ccSignup: "Registro", ccSpend: "Pagos en comercios locales",
@@ -219,7 +219,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Desde Rusia sí te puedes registrar y usar la tarjeta en viajes y servicios extranjeros.",
     ccMore: "Análisis completo", ccCta: "Pedir la tarjeta", ccSource: "Listas de Pionex a septiembre de 2026. Cambian sin aviso, revisa la app antes de viajar.",
 
-    calcBadge: "Calculadora", calcTitle: "Cuánto sacas en un año",
+    calcBadge: "Calculadora", calcTitle: "Calculadora de comisiones y reembolso",
     calcDesc: "Mueve los controles. El cálculo incluye el reembolso, la comisión por compra y los intereses del saldo.",
     spend: "Gasto con tarjeta", perMonth: "al mes", currency: "Moneda de las compras", curUsd: "Dólares", curLocal: "Moneda local",
     card: "Tarjeta", balance: "Saldo en la tarjeta", perYear: "al año",
@@ -227,7 +227,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Datos de Pionex a septiembre de 2026. Algunas categorías no dan reembolso. Los textos de Pionex no coinciden sobre Mastercard, así que tomamos el peor caso: 3,5% de comisión y 0,1% de reembolso. Pionex puede cambiar las condiciones, revisa la app.",
     calcCta: "Pedir la tarjeta", visaWins: "Visa cobra un 1% por compra y el reembolso de hasta 1% lo compensa más o menos.", mcLoses: "Mastercard cobra hasta un 3,5% y el reembolso no lo cubre. Si puedes elegir, Visa sale más barata.",
 
-    benBadge: "La tarjeta en breve", benTitle: "Qué obtienes",
+    benBadge: "La tarjeta en breve", benTitle: "Tarjeta cripto Pionex: funciones y costes",
     ben: [
       { big: "1%", title: "Reembolso en USDT", text: "Llega a la cuenta de la tarjeta en un día. Pionex excluye algunas categorías, la lista está en la app." },
       { big: "5%", title: "Anual sobre el saldo", text: "El dinero en la tarjeta genera intereses, que se abonan cada hora. La tasa la fija Pionex." },
@@ -235,7 +235,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "Por emisión y mantenimiento", text: "La tarjeta no cuesta nada. Visa cobra un 1% por compra y el reembolso de hasta 1% lo compensa más o menos. Mastercard cobra hasta un 3,5%." },
     ],
 
-    audBadge: "Para quién", audTitle: "A quién le sirve de verdad",
+    audBadge: "Para quién", audTitle: "Tarjeta cripto para viajes y suscripciones",
     aud: [
       { icon: "✈️", title: "Vives o viajas fuera", text: "Pagas con el móvil en cafés y tiendas y el saldo sigue en USDT. En China la Visa funciona con Alipay y WeChat Pay.", link: "/es/blog/tarjeta-pionex-latinoamerica", linkLabel: "Cuánto cuesta pagar" },
       { icon: "🤖", title: "Pagas herramientas de IA", text: "ChatGPT, Claude, Cursor y otras suscripciones aceptan la tarjeta como cualquier Visa. Ahora Pionex tiene una promo que devuelve la suscripción.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "Pagar la IA" },
@@ -244,7 +244,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   pt: {
-    ccBadge: "Consulta por país", ccTitle: "O cartão funciona no seu país?",
+    ccBadge: "Consulta por país", ccTitle: "Cartão cripto Pionex: países e acesso",
     ccDesc: "A Pionex tem duas listas diferentes: de onde não dá para se cadastrar e onde os pagamentos são recusados. Escolha um país e veja as duas respostas.",
     ccPick: "Escolha um país", ccPopular: "Mais buscados",
     ccSignup: "Cadastro", ccSpend: "Compras em lojas locais",
@@ -259,7 +259,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Da Rússia dá para se cadastrar e usar o cartão em viagens e serviços estrangeiros.",
     ccMore: "Análise completa", ccCta: "Pedir o cartão", ccSource: "Listas da Pionex em setembro de 2026. Mudam sem aviso, confira no app antes de viajar.",
 
-    calcBadge: "Calculadora", calcTitle: "Quanto sobra em um ano",
+    calcBadge: "Calculadora", calcTitle: "Calculadora de taxas e cashback",
     calcDesc: "Mexa nos controles. A conta inclui o cashback, a taxa sobre as compras e os juros sobre o saldo.",
     spend: "Gastos no cartão", perMonth: "por mês", currency: "Moeda das compras", curUsd: "Dólares", curLocal: "Moeda local",
     card: "Cartão", balance: "Saldo no cartão", perYear: "por ano",
@@ -267,7 +267,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Dados da Pionex de setembro de 2026. Algumas categorias não dão cashback. Os textos da Pionex não batem sobre o Mastercard, então usamos o pior caso: taxa de 3,5% e cashback de 0,1%. A Pionex pode mudar as condições, confira no app.",
     calcCta: "Pedir o cartão", visaWins: "O Visa cobra 1% por compra, e o cashback de até 1% compensa mais ou menos.", mcLoses: "O Mastercard cobra até 3,5% e o cashback não cobre. Se puder escolher, o Visa sai mais barato.",
 
-    benBadge: "O cartão em resumo", benTitle: "O que você ganha",
+    benBadge: "O cartão em resumo", benTitle: "Cartão cripto Pionex: funções e custos",
     ben: [
       { big: "1%", title: "Cashback em USDT", text: "Cai na conta do cartão em até um dia. A Pionex exclui algumas categorias, a lista está no app." },
       { big: "5%", title: "Ao ano sobre o saldo", text: "O dinheiro no cartão rende juros, creditados a cada hora. A taxa é definida pela Pionex." },
@@ -275,7 +275,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "De emissão e manutenção", text: "O cartão em si é grátis. O Visa cobra 1% por compra e o cashback de até 1% compensa mais ou menos. O Mastercard cobra até 3,5%." },
     ],
 
-    audBadge: "Para quem", audTitle: "Para quem ele faz diferença",
+    audBadge: "Para quem", audTitle: "Cartão cripto para viagens e assinaturas",
     aud: [
       { icon: "✈️", title: "Você mora ou viaja para fora", text: "Paga com o celular em cafés e lojas e o saldo fica em USDT. Na China o Visa funciona pelo Alipay e WeChat Pay.", link: "/pt/blog/cartao-pionex-brasil", linkLabel: "Quanto custa pagar" },
       { icon: "🤖", title: "Você paga ferramentas de IA", text: "ChatGPT, Claude, Cursor e outras assinaturas aceitam o cartão como qualquer Visa. A Pionex está com uma promoção que devolve a assinatura.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "Pagar a IA" },
@@ -284,7 +284,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   it: {
-    ccBadge: "Verifica paese", ccTitle: "La carta funziona nel tuo paese?",
+    ccBadge: "Verifica paese", ccTitle: "Carta crypto Pionex: paesi e accesso",
     ccDesc: "Pionex ha due liste separate: da dove non ci si può registrare e dove i pagamenti vengono rifiutati. Scegli un paese e vedi entrambe le risposte.",
     ccPick: "Scegli un paese", ccPopular: "Più cercati",
     ccSignup: "Registrazione", ccSpend: "Pagamenti nei negozi locali",
@@ -299,7 +299,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Dalla Russia ci si può registrare e usare la carta in viaggio e sui servizi stranieri.",
     ccMore: "Approfondimento", ccCta: "Richiedi la carta", ccSource: "Liste di Pionex a settembre 2026. Cambiano senza preavviso, controlla l'app prima di partire.",
 
-    calcBadge: "Calcolatore", calcTitle: "Quanto ottieni in un anno",
+    calcBadge: "Calcolatore", calcTitle: "Calcolatore di commissioni e cashback",
     calcDesc: "Sposta i cursori. Il calcolo tiene conto di cashback, commissione sugli acquisti e interessi sul saldo.",
     spend: "Spesa con la carta", perMonth: "al mese", currency: "Valuta degli acquisti", curUsd: "Dollari", curLocal: "Valuta locale",
     card: "Carta", balance: "Saldo sulla carta", perYear: "all'anno",
@@ -307,7 +307,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Dati Pionex a settembre 2026. Alcune categorie non danno cashback. I testi di Pionex non concordano su Mastercard, quindi usiamo il caso peggiore: commissione 3,5% e cashback 0,1%. Pionex può cambiare le condizioni, controlla l'app.",
     calcCta: "Richiedi la carta", visaWins: "Visa prende l'1% su ogni acquisto e il cashback fino all'1% lo compensa più o meno.", mcLoses: "Mastercard prende fino al 3,5% e il cashback non lo copre. Se puoi scegliere, Visa costa meno.",
 
-    benBadge: "La carta in breve", benTitle: "Cosa ottieni",
+    benBadge: "La carta in breve", benTitle: "Carta crypto Pionex: funzioni e costi",
     ben: [
       { big: "1%", title: "Cashback in USDT", text: "Arriva sul conto della carta entro un giorno. Pionex esclude alcune categorie, la lista è nell'app." },
       { big: "5%", title: "Annuo sul saldo", text: "I soldi sulla carta maturano interessi, accreditati ogni ora. Il tasso lo stabilisce Pionex." },
@@ -315,7 +315,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "Per emissione e gestione", text: "La carta in sé è gratuita. Visa prende l'1% su ogni acquisto e il cashback fino all'1% lo compensa più o meno. Mastercard costa fino al 3,5%." },
     ],
 
-    audBadge: "Per chi", audTitle: "A chi serve davvero",
+    audBadge: "Per chi", audTitle: "Carta crypto per viaggi e abbonamenti",
     aud: [
       { icon: "✈️", title: "Vivi o viaggi all'estero", text: "Paghi col telefono in bar e negozi e il saldo resta in USDT. In Cina la Visa funziona con Alipay e WeChat Pay.", link: "/en/blog/who-can-use-pionex-2026", linkLabel: "Chi può registrarsi" },
       { icon: "🤖", title: "Paghi strumenti di IA", text: "ChatGPT, Claude, Cursor e altri abbonamenti accettano la carta come qualsiasi Visa. Ora Pionex ha una promo che rimborsa l'abbonamento.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "Pagare l'IA" },
@@ -324,7 +324,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     ],
   },
   fr: {
-    ccBadge: "Vérifier un pays", ccTitle: "La carte fonctionne-t-elle dans votre pays ?",
+    ccBadge: "Vérifier un pays", ccTitle: "Carte crypto Pionex : pays et accès",
     ccDesc: "Pionex tient deux listes distinctes : d'où l'on ne peut pas s'inscrire et où les paiements sont refusés. Choisissez un pays pour voir les deux réponses.",
     ccPick: "Choisir un pays", ccPopular: "Souvent cherchés",
     ccSignup: "Inscription", ccSpend: "Paiement chez les commerçants locaux",
@@ -339,7 +339,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     noteRU: "Depuis la Russie, l'inscription reste possible et la carte sert en voyage et pour les services étrangers.",
     ccMore: "Analyse complète", ccCta: "Obtenir la carte", ccSource: "Listes Pionex à septembre 2026. Elles changent sans préavis, vérifiez dans l'app avant de partir.",
 
-    calcBadge: "Calculateur", calcTitle: "Ce que vous gagnez sur un an",
+    calcBadge: "Calculateur", calcTitle: "Calculateur de frais et cashback",
     calcDesc: "Bougez les curseurs. Le calcul tient compte du cashback, des frais sur les achats et des intérêts sur le solde.",
     spend: "Dépenses par carte", perMonth: "par mois", currency: "Devise des achats", curUsd: "Dollars", curLocal: "Devise locale",
     card: "Carte", balance: "Solde gardé sur la carte", perYear: "par an",
@@ -347,7 +347,7 @@ const COPY: Record<Lang, ToolsCopy> = {
     calcNote: "Données Pionex de septembre 2026. Certaines catégories ne donnent pas de cashback. Les textes de Pionex divergent sur Mastercard, nous prenons le pire cas : 3,5 % de frais et 0,1 % de cashback. Pionex peut changer les conditions, vérifiez dans l'app.",
     calcCta: "Obtenir la carte", visaWins: "Visa prend 1 % par achat, et le cashback jusqu'à 1 % compense à peu près.", mcLoses: "Mastercard prend jusqu'à 3,5 % et le cashback ne couvre pas. Si vous avez le choix, Visa coûte moins cher.",
 
-    benBadge: "La carte en bref", benTitle: "Ce que vous obtenez",
+    benBadge: "La carte en bref", benTitle: "Carte crypto Pionex : fonctions et frais",
     ben: [
       { big: "1%", title: "Cashback en USDT", text: "Versé sur le compte carte dans la journée. Pionex exclut certaines catégories, la liste est dans l'app." },
       { big: "5%", title: "Par an sur le solde", text: "L'argent sur la carte rapporte des intérêts, versés chaque heure. Le taux est fixé par Pionex." },
@@ -355,7 +355,7 @@ const COPY: Record<Lang, ToolsCopy> = {
       { big: "$0", title: "D'émission et de gestion", text: "La carte elle-même est gratuite. Visa prend 1 % par achat et le cashback jusqu'à 1 % compense à peu près. Mastercard coûte jusqu'à 3,5 %." },
     ],
 
-    audBadge: "Pour qui", audTitle: "À qui elle sert vraiment",
+    audBadge: "Pour qui", audTitle: "Carte crypto pour voyages et abonnements",
     aud: [
       { icon: "✈️", title: "Vous vivez ou voyagez à l'étranger", text: "Vous payez avec le téléphone au café et en boutique, le solde reste en USDT. En Chine, la Visa passe par Alipay et WeChat Pay.", link: "/fr/blog/carte-pionex-afrique-suisse", linkLabel: "Le vrai coût d'un paiement" },
       { icon: "🤖", title: "Vous payez des outils d'IA", text: "ChatGPT, Claude, Cursor et d'autres abonnements acceptent la carte comme n'importe quelle Visa. Pionex rembourse en ce moment des abonnements via une promo.", link: "/en/blog/pay-ai-subscriptions-pionex-card", linkLabel: "Payer l'IA" },

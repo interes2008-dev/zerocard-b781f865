@@ -81,7 +81,7 @@ const de = {
   benCtaDesc: "Hol dir ZeroCard in 5 Minuten kostenlos und kassiere Cashback schon ab dem ersten Einkauf.",
   // How it works
   howBadge: "📋 So geht's",
-  howTitle: "In wenigen\nSchritten fertig",
+  howTitle: "Krypto-Karte beantragen\nund mit USDT aufladen",
   howDesc: "Alles läuft in der Pionex-App, von der Anmeldung bis zum ersten Kauf.",
   howTab1: "Karte holen", howTab2: "Apple Pay", howTab3: "Google Pay", howTab4: "PayPal",
   step1Title: "Registrierung", step1Desc: "Pionex-Konto per E-Mail oder Google anlegen. Dauert 2 Minuten.",
@@ -323,7 +323,7 @@ const de = {
 
   // FAQ
   faqBadge: "❓ FAQ",
-  faqTitle: "Alles was du\nwissen willst",
+  faqTitle: "Fragen zur Krypto-Karte\nund USDT-Zahlungen",
   faq1Q: "Was ist ZeroCard?",
   faq1A: "ZeroCard ist eine virtuelle Zahlungskarte auf Basis von Pionex. Damit bezahlst du internationale Dienste, Abos und Online-Einkäufe weltweit.\n\nEinfach gesagt: ZeroCard ist dieselbe Karte, die du über Pionex bekommst, nur verständlicher erklärt. Sie funktioniert wie eine normale Online-Zahlungskarte, aber ohne die üblichen Bankgrenzen.\n\nDas Wichtigste:\n• Läuft bei internationalen Diensten\n• Eine Visa oder Mastercard, akzeptiert wo diese Netzwerke laufen\n• Einrichtung dauert etwa 5 Minuten\n• Keine monatlichen Gebühren\n• Bis zu 1% Cashback\n\nNach dem Klick auf den Button landest du auf der offiziellen Pionex-Plattform, wo du die Registrierung abschließt und deine Karte bekommst.",
   faq2Q: "Wie lade ich das Kartenkonto auf?",
@@ -384,8 +384,8 @@ const de = {
   footerNote: "Unabhängige Partnerseite, kein offizielles Pionex-Angebot. Alle Links enthalten einen Partner-Referral-Code. Konditionen und Gebühren können sich ändern, den aktuellen Stand findest du auf pionex.com. © 2026 ZeroCard.",
 
   // SEO
-  metaTitle: "Pionex Card: USDT im Ausland ausgeben, 1% Cashback, 5% Zinsen",
-  metaDesc: "So gibst du USDT mit der Pionex Card im Ausland und online aus: wo sie funktioniert, Gebühren bei Visa und Mastercard, bis zu 1% Cashback, 5% Zinsen.",
+  metaTitle: "Pionex Krypto-Karte: USDT, Gebühren und Länder | ZeroCard",
+  metaDesc: "Pionex Krypto-Karte: USDT-Zahlungen, Visa- und Mastercard-Gebühren, Apple Pay und Länder prüfen. Für EU-Bewohner Zugang über Webot gesondert klären.",
 };
 
 export default de;
