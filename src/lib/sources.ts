@@ -6,6 +6,12 @@
 export interface Source { title: string; url: string }
 
 export const SOURCE_SETS: Record<string, Source[]> = {
+  "anthropic-ipo-pionex": [
+    { title: "Anthropic: closing of initial public offering (November 20, 2026)", url: "https://www.anthropic.com/news/ipo-close" },
+    { title: "Pionex Help Center: ANTHROPIC 1-25x USDT-margined perpetual futures listing", url: "https://support.pionex.com/hc/en-us/articles/58545070218649-Pionex-has-listed-ANTHROPIC-Anthropic-AI-1-25x-USDT-Margined-Perpetual-Futures" },
+    { title: "CoinDesk: tokenized Anthropic shares and OKX markets (November 19, 2026)", url: "https://www.coindesk.com/markets/2026/11/19/crypto-traders-vs-wall-street-okx-s-anthropic-markets-put-ipo-pricing-to-the-test" },
+    { title: "CoinDesk: tokenized Anthropic on BNB Chain on IPO day", url: "https://www.coindesk.com/markets/2026/11/19/cz-says-tokenized-anthropic-is-coming-to-bnb-chain-on-ipo-day" },
+  ],
   "okx-us-card-news": [
     { title: "OKX: US Mastercard card launch", url: "https://www.okx.com/en-us/learn/okx-card-us" },
     { title: "OKX: card model, collateral and repayment FAQ (updated November 5, 2026)", url: "https://www.okx.com/en-us/help/us-okx-card-what-is-the-okx-card" },
