@@ -1,3 +1,9 @@
+# Anthropic tokenized stock explainer
+
+- [x] Prepare a sourced Russian article comparing shares, tokens and Pionex perpetual futures, with a separate card section.
+- [x] Verify the article from the blog, source links, metadata, cover and editorial sitemap date.
+- [x] Check current security results and prepare verified changes for publication; deployment completion must be confirmed separately.
+
 # SEO corrections
 
 - [x] Repair and verify static sharing metadata.

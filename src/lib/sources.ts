@@ -6,6 +6,12 @@
 export interface Source { title: string; url: string }
 
 export const SOURCE_SETS: Record<string, Source[]> = {
+  "anthropic-token-models": [
+    { title: "Anthropic: IPO closing and Nasdaq ticker ANT, November 20, 2026", url: "https://www.anthropic.com/news/ipo-close" },
+    { title: "0x: tokenized Anthropic stock, issuers and networks, November 19, 2026", url: "https://0x.org/post/tokenized-anthropic-stock" },
+    { title: "Forbes: Anthropic tokens and differences in ownership rights, November 20, 2026", url: "https://www.forbes.com/sites/digital-assets/2026/11/20/one-anthropic-ipo-three-tokens-how-and-where-ant-traded-on-day-one/" },
+    { title: "Pionex Help Center: ANTHROPIC USDT-margined perpetual futures", url: "https://support.pionex.com/hc/en-us/articles/58545070218649-Pionex-has-listed-ANTHROPIC-Anthropic-AI-1-25x-USDT-Margined-Perpetual-Futures" },
+  ],
   "anthropic-ipo-pionex": [
     { title: "Anthropic: closing of initial public offering (November 20, 2026)", url: "https://www.anthropic.com/news/ipo-close" },
     { title: "Pionex Help Center: ANTHROPIC 1-25x USDT-margined perpetual futures listing", url: "https://support.pionex.com/hc/en-us/articles/58545070218649-Pionex-has-listed-ANTHROPIC-Anthropic-AI-1-25x-USDT-Margined-Perpetual-Futures" },
